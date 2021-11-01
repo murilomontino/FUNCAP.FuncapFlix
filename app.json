@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FUNCAP.FuncapFlix",
-    "slug": "FUNCAP.FuncapFlix",
+    "name": "FuncapFlix",
+    "slug": "FuncapFlix",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

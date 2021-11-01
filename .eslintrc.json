@@ -1,0 +1,66 @@
+{
+	"env": {
+		"es2021": true
+	},
+	"settings": {
+		"react": {
+			"version": "17.0.2"
+		}
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"prettier",
+		"eslint-plugin-import-helpers",
+		"unused-imports"
+	],
+	"rules": {
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "never"],
+		"prettier/prettier": 2,
+		"@typescript-eslint/no-extra-semi": ["off"],
+		"no-console": "error",
+		"import-helpers/order-imports": [
+			"warn",
+			{
+				// example configuration
+				"newlinesBetween": "always",
+				"groups": [
+					["/^react/", "/^react-native/"],
+					"/^@react/",
+					"/^expo/",
+					"/^redux/",
+					"module",
+					[
+						"/reduxDatabase/",
+						"/^navigations/",
+						"/^context/",
+						"/^services/",
+						"/^pages/",
+						"/^components/"
+					],
+					["parent", "sibling", "index"],
+					["/styles/"]
+				],
+				"alphabetize": { "order": "asc", "ignoreCase": true }
+			}
+		],
+		"unused-imports/no-unused-imports": "error"
+	},
+	"ignorePatterns": ["metro.config.js", "babel.config.js", "node_modules"]
+}
