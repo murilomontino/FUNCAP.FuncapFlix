@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useLayout } from 'react-native-web-hooks'
 
-import colors from 'global/colors'
 import constants from 'global/constants'
 
 import ButtonLogin from 'components/atom/ButtonLogin'
@@ -71,6 +70,6 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		height: constants.headerHight,
-		backgroundColor: colors.dark_primary,
+		backgroundColor: 'rgba(0,0,0,0.5)',
 	},
 })

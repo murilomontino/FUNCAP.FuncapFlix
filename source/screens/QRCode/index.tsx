@@ -11,6 +11,8 @@ import {
 import { ScrollView } from 'react-native-gesture-handler'
 
 import axios from 'axios'
+import colors from 'global/colors'
+import constants from 'global/constants'
 
 const QRCodeScreen = () => {
 	const [inputText, setInputText] = useState('')
@@ -34,13 +36,14 @@ const QRCodeScreen = () => {
 		<View
 			style={{
 				flex: 1,
-				backgroundColor: '#fffaff',
+				backgroundColor: colors.white_secondary,
+
 				padding: 48,
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
 		>
-			<ScrollView style={{ height: height }}>
+			<ScrollView style={{ marginTop: constants.headerHight, height: height }}>
 				{qrValue && (
 					<View style={styles.containerQr}>
 						<Image

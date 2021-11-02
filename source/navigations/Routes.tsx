@@ -11,6 +11,7 @@ import LiteraturaPage from 'screens/LiteraturaPage'
 import Home from 'screens/LiteraturaPage'
 import QRCodeScreen from 'screens/QRCode'
 
+import PdfViewer from 'components/organism/PDFViewer'
 import Front from 'components/templates/Front'
 
 const prefix = Linking.createURL('/')
@@ -30,6 +31,7 @@ export type RootStackParamList = {
 	Literatura: undefined
 	Home: undefined
 	QRCode: undefined
+	PDFView: undefined
 }
 
 declare global {
@@ -38,6 +40,7 @@ declare global {
 			Home: undefined
 			Literatura: undefined
 			QRCode: undefined
+			PDFViews: undefined
 		}
 	}
 }
@@ -61,8 +64,6 @@ const Navigation: React.FC = () => {
 		enabled: true,
 
 		config: {
-			initialRouteName: 'Literatura',
-
 			screens: {
 				Home: {
 					path: '/',
@@ -72,6 +73,9 @@ const Navigation: React.FC = () => {
 				},
 				Literatura: {
 					path: '/literatura',
+				},
+				PDFView: {
+					path: '/pdf/:id',
 				},
 			},
 		},
@@ -100,6 +104,10 @@ const Navigation: React.FC = () => {
 				<Stack.Screen
 					component={() => TemplateFront({ children: <Home /> })}
 					name="Home"
+				/>
+				<Stack.Screen
+					component={() => TemplateFront({ children: <PdfViewer /> })}
+					name="PDFView"
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

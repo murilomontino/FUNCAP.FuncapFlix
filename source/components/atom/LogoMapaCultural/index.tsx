@@ -19,12 +19,20 @@ const LogoMapaCultural: React.FC = () => {
 	}
 
 	return (
-		<TouchableOpacity onPress={handleClickURL}>
+		<TouchableOpacity
+			onPress={handleClickURL}
+			style={{
+				height: 40,
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
 			<Image
 				source={assets[0]}
 				style={{
 					resizeMode: 'contain',
 					width: fontSize,
+					height: fontSize,
 					marginLeft: 20,
 				}}
 			/>

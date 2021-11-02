@@ -5,4 +5,5 @@ export default {
 	orange: '#dd4b39',
 	dark_secondary: '#141414',
 	dark_primary: '#0b0b0b',
+	white_secondary: '#ededf0',
 }

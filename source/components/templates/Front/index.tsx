@@ -27,7 +27,6 @@ const Front: React.FC = ({ children }) => {
 						flex: 1,
 						minHeight: minHeight,
 						marginBottom: 90,
-						marginTop: constants.headerHight,
 					}}
 				>
 					{children}
