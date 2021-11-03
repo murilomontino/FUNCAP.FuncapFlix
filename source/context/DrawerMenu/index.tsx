@@ -17,7 +17,6 @@ const DrawerProvider: React.FC = ({ children }) => {
 	const drawer = useRef<DrawerLayout>()
 
 	const drawerToggle = () => {
-		console.log(drawer)
 		drawer.current?.openDrawer()
 	}
 

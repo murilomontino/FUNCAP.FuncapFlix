@@ -1,11 +1,10 @@
 {
-  "expo": {
-    "name": "FuncapFlix",
-    "slug": "FuncapFlix",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  },
-  "name": "FUNCAP.FuncapFlix"
+	"expo": {
+		"name": "FuncapFlix",
+		"slug": "FuncapFlix",
+		"icon": "./source/assets/funcap-play.png",
+		"version": "1.0.0",
+		"assetBundlePatterns": ["**/*"]
+	},
+	"name": "FUNCAP.FuncapFlix"
 }

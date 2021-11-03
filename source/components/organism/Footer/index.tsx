@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Platform, StyleSheet, View } from 'react-native'
 import { useLayout } from 'react-native-web-hooks'
 
 import colors from 'global/colors'
@@ -11,16 +11,19 @@ import LogoGoverno from 'components/atom/LogoGoverno'
 import AboutFooter from 'components/molecule/AboutFooter'
 
 const Footer = () => {
-	const [sizeNavBar, setSizeNavBar] = useState(false)
+	const web = Platform.OS === 'web'
+
+	const [sizeNavBar, setSizeNavBar] = useState(web ? false : true)
 	const { onLayout, width } = useLayout()
 
-	useEffect(() => {
-		if (width < 720) {
-			setSizeNavBar(true)
-		} else {
-			setSizeNavBar(false)
-		}
-	}, [width])
+	web &&
+		useEffect(() => {
+			if (width < 720) {
+				setSizeNavBar(true)
+			} else {
+				setSizeNavBar(false)
+			}
+		}, [width])
 
 	// 720
 

@@ -13,6 +13,7 @@ const Front: React.FC = ({ children }) => {
 	const web = Platform.OS === 'web'
 	const { height } = Dimensions.get(web ? 'window' : 'screen')
 	const minHeight = height - constants.footerHight
+
 	return (
 		<DrawerProvider>
 			<Header />

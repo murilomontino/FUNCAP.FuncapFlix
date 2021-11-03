@@ -1,5 +1,11 @@
 import React, { useRef } from 'react'
-import { StyleSheet, Text, TouchableOpacity, FontVariant } from 'react-native'
+import {
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	Linking,
+	FontVariant,
+} from 'react-native'
 import { useHover, useScaledSize } from 'react-native-web-hooks'
 
 type Props = {
@@ -21,22 +27,26 @@ const ItemNavBar: React.FC<Props> = ({
 	const fontSize = useScaledSize(0.7)
 
 	const handleClickURL = async () => {
-		console.log(`navigate ${link}`)
+		if (link) {
+			await Linking.openURL(link)
+		}
 	}
 
 	return (
-		<TouchableOpacity style={styles.buttonNav} onPress={handleClickURL}>
-			<Text
-				ref={ref}
-				style={[
-					{ fontSize, fontVariant: [fontVariant] },
-					styles.textNav,
-					select && hover && styles.hoverText,
-				]}
-			>
-				{title}
-			</Text>
-		</TouchableOpacity>
+		<a href={link} style={{ textDecoration: 'none' }}>
+			<TouchableOpacity style={styles.buttonNav}>
+				<Text
+					ref={ref}
+					style={[
+						{ fontSize, fontVariant: [fontVariant] },
+						styles.textNav,
+						select && hover && styles.hoverText,
+					]}
+				>
+					{title}
+				</Text>
+			</TouchableOpacity>
+		</a>
 	)
 }
 

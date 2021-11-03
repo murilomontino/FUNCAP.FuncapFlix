@@ -18,20 +18,11 @@ const prefix = Linking.createURL('/')
 
 const Stack = createStackNavigator()
 
-declare global {
-	namespace ReactNavigation {
-		interface RootParamList {
-			Register: undefined
-			Login: undefined
-		}
-	}
-}
-
 export type RootStackParamList = {
 	Literatura: undefined
 	Home: undefined
 	QRCode: undefined
-	PDFView: undefined
+	PDFView: { id: string }
 }
 
 declare global {
@@ -40,7 +31,7 @@ declare global {
 			Home: undefined
 			Literatura: undefined
 			QRCode: undefined
-			PDFViews: undefined
+			PDFView: { id: string }
 		}
 	}
 }
@@ -75,7 +66,7 @@ const Navigation: React.FC = () => {
 					path: '/literatura',
 				},
 				PDFView: {
-					path: '/pdf/:id',
+					path: '/literatura/leitorpdf/:id',
 				},
 			},
 		},
@@ -94,19 +85,27 @@ const Navigation: React.FC = () => {
 				}}
 			>
 				<Stack.Screen
-					component={() => TemplateFront({ children: <LiteraturaPage /> })}
+					component={({ ...rest }) =>
+						TemplateFront({ children: <LiteraturaPage {...rest} /> })
+					}
 					name="Literatura"
 				/>
 				<Stack.Screen
-					component={() => TemplateFront({ children: <QRCodeScreen /> })}
+					component={({ ...rest }) =>
+						TemplateFront({ children: <QRCodeScreen {...rest} /> })
+					}
 					name="QRCode"
 				/>
 				<Stack.Screen
-					component={() => TemplateFront({ children: <Home /> })}
+					component={({ ...rest }) =>
+						TemplateFront({ children: <Home {...rest} /> })
+					}
 					name="Home"
 				/>
 				<Stack.Screen
-					component={() => TemplateFront({ children: <PdfViewer /> })}
+					component={({ ...rest }) =>
+						TemplateFront({ children: <PdfViewer {...rest} /> })
+					}
 					name="PDFView"
 				/>
 			</Stack.Navigator>

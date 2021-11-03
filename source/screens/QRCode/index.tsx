@@ -10,9 +10,10 @@ import {
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-import axios from 'axios'
 import colors from 'global/colors'
 import constants from 'global/constants'
+
+import api from 'services'
 
 const QRCodeScreen = () => {
 	const [inputText, setInputText] = useState('')
@@ -21,10 +22,7 @@ const QRCodeScreen = () => {
 
 	const generateQRCode = async () => {
 		const buffer = { url: inputText }
-		const { data } = await axios.post(
-			'https://funcap.mapacultural.se.gov.br/qrcode/generate',
-			buffer
-		)
+		const { data } = await api.post('qrcode/generate', buffer)
 
 		const base64 = new Buffer(data.data).toString('base64')
 		setQrValue(base64)

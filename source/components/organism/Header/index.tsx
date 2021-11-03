@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Platform, StyleSheet, View } from 'react-native'
 import { useLayout } from 'react-native-web-hooks'
 
 import constants from 'global/constants'
@@ -10,16 +10,19 @@ import LogoMapaCultural from 'components/atom/LogoMapaCultural'
 import NavBar from 'components/molecule/NavBar'
 
 const Header = () => {
-	const [sizeNavBar, setSizeNavBar] = useState(false)
+	const web = Platform.OS === 'web'
+
+	const [sizeNavBar, setSizeNavBar] = useState(web ? false : true)
 	const { onLayout, width } = useLayout()
 
-	useEffect(() => {
-		if (width < 1127) {
-			setSizeNavBar(true)
-		} else {
-			setSizeNavBar(false)
-		}
-	}, [width])
+	web &&
+		useEffect(() => {
+			if (width < 1127) {
+				setSizeNavBar(true)
+			} else {
+				setSizeNavBar(false)
+			}
+		}, [width])
 
 	// 1127
 
