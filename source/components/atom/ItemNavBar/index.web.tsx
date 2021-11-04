@@ -1,11 +1,5 @@
 import React, { useRef } from 'react'
-import {
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	Linking,
-	FontVariant,
-} from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, FontVariant } from 'react-native'
 import { useHover, useScaledSize } from 'react-native-web-hooks'
 
 type Props = {
@@ -25,12 +19,6 @@ const ItemNavBar: React.FC<Props> = ({
 	const hover = useHover(ref)
 
 	const fontSize = useScaledSize(0.7)
-
-	const handleClickURL = async () => {
-		if (link) {
-			await Linking.openURL(link)
-		}
-	}
 
 	return (
 		<a href={link} style={{ textDecoration: 'none' }}>

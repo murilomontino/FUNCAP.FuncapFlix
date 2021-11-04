@@ -4,7 +4,7 @@ import axios from 'axios'
 // http://localhost:3000
 
 const api = axios.create({
-	baseURL: 'https://funcap.mapacultural.se.gov.br/',
+	baseURL: 'https://funcap.mapacultural.se.gov.br/api',
 	headers: {
 		Authorization: 'Api-key 2458cdd1-b568-52eb-a99f-d7e006dface9',
 	},
