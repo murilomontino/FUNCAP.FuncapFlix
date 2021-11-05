@@ -22,7 +22,7 @@ export type RootStackParamList = {
 	Literatura: undefined
 	Home: undefined
 	QRCode: undefined
-	PDFView: { id: string }
+	PDFView: { id: string; author?: string; title?: string }
 }
 
 declare global {
@@ -31,7 +31,7 @@ declare global {
 			Home: undefined
 			Literatura: undefined
 			QRCode: undefined
-			PDFView: { id: string }
+			PDFView: { id: string; author?: string; title?: string }
 		}
 	}
 }
@@ -66,7 +66,7 @@ const Navigation: React.FC = () => {
 					path: '/literatura',
 				},
 				PDFView: {
-					path: '/literatura/leitorpdf/:id',
+					path: '/literatura/leitorpdf/:id/:author?&:title?',
 				},
 			},
 		},

@@ -1,9 +1,17 @@
 import React from 'react'
-import { Button, Dimensions, StyleSheet, View } from 'react-native'
+import {
+	Button,
+	Dimensions,
+	FlatList,
+	StyleSheet,
+	View,
+	Text,
+} from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 
-import colors from 'global/colors'
+import data from './data'
+
 const { height } = Dimensions.get('window')
 
 const Literatura = () => {
@@ -11,12 +19,31 @@ const Literatura = () => {
 
 	return (
 		<View style={styles.container}>
-			<Button
-				title="Clique Aqui"
-				onPress={() => {
-					navigate('PDFView', { id: '12371623' })
-				}}
-			/>
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<Button
+					title="Clique Aqui"
+					onPress={() => {
+						navigate('PDFView', {
+							id: 'domCasmurro',
+							title: 'dom casmurro',
+							author: 'machado-de-assis',
+						})
+					}}
+				/>
+			</View>
+			<View style={{ flex: 1, backgroundColor: 'white' }}>
+				<FlatList
+					data={data}
+					renderItem={({ item }) => {
+						return (
+							<View>
+								<Text>{item.title}</Text>
+							</View>
+						)
+					}}
+					keyExtractor={(item) => item.id}
+				/>
+			</View>
 		</View>
 	)
 }
@@ -25,8 +52,9 @@ export default Literatura
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		minHeight: height,
-		backgroundColor: colors.dark_primary,
+		backgroundColor: 'transparent',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

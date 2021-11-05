@@ -3,8 +3,12 @@ import axios from 'axios'
 // Pode ser algum servidor executando localmente:
 // http://localhost:3000
 
+const path_prod = 'http://funcap.mapacultural.se.gov.br/api'
+
+const path_dev = 'http://localhost:3000/api'
+
 const api = axios.create({
-	baseURL: 'https://funcap.mapacultural.se.gov.br/api',
+	baseURL: path_dev,
 	headers: {
 		Authorization: 'Api-key 2458cdd1-b568-52eb-a99f-d7e006dface9',
 	},

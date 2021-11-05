@@ -19,7 +19,7 @@ interface Props {
 	route: RouteProp<{ params: { id: string } }, 'params'>
 }
 
-const PdfViewer: React.FC<Props> = ({ route }) => {
+const PdfViewer = ({ route }: Props) => {
 	const [numPages, setNumPages] = useState<number>(0)
 	const [pageNumber, setPageNumber] = useState(1)
 	const [widthPDF, setWidthPDF] = useState(false)
@@ -36,7 +36,7 @@ const PdfViewer: React.FC<Props> = ({ route }) => {
 
 	useEffect(() => {
 		;(async () => {
-			const { data } = await api.get('pdf/123145')
+			const { data } = await api.get(`pdf/${route.params.id}`)
 			setFilePDF(data.data)
 		})()
 	}, [])
