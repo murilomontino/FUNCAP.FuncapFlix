@@ -1,0 +1,409 @@
+{
+	"items": [
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "Q_7BZli9l11XQAhHg9wkuSsSg2o",
+			"id": "UEx4azZSVERkMUd4U0g1Q1hpdlBwOHNGWlE5ZkdTczRGRy5BQjhEMTFBNTE1MjI2ODVB",
+			"snippet": {
+				"publishedAt": "2021-10-08T20:15:53Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Nota da gente",
+				"description": "Gostou do conteúdo? Acompanhe a APERIPE nas redes sociais: \n\nFACEBOOK: https://www.facebook.com/aperipesergipe\nINSTAGRAM: https://www.instagram.com/aperipesergipe\nTWITTER: https://twitter.com/aperipesergipe",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/XxOQhhCgHng/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/XxOQhhCgHng/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/XxOQhhCgHng/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/XxOQhhCgHng/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					},
+					"maxres": {
+						"url": "https://i.ytimg.com/vi/XxOQhhCgHng/maxresdefault.jpg",
+						"width": 1280,
+						"height": 720
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxSH5CXivPp8sFZQ9fGSs4FG",
+				"position": 0,
+				"resourceId": { "kind": "youtube#video", "videoId": "XxOQhhCgHng" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "Ew0uLyWuVtCbouZga2PUqQIaXW0",
+			"id": "UEx4azZSVERkMUd4UTdLS0RRNEFwclVLQlBESEFKd2tQZS4yMUQyQTQzMjRDNzMyQTMy",
+			"snippet": {
+				"publishedAt": "2021-08-02T18:29:50Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Funcap Virtual: Abertura de Exposições no Aracaju Parque Shopping (03/08)",
+				"description": "Não perca, nesta terça-feira, 03, às 18h, a transmissão de abertura de três exposições, que serão apresentadas no Espaço Cultural da Funcap, localizado no Aracaju Parque Shopping. As exposições, viabilizadas com recursos da Lei Aldir Blanc, trazem o feminino como principal abordagem: \"Eu amo essa mulher com todo o meu coração\", da artista visual Kely Nascimento; “As mulheres impactadas pela pandemia”, da artista Vilma Rebouças, e “Relatos Femininos - Vidas e morte de um ciclo sem fim”, da artista plástica Priscila Oliveira.\n\nAlém das exposições, será exibido, às 17h, uma apresentação musical do artista Diego Francisco.\n\n👇 Siga nossas redes sociais\nYouTube: Funcap/Aperipê\nSite Oficial: www.funcap.se.gov.br\nInstagram: @funcapse\nFacebook: @funcapse",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/q7744AA7tCc/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/q7744AA7tCc/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/q7744AA7tCc/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/q7744AA7tCc/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					},
+					"maxres": {
+						"url": "https://i.ytimg.com/vi/q7744AA7tCc/maxresdefault.jpg",
+						"width": 1280,
+						"height": 720
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxQ7KKDQ4AprUKBPDHAJwkPe",
+				"position": 16,
+				"resourceId": { "kind": "youtube#video", "videoId": "q7744AA7tCc" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "k8xcM-FBnlGPIDFOn61uQ0xILs8",
+			"id": "UEx4azZSVERkMUd4UnlELXNnQmpXRUkwY29fcURUNkNxLS41QUZGQTY5OTE4QTREQUU4",
+			"snippet": {
+				"publishedAt": "2021-07-09T14:39:45Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Roda de Conversa - \"Sergipe Emancipado\"",
+				"description": "Mediação: Professora Conceição Vieira (Presidente da FUNCAP)\nParitcipações: Francisco Diemerson de Souza Pereira (Conselho Estadual de Cultura); Professora Edna Maria Matos (UFS).   \n\n\n\nApresentação do Quinteto da Orquestra Sinfônica de Sergipe.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/ieFp9fS3u9k/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/ieFp9fS3u9k/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/ieFp9fS3u9k/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/ieFp9fS3u9k/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					},
+					"maxres": {
+						"url": "https://i.ytimg.com/vi/ieFp9fS3u9k/maxresdefault.jpg",
+						"width": 1280,
+						"height": 720
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxRyD-sgBjWEI0co_qDT6Cq-",
+				"position": 30,
+				"resourceId": { "kind": "youtube#video", "videoId": "ieFp9fS3u9k" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "HJMsynOADdMJQ0LYvd9xEGrnqcE",
+			"id": "UEx4azZSVERkMUd4UnRXa3NId09EeUNSMkV2VlVLWDlXei5DQUNERDQ2NkIzRUQxNTY1",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:15:52Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 29 (bloco 02)",
+				"description": "No programa de hoje, você vai conferir último programa da temporada do Reinvente-SE, nosso programa reuniu  o melhor das apresentações  realizadas pelos artistas selecionados no Edital Reinvente-SE de auxilio emergencial do Governo de Sergipe, através da FUNCAP em benefício aos artistas sergipanos.\n\nNeste programa teremos a video-arte \"Meta-Metá: Ré Luz Ir Ancestral\" de Margot Oliveira, o espetáculo \"Acrobacias Aéreas\" de Anthony Lira realizado no tecido acrobático, vamos ver um pouco da video-aula \"Como elaborar uma pintura em tela\" com Edson Lima e para encerrar o show \"Conectando Energias\" da cantora Lari Lima. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxRtWksHwODyCR2EvVUKX9Wz",
+				"position": 7,
+				"resourceId": { "kind": "youtube#video", "videoId": "cReQrSze5Sk" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "dDBVAFix_ONEHSyegRjcO5xT4Xw",
+			"id": "UEx4azZSVERkMUd4UlhCQUxaUW4tVlJEUjJWcU5wNTdVaS4wMTcyMDhGQUE4NTIzM0Y5",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:15:45Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 29 (bloco 02)",
+				"description": "No programa de hoje, você vai conferir último programa da temporada do Reinvente-SE, nosso programa reuniu  o melhor das apresentações  realizadas pelos artistas selecionados no Edital Reinvente-SE de auxilio emergencial do Governo de Sergipe, através da FUNCAP em benefício aos artistas sergipanos.\n\nNeste programa teremos a video-arte \"Meta-Metá: Ré Luz Ir Ancestral\" de Margot Oliveira, o espetáculo \"Acrobacias Aéreas\" de Anthony Lira realizado no tecido acrobático, vamos ver um pouco da video-aula \"Como elaborar uma pintura em tela\" com Edson Lima e para encerrar o show \"Conectando Energias\" da cantora Lari Lima. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/cReQrSze5Sk/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxRXBALZQn-VRDR2VqNp57Ui",
+				"position": 2,
+				"resourceId": { "kind": "youtube#video", "videoId": "cReQrSze5Sk" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "0GyWGzxubbdGUJBS6f2_m6fZmH8",
+			"id": "UEx4azZSVERkMUd4U3ZQYWlFejJpRWJfOXVyZFNIQWNxNi41MzJCQjBCNDIyRkJDN0VD",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:15:12Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 29 (bloco 01)",
+				"description": "No programa de hoje, você vai conferir último programa da temporada do Reinvente-SE, nosso programa reuniu  o melhor das apresentações  realizadas pelos artistas selecionados no Edital Reinvente-SE de auxilio emergencial do Governo de Sergipe, através da FUNCAP em benefício aos artistas sergipanos.\n\nNeste programa teremos a video-arte \"Meta-Metá: Ré Luz Ir Ancestral\" de Margot Oliveira, o espetáculo \"Acrobacias Aéreas\" de Anthony Lira realizado no tecido acrobático, vamos ver um pouco da video-aula \"Como elaborar uma pintura em tela\" com Edson Lima e para encerrar o show \"Conectando Energias\" da cantora Lari Lima. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/J1ZFdjm5jUQ/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/J1ZFdjm5jUQ/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/J1ZFdjm5jUQ/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/J1ZFdjm5jUQ/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxSvPaiEz2iEb_9urdSHAcq6",
+				"position": 6,
+				"resourceId": { "kind": "youtube#video", "videoId": "J1ZFdjm5jUQ" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "AvhrOuutfFdctg-nTWGXxxMlzRQ",
+			"id": "UEx4azZSVERkMUd4UmNrWEtjWXpERGNSdmt6X0U3cmQyeC41MzJCQjBCNDIyRkJDN0VD",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:14:08Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 28 (bloco 02)",
+				"description": "No programa de hoje, você vai conferir tudo o que rolou no show \"Maruska Som Dicasa\" da Maruska, a contação da história \"Vamos fazer um mundo limpo contra o coronavírus\" da Tia Stephane e também trechos da live \"O claro e o Escuro\" de Tonho Baixinho. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxRckXKcYzDDcRvkz_E7rd2x",
+				"position": 6,
+				"resourceId": { "kind": "youtube#video", "videoId": "wzEu28lSWOI" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "oFPuxFu0C-iRrtAT_jCrJGsBvoM",
+			"id": "UEx4azZSVERkMUd4UzBkLW9hQWNZVWY4WDJETE8tUjBwZC41MjE1MkI0OTQ2QzJGNzNG",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:14:02Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 28 (bloco 02)",
+				"description": "No programa de hoje, você vai conferir tudo o que rolou no show \"Maruska Som Dicasa\" da Maruska, a contação da história \"Vamos fazer um mundo limpo contra o coronavírus\" da Tia Stephane e também trechos da live \"O claro e o Escuro\" de Tonho Baixinho. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/wzEu28lSWOI/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxS0d-oaAcYUf8X2DLO-R0pd",
+				"position": 3,
+				"resourceId": { "kind": "youtube#video", "videoId": "wzEu28lSWOI" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "Pvl3m0FKtMWVylE8we28fCnnwIk",
+			"id": "UEx4azZSVERkMUd4UTFjVmFBTVpwQjRnR00xV3NuWnRQQy5DQUNERDQ2NkIzRUQxNTY1",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:10:18Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 26 (bloco 01)",
+				"description": "No programa de hoje, você vai curtir o documentário \"Jardim\" da cineasta Fernanda Almeida que faz parte da EGBÉ, Mostra de Cinema Negro de Sergipe, e o monólogo \"Tributo ao poeta Araripe Coutinho\" representado pelo artista Ivo Adnil. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/3Q2dgu7xj4U/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/3Q2dgu7xj4U/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/3Q2dgu7xj4U/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/3Q2dgu7xj4U/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxQ1cVaAMZpB4gGM1WsnZtPC",
+				"position": 7,
+				"resourceId": { "kind": "youtube#video", "videoId": "3Q2dgu7xj4U" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		},
+		{
+			"kind": "youtube#playlistItem",
+			"etag": "VZ_Vst2vvT2NCSyUUDEK1pYLlF8",
+			"id": "UEx4azZSVERkMUd4U0kyUzRzbC02SFVIT2tSVkZEQWpZYi4xMkVGQjNCMUM1N0RFNEUx",
+			"snippet": {
+				"publishedAt": "2021-07-06T15:06:23Z",
+				"channelId": "UCQbKXPyFsK-j0haJE0PGvhA",
+				"title": "Reinvente-SE - episódio 25 (bloco 01)",
+				"description": "No programa de hoje, você vai curtir a cultura popular do \"Reisado Nossa Senhora das Graças\" do município de Poço Verde, o curta metragem \"O filme da cadeira\" de Ravi Aynõre\" e conversar sobre os grafites de Dalvan Dext. Com a apresentação de Márcio Lyncoln o programa Reinvente-SE traz música, teatro e apresentações culturais de todos os tipos, sendo exibido as terças e quintas a partir das 20 horas, na Aperipê TV, canal 6.1.\n\nEste é um projeto que surgiu a partir do edital \"Reinvente-SE\" proposto pelo Governo de Sergipe, através de Fundação de Cultura e Arte Aperipê - FUNCAP.",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/hKpoJZXlYRc/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/hKpoJZXlYRc/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/hKpoJZXlYRc/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/hKpoJZXlYRc/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					}
+				},
+				"channelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"playlistId": "PLxk6RTDd1GxSI2S4sl-6HUHOkRVFDAjYb",
+				"position": 5,
+				"resourceId": { "kind": "youtube#video", "videoId": "hKpoJZXlYRc" },
+				"videoOwnerChannelTitle": "Fundação de Cultura e Arte Aperipê - Aperipê TV",
+				"videoOwnerChannelId": "UCQbKXPyFsK-j0haJE0PGvhA"
+			}
+		}
+	]
+}

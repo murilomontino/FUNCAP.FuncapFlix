@@ -1,147 +1,162 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { useLayout } from 'react-native-web-hooks'
+import { useDimensions } from 'react-native-web-hooks'
 import { Document, Page, pdfjs } from 'react-pdf'
 
+import { useBooks } from 'components/context/ContextBooks'
+
 import './PdfViewer.css'
+import { useScroll } from 'components/context/ContextScroll'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-import { NavigationProp, RouteProp } from '@react-navigation/native'
-
-import constants from 'global/constants'
-
-import { RootStackParamList } from 'navigations/Routes'
-import api from 'services'
-
-interface Props {
-	navigation: NavigationProp<RootStackParamList>
-	route: RouteProp<{ params: { id: string } }, 'params'>
-}
-
-const PdfViewer = ({ route }: Props) => {
+const PdfViewer = () => {
 	const [numPages, setNumPages] = useState<number>(0)
 	const [pageNumber, setPageNumber] = useState(1)
-	const [widthPDF, setWidthPDF] = useState(false)
-	const { onLayout, width } = useLayout()
-	const [filePDF, setFilePDF] = useState()
 
-	useEffect(() => {
-		if (width < 750) {
-			setWidthPDF(true)
-		} else {
-			setWidthPDF(false)
-		}
-	}, [width])
+	const { width, height } = useDimensions().window
 
-	useEffect(() => {
-		;(async () => {
-			const { data } = await api.get(`pdf/${route.params.id}`)
-			setFilePDF(data.data)
-		})()
-	}, [])
-
+	const { book } = useBooks()
+	const { scrollTop } = useScroll()
 	const onDocumentLoadSuccess = (numPages: number) => {
 		setNumPages(numPages)
 	}
 
 	const nextPage = () => {
+		scrollTop()
 		if (pageNumber < numPages) {
 			setPageNumber(pageNumber + 1)
 		}
 	}
 
 	const prevPage = () => {
+		scrollTop()
 		if (pageNumber > 1) {
 			setPageNumber(pageNumber - 1)
 		}
 	}
 
 	const PDF = useMemo(() => {
-		return {
-			data: filePDF,
-		}
-	}, [filePDF])
+		setPageNumber(1)
+		return book
+			? {
+					url: `http://localhost:3000/api/pdf/${book}`,
+					httpHeaders: {
+						authorization: 'Api-key 2458cdd1-b568-52eb-a99f-d7e006dface9',
+					},
+			  }
+			: null
+	}, [book])
 
 	return (
 		<View
-			onLayout={onLayout}
 			style={{
-				flex: 1,
-				width: '100%',
+				width: width,
+				minHeight: height / 2,
 				backgroundColor: '#666666',
 			}}
 		>
-			<View
-				style={{
-					flex: 4,
-					marginTop: constants.headerHight + 20,
-					elevation: 5,
-					height: '100%',
+			<Document
+				file={PDF}
+				noData={() => {
+					return (
+						<View
+							style={{
+								width: width,
+								height: height / 2,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text>Nenhum livro selecionado</Text>
+						</View>
+					)
 				}}
-			>
-				<Document
-					file={PDF}
-					renderMode="svg"
-					onLoadSuccess={(pdf) => onDocumentLoadSuccess(pdf.numPages)}
-					onContextMenu={(e) => e.preventDefault()}
-					className="pdf-container"
-				>
-					<Page
-						height={!widthPDF ? 1280 : 720}
-						width={!widthPDF ? 720 : 360}
-						pageNumber={pageNumber}
-					/>
-				</Document>
-			</View>
-			<View
-				style={{
-					height: 80,
-					marginTop: 180,
-					flex: 1,
-					alignItems: 'center',
-					justifyContent: 'center',
+				renderMode="svg"
+				loading={() => {
+					return (
+						<View
+							style={{
+								width: width,
+								height: height,
+							}}
+						></View>
+					)
 				}}
+				onLoadSuccess={(pdf) => onDocumentLoadSuccess(pdf.numPages)}
+				onContextMenu={(e) => e.preventDefault()}
+				className="pdf-container"
 			>
-				<Text style={styles.txtButton}>{`${pageNumber}/${numPages}`}</Text>
+				<Page
+					height={height / 2}
+					width={width / 1.5}
+					loading={() => (
+						<View
+							style={{
+								width: width,
+								height: height * 2,
+								backgroundColor: '#666666',
+							}}
+						></View>
+					)}
+					pageNumber={pageNumber}
+				/>
+			</Document>
 
-				<View style={{ flex: 1, flexDirection: 'row' }}>
-					<TouchableOpacity
-						style={styles.buttonContainer}
-						onPress={prevPage}
-						disabled={pageNumber === 1}
-					>
-						<Text
-							style={[
-								styles.txtButton,
-								pageNumber === 1 && {
-									fontWeight: 'normal',
-									color: 'transparent',
-								},
-							]}
+			{book && (
+				<View
+					style={{
+						height: 80,
+						elevation: 5,
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'absolute',
+						bottom: 0,
+						left: 0,
+						right: 0,
+						flex: 1,
+					}}
+				>
+					<Text style={styles.txtButton}>{`${pageNumber}/${numPages}`}</Text>
+
+					<View style={{ flex: 1, flexDirection: 'row' }}>
+						<TouchableOpacity
+							style={styles.buttonContainer}
+							onPress={prevPage}
+							disabled={pageNumber === 1}
 						>
-							Anterior
-						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={[styles.buttonContainer]}
-						onPress={nextPage}
-						disabled={pageNumber === numPages}
-					>
-						<Text
-							style={[
-								styles.txtButton,
-								pageNumber === numPages && {
-									fontWeight: 'normal',
-									color: 'transparent',
-								},
-							]}
+							<Text
+								style={[
+									styles.txtButton,
+									pageNumber === 1 && {
+										fontWeight: 'normal',
+										color: 'transparent',
+									},
+								]}
+							>
+								Anterior
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							style={[styles.buttonContainer]}
+							onPress={nextPage}
+							disabled={pageNumber === numPages}
 						>
-							Próximo
-						</Text>
-					</TouchableOpacity>
+							<Text
+								style={[
+									styles.txtButton,
+									pageNumber === numPages && {
+										fontWeight: 'normal',
+										color: 'transparent',
+									},
+								]}
+							>
+								Próximo
+							</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</View>
+			)}
 		</View>
 	)
 }
@@ -157,7 +172,7 @@ const styles = StyleSheet.create({
 	},
 	txtButton: {
 		fontVariant: ['small-caps'],
-		color: '#fff',
+		color: '#666666',
 		fontWeight: '500',
 	},
 })

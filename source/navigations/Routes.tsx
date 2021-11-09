@@ -7,11 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import * as Linking from 'expo-linking'
 
-import LiteraturaPage from 'screens/LiteraturaPage'
-import Home from 'screens/LiteraturaPage'
+import Home from 'screens/Home'
+import LiteraturaPage from 'screens/Literature'
 import QRCodeScreen from 'screens/QRCode'
 
-import PdfViewer from 'components/organism/PDFViewer'
 import Front from 'components/templates/Front'
 
 const prefix = Linking.createURL('/')
@@ -22,7 +21,6 @@ export type RootStackParamList = {
 	Literatura: undefined
 	Home: undefined
 	QRCode: undefined
-	PDFView: { id: string; author?: string; title?: string }
 }
 
 declare global {
@@ -31,7 +29,6 @@ declare global {
 			Home: undefined
 			Literatura: undefined
 			QRCode: undefined
-			PDFView: { id: string; author?: string; title?: string }
 		}
 	}
 }
@@ -65,9 +62,6 @@ const Navigation: React.FC = () => {
 				Literatura: {
 					path: '/literatura',
 				},
-				PDFView: {
-					path: '/literatura/leitorpdf/:id/:author?&:title?',
-				},
 			},
 		},
 	}
@@ -86,6 +80,12 @@ const Navigation: React.FC = () => {
 			>
 				<Stack.Screen
 					component={({ ...rest }) =>
+						TemplateFront({ children: <Home {...rest} /> })
+					}
+					name="Home"
+				/>
+				<Stack.Screen
+					component={({ ...rest }) =>
 						TemplateFront({ children: <LiteraturaPage {...rest} /> })
 					}
 					name="Literatura"
@@ -95,18 +95,6 @@ const Navigation: React.FC = () => {
 						TemplateFront({ children: <QRCodeScreen {...rest} /> })
 					}
 					name="QRCode"
-				/>
-				<Stack.Screen
-					component={({ ...rest }) =>
-						TemplateFront({ children: <Home {...rest} /> })
-					}
-					name="Home"
-				/>
-				<Stack.Screen
-					component={({ ...rest }) =>
-						TemplateFront({ children: <PdfViewer {...rest} /> })
-					}
-					name="PDFView"
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

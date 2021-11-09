@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const path_prod = 'http://funcap.mapacultural.se.gov.br/api'
 
-const path_dev = 'http://localhost:3000/api'
+const path_dev = 'http://192.168.100.3:3000/api'
 
 const api = axios.create({
 	baseURL: path_dev,

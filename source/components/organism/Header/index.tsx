@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Platform, StyleSheet, View } from 'react-native'
-import { useLayout } from 'react-native-web-hooks'
+import { useDimensions } from 'react-native-web-hooks'
 
 import constants from 'global/constants'
 
@@ -13,8 +13,8 @@ const Header = () => {
 	const web = Platform.OS === 'web'
 
 	const [sizeNavBar, setSizeNavBar] = useState(web ? false : true)
-	const { onLayout, width } = useLayout()
-
+	const { window } = useDimensions()
+	const { width } = window
 	web &&
 		useEffect(() => {
 			if (width < 1127) {
@@ -28,7 +28,6 @@ const Header = () => {
 
 	return (
 		<View
-			onLayout={onLayout}
 			style={[
 				styles.container,
 				{

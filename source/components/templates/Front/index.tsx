@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, ScrollView, Dimensions } from 'react-native'
+import { View, Dimensions } from 'react-native'
 
 import { Platform } from 'expo-modules-core'
 
 import constants from 'global/constants'
 
+import ScrollProvider from 'components/context/ContextScroll'
 import Footer from 'components/organism/Footer'
 import Header from 'components/organism/Header'
 import DrawerProvider from 'context/DrawerMenu'
@@ -18,11 +19,7 @@ const Front: React.FC = ({ children }) => {
 		<DrawerProvider>
 			<Header />
 
-			<ScrollView
-				style={{
-					backgroundColor: '#141414',
-				}}
-			>
+			<ScrollProvider>
 				<View
 					style={{
 						flex: 1,
@@ -33,7 +30,7 @@ const Front: React.FC = ({ children }) => {
 					{children}
 				</View>
 				<Footer />
-			</ScrollView>
+			</ScrollProvider>
 		</DrawerProvider>
 	)
 }

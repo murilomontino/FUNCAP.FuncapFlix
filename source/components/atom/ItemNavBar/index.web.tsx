@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import { StyleSheet, Text, TouchableOpacity, FontVariant } from 'react-native'
 import { useHover, useScaledSize } from 'react-native-web-hooks'
 
+import { useNavigation } from '@react-navigation/native'
+
 type Props = {
 	title: string
 	link?: string
@@ -19,10 +21,18 @@ const ItemNavBar: React.FC<Props> = ({
 	const hover = useHover(ref)
 
 	const fontSize = useScaledSize(0.7)
+	const { navigate } = useNavigation()
+
+	const navigateItem = () => {
+		navigate('Literatura')
+	}
 
 	return (
 		<a href={link} style={{ textDecoration: 'none' }}>
-			<TouchableOpacity style={styles.buttonNav}>
+			<TouchableOpacity
+				style={styles.buttonNav}
+				onPress={!link && navigateItem}
+			>
 				<Text
 					ref={ref}
 					style={[
