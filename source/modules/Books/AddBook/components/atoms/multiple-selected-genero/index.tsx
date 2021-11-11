@@ -21,16 +21,35 @@ const MultipleSelectedGenero = () => {
 		<SectionedMultiSelect
 			items={items}
 			IconRenderer={Icon}
-			uniqueKey="id"
+			uniqueKey="name"
 			subKey="children"
 			selectText="Escolha um Gênero"
-			showDropDowns={false}
+			showDropDowns={true}
 			readOnlyHeadings={true}
 			onSelectedItemsChange={onSelectedItemsChange}
 			selectedItems={selectedItems}
 			styles={{
+				modalWrapper: {
+					justifyContent: 'center',
+				},
+				container: {
+					width: '50%',
+					height: '50%',
+				},
 				subSeparator: {
 					display: 'none',
+				},
+				button: {
+					minHeight: 80,
+					margin: 12,
+					alignSelf: 'center',
+					width: '20%',
+				},
+				selectedSubItemText: {
+					color: 'green',
+				},
+				chipsWrapper: {
+					justifyContent: 'center',
 				},
 			}}
 		/>

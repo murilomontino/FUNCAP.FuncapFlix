@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import { TextInput } from 'react-native-paper'
 import { useDimensions } from 'react-native-web-hooks'
 
 import FormProductProvider from 'forms/Product'
@@ -16,7 +17,6 @@ const AddBook = () => {
 		<FormProductProvider>
 			<View
 				style={{
-					backgroundColor: 'white',
 					minHeight: window.height,
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -31,13 +31,17 @@ const AddBook = () => {
 						style={{
 							justifyContent: 'center',
 							alignItems: 'center',
-							backgroundColor: 'gray',
+							backgroundColor: 'white',
+							maxWidth: 300,
 						}}
 					>
 						<GetImageButton />
 						<GetPDFButton />
+						<MultipleSelectedGenero />
 					</View>
-					<MultipleSelectedGenero />
+					<View>
+						<TextInput />
+					</View>
 				</View>
 				<SendFormButtonProduct />
 			</View>
