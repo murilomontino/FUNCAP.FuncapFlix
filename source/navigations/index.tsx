@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Routes from './Routes'
+import Routes from './routes'
 
 const Authentication: React.FC = () => {
 	return <Routes />

@@ -2,68 +2,35 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-import { LinkingOptions, NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import * as Linking from 'expo-linking'
-
+import AddBook from 'modules/Books/AddBook'
 import Home from 'screens/Home'
 import LiteraturaPage from 'screens/Literature'
 import QRCodeScreen from 'screens/QRCode'
 
 import Front from 'components/templates/Front'
 
-const prefix = Linking.createURL('/')
+import { linking, RootStackParamList } from '../config'
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<RootStackParamList>()
 
-export type RootStackParamList = {
-	Literatura: undefined
-	Home: undefined
-	QRCode: undefined
-}
-
-declare global {
-	namespace ReactNavigation {
-		interface RootParamList {
-			Home: undefined
-			Literatura: undefined
-			QRCode: undefined
-		}
-	}
-}
-
-const themeDefault = {
+const themeDefault: Theme = {
 	dark: true,
 	colors: {
 		background: 'transparent',
 		notification: '#fff',
 		border: '#000',
+		text: '#000',
+		card: '#fff',
+		primary: '#666666',
 	},
 }
 
 const Navigation: React.FC = () => {
 	const TemplateFront: React.FC = ({ children }) => {
 		return <Front>{children}</Front>
-	}
-
-	const linking: LinkingOptions<RootStackParamList> = {
-		prefixes: [prefix],
-		enabled: true,
-
-		config: {
-			screens: {
-				Home: {
-					path: '/',
-				},
-				QRCode: {
-					path: '/qrcode',
-				},
-				Literatura: {
-					path: '/literatura',
-				},
-			},
-		},
 	}
 
 	return (
@@ -95,6 +62,12 @@ const Navigation: React.FC = () => {
 						TemplateFront({ children: <QRCodeScreen {...rest} /> })
 					}
 					name="QRCode"
+				/>
+				<Stack.Screen
+					component={({ ...rest }) =>
+						TemplateFront({ children: <AddBook {...rest} /> })
+					}
+					name="AddBooks"
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

@@ -3,7 +3,6 @@ module.exports = function (api) {
 	api.cache(true)
 	return {
 		presets: ['babel-preset-expo'],
-		exclude: [/react-native-web/, /\.(native|ios|android)\.(ts|js)x?$/],
 		plugins: [
 			'react-native-reanimated/plugin',
 			[
