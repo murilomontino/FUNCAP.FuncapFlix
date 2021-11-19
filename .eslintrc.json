@@ -29,11 +29,28 @@
 		"unused-imports"
 	],
 	"rules": {
-		"linebreak-style": ["error", "unix"],
-		"quotes": ["error", "single"],
-		"semi": ["error", "never"],
-		"prettier/prettier": 2,
-		"@typescript-eslint/no-extra-semi": ["off"],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+				"printWidth": 80,
+				"tabWidth": 2,
+				"useTabs": false,
+				"semi": false,
+				"trailingComma": "es5",
+				"space-before-function-paren": [
+					"error",
+					"always"
+				]
+			}
+		],
+		"@typescript-eslint/no-extra-semi": [
+			"off"
+		],
 		"no-console": "error",
 		"import-helpers/order-imports": [
 			"warn",
@@ -41,7 +58,10 @@
 				// example configuration
 				"newlinesBetween": "always",
 				"groups": [
-					["/^react/", "/^react-native/"],
+					[
+						"/^react/",
+						"/^react-native/"
+					],
 					"/^@react/",
 					"/^expo/",
 					"/^redux/",
@@ -54,13 +74,26 @@
 						"/^pages/",
 						"/^components/"
 					],
-					["parent", "sibling", "index"],
-					["/styles/"]
+					[
+						"parent",
+						"sibling",
+						"index"
+					],
+					[
+						"/styles/"
+					]
 				],
-				"alphabetize": { "order": "asc", "ignoreCase": true }
+				"alphabetize": {
+					"order": "asc",
+					"ignoreCase": true
+				}
 			}
 		],
 		"unused-imports/no-unused-imports": "error"
 	},
-	"ignorePatterns": ["metro.config.js", "babel.config.js", "node_modules"]
+	"ignorePatterns": [
+		"metro.config.js",
+		"babel.config.js",
+		"node_modules"
+	]
 }

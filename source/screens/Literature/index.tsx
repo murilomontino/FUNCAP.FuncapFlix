@@ -8,7 +8,7 @@ import { ProductsAttributes } from 'types/Products'
 import BooksProvider from 'components/context/ContextBooks'
 import CardBooks from 'components/organism/CardBooks'
 import PdfViewer from 'components/organism/PDFViewer'
-import socket from 'services/config/socket'
+import api from 'services'
 
 const Literatura = () => {
 	const [products, setProducts] = useState<ProductsAttributes[]>([])
@@ -16,7 +16,12 @@ const Literatura = () => {
 	const { window } = useDimensions()
 
 	useEffect(() => {
-		socket.emit('get-PDF', setProducts)
+		;(async () => {
+			const { data } = await api.get('get-all-products')
+			console.log(data)
+
+			setProducts(data)
+		})()
 	}, [])
 
 	return (

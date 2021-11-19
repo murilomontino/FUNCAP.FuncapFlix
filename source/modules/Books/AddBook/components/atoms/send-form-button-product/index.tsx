@@ -9,7 +9,9 @@ const SendFormButtonProduct = () => {
 	const [document, setDocument] = useState({} as ProductsAttributes)
 
 	const sendForm = async () => {
-		const response = await api.post('add-book', document)
+		const response = await api.post('add-book', {
+			arquivo: 'alo',
+		})
 	}
 
 	return (
