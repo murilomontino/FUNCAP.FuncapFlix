@@ -8,10 +8,10 @@ const path_prod = 'http://funcap.mapacultural.se.gov.br/api'
 const path_dev = 'http://192.168.100.3:3000/api'
 
 const api = axios.create({
-	baseURL: path_dev,
-	headers: {
-		Authorization: 'Api-key 2458cdd1-b568-52eb-a99f-d7e006dface9',
-	},
+  baseURL: path_dev,
+  headers: {
+    Authorization: 'Api-key 2458cdd1-b568-52eb-a99f-d7e006dface9',
+  },
 })
 
 export default api

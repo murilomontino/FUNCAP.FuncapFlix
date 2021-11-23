@@ -19,8 +19,15 @@ const GetImageButton = () => {
             width: 150,
             height: 250,
             marginTop: 20,
-            resizeMode: 'stretch',
-            borderWidth: 2,
+            resizeMode: 'contain',
+            elevation: 5,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 1,
+              height: 2,
+            },
+            shadowOpacity: 1,
+            shadowRadius: 4,
           }}
           defaultSource={require('assets/not-image.png')}
           source={{ uri: `${image.uri}` }}

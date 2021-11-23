@@ -6,60 +6,59 @@ import constants from 'global/constants'
 import { ProductsAttributes } from 'types/Products'
 
 import BooksProvider from 'components/context/ContextBooks'
-import CardBooks from 'components/organism/CardBooks'
+import CardBooks from 'components/organism/card-book'
 import PdfViewer from 'components/organism/PDFViewer'
 import api from 'services'
 
 const Literatura = () => {
-	const [products, setProducts] = useState<ProductsAttributes[]>([])
+  const [products, setProducts] = useState<ProductsAttributes[]>([])
 
-	const { window } = useDimensions()
+  const { window } = useDimensions()
 
-	useEffect(() => {
-		;(async () => {
-			const { data } = await api.get('get-all-products')
-			console.log(data)
+  useEffect(() => {
+    ; (async () => {
+      const { data } = await api.get('get-all-products')
 
-			setProducts(data)
-		})()
-	}, [])
+      setProducts(data)
+    })()
+  }, [])
 
-	return (
-		<BooksProvider>
-			<View style={styles.container}>
-				<View
-					style={{
-						width: window.width,
-					}}
-				>
-					<PdfViewer />
-				</View>
-				<FlatList
-					style={{ marginBottom: 40, minHeight: 300 * products.length ?? 1 }}
-					data={products}
-					renderItem={({ item }) => {
-						return <CardBooks item={item} />
-					}}
-					keyExtractor={(item) => item.nome_arquivo}
-				/>
-			</View>
-		</BooksProvider>
-	)
+  return (
+    <BooksProvider>
+      <View style={styles.container}>
+        <View
+          style={{
+            width: window.width,
+          }}
+        >
+          <PdfViewer />
+        </View>
+        <FlatList
+          style={{ marginBottom: 40, minHeight: 300 * products.length ?? 1 }}
+          data={products}
+          renderItem={({ item }) => {
+            return <CardBooks item={item} />
+          }}
+          keyExtractor={(item) => item.nome_arquivo}
+        />
+      </View>
+    </BooksProvider>
+  )
 }
 
 export default Literatura
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		marginTop: constants.headerHight,
-		backgroundColor: 'transparent',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	section: {
-		margin: 10,
-		padding: 10,
-		flexGrow: 1,
-	},
+  container: {
+    flex: 1,
+    marginTop: constants.headerHight,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
 })

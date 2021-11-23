@@ -1,23 +1,24 @@
-export type ProductsAttributes = {
-	id: number
-	id_artista: number
-	titulo: string
-	sub_titulo: string
-	capa: string
-	sinopse: string
-	resumo: string
-	genero: {
-		[key: number]: string
-	}
-	tags: {
-		[key: number]: string
-	}
-	categoria: number
-	tipo: number
-	link: string
-	nome_arquivo: string
-	arquivo: string
-	cidade: string
-	estado: string
-	data_cadastro: Date
+export type InsertProductsAttributes = {
+  titulo: string
+  sub_titulo: string
+  capa: string | undefined
+  sinopse: string
+  resumo: string
+  genero: string[]
+  tags: string[]
+  categoria: number
+  tipo: number
+  nome_arquivo: string
+  tipo_capa: string | undefined
+  arquivo: string
+}
+
+export interface ProductsAttributes extends InsertProductsAttributes {
+  id: number
+
+  cidade: string
+  estado: string
+  link: string
+  data_cadastro: Date
+  id_artista: number
 }
