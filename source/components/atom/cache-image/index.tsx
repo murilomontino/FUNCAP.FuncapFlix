@@ -1,18 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Image } from 'react-native'
+
+import NotCapa from 'assets/no-capa.jpg'
+import { getCache, setCache } from 'utils/CacheStorageLocal'
+
+import api from 'services'
 
 type Props = {
-  capa: string
+  capa?: string
+  height?: number
+  width?: number
 }
 
-const CacheImage = ({ capa }: Props) => {
+const CacheImage = ({ capa, height = 200, width = 150 }: Props) => {
+  const [img, setImg] = useState('')
+
+  useEffect(() => {
+    if (capa) {
+      getImgStorage(capa)
+    }
+  }, [])
+
+  const getImgStorage = async (capa: string) => {
+    const arrayCapa = capa.split('.')
+    const tipo = arrayCapa[arrayCapa.length - 1]
+
+    const cache = await getCache(arrayCapa[0])
+
+    if (!cache) {
+      const { data } = await api.get(`image/${capa}`)
+
+      setCache(arrayCapa[0], {
+        data: data,
+      })
+      setImg(`data:image/${tipo};base64,`.concat(data))
+    } else {
+      setImg(`data:image/${tipo};base64,`.concat(cache.data as string))
+    }
+  }
+
   return (
-    <img
+    <Image
       style={{
-        width: 100,
+        width,
         resizeMode: 'contain',
-        height: 150,
+        height,
       }}
-      src={`http://192.168.100.3:3000/api/capa/${capa}`}
+      defaultSource={NotCapa}
+      source={{
+        uri: img,
+      }}
     />
   )
 }

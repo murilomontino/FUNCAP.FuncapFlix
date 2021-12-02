@@ -11,10 +11,12 @@ import NavBar from 'components/molecule/nav-bar'
 
 const Header = () => {
   const web = Platform.OS === 'web'
+  const { window, screen } = useDimensions()
+  const size = web ? window : screen
 
   const [sizeNavBar, setSizeNavBar] = useState(web ? false : true)
-  const { window } = useDimensions()
-  const { width } = window
+
+  const { width } = size
   web &&
     useEffect(() => {
       if (width < 1127) {

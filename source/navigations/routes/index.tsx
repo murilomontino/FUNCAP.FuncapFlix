@@ -5,10 +5,11 @@ import { Text } from 'react-native'
 import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from 'modules/Books/AddBook'
-import Home from 'screens/Home'
-import LiteraturaPage from 'screens/Literature'
-import QRCodeScreen from 'screens/QRCode'
+import AddBook from 'modules/Books/add-book'
+import BooksPage from 'screens/books-screen'
+import HomeScreen from 'screens/home-screen'
+import MusicScreen from 'screens/music-screen'
+import QRCodeScreen from 'screens/qr-code-screen'
 
 import Front from 'components/templates/frontend'
 
@@ -47,13 +48,13 @@ const Navigation: React.FC = () => {
       >
         <Stack.Screen
           component={({ ...rest }) =>
-            TemplateFront({ children: <Home {...rest} /> })
+            TemplateFront({ children: <HomeScreen {...rest} /> })
           }
-          name="Home"
+          name="HomeScreen"
         />
         <Stack.Screen
           component={({ ...rest }) =>
-            TemplateFront({ children: <LiteraturaPage {...rest} /> })
+            TemplateFront({ children: <BooksPage {...rest} /> })
           }
           name="Literatura"
         />
@@ -68,6 +69,12 @@ const Navigation: React.FC = () => {
             TemplateFront({ children: <AddBook {...rest} /> })
           }
           name="AddBooks"
+        />
+        <Stack.Screen
+          component={({ ...rest }) =>
+            TemplateFront({ children: <MusicScreen {...rest} /> })
+          }
+          name="Music"
         />
       </Stack.Navigator>
     </NavigationContainer>

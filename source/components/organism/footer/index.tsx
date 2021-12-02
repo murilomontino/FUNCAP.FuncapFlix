@@ -38,6 +38,7 @@ const Footer = () => {
         height: constants.footerHight,
         width: '100%',
         backgroundColor: colors.dark_secondary,
+        marginTop: 200,
       }}
     >
       <View
