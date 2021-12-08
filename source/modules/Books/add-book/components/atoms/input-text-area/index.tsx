@@ -15,7 +15,7 @@ type Props = {
 const InputTextArea = ({
   topic,
   numberLines,
-  maxLength,
+  maxLength = 5000,
   height,
   value,
   onChangeValue,

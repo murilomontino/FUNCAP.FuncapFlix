@@ -3,9 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 import { Document, Page, pdfjs } from 'react-pdf'
 
-import { useBooks } from 'components/context/ContextBooks'
-import { useScroll } from 'components/context/ContextScroll'
-import { path } from 'services/config/api'
+import { useBooks } from '@/components/context/ContextBooks'
+import { useScroll } from '@/components/context/ContextScroll'
+
+import { path } from '@/services/config/api'
 
 import './PdfViewer.css'
 

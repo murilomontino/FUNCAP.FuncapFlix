@@ -8,20 +8,26 @@ module.exports = function (api) {
 			[
 				'module-resolver',
 				{
-					alias: {
-						forms: './source/forms',
-						data: './source/data',
-						assets: './source/assets',
-						modules: './source/modules',
-						context: './source/context',
-						navigations: './source/navigations',
-						components: './source/components',
-						global: './source/global',
-						utils: './source/utils',
-						hooks: './source/hooks',
-						screens: './source/screens',
-						types: './source/types',
-						services: './source/services'
+          alias: {
+            '@/assets': './source/assets',
+            '@/components': './source/components',
+            '@/context': './source/context',
+
+						'@/data': './source/data',
+            '@/forms': './source/forms',
+            '@/global': './source/global',
+            '@/hooks': './source/hooks',
+						'@/modules': './source/modules',
+
+						'@/navigations': './source/navigations',
+						'@/redux': './source/redux',
+            '@/screens': './source/screens',
+
+
+            '@/services': './source/services',
+						'@/types': './source/types',
+            '@/utils': './source/utils',
+
 					},
 
 				},

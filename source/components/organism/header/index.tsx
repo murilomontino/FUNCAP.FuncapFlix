@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Platform, StyleSheet, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import constants from 'global/constants'
+import ButtonLogin from '@/components/atom/button-login'
+import ButtonOpenMenu from '@/components/atom/button-open-menu'
+import LogoMapaCultural from '@/components/atom/logo-mapa-cultural'
+import NavBar from '@/components/molecule/nav-bar'
 
-import ButtonLogin from 'components/atom/button-login'
-import ButtonOpenMenu from 'components/atom/button-open-menu'
-import LogoMapaCultural from 'components/atom/logo-mapa-cultural'
-import NavBar from 'components/molecule/nav-bar'
+import constants from '@/global/constants'
 
 const Header = () => {
   const web = Platform.OS === 'web'

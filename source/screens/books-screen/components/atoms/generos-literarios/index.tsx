@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text } from 'react-native'
 
-import colors from 'global/colors'
+import colors from '@/global/colors'
 
 type Props = {
   generos: string | string[] | undefined

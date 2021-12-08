@@ -5,13 +5,13 @@ import { Text } from 'react-native'
 import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from 'modules/Books/add-book'
-import BooksPage from 'screens/books-screen'
-import HomeScreen from 'screens/home-screen'
-import MusicScreen from 'screens/music-screen'
-import QRCodeScreen from 'screens/qr-code-screen'
+import AddBook from '@/modules/Books/add-book'
 
-import Front from 'components/templates/frontend'
+import Front from '@/components/templates/frontend'
+import BooksPage from '@/screens/books-screen'
+import HomeScreen from '@/screens/home-screen'
+import MusicScreen from '@/screens/music-screen'
+import QRCodeScreen from '@/screens/qr-code-screen'
 
 import { linking, RootStackParamList } from '../config'
 

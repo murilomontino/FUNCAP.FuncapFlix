@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Platform, StyleSheet, View } from 'react-native'
 import { useLayout } from 'react-native-web-hooks'
 
-import colors from 'global/colors'
-import constants from 'global/constants'
+import Logo from '@/components/atom/logo-funcap'
+import LogoFuncapVertical from '@/components/atom/logo-funcap-vertical'
+import LogoGoverno from '@/components/atom/logo-governo'
+import AboutFooter from '@/components/molecule/about-footer'
 
-import Logo from 'components/atom/logo-funcap'
-import LogoFuncapVertical from 'components/atom/logo-funcap-vertical'
-import LogoGoverno from 'components/atom/logo-governo'
-import AboutFooter from 'components/molecule/about-footer'
+import colors from '@/global/colors'
+import constants from '@/global/constants'
 
 const Footer = () => {
   const web = Platform.OS === 'web'

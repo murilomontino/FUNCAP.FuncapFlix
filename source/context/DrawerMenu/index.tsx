@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useRef } from 'react'
 import { DrawerLayout } from 'react-native-gesture-handler'
 
-import NavBar from 'components/molecule/nav-bar'
+import NavBar from '@/components/molecule/nav-bar'
 
 type ContextDrawer = {
   drawerToggle: () => void
@@ -29,7 +29,7 @@ const DrawerProvider: React.FC = ({ children }) => {
         drawerType="front"
         drawerBackgroundColor="rgba(0,0,0,0.5)"
         renderNavigationView={renderDrawer}
-      //onDrawerSlide={handleDrawerSlide}
+        //onDrawerSlide={handleDrawerSlide}
       >
         {children}
       </DrawerLayout>

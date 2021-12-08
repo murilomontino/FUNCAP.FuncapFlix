@@ -10,10 +10,10 @@ import {
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-import colors from 'global/colors'
-import constants from 'global/constants'
+import api from '@/services'
 
-import api from 'services'
+import colors from '@/global/colors'
+import constants from '@/global/constants'
 
 const QRCodeScreen = () => {
   const [inputText, setInputText] = useState('')

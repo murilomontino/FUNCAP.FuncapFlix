@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Image } from 'react-native'
 
-import NotCapa from 'assets/no-capa.jpg'
-import { getCache, setCache } from 'utils/CacheStorageLocal'
+import api from '@/services'
 
-import api from 'services'
+import NotCapa from '@/assets/no-capa.jpg'
+
+import { getCache, setCache } from '@/utils/CacheStorageLocal'
 
 type Props = {
   capa?: string

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import ItemNavBar from 'components/atom/item-nav-bar'
+import ItemNavBar from '@/components/atom/item-nav-bar'
 
 type Props = {
   flexDirection?:

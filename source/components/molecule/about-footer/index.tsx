@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { useScaledSize } from 'react-native-web-hooks'
 
-import colors from 'global/colors'
+import ItemNavBar from '@/components/atom/item-nav-bar'
 
-import ItemNavBar from 'components/atom/item-nav-bar'
+import colors from '@/global/colors'
 
 const AboutFooter = () => {
   const fontSize = useScaledSize(0.7)

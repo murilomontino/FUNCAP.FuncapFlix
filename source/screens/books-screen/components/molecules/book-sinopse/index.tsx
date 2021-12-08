@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-import { AttrsProducts } from 'types/Products'
+import { AttrsProducts } from '@/types/Products'
 
 import { textStyles, viewStyles } from '../../styles'
 

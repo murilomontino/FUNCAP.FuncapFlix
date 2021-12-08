@@ -2,8 +2,9 @@ import React from 'react'
 import { TouchableOpacity, Text, View } from 'react-native'
 import Tags from 'react-native-tags'
 
-import { useFormProductTags } from 'forms/Product'
-import colors from 'global/colors'
+import { useFormProductTags } from '@/forms/Product/hooks'
+
+import colors from '@/global/colors'
 
 const InputTags = () => {
   const { onChangeTags } = useFormProductTags()

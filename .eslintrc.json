@@ -66,22 +66,26 @@
 					"/^expo/",
 					"/^redux/",
 					"module",
+					"/@\/redux/",
+					"/^@\/context/",
+					"/^@\/navigations/",
 					[
-						"/reduxDatabase/",
-						"/^navigations/",
-						"/^context/",
-						"/^services/",
-						"/^pages/",
-						"/^components/"
+						"/^@\/screens/",
+						"/^@\/components/"
 					],
+					"/^@\/forms/",
+					"/^@\/services/",
 					[
 						"parent",
 						"sibling",
 						"index"
 					],
 					[
-						"/styles/"
-					]
+						"/^@\/assets/",
+						"/^@\/hooks/",
+						"/^@\/global/"
+					],
+					"/^@\/utils/"
 				],
 				"alphabetize": {
 					"order": "asc",

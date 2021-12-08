@@ -5,10 +5,10 @@ import { Icon } from 'react-native-elements'
 
 import { useAssets } from 'expo-asset'
 
-import ErrorImg from 'assets/Alerts/Error.png'
-import SuccessImg from 'assets/Alerts/Success.png'
-import WarningImg from 'assets/Alerts/Warning.png'
-import colors from 'global/colors'
+import ErrorImg from '@/assets/Alerts/Error.png'
+import SuccessImg from '@/assets/Alerts/Success.png'
+import WarningImg from '@/assets/Alerts/Warning.png'
+import colors from '@/global/colors'
 
 type Toast = 'warning' | 'erro' | 'success'
 

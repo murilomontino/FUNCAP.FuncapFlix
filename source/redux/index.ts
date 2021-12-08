@@ -9,12 +9,12 @@ import { UserState } from './reducer/User/types'
 // import {createLogger} from 'redux-logger'
 
 const persistConfig = {
-	key: 'root',
-	storage: AsyncStorage,
+  key: 'root',
+  storage: AsyncStorage,
 }
 
 export interface ApplicationState {
-	UserState: UserState
+  UserState: UserState
 }
 
 const reducers = persistReducer(persistConfig, root)

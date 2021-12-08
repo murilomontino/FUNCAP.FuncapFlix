@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import constants from 'global/constants'
+import constants from '@/global/constants'
 
 const MusicScreen = () => {
   return (

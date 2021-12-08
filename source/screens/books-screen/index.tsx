@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Platform, StyleSheet, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import constants from 'global/constants'
-import { AttrsProducts } from 'types/Products'
+import { AttrsProducts } from '@/types/Products'
 
-import BooksProvider from 'components/context/ContextBooks'
-import PdfViewer from 'components/organism/PDF-viewer'
-import api from 'services'
+import BooksProvider from '@/components/context/ContextBooks'
+import PdfViewer from '@/components/organism/PDF-viewer'
+
+import api from '@/services'
 
 import CardBooks from './components/organims/card-book'
 import PaginationsBooks from './components/organims/pagination-books'
+
+import constants from '@/global/constants'
 
 const BooksScreen = () => {
   const [products, setProducts] = useState<AttrsProducts[]>([])

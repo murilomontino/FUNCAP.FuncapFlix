@@ -3,11 +3,10 @@ import React, { useRef } from 'react'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { useFormProductGenero } from 'forms/Product'
-
-import items from './items'
+import { useFormProductGenero } from '@/forms/Product/hooks'
 
 import { styles } from '../styles'
+import items from './items'
 
 const MultipleSelectedGenero = () => {
   const multiSelect = useRef()

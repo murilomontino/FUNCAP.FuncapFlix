@@ -2,10 +2,9 @@ import React from 'react'
 import { View, Text, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from 'types/Products'
+import { AttrsProducts } from '@/types/Products'
 
 import GenerosLiterarios from '../../atoms/generos-literarios'
-
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {

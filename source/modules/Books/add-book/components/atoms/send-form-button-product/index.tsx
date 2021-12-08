@@ -2,52 +2,51 @@
 import React, { useMemo } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
+import { AttrsProducts, Category, TypeImgCapa } from '@/types/Products'
+
+import { useLoading } from '@/context/LoadingModal'
+import { useToast } from '@/context/ToastModal'
+
 import {
   useFormProductGenero,
   useFormProductTags,
   useFormImage,
-  useFormPDF,
-  useFormProduct,
   useFormProductCategory,
   useFormProductCPFandCNPJ,
   useFormProductFinancialResources,
-  useFormProductLink,
-  useResetFormProduct,
-  useFormMusic,
-} from 'forms/Product'
-import colors from 'global/colors'
-import { AttrsProducts, Category, TypeImgCapa } from 'types/Products'
+  useFormProductFile,
+} from '@/forms/Product/hooks'
+import { useFormProductBook } from '@/forms/Product/product-book/hooks'
 
-import { useLoading } from 'context/LoadingModal'
-import { useToast } from 'context/ToastModal'
-import api from 'services'
+import api from '@/services'
+
+import colors from '@/global/colors'
 
 const SendFormButtonProduct = () => {
   const { tags } = useFormProductTags()
   const { genero } = useFormProductGenero()
-  const { resumo, sinopse, subTitle, title } = useFormProduct()
+  const { sobreAObra, sinopse, subTitle, title } = useFormProductBook()
   const { image } = useFormImage()
-  const { pdf } = useFormPDF()
-  const { music } = useFormMusic()
+  const { file } = useFormProductFile()
   const { category, type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
-  const { link } = useFormProductLink()
   const { setLoading } = useLoading()
   const { AlertToast } = useToast()
-  const { resetForm } = useResetFormProduct()
 
   const submitIsValid = useMemo(() => {
     if (
       financialResources &&
       title &&
+      file !== null &&
+      file.type === 'success' &&
       (cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid))
     ) {
       switch (category) {
         case Category.Literature:
-          return sinopse.length > 0 && pdf !== null && pdf.type === 'success'
+          return sinopse.length > 0
         case Category.Music:
-          return music !== null && music.type === 'success'
+          return true
         case Category.Video:
           return false
         default:
@@ -56,33 +55,25 @@ const SendFormButtonProduct = () => {
     } else {
       return false
     }
-  }, [
-    sinopse,
-    title,
-    pdf,
-    financialResources,
-    music,
-    cpfOrCnpj,
-    cpfOrCnpjIsValid,
-  ])
+  }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
     setLoading(true)
 
     const { status, data } = await send({
       recursos: financialResources,
-      link: link,
+      link: '',
       cpfOrCnpj: cpfOrCnpj,
       tipo: type,
-      nome_arquivo: pdf.name ?? music.name,
+      nome_arquivo: file.name,
       genero: genero,
       tags: tags,
-      resumo: resumo,
+      resumo: sobreAObra,
       sinopse: sinopse,
-      categoria: category as Category,
+      categoria: category,
       sub_titulo: subTitle,
       titulo: title,
-      arquivo: pdf.uri ?? music.uri,
+      arquivo: file.uri,
       capa: image.uri ?? undefined,
       tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
     })
@@ -100,7 +91,6 @@ const SendFormButtonProduct = () => {
         break
     }
 
-    resetForm()
     setLoading(false)
   }
 

@@ -6,11 +6,18 @@ import { styles } from '../styles'
 type Props = {
   topic: string
   value: string
+  maxLength?: number
   onChangeValue: (text: string) => void
   viewInput?: ViewStyle
 }
 
-const InputSubTitle = ({ topic, onChangeValue, value, viewInput }: Props) => {
+const InputTopic = ({
+  topic,
+  onChangeValue,
+  value,
+  viewInput,
+  maxLength = 255,
+}: Props) => {
   const web = Platform.OS === 'web'
 
   const outlineWeb = useMemo(() => {
@@ -27,10 +34,10 @@ const InputSubTitle = ({ topic, onChangeValue, value, viewInput }: Props) => {
         value={value}
         onChangeText={onChangeValue}
         style={[styles.textArea, outlineWeb, viewInput]}
-        maxLength={255}
+        maxLength={maxLength}
       />
     </View>
   )
 }
 
-export default InputSubTitle
+export default InputTopic

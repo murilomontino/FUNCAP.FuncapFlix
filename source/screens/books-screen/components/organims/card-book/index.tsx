@@ -2,14 +2,13 @@ import React from 'react'
 import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from 'types/Products'
+import { AttrsProducts } from '@/types/Products'
 
-import CacheImage from 'components/atom/cache-image'
+import CacheImage from '@/components/atom/cache-image'
 
 import BookBasicInformation from '../../molecules/book-basic-information'
 import BookFooter from '../../molecules/book-footer'
 import BookSinopse from '../../molecules/book-sinopse'
-
 import { viewStyles } from '../../styles'
 
 type Props = {

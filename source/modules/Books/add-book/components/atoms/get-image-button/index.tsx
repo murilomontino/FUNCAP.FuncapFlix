@@ -2,8 +2,9 @@ import React from 'react'
 import { Image, TouchableHighlight, View } from 'react-native'
 import { Button } from 'react-native-paper'
 
-import { useFormImage, useFormProductCategory } from 'forms/Product'
-import { TypesProducts } from 'types/Products'
+import { TypesProducts } from '@/types/Products'
+
+import { useFormImage, useFormProductCategory } from '@/forms/Product/hooks'
 
 import { styles } from '../styles'
 
@@ -37,7 +38,7 @@ const GetImageButton = () => {
             height: 200,
             resizeMode: 'cover',
           }}
-          defaultSource={require('assets/not-image.png')}
+          defaultSource={require('@/assets/not-image.png')}
           source={{ uri: `${image.uri}` }}
         />
       </TouchableHighlight>

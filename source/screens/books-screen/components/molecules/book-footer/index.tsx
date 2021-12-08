@@ -2,13 +2,12 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from 'types/Products'
+import { AttrsProducts } from '@/types/Products'
 
-import { useBooks } from 'components/context/ContextBooks'
-import { useScroll } from 'components/context/ContextScroll'
+import { useBooks } from '@/components/context/ContextBooks'
+import { useScroll } from '@/components/context/ContextScroll'
 
 import Tags from '../../atoms/tags'
-
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {

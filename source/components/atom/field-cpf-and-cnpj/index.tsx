@@ -4,10 +4,12 @@ import { MaskedTextInput } from 'react-native-mask-text'
 import { HelperText } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import { useFormProductCPFandCNPJ } from 'forms/Product'
-import colors from 'global/colors'
-import useDebounce from 'hooks/use-debounce'
 import { validateBr } from 'js-brasil'
+
+import { useFormProductCPFandCNPJ } from '@/forms/Product/hooks'
+
+import colors from '@/global/colors'
+import useDebounce from '@/hooks/use-debounce'
 
 type Props = {
   topic: string

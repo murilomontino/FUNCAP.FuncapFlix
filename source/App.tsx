@@ -8,10 +8,11 @@ import * as ScreenOrientation from 'expo-screen-orientation'
 
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { persistedStore, store } from 'data'
+import { persistedStore, store } from '@/redux'
 
-import RootContext from 'context/Root'
-import Navigation from 'navigations/index'
+import RootContext from '@/context/Root'
+
+import Navigation from '@/navigations/index'
 
 enableScreens()
 

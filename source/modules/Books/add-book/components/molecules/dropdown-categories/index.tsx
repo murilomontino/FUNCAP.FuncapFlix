@@ -1,52 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-import { useFormProductCategory } from 'forms/Product'
-import colors from 'global/colors'
-import { TypesProducts } from 'types/Products'
+import { Category } from '@/types/Products'
 
-import { styles } from '../styles'
+import { useFormProductCategory } from '@/forms/Product/hooks'
 
-const DropdownTypes = () => {
-  const [open, setOpen] = useState(false)
+import styles from '@/global/styles'
 
-  const { onChangeType, type } = useFormProductCategory()
+const DropdownCategories = () => {
+  const { onChangeCategory } = useFormProductCategory()
 
-  const [value, setValue] = useState('')
   const [items, setItems] = useState([
-    { label: 'MP3', value: TypesProducts.MP3 },
-    { label: 'Link', value: TypesProducts.URL },
-    { label: 'PDF', value: TypesProducts.PDF },
+    { label: 'Música', value: Category.Music },
+    { label: 'Literatura', value: Category.Literature },
+    /* { label: 'Video', value: Category.Video }, */
   ])
-
-  useEffect(() => {
-    select()
-  }, [type])
-
-  const select = () => {
-    const selectedItem = items.find((item) => item.value === type)
-    if (selectedItem) {
-      setValue(selectedItem.label)
-    }
-  }
 
   return (
     <SelectDropdown
       data={items}
       onSelect={(selectedItem, index) => {
-        onChangeType(selectedItem.value)
+        onChangeCategory(selectedItem.value)
       }}
-      disabled={true}
-      buttonStyle={[styles.buttonContainer, { backgroundColor: colors.grey20 }]}
+      defaultButtonText={'CATEGORIAS'}
+      buttonStyle={styles.buttonContainer}
       buttonTextStyle={{
         color: '#fff',
         textTransform: 'uppercase',
         fontSize: 14,
       }}
-      /* renderDropdownIcon={() => {
+      renderDropdownIcon={() => {
         return <FontAwesome name="chevron-down" color={'#fff'} size={14} />
-      }} */
-      defaultButtonText={value ? value : 'TIPO DE ARQUIVO'}
+      }}
       dropdownIconPosition={'right'}
       buttonTextAfterSelection={(selectedItem, index) => {
         // text represented after item is selected
@@ -67,4 +53,4 @@ const DropdownTypes = () => {
   )
 }
 
-export default DropdownTypes
+export default DropdownCategories

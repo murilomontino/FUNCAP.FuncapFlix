@@ -2,20 +2,42 @@ import React, { useMemo } from 'react'
 import { View, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { useFormProductCategory } from 'forms/Product'
-import { Category, TypesProducts } from 'types/Products'
+import { Category, FinancialResources, TypesProducts } from '@/types/Products'
 
-import DropdownResources from '../../atoms/dropdown-resources'
-import DropdownTypes from '../../atoms/dropdown-types'
+import Dropdown from '@/components/atom/dropdown'
+
+import {
+  useFormProductCategory,
+  useFormProductFinancialResources,
+} from '@/forms/Product/hooks'
+
+import GetFileButton from '../../atoms/get-file-button'
 import GetImageButton from '../../atoms/get-image-button'
-import GetMP3Button from '../../atoms/get-mp3-button'
-import GetPDFButton from '../../atoms/get-pdf-button'
 import MultipleSelectedGenero from '../../atoms/multiple-selected-genero'
+
+const ItemsTypesProducts = [
+  { label: 'MP3', value: TypesProducts.MP3 },
+  { label: 'Link', value: TypesProducts.URL },
+  { label: 'PDF', value: TypesProducts.PDF },
+]
+
+const ItemsFincancialResources = [
+  { label: 'Lei Aldir Blanc ', value: FinancialResources.LeiAldirBlanc },
+  {
+    label: 'Recursos do Artista',
+    value: FinancialResources.RecursoDoArtista,
+  },
+  { label: 'Funcart', value: FinancialResources.Funcart },
+  { label: 'Municipal', value: FinancialResources.Municipal },
+  { label: 'Federal', value: FinancialResources.Federal },
+]
 
 const Left = () => {
   const web = Platform.OS === 'web'
   const { window } = useDimensions()
-  const { type, category } = useFormProductCategory()
+  const { category, onChangeType, type } = useFormProductCategory()
+  const { onChangeFinancialResources, financialResources } =
+    useFormProductFinancialResources()
 
   const marginBotton = useMemo(() => {
     if (window.width < 1127 && category === Category.Music) {
@@ -37,10 +59,21 @@ const Left = () => {
       }}
     >
       <GetImageButton />
-      <DropdownTypes />
-      {type === TypesProducts.PDF && <GetPDFButton />}
-      {type === TypesProducts.MP3 && <GetMP3Button />}
-      <DropdownResources />
+      <Dropdown
+        items={ItemsTypesProducts}
+        onChangeValue={onChangeType}
+        value={type}
+        disabled={true}
+        label="Selecione o Tipo"
+      />
+
+      <GetFileButton />
+      <Dropdown
+        items={ItemsFincancialResources}
+        onChangeValue={onChangeFinancialResources}
+        value={financialResources}
+        label="Recursos"
+      />
       {category === Category.Literature && <MultipleSelectedGenero />}
     </View>
   )

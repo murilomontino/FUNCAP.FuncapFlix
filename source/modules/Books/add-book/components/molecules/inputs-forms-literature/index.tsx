@@ -2,20 +2,23 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { useFormProduct } from 'forms/Product'
+import { useFormProductBook } from '@/forms/Product/product-book/hooks'
 
+import InputISBN from '../../atoms/input-isbn'
 import InputTextArea from '../../atoms/input-text-area'
 import InputTopic from '../../atoms/input-topic'
 
 const InputsFormsLiterature = () => {
   const {
-    onChangeResumo,
+    onChangeSobreAObra,
     onChangeSinopse,
     onChangeSubTitle,
-    resumo,
+    sobreAObra,
     sinopse,
     subTitle,
-  } = useFormProduct()
+    onChangeTitle,
+    title,
+  } = useFormProductBook()
 
   const { window } = useDimensions()
 
@@ -26,6 +29,7 @@ const InputsFormsLiterature = () => {
         height: window.width < 1127 ? window.height + 600 : 'auto',
       }}
     >
+      <InputISBN />
       <Text
         style={{
           fontSize: 20,
@@ -38,6 +42,7 @@ const InputsFormsLiterature = () => {
       >
         Detalhes
       </Text>
+      <InputTopic value={title} onChangeValue={onChangeTitle} topic="Título*" />
       <InputTopic
         value={subTitle}
         onChangeValue={onChangeSubTitle}
@@ -52,9 +57,9 @@ const InputsFormsLiterature = () => {
         numberLines={12}
       />
       <InputTextArea
-        value={resumo}
-        onChangeValue={onChangeResumo}
-        topic="Resumo"
+        value={sobreAObra}
+        onChangeValue={onChangeSobreAObra}
+        topic="Sobre a Obra"
         height={300}
         maxLength={5000}
         numberLines={12}

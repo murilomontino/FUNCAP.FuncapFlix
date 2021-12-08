@@ -6,37 +6,37 @@ import AppLoading from 'expo-app-loading'
 import { useAssets } from 'expo-asset'
 
 type Props = {
-	size: number
+  size: number
 }
 
 const LogoFuncap: React.FC<Props> = ({ size }) => {
-	const [assets] = useAssets([require('assets/logo-funcap.png')])
+  const [assets] = useAssets([require('@/assets/logo-funcap.png')])
 
-	const fontSize = useScaledSize(size)
-	const link = 'https://www.funcap.se.gov.br/'
+  const fontSize = useScaledSize(size)
+  const link = 'https://www.funcap.se.gov.br/'
 
-	const handleClickURL = async () => {
-		if (link) {
-			await Linking.openURL(link)
-		}
-	}
+  const handleClickURL = async () => {
+    if (link) {
+      await Linking.openURL(link)
+    }
+  }
 
-	if (!assets) {
-		return <AppLoading />
-	}
+  if (!assets) {
+    return <AppLoading />
+  }
 
-	return (
-		<TouchableOpacity onPress={handleClickURL}>
-			<Image
-				source={assets[0]}
-				style={{
-					resizeMode: 'contain',
-					width: fontSize,
-					height: fontSize,
-				}}
-			/>
-		</TouchableOpacity>
-	)
+  return (
+    <TouchableOpacity onPress={handleClickURL}>
+      <Image
+        source={assets[0]}
+        style={{
+          resizeMode: 'contain',
+          width: fontSize,
+          height: fontSize,
+        }}
+      />
+    </TouchableOpacity>
+  )
 }
 
 export default memo(LogoFuncap)

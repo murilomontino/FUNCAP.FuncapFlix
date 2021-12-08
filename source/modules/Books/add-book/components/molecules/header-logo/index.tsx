@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { useDimensions, useScaledSize } from 'react-native-web-hooks'
 
-import LogoFuncap from 'components/atom/logo-funcap'
+import LogoFuncap from '@/components/atom/logo-funcap'
 
 const HeaderLogo = () => {
   const { window } = useDimensions()

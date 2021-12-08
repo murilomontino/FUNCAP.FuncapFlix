@@ -2,13 +2,14 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { useFormProductCategory } from 'forms/Product'
-import colors from 'global/colors'
-import constants from 'global/constants'
+import { useFormProductCategory } from '@/forms/Product/hooks'
 
 import Details from '../../organims/details'
 import Left from '../../organims/left'
 import Right from '../../organims/right'
+
+import colors from '@/global/colors'
+import constants from '@/global/constants'
 
 const CategoryInputs = () => {
   const { window } = useDimensions()
