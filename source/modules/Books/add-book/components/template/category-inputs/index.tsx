@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
 import { useFormProductCategory } from '@/forms/Product/hooks'
@@ -12,7 +12,9 @@ import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const CategoryInputs = () => {
-  const { window } = useDimensions()
+  const web = Platform.OS === 'web'
+  const { window, screen } = useDimensions()
+  const size = web ? window : screen
 
   const { category } = useFormProductCategory()
 
@@ -35,15 +37,22 @@ const CategoryInputs = () => {
 
   return (
     <View
-      style={{
-        flex: 1,
-        marginTop: 40,
-        padding: 40,
-        width: '100%',
-        flexDirection: window.width < 1127 ? 'column' : 'row',
-        alignItems: window.width < 1127 ? 'center' : 'flex-start',
-        marginBottom: constants.footerHight,
-      }}
+      style={[
+        {
+          flex: 1,
+          marginTop: 40,
+          padding: 40,
+          flexDirection: 'row',
+          width: '100%',
+          alignItems: 'center',
+          marginBottom: constants.footerHight,
+        },
+        size.width < 1127 && {
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+      ]}
     >
       <Left />
       <Details />

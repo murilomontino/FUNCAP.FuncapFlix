@@ -21,7 +21,7 @@ const ItemsTypesProducts = [
   { label: 'PDF', value: TypesProducts.PDF },
 ]
 
-const ItemsFincancialResources = [
+const ItemsFinancialResources = [
   { label: 'Lei Aldir Blanc ', value: FinancialResources.LeiAldirBlanc },
   {
     label: 'Recursos do Artista',
@@ -34,13 +34,14 @@ const ItemsFincancialResources = [
 
 const Left = () => {
   const web = Platform.OS === 'web'
-  const { window } = useDimensions()
+  const { window, screen } = useDimensions()
+  const size = web ? window : screen
   const { category, onChangeType, type } = useFormProductCategory()
   const { onChangeFinancialResources, financialResources } =
     useFormProductFinancialResources()
 
-  const marginBotton = useMemo(() => {
-    if (window.width < 1127 && category === Category.Music) {
+  const marginBottom = useMemo(() => {
+    if (size.width < 1127 && category === Category.Music) {
       return 200
     }
     return 0
@@ -51,10 +52,10 @@ const Left = () => {
       style={{
         flex: 1,
         maxWidth: 300,
-        height: window.height,
+        minHeight: size.height,
         marginLeft: web ? 0 : 40,
-        marginBottom: marginBotton,
-        borderRightWidth: window.width < 1127 ? 0 : 1,
+        marginBottom: marginBottom,
+        borderRightWidth: size.width < 1127 ? 0 : 1,
         borderColor: 'rgba(0,0,0, 0.4)',
       }}
     >
@@ -69,7 +70,7 @@ const Left = () => {
 
       <GetFileButton />
       <Dropdown
-        items={ItemsFincancialResources}
+        items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}
         value={financialResources}
         label="Recursos"

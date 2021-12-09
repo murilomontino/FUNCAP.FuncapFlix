@@ -4,8 +4,11 @@ import { MaskedTextInput } from 'react-native-mask-text'
 
 import { useLoading } from '@/context/LoadingModal'
 
-import { useFormImage } from '@/forms/Product/hooks'
-import { useFormProductBook } from '@/forms/Product/product-book/hooks'
+import { useFormImage, useFormProductData } from '@/forms/Product/hooks'
+import {
+  useFormProductBook,
+  useFormProductBookContent,
+} from '@/forms/Product/product-book/hooks'
 
 import { styles } from '../styles'
 
@@ -23,6 +26,9 @@ const InputISBN = () => {
     onChangeTitle,
   } = useFormProductBook()
 
+  const { onChangeNumberOfPages, onChangePublisher } =
+    useFormProductBookContent()
+  const { onChangePublishedDate, onChangeCulturalName } = useFormProductData()
   const { onChangeImageURL } = useFormImage()
 
   const web = Platform.OS === 'web'
@@ -39,25 +45,28 @@ const InputISBN = () => {
     if (data.totalItems === 0) {
       return []
     }
-
     const { volumeInfo } = data.items[0]
 
-    onChangeSinopse(volumeInfo.description)
-    onChangeSubTitle(volumeInfo.subtitle)
-    onChangeTitle(volumeInfo.title)
-    onChangeImageURL(volumeInfo.imageLinks.thumbnail, volumeInfo.title)
-
     const mapBook = {
-      title: volumeInfo.title,
-      subtitle: volumeInfo.subtitle,
-      authors: volumeInfo.authors,
-      description: volumeInfo.description,
-      image: volumeInfo.imageLinks.thumbnail,
-      categories: volumeInfo.categories,
-      publisher: volumeInfo.publisher,
-      publishedDate: volumeInfo.publishedDate,
-      pageCount: volumeInfo.pageCount,
+      title: volumeInfo.title || '',
+      subtitle: volumeInfo.subtitle || '',
+      authors: volumeInfo.authors || [],
+      description: volumeInfo.description || '',
+      image: volumeInfo.imageLinks?.thumbnail || '',
+      categories: volumeInfo.categories || [],
+      publisher: volumeInfo.publisher || '',
+      publishedDate: volumeInfo.publishedDate || '',
+      pageCount: volumeInfo.pageCount || '',
     }
+
+    onChangeSinopse(mapBook.description)
+    onChangeSubTitle(mapBook.subtitle)
+    onChangeTitle(mapBook.title)
+    onChangeImageURL(mapBook.image, mapBook.title)
+    onChangePublisher(mapBook.publisher)
+    onChangeNumberOfPages(mapBook.pageCount)
+    onChangePublishedDate(mapBook.publishedDate)
+    onChangeCulturalName(mapBook.authors.join(', '))
 
     return mapBook
   }, [])

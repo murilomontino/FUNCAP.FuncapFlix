@@ -58,3 +58,61 @@ export const useFormProductBook = () => {
     onChangeSinopse,
   }
 }
+
+export const useFormProductBookContent = () => {
+  const publisher = useContextSelector(
+    FormProductBookContext,
+    (value) => value.publisher
+  )
+  const numberOfPages = useContextSelector(
+    FormProductBookContext,
+    (value) => value.numberOfPages
+  )
+  const size = useContextSelector(FormProductBookContext, (value) => value.size)
+  const illustrator = useContextSelector(
+    FormProductBookContext,
+    (value) => value.illustrator
+  )
+  const illustrated = useContextSelector(
+    FormProductBookContext,
+    (value) => value.illustrated
+  )
+
+  const onChangePublisher = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangePublisher
+  )
+
+  const onChangeNumberOfPages = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeNumberOfPages
+  )
+
+  const onChangeSize = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeSize
+  )
+
+  const onChangeIllustrator = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeIllustrator
+  )
+
+  const onChangeIllustrated = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeIllustrated
+  )
+
+  return {
+    publisher,
+    numberOfPages,
+    size,
+    illustrator,
+    illustrated,
+    onChangePublisher,
+    onChangeNumberOfPages,
+    onChangeSize,
+    onChangeIllustrator,
+    onChangeIllustrated,
+  }
+}

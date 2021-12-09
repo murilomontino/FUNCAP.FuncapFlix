@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
-import { AttrsProducts, Category, TypeImgCapa } from '@/types/Products'
+import { TypeProduct, Category, TypeImgCapa } from '@/types/Products'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -15,8 +15,12 @@ import {
   useFormProductCPFandCNPJ,
   useFormProductFinancialResources,
   useFormProductFile,
+  useFormProductData,
 } from '@/forms/Product/hooks'
-import { useFormProductBook } from '@/forms/Product/product-book/hooks'
+import {
+  useFormProductBook,
+  useFormProductBookContent,
+} from '@/forms/Product/product-book/hooks'
 
 import api from '@/services'
 
@@ -25,13 +29,16 @@ import colors from '@/global/colors'
 const SendFormButtonProduct = () => {
   const { tags } = useFormProductTags()
   const { genero } = useFormProductGenero()
-  const { sobreAObra, sinopse, subTitle, title } = useFormProductBook()
+  const { sobreAObra, sinopse, subTitle, title, isbn } = useFormProductBook()
   const { image } = useFormImage()
   const { file } = useFormProductFile()
   const { category, type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
   const { showLoading, hideLoading } = useLoading()
+  const { culturalName, publishedDate } = useFormProductData()
+  const { illustrated, publisher, size, illustrator, numberOfPages } =
+    useFormProductBookContent()
   const { AlertToast } = useToast()
 
   const submitIsValid = useMemo(() => {
@@ -62,13 +69,20 @@ const SendFormButtonProduct = () => {
 
     const { status, data } = await send({
       recursos: financialResources,
+      isbn: isbn,
+      numero_de_paginas: numberOfPages,
+      tamanho: size,
+      ilustracao: illustrated,
+      editora: publisher,
+      nome_cultural: culturalName,
+      data_de_publicacao: publishedDate,
       link: '',
       cpfOrCnpj: cpfOrCnpj,
       tipo: type,
       nome_arquivo: file.name,
       genero: genero,
       tags: tags,
-      resumo: sobreAObra,
+      sobre_a_obra: sobreAObra,
       sinopse: sinopse,
       categoria: category,
       sub_titulo: subTitle,
@@ -94,7 +108,7 @@ const SendFormButtonProduct = () => {
     hideLoading()
   }
 
-  const send = async (document: AttrsProducts) => {
+  const send = async (document: TypeProduct) => {
     try {
       const { data, status } = await api.post('add-product', document)
       return { data, status }
@@ -104,7 +118,7 @@ const SendFormButtonProduct = () => {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       <TouchableHighlight
         disabled={!submitIsValid}
         style={{

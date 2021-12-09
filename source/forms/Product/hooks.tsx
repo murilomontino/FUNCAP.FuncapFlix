@@ -120,3 +120,30 @@ export const useFormProductFile = () => {
     onChangeFile,
   }
 }
+
+export const useFormProductData = () => {
+  const culturalName = useContextSelector(
+    FormProductContext,
+    (value) => value.culturalName
+  )
+  const onChangeCulturalName = useContextSelector(
+    FormProductContext,
+    (value) => value.onChangeCulturalName
+  )
+
+  const publishedDate = useContextSelector(
+    FormProductContext,
+    (value) => value.publishedDate
+  )
+  const onChangePublishedDate = useContextSelector(
+    FormProductContext,
+    (value) => value.onChangePublishedDate
+  )
+
+  return {
+    culturalName,
+    onChangeCulturalName,
+    publishedDate,
+    onChangePublishedDate,
+  }
+}

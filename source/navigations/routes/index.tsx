@@ -50,7 +50,7 @@ const Navigation: React.FC = () => {
           component={({ ...rest }) =>
             TemplateFront({ children: <HomeScreen {...rest} /> })
           }
-          name="HomeScreen"
+          name="Home"
         />
         <Stack.Screen
           component={({ ...rest }) =>

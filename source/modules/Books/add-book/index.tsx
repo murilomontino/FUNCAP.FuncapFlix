@@ -24,6 +24,7 @@ const AddBook = () => {
         style={{
           backgroundColor: colors.button,
           width: window.width,
+          minHeight: window.height,
           marginTop: constants.headerHight,
           padding: web ? 0 : 20,
         }}

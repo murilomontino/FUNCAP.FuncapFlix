@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
 import { Category } from '@/types/Products'
@@ -13,14 +13,17 @@ import InputsFormsLiterature from '../../molecules/inputs-forms-literature'
 
 const Details = () => {
   const { category } = useFormProductCategory()
-  const { window } = useDimensions()
+  const web = Platform.OS === 'web'
+  const { window, screen } = useDimensions()
+  const size = web ? window : screen
 
   return (
     <View
       style={{
-        flex: 1,
-        width: '100%',
-        height: window.height,
+        width: '70%',
+        flex: 2.5,
+        minHeight: size.height,
+        marginBottom: 120,
       }}
     >
       <FieldCPFandCNPJGeneric

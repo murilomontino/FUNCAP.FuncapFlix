@@ -27,6 +27,22 @@ const FormProductProvider: React.FC = ({ children }) => {
   const [type, setType] = useState(TypesProducts.URL)
   const [cpfOrCnpj, SetCPForCNPJ] = useState('')
   const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
+  const [publishedDate, setPublishedDate] = useState('')
+  const [culturalName, setCulturalName] = useState('')
+
+  const onChangePublishedDate = useCallback(
+    (date: string) => {
+      setPublishedDate(date)
+    },
+    [publishedDate]
+  )
+
+  const onChangeCulturalName = useCallback(
+    (value: string) => {
+      setCulturalName(value)
+    },
+    [culturalName]
+  )
 
   const resetProduct = useCallback(() => {
     setFinancialResources(0)
@@ -152,6 +168,10 @@ const FormProductProvider: React.FC = ({ children }) => {
         cpfOrCnpjIsValid,
         financialResources,
         file,
+        culturalName,
+        onChangeCulturalName,
+        onChangePublishedDate,
+        publishedDate,
         onChangeImageURL,
         onChangeFile,
         onChangeFinancialResources,

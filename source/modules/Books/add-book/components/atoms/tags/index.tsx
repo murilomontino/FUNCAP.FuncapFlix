@@ -10,7 +10,7 @@ const InputTags = () => {
   const { onChangeTags } = useFormProductTags()
 
   return (
-    <View style={{ flex: 1, padding: 12 }}>
+    <View style={{ padding: 12 }}>
       <Text
         style={{
           fontWeight: 'bold',

@@ -12,6 +12,45 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [sinopse, setSinopse] = useState('')
   const [sobreAObra, setSobreAObra] = useState('')
   const [isbn, setISBN] = useState('')
+  const [numberOfPages, setNumberOfPages] = useState('')
+  const [publisher, setPublisher] = useState('')
+  const [size, setSize] = useState('')
+  const [illustrated, setIllustrated] = useState(false)
+  const [illustrator, setIlustrador] = useState('')
+
+  const onChangeIllustrator = useCallback(
+    (text: string) => {
+      setIlustrador(text)
+    },
+    [illustrator]
+  )
+  const onChangeNumberOfPages = useCallback(
+    (text: string) => {
+      setNumberOfPages(text)
+    },
+    [numberOfPages]
+  )
+
+  const onChangePublisher = useCallback(
+    (text: string) => {
+      setPublisher(text)
+    },
+    [publisher]
+  )
+
+  const onChangeSize = useCallback(
+    (text: string) => {
+      setSize(text)
+    },
+    [size]
+  )
+
+  const onChangeIllustrated = useCallback(
+    (value: boolean) => {
+      setIllustrated(value)
+    },
+    [illustrated]
+  )
 
   const resetProductBook = useCallback(() => {
     setTitle('')
@@ -62,6 +101,16 @@ const FormProductBookProvider: React.FC = ({ children }) => {
         sinopse,
         sobreAObra,
         isbn,
+        illustrated,
+        numberOfPages,
+        publisher,
+        size,
+        illustrator,
+        onChangeIllustrator,
+        onChangeNumberOfPages,
+        onChangePublisher,
+        onChangeSize,
+        onChangeIllustrated,
         onChangeISBN,
         onChangeTitle,
         onChangeSobreAObra,

@@ -26,10 +26,9 @@ const InputsFormsLiterature = () => {
     <View
       style={{
         maxWidth: '90%',
-        height: window.width < 1127 ? window.height + 600 : 'auto',
+        minHeight: window.width < 1127 ? window.height : 'auto',
       }}
     >
-      <InputISBN />
       <Text
         style={{
           fontSize: 20,
@@ -42,6 +41,7 @@ const InputsFormsLiterature = () => {
       >
         Detalhes
       </Text>
+      <InputISBN />
       <InputTopic value={title} onChangeValue={onChangeTitle} topic="Título*" />
       <InputTopic
         value={subTitle}

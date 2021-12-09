@@ -1,21 +1,25 @@
 /* eslint-disable no-unused-vars */
-
 interface Product {
-  cpfOrCnpj: string
+  cpfOrCnpj?: string
   recursos: FinancialResources
-  categoria: Category
   arquivo: string
+  conteudo?: string
   nome_arquivo: string
+  data_de_publicacao: string
+  nome_cultural: string
   tipo: TypesProducts
 }
 
 interface GenericAttrs {
   id?: string
   titulo?: string
+  name_uuid?: string
   sub_titulo?: string
+  cpf?: string | null
+  cnpj?: string | null
   capa?: string
   sinopse?: string
-  resumo?: string
+  sobre_a_obra?: string
   qr_code?: string
   recursos_outros?: string
   genero?: string[] | string
@@ -24,29 +28,41 @@ interface GenericAttrs {
   estado?: string
   link?: string
   tipo_capa?: TypeImgCapa
+  isbn?: string
+  numero_de_paginas?: string
+  tamanho?: string
+  ilustracao?: boolean
+  editora?: string
 }
 
-interface ProductVideo extends Product, GenericAttrs {
+export interface ProductVideo extends Product, GenericAttrs {
   link: string
   categoria: Category.Video
 }
 
-interface ProductAudio extends Product, GenericAttrs {
+export interface ProductMusic extends Product, GenericAttrs {
   titulo: string
   categoria: Category.Music
 }
 
-interface ProductBook extends Product, GenericAttrs {
+export interface ProductBook extends Product, GenericAttrs {
   categoria: Category.Literature
   titulo: string
+  isbn: string
   sinopse: string
+  numero_de_paginas: string
+  tamanho: string
+  ilustracao: boolean
+  editora: string
 }
 
-export type AttrsProducts = ProductVideo | ProductAudio | ProductBook
+export interface GenericProduct extends Product, GenericAttrs { }
+
+export type TypeProduct = ProductVideo | ProductMusic | ProductBook
 
 export type TypeImgCapa = 'image/png' | 'image/jpeg'
 
-export type ExtImgCapa = 'png' | 'jpeg'
+export type ExtImgCapa = 'png' | 'jpg'
 
 export enum FinancialResources {
   NaoInformado = 0,

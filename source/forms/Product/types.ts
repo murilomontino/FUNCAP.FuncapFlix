@@ -13,6 +13,8 @@ export type Document = {
 
 export type FormProduct = {
   cpfOrCnpj: string
+  culturalName: string
+  publishedDate: string
   financialResources: FinancialResources
   capa: Document
   category: Category
@@ -21,6 +23,8 @@ export type FormProduct = {
   type: TypesProducts
   tags: string[]
   cpfOrCnpjIsValid: boolean
+  onChangePublishedDate: (date: string) => void
+  onChangeCulturalName: (value: string) => void
   onChangeFinancialResources: (value: FinancialResources) => void
   onChangeFile: () => void
   onChangeCPForCNPJ: (text: string) => void
@@ -46,6 +50,16 @@ export type FormProductBook = {
   isbn: string
   sinopse: string
   sobreAObra: string
+  numberOfPages: string
+  publisher: string
+  size: string
+  illustrated: boolean
+  illustrator: string
+  onChangeIllustrator: (text: string) => void
+  onChangeNumberOfPages: (text: string) => void
+  onChangePublisher: (text: string) => void
+  onChangeSize: (text: string) => void
+  onChangeIllustrated: (value: boolean) => void
   onChangeISBN: (value: string) => void
   onChangeTitle: (text: string) => void
   onChangeSubTitle: (text: string) => void
