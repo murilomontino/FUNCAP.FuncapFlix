@@ -6,18 +6,17 @@ import styles from '@/global/styles'
 
 type Context = {
   loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  showLoading: () => void
+  hideLoading: () => void
 }
 
-const LoadingContext = createContext<Context>({
-  loading: false,
-  setLoading: () => {
-    return
-  },
-})
+const LoadingContext = createContext<Context>({} as Context)
 
 const LoadingContextProvider: React.FC = ({ children }) => {
   const [loading, setLoading] = useState(false)
+
+  const showLoading = () => setLoading(true)
+  const hideLoading = () => setLoading(false)
 
   const LoadingModal = () => {
     return (
@@ -34,7 +33,8 @@ const LoadingContextProvider: React.FC = ({ children }) => {
     <LoadingContext.Provider
       value={{
         loading,
-        setLoading,
+        showLoading,
+        hideLoading,
       }}
     >
       {children}

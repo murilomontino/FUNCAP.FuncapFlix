@@ -4,6 +4,7 @@ import { MaskedTextInput } from 'react-native-mask-text'
 
 import { useLoading } from '@/context/LoadingModal'
 
+import { useFormImage } from '@/forms/Product/hooks'
 import { useFormProductBook } from '@/forms/Product/product-book/hooks'
 
 import { styles } from '../styles'
@@ -14,10 +15,21 @@ const InputISBN = () => {
   const apiGoogle = 'https://www.googleapis.com/books/v1/volumes?q=isbn='
   const apiKey = '&maxResults=1&key=AIzaSyB6sfiUCwfRUDtlc_q1XsUDCvDzM4AsXNk'
 
-  const { isbn, onChangeISBN } = useFormProductBook()
-  const web = Platform.OS === 'web'
+  const {
+    isbn,
+    onChangeISBN,
+    onChangeSinopse,
+    onChangeSubTitle,
+    onChangeTitle,
+  } = useFormProductBook()
 
-  const { setLoading } = useLoading()
+  const { onChangeImageURL } = useFormImage()
+
+  const web = Platform.OS === 'web'
+  const outlineWeb = useMemo(() => {
+    return web ? styles.outlineWeb : styles.outline
+  }, [])
+  const { showLoading, hideLoading } = useLoading()
   const debounce = useDebounce()
 
   const searchBook = useCallback(async (isbn: string) => {
@@ -29,6 +41,11 @@ const InputISBN = () => {
     }
 
     const { volumeInfo } = data.items[0]
+
+    onChangeSinopse(volumeInfo.description)
+    onChangeSubTitle(volumeInfo.subtitle)
+    onChangeTitle(volumeInfo.title)
+    onChangeImageURL(volumeInfo.imageLinks.thumbnail, volumeInfo.title)
 
     const mapBook = {
       title: volumeInfo.title,
@@ -49,16 +66,12 @@ const InputISBN = () => {
     onChangeISBN(text)
     debounce(async () => {
       if (rawText.length === 13) {
-        setLoading(true)
+        showLoading()
         await searchBook(rawText)
-        setLoading(false)
+        hideLoading()
       }
     }, 500)
   }
-
-  const outlineWeb = useMemo(() => {
-    return web ? styles.outlineWeb : styles.outline
-  }, [])
 
   return (
     <View style={[styles.textAreaContainer]}>

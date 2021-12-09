@@ -39,6 +39,14 @@ const FormProductProvider: React.FC = ({ children }) => {
     SetCPForCNPJIsValid(false)
   }, [])
 
+  const onChangeImageURL = useCallback((value: string, title: string) => {
+    setCapa({
+      type: 'success',
+      name: title,
+      uri: value,
+    } as Document)
+  }, [])
+
   const onChangeFinancialResources = useCallback(
     (value: FinancialResources) => {
       setFinancialResources(value)
@@ -144,6 +152,7 @@ const FormProductProvider: React.FC = ({ children }) => {
         cpfOrCnpjIsValid,
         financialResources,
         file,
+        onChangeImageURL,
         onChangeFile,
         onChangeFinancialResources,
         onChangeCPForCNPJ,

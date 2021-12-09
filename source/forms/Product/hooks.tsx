@@ -9,8 +9,14 @@ export const useFormImage = () => {
   )
   const image = useContextSelector(FormProductContext, (value) => value.capa)
 
+  const onChangeImageURL = useContextSelector(
+    FormProductContext,
+    (value) => value.onChangeImageURL
+  )
+
   return {
     getImage,
+    onChangeImageURL,
     image,
   }
 }

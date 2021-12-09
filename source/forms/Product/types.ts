@@ -30,6 +30,7 @@ export type FormProduct = {
   onChangeType: (value: TypesProducts) => void
   onChangeTags: (tags: string[]) => void
   onChangeGeneros: (generos: string[]) => void
+  onChangeImageURL: (value: string, title: string) => void
   resetProduct: () => void
 }
 

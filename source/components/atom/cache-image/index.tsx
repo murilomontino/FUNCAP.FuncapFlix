@@ -17,6 +17,12 @@ const CacheImage = ({ capa, height = 200, width = 150 }: Props) => {
   const [img, setImg] = useState('')
 
   useEffect(() => {
+    // Se a capa for uma url, seta a imagem como a capa
+    if (capa && capa.includes('http')) {
+      setImg(capa)
+      return
+    }
+
     if (capa) {
       getImgStorage(capa)
     }

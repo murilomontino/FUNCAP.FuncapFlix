@@ -31,7 +31,7 @@ const SendFormButtonProduct = () => {
   const { category, type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
-  const { setLoading } = useLoading()
+  const { showLoading, hideLoading } = useLoading()
   const { AlertToast } = useToast()
 
   const submitIsValid = useMemo(() => {
@@ -58,7 +58,7 @@ const SendFormButtonProduct = () => {
   }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
-    setLoading(true)
+    showLoading()
 
     const { status, data } = await send({
       recursos: financialResources,
@@ -91,7 +91,7 @@ const SendFormButtonProduct = () => {
         break
     }
 
-    setLoading(false)
+    hideLoading()
   }
 
   const send = async (document: AttrsProducts) => {
