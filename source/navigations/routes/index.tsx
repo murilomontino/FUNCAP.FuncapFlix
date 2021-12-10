@@ -5,15 +5,14 @@ import { Text } from 'react-native'
 import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from '@/modules/Books/add-book'
-
-import Front from '@/components/templates/frontend'
 import BooksPage from '@/screens/books-screen'
 import HomeScreen from '@/screens/home-screen'
 import MusicScreen from '@/screens/music-screen'
 import QRCodeScreen from '@/screens/qr-code-screen'
 
 import { linking, RootStackParamList } from '../config'
+import { TemplateFront } from '../template/navigation-frontend-template'
+import { AddProductStack } from './stacks/add-products-stack'
 
 const Stack = createStackNavigator<RootStackParamList>()
 
@@ -30,10 +29,6 @@ const themeDefault: Theme = {
 }
 
 const Navigation: React.FC = () => {
-  const TemplateFront: React.FC = ({ children }) => {
-    return <Front>{children}</Front>
-  }
-
   return (
     <NavigationContainer
       theme={themeDefault}
@@ -65,10 +60,8 @@ const Navigation: React.FC = () => {
           name="QRCode"
         />
         <Stack.Screen
-          component={({ ...rest }) =>
-            TemplateFront({ children: <AddBook {...rest} /> })
-          }
-          name="AddBooks"
+          name="AddProducts"
+          component={({ ...rest }) => <AddProductStack {...rest} />}
         />
         <Stack.Screen
           component={({ ...rest }) =>
