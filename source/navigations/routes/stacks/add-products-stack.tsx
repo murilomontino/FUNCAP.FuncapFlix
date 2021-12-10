@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from '@/modules/Books/add-book'
+import AddBook from '@/modules/products/add-product'
 
 import { TemplateFront } from '@/navigations/template/navigation-frontend-template'
 
