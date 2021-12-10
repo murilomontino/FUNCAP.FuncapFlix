@@ -8,7 +8,7 @@ export type RootStackParamList = {
   Literatura: undefined
   Home: undefined
   QRCode: undefined
-  AddBooks: undefined
+  AddProducts: undefined
   Music: undefined
 }
 
@@ -19,6 +19,7 @@ declare global {
       Literatura: undefined
       QRCode: undefined
       AddBooks: undefined
+      AddMusic: undefined
       Music: undefined
     }
   }
@@ -29,24 +30,20 @@ export const prefix = Linking.createURL('/')
 export const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [prefix],
   enabled: true,
-
   config: {
+    initialRouteName: 'Home',
     screens: {
-      Home: {
-        path: '/',
+      Home: '/',
+      QRCode: 'qrcode',
+      Literatura: 'literatura',
+      AddProducts: {
+        path: '6eade882-2e68-43ca-838e-7742b75e7698',
+        screens: {
+          AddBooks: 'adicionar-livros',
+          AddMusic: 'adicionar-musicas',
+        },
       },
-      QRCode: {
-        path: '/qrcode',
-      },
-      Literatura: {
-        path: '/literatura',
-      },
-      AddBooks: {
-        path: '/6eade882-2e68-43ca-838e-7742b75e7698',
-      },
-      Music: {
-        path: '/musica',
-      },
+      Music: 'musicas',
     },
   },
 }

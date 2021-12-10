@@ -45,7 +45,7 @@ const Navigation: React.FC = () => {
           component={({ ...rest }) =>
             TemplateFront({ children: <AddBook {...rest} /> })
           }
-          name="AddBooks"
+          name="AddProducts"
         />
       </Stack.Navigator>
     </NavigationContainer>
