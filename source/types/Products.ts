@@ -33,6 +33,7 @@ interface GenericAttrs {
   tamanho?: string
   ilustracao?: boolean
   editora?: string
+  ilustrador?: string
 }
 
 export interface ProductVideo extends Product, GenericAttrs {
@@ -54,9 +55,12 @@ export interface ProductBook extends Product, GenericAttrs {
   tamanho: string
   ilustracao: boolean
   editora: string
+  ilustrador: string
 }
 
-export interface GenericProduct extends Product, GenericAttrs { }
+export interface GenericProduct extends Product, GenericAttrs {
+  [key: string]: any
+}
 
 export type TypeProduct = ProductVideo | ProductMusic | ProductBook
 

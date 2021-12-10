@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   textArea: {
     color: colors.grey20,
-    fontWeight: '600',
+    fontWeight: '500',
     backgroundColor: '#d9d9d9',
     padding: 8,
     borderRadius: 8,

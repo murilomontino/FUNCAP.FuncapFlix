@@ -42,10 +42,10 @@ const InputsFormsLiterature = () => {
         Detalhes
       </Text>
       <InputISBN />
-      <InputTopic value={title} onChangeValue={onChangeTitle} topic="Título*" />
+      <InputTopic value={title} onChangeText={onChangeTitle} topic="Título*" />
       <InputTopic
         value={subTitle}
-        onChangeValue={onChangeSubTitle}
+        onChangeText={onChangeSubTitle}
         topic="Sub-Título"
       />
       <InputTextArea

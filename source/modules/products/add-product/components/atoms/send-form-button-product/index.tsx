@@ -72,6 +72,7 @@ const SendFormButtonProduct = () => {
       isbn: isbn,
       numero_de_paginas: numberOfPages,
       tamanho: size,
+      ilustrador: illustrator,
       ilustracao: illustrated,
       editora: publisher,
       nome_cultural: culturalName,
