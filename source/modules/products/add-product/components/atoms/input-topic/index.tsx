@@ -22,8 +22,8 @@ interface Props {
   mask?: string
   type?: string
   onChangeText:
-  | ((text: string, rawText: string) => void)
-  | ((text: string) => void)
+    | ((text: string, rawText: string) => void)
+    | ((text: string) => void)
 }
 
 interface InputTopicProps extends TextInputProps, Props {
