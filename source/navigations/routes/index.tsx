@@ -33,6 +33,10 @@ const Navigation: React.FC = () => {
     <NavigationContainer
       theme={themeDefault}
       linking={linking}
+      documentTitle={{
+        formatter: (options, route) =>
+          `Mapa Cultural de Sergipe - ${options?.title ?? route?.name}`,
+      }}
       fallback={<Text>Loading...</Text>}
     >
       <Stack.Navigator

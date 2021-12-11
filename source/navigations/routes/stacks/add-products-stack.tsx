@@ -2,11 +2,10 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from '@/modules/products/add-product'
+import AddProduct from '@/modules/products/add-product'
+import { Category } from '@/types/Products'
 
 import { TemplateFront } from '@/navigations/template/navigation-frontend-template'
-
-import MusicScreen from '@/screens/music-screen'
 
 const Stack = createStackNavigator()
 
@@ -15,7 +14,11 @@ export const AddProductStack = ({ ...rest }) => {
     <Stack.Navigator>
       <Stack.Screen
         name="AddBooks"
-        component={() => TemplateFront({ children: <AddBook {...rest} /> })}
+        component={() =>
+          TemplateFront({
+            children: <AddProduct {...rest} category={Category.Literature} />,
+          })
+        }
         options={{
           headerShown: false,
         }}
@@ -23,7 +26,11 @@ export const AddProductStack = ({ ...rest }) => {
 
       <Stack.Screen
         name="AddMusic"
-        component={() => TemplateFront({ children: <MusicScreen {...rest} /> })}
+        component={() =>
+          TemplateFront({
+            children: <AddProduct {...rest} category={Category.Music} />,
+          })
+        }
         options={{
           headerShown: false,
         }}

@@ -17,13 +17,20 @@ const mapTypeProduct: { [key in TypesProducts]: string } = {
   [TypesProducts.URL]: 'text/url',
 }
 
-const FormProductProvider: React.FC = ({ children }) => {
+interface Props {
+  initialCategory: Category
+}
+
+const FormProductProvider: React.FC<Props> = ({
+  children,
+  initialCategory,
+}) => {
   const [financialResources, setFinancialResources] = useState(0)
   const [genero, setGenero] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
   const [capa, setCapa] = useState({} as Document)
   const [file, setFile] = useState({} as Document)
-  const [category, setCategory] = useState(0)
+  const [category, setCategory] = useState(initialCategory)
   const [type, setType] = useState(TypesProducts.URL)
   const [cpfOrCnpj, SetCPForCNPJ] = useState('')
   const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)

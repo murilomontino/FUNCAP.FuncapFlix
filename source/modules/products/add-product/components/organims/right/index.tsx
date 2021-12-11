@@ -6,7 +6,7 @@ import { Category } from '@/types/Products'
 
 import { useFormProductCategory } from '@/forms/Product/hooks'
 
-import SendFormButtonProduct from '../../atoms/send-form-button-product'
+import SendFormBookButton from '../../atoms/send-form-book-button'
 import InputTags from '../../atoms/tags'
 import BookContent from '../../molecules/book-content'
 
@@ -32,7 +32,7 @@ const Right = () => {
     >
       {category === Category.Literature && <BookContent />}
       <InputTags />
-      <SendFormButtonProduct />
+      <SendFormBookButton />
     </View>
   )
 }
