@@ -1,12 +1,17 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
+import { Category } from '@/types/Products'
 import { createContext } from 'use-context-selector'
 
 import { FormProductBook } from '../types'
 
 export const FormProductBookContext = createContext({} as FormProductBook)
 
-const FormProductBookProvider: React.FC = ({ children }) => {
+type Props = {
+  category: Category
+}
+
+const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
   const [title, setTitle] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [sinopse, setSinopse] = useState('')
@@ -17,6 +22,12 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [size, setSize] = useState('')
   const [illustrated, setIllustrated] = useState(false)
   const [illustrator, setIlustrador] = useState('')
+
+  useEffect(() => {
+    return () => {
+      resetProductBook()
+    }
+  }, [category])
 
   const onChangeIllustrator = useCallback(
     (text: string) => {

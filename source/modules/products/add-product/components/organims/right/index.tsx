@@ -7,6 +7,7 @@ import { Category } from '@/types/Products'
 import { useFormProductCategory } from '@/forms/Product/hooks'
 
 import SendFormBookButton from '../../atoms/send-form-book-button'
+import SendFormMusicButton from '../../atoms/send-form-music-button'
 import InputTags from '../../atoms/tags'
 import BookContent from '../../molecules/book-content'
 
@@ -16,6 +17,15 @@ const Right = () => {
   const size = web ? window : screen
 
   const { category } = useFormProductCategory()
+
+  const SendButtonCategory = () => {
+    if (category === Category.Literature) {
+      return <SendFormBookButton />
+    } else if (category === Category.Music) {
+      return <SendFormMusicButton />
+    }
+    return null
+  }
 
   return (
     <View
@@ -32,7 +42,7 @@ const Right = () => {
     >
       {category === Category.Literature && <BookContent />}
       <InputTags />
-      <SendFormBookButton />
+      <SendButtonCategory />
     </View>
   )
 }

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { View } from 'react-native'
 
-import { TypeProduct, Category, TypeImgCapa } from '@/types/Products'
+import { Category, TypeImgCapa, ProductMusic } from '@/types/Products'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
+
+import Button from '@/components/atom/button'
 
 import {
   useFormProductGenero,
@@ -24,15 +26,13 @@ import {
 
 import api from '@/services'
 
-import colors from '@/global/colors'
-
-const SendFormButtonProduct = () => {
+const SendFormBookButton = () => {
   const { tags } = useFormProductTags()
   const { genero } = useFormProductGenero()
   const { sobreAObra, sinopse, subTitle, title, isbn } = useFormProductBook()
   const { image } = useFormImage()
   const { file } = useFormProductFile()
-  const { category, type } = useFormProductCategory()
+  const { type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
   const { showLoading, hideLoading } = useLoading()
@@ -41,27 +41,18 @@ const SendFormButtonProduct = () => {
     useFormProductBookContent()
   const { AlertToast } = useToast()
 
-  const submitIsValid = useMemo(() => {
+  const submitBookIsValid = useMemo(() => {
     if (
       financialResources &&
       title &&
       file !== null &&
       file.type === 'success' &&
+      sinopse.length > 0 &&
       (cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid))
     ) {
-      switch (category) {
-        case Category.Literature:
-          return sinopse.length > 0
-        case Category.Music:
-          return true
-        case Category.Video:
-          return false
-        default:
-          return false
-      }
-    } else {
-      return false
+      return true
     }
+    return false
   }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
@@ -85,7 +76,7 @@ const SendFormButtonProduct = () => {
       tags: tags,
       sobre_a_obra: sobreAObra,
       sinopse: sinopse,
-      categoria: category,
+      categoria: Category.Music,
       sub_titulo: subTitle,
       titulo: title,
       arquivo: file.uri,
@@ -95,21 +86,18 @@ const SendFormButtonProduct = () => {
 
     switch (status) {
       case 200:
-        AlertToast('success', 'Produto cadastrado com sucesso!')
+        AlertToast('success', 'Livro Cadastrado Com Sucesso!')
         break
 
       default:
-        AlertToast(
-          'erro',
-          `Erro ao cadastrar produto! Tente novamente. ${data}`
-        )
+        AlertToast('erro', `Erro ao cadastrar livro! Tente novamente. ${data}`)
         break
     }
 
     hideLoading()
   }
 
-  const send = async (document: TypeProduct) => {
+  const send = async (document: ProductMusic) => {
     try {
       const { data, status } = await api.post('add-product', document)
       return { data, status }
@@ -120,33 +108,13 @@ const SendFormButtonProduct = () => {
 
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <TouchableHighlight
-        disabled={!submitIsValid}
-        style={{
-          backgroundColor: submitIsValid
-            ? colors.button_secondary
-            : colors.grey20,
-          padding: 16,
-          margin: 8,
-          borderRadius: 40,
-
-          width: 200,
-        }}
+      <Button
+        disabled={!submitBookIsValid}
         onPress={handleSubmit}
-      >
-        <Text
-          style={{
-            fontWeight: 'bold',
-            color: '#fff',
-            fontSize: 14,
-            textAlign: 'center',
-          }}
-        >
-          Enviar Produto
-        </Text>
-      </TouchableHighlight>
+        text="Enviar Música(s)"
+      />
     </View>
   )
 }
 
-export default SendFormButtonProduct
+export default SendFormBookButton

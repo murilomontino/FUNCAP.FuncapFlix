@@ -1,13 +1,24 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
+import { Category } from '@/types/Products'
 import { createContext } from 'use-context-selector'
 
 import { FormProductMusic } from '../types'
 
 export const FormProductMusicContext = createContext({} as FormProductMusic)
 
-const FormProductMusicProvider: React.FC = ({ children }) => {
+type Props = {
+  category: Category
+}
+
+const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
   const [title, setTitle] = useState('')
+
+  useEffect(() => {
+    return () => {
+      resetProductMusic()
+    }
+  }, [category])
 
   const onChangeTitle = useCallback(
     (text: string) => {

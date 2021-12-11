@@ -21,6 +21,7 @@ export const AddProductStack = ({ ...rest }) => {
         }
         options={{
           headerShown: false,
+          title: 'Adicionar Livro',
         }}
       />
 
@@ -33,6 +34,7 @@ export const AddProductStack = ({ ...rest }) => {
         }
         options={{
           headerShown: false,
+          title: 'Adicionar Música',
         }}
       />
     </Stack.Navigator>
