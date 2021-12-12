@@ -116,3 +116,16 @@ export const useFormProductBookContent = () => {
     onChangeIllustrated,
   }
 }
+
+export const useFormBookFile = () => {
+  const file = useContextSelector(FormProductBookContext, (value) => value.file)
+  const onChangeFile = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeFile
+  )
+
+  return {
+    file,
+    onChangeFile,
+  }
+}

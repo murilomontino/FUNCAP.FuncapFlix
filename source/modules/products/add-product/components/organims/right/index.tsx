@@ -31,13 +31,12 @@ const Right = () => {
     <View
       style={{
         flex: 1,
+        height: '100%',
         minHeight: size.width < 1127 ? 250 : size.height,
         marginRight: web ? 0 : 40,
-        padding: 8,
+        padding: 20,
         maxWidth: 300,
-        justifyContent: 'space-around',
-        borderLeftWidth: size.width < 1127 ? 0 : 1,
-        borderColor: 'rgba(0,0,0, 0.4)',
+        justifyContent: 'flex-start',
       }}
     >
       {category === Category.Literature && <BookContent />}

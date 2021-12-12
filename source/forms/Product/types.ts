@@ -18,7 +18,6 @@ export type FormProduct = {
   financialResources: FinancialResources
   capa: Document
   category: Category
-  file: Document
   genero: string[]
   type: TypesProducts
   tags: string[]
@@ -26,7 +25,6 @@ export type FormProduct = {
   onChangePublishedDate: (date: string) => void
   onChangeCulturalName: (value: string) => void
   onChangeFinancialResources: (value: FinancialResources) => void
-  onChangeFile: () => void
   onChangeCPForCNPJ: (text: string) => void
   onChangeCPForCNPJIsValid: (value: boolean) => void
   getImage: () => Promise<boolean>
@@ -39,8 +37,10 @@ export type FormProduct = {
 }
 
 export type FormProductMusic = {
-  title: string
-  onChangeTitle: (text: string) => void
+  title: Array<string>
+  file: Document[]
+  onChangeFile: () => void
+  onChangeTitle: (text: Array<string>) => void
   resetProductMusic: () => void
 }
 
@@ -55,6 +55,8 @@ export type FormProductBook = {
   size: string
   illustrated: boolean
   illustrator: string
+  file: Document
+  onChangeFile: () => void
   onChangeIllustrator: (text: string) => void
   onChangeNumberOfPages: (text: string) => void
   onChangePublisher: (text: string) => void
@@ -66,4 +68,10 @@ export type FormProductBook = {
   onChangeSinopse: (text: string) => void
   onChangeSobreAObra: (text: string) => void
   resetProductBook: () => void
+}
+
+export const mapTypeProduct: { [key in TypesProducts]: string } = {
+  [TypesProducts.PDF]: 'Livro',
+  [TypesProducts.MP3]: 'Música(s)',
+  [TypesProducts.URL]: 'URL',
 }

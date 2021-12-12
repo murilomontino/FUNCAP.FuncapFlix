@@ -11,12 +11,6 @@ import { Document, FormProduct } from './types'
 
 export const FormProductContext = createContext({} as FormProduct)
 
-const mapTypeProduct: { [key in TypesProducts]: string } = {
-  [TypesProducts.PDF]: 'application/pdf',
-  [TypesProducts.MP3]: 'audio/mp3',
-  [TypesProducts.URL]: 'text/url',
-}
-
 interface Props {
   initialCategory: Category
 }
@@ -29,7 +23,6 @@ const FormProductProvider: React.FC<Props> = ({
   const [genero, setGenero] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
   const [capa, setCapa] = useState({} as Document)
-  const [file, setFile] = useState({} as Document)
   const [category, setCategory] = useState<Category>(0)
   const [type, setType] = useState(TypesProducts.URL)
   const [cpfOrCnpj, SetCPForCNPJ] = useState('')
@@ -66,7 +59,6 @@ const FormProductProvider: React.FC<Props> = ({
     setGenero([])
     setTags([])
     setCapa({} as Document)
-    setFile({} as Document)
     setType(TypesProducts.URL)
     SetCPForCNPJ('')
     SetCPForCNPJIsValid(false)
@@ -133,19 +125,6 @@ const FormProductProvider: React.FC<Props> = ({
     [type]
   )
 
-  const onChangeFile = useCallback(async () => {
-    const obj = await DocumentPicker.getDocumentAsync({
-      type: mapTypeProduct[type],
-    })
-
-    if (obj && obj.type === 'success') {
-      setFile(obj)
-      return true
-    }
-
-    return false
-  }, [file, type])
-
   const getImage = useCallback(async () => {
     const obj = await DocumentPicker.getDocumentAsync({
       type: ['image/png', 'image/jpeg'],
@@ -184,13 +163,12 @@ const FormProductProvider: React.FC<Props> = ({
         cpfOrCnpj,
         cpfOrCnpjIsValid,
         financialResources,
-        file,
         culturalName,
         onChangeCulturalName,
         onChangePublishedDate,
         publishedDate,
         onChangeImageURL,
-        onChangeFile,
+
         onChangeFinancialResources,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,

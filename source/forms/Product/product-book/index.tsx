@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
+import * as DocumentPicker from 'expo-document-picker'
+
 import { Category } from '@/types/Products'
 import { createContext } from 'use-context-selector'
 
-import { FormProductBook } from '../types'
+import { Document, FormProductBook } from '../types'
 
 export const FormProductBookContext = createContext({} as FormProductBook)
 
@@ -22,6 +24,7 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
   const [size, setSize] = useState('')
   const [illustrated, setIllustrated] = useState(false)
   const [illustrator, setIlustrador] = useState('')
+  const [file, setFile] = useState({} as Document)
 
   useEffect(() => {
     return () => {
@@ -104,6 +107,20 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
     [sinopse]
   )
 
+  const onChangeFile = useCallback(async () => {
+    const obj = await DocumentPicker.getDocumentAsync({
+      type: 'application/pdf',
+      copyToCacheDirectory: true,
+    })
+
+    if (obj && obj.type === 'success') {
+      setFile(obj)
+      return true
+    }
+
+    return false
+  }, [file])
+
   return (
     <FormProductBookContext.Provider
       value={{
@@ -117,6 +134,8 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
         publisher,
         size,
         illustrator,
+        file,
+        onChangeFile,
         onChangeIllustrator,
         onChangeNumberOfPages,
         onChangePublisher,

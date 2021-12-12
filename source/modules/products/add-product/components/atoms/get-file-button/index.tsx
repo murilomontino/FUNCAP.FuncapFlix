@@ -1,34 +1,45 @@
 import React from 'react'
 import { Button } from 'react-native-paper'
 
-import { TypesProducts } from '@/types/Products'
+import { Category } from '@/types/Products'
 
-import {
-  useFormProductFile,
-  useFormProductCategory,
-} from '@/forms/Product/hooks'
+import { useFormBookFile } from '@/forms/Product/product-book/hooks'
+import { useFormMusicsFile } from '@/forms/Product/product-music/hooks'
 
 import { styles } from '../styles'
 
-const mapTypeProduct: { [key in TypesProducts]: string } = {
-  [TypesProducts.PDF]: 'Livro',
-  [TypesProducts.MP3]: 'Música',
-  [TypesProducts.URL]: 'URL',
+type Props = {
+  category: Category
 }
+export const GetFileButton = ({ category }: Props) => {
+  if (category === Category.Literature) {
+    const { file, onChangeFile } = useFormBookFile()
 
-const GetFileButton = () => {
-  const { onChangeFile, file } = useFormProductFile()
-  const { type } = useFormProductCategory()
+    return (
+      <Button
+        style={[styles.buttonContainer]}
+        color="#fff"
+        onPress={onChangeFile}
+      >
+        {file?.name || `Escolher Livro`}
+      </Button>
+    )
+  }
+  if (category === Category.Music) {
+    const { file, onChangeFile } = useFormMusicsFile()
 
-  return (
-    <Button
-      style={[styles.buttonContainer]}
-      color="#fff"
-      onPress={onChangeFile}
-    >
-      {file.name || `Escolher ${mapTypeProduct[type]}`}
-    </Button>
-  )
+    return (
+      <Button
+        style={[styles.buttonContainer]}
+        color="#fff"
+        onPress={onChangeFile}
+      >
+        {file?.name || `Escolher Músicas`}
+      </Button>
+    )
+  }
+
+  return <Button>Indefinido</Button>
 }
 
 export default GetFileButton

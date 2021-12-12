@@ -16,3 +16,18 @@ export const useFormMusic = () => {
     onChangeTitleMusic,
   }
 }
+
+export const useFormMusicsFile = () => {
+  const file = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.file
+  )
+  const onChangeFile = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeFile
+  )
+  return {
+    file,
+    onChangeFile,
+  }
+}

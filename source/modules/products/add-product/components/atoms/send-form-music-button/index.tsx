@@ -16,56 +16,46 @@ import {
   useFormProductCategory,
   useFormProductCPFandCNPJ,
   useFormProductFinancialResources,
-  useFormProductFile,
   useFormProductData,
 } from '@/forms/Product/hooks'
 import {
-  useFormProductBook,
-  useFormProductBookContent,
-} from '@/forms/Product/product-book/hooks'
+  useFormMusic,
+  useFormMusicsFile,
+} from '@/forms/Product/product-music/hooks'
 
 import api from '@/services'
 
 const SendFormBookButton = () => {
   const { tags } = useFormProductTags()
   const { genero } = useFormProductGenero()
-  const { sobreAObra, sinopse, subTitle, title, isbn } = useFormProductBook()
   const { image } = useFormImage()
-  const { file } = useFormProductFile()
   const { type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
   const { showLoading, hideLoading } = useLoading()
   const { culturalName, publishedDate } = useFormProductData()
-  const { illustrated, publisher, size, illustrator, numberOfPages } =
-    useFormProductBookContent()
+  const { file } = useFormMusicsFile()
+  const { titleMusic } = useFormMusic()
   const { AlertToast } = useToast()
 
   const submitBookIsValid = useMemo(() => {
     if (
       financialResources &&
-      title &&
+      titleMusic &&
       file !== null &&
       file.type === 'success' &&
-      sinopse.length > 0 &&
       (cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid))
     ) {
       return true
     }
     return false
-  }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
+  }, [financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
     showLoading()
 
     const { status, data } = await send({
       recursos: financialResources,
-      isbn: isbn,
-      numero_de_paginas: numberOfPages,
-      tamanho: size,
-      ilustrador: illustrator,
-      ilustracao: illustrated,
-      editora: publisher,
       nome_cultural: culturalName,
       data_de_publicacao: publishedDate,
       link: '',
@@ -74,14 +64,11 @@ const SendFormBookButton = () => {
       nome_arquivo: file.name,
       genero: genero,
       tags: tags,
-      sobre_a_obra: sobreAObra,
-      sinopse: sinopse,
       categoria: Category.Music,
-      sub_titulo: subTitle,
-      titulo: title,
       arquivo: file.uri,
       capa: image.uri ?? undefined,
       tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
+      titulo: titleMusic[0],
     })
 
     switch (status) {

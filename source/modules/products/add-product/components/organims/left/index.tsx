@@ -51,11 +51,11 @@ const Left = () => {
     <View
       style={{
         flex: 1,
+        height: '100%',
         maxWidth: 300,
         minHeight: size.height,
+        justifyContent: 'flex-start',
         marginLeft: web ? 0 : 40,
-        marginBottom: marginBottom,
-        borderRightWidth: size.width < 1127 ? 0 : 1,
         borderColor: 'rgba(0,0,0, 0.4)',
       }}
     >
@@ -68,7 +68,7 @@ const Left = () => {
         label="Selecione o Tipo"
       />
 
-      <GetFileButton />
+      <GetFileButton category={category} />
       <Dropdown
         items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}

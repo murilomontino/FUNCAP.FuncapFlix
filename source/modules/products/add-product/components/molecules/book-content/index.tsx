@@ -20,12 +20,17 @@ const BookContent = () => {
     publisher,
   } = useFormProductBookContent()
   return (
-    <View>
+    <View
+      style={{
+        marginLeft: 40,
+        backgroundColor: '#red',
+      }}
+    >
       <InputTopic
         value={publisher}
         onChangeText={onChangePublisher}
         topic="Editora"
-        viewInput={{
+        styleViewInput={{
           flex: 1,
           fontSize: 14,
           textAlign: 'center',
@@ -40,7 +45,7 @@ const BookContent = () => {
         mask="9999"
         keyboardType="numeric"
         placeholder="Páginas"
-        viewInput={{
+        styleViewInput={{
           flex: 1,
           fontSize: 14,
           textAlign: 'center',
@@ -62,7 +67,7 @@ const BookContent = () => {
         mask="99,9 x 99,9 x 99,9 cm"
         keyboardType="numeric"
         placeholder="Tamanho"
-        viewInput={{
+        styleViewInput={{
           flex: 1,
           fontSize: 14,
           textAlign: 'center',
@@ -99,7 +104,7 @@ const BookContent = () => {
           onChangeText={onChangeIllustrator}
           topic=""
           placeholder="Ilustrador"
-          viewInput={{
+          styleViewInput={{
             flex: 1,
 
             textAlign: 'center',

@@ -17,8 +17,8 @@ interface Props {
   topic: string
   value: string
   maxLength?: number
-  viewContainer?: ViewStyle
-  viewInput?: TextStyle | ViewStyle | ImageStyle
+  styleViewContainer?: ViewStyle
+  styleViewInput?: TextStyle | ViewStyle | ImageStyle
   mask?: string
   type?: string
   onChangeText:
@@ -42,7 +42,7 @@ interface MaskedTopicProps extends MaskedTextInputProps, Props {
 
 type InputTopicType = InputTopicProps | MaskedTopicProps
 
-const InputTopic = (params: InputTopicType) => {
+export const InputTopic = (params: InputTopicType) => {
   const web = Platform.OS === 'web'
 
   const outlineWeb = useMemo(() => {
@@ -51,7 +51,7 @@ const InputTopic = (params: InputTopicType) => {
 
   if (params.mask !== undefined || params.type !== undefined) {
     return (
-      <View style={[styles.textAreaContainer, params.viewContainer]}>
+      <View style={[styles.textAreaContainer, params.styleViewContainer]}>
         <View style={styles.viewTitle}>
           <Text style={styles.topicForm}>{params.topic}:</Text>
         </View>
@@ -61,7 +61,7 @@ const InputTopic = (params: InputTopicType) => {
           value={params.value}
           onChangeText={params.onChangeText}
           placeholder={params.placeholder || params.topic}
-          style={[styles.textArea, outlineWeb, params.viewInput]}
+          style={[styles.textArea, outlineWeb, params.styleViewInput]}
           maxLength={params.maxLength}
         />
       </View>
@@ -69,7 +69,7 @@ const InputTopic = (params: InputTopicType) => {
   }
 
   return (
-    <View style={[styles.textAreaContainer, params.viewContainer]}>
+    <View style={[styles.textAreaContainer, params.styleViewContainer]}>
       {params.topic && (
         <View style={styles.viewTitle}>
           <Text style={styles.topicForm}>{params.topic}:</Text>
@@ -80,7 +80,7 @@ const InputTopic = (params: InputTopicType) => {
         placeholder={params.placeholder || params.topic}
         value={params.value}
         onChangeText={params.onChangeText}
-        style={[styles.textArea, outlineWeb, params.viewInput]}
+        style={[styles.textArea, outlineWeb, params.styleViewInput]}
         maxLength={params.maxLength}
       />
     </View>

@@ -14,6 +14,18 @@ import { styles } from '../styles'
 
 import useDebounce from '@/hooks/use-debounce'
 
+interface MapBook {
+  title: string
+  subtitle: string
+  authors: Array<string>
+  description: string
+  image: string
+  categories: Array<string>
+  publisher: string
+  publishedDate: string
+  pageCount: string
+}
+
 const InputISBN = () => {
   const apiGoogle = 'https://www.googleapis.com/books/v1/volumes?q=isbn='
   const apiKey = '&maxResults=1&key=AIzaSyB6sfiUCwfRUDtlc_q1XsUDCvDzM4AsXNk'
@@ -38,6 +50,14 @@ const InputISBN = () => {
   const { showLoading, hideLoading } = useLoading()
   const debounce = useDebounce()
 
+  const publishedDate = (publishedDate: string) => {
+    if (publishedDate) {
+      const date = new Date(publishedDate)
+      return date.toLocaleDateString()
+    }
+    return ''
+  }
+
   const searchBook = useCallback(async (isbn: string) => {
     const response = await fetch(`${apiGoogle}${isbn}${apiKey}`)
     const data = await response.json()
@@ -47,7 +67,7 @@ const InputISBN = () => {
     }
     const { volumeInfo } = data.items[0]
 
-    const mapBook = {
+    const mapBook: MapBook = {
       title: volumeInfo.title || '',
       subtitle: volumeInfo.subtitle || '',
       authors: volumeInfo.authors || [],
@@ -59,13 +79,15 @@ const InputISBN = () => {
       pageCount: volumeInfo.pageCount || '',
     }
 
-    onChangeSinopse(mapBook.description)
+    onChangeSinopse(mapBook.description.slice(0, 1500))
+
     onChangeSubTitle(mapBook.subtitle)
     onChangeTitle(mapBook.title)
     onChangeImageURL(mapBook.image, mapBook.title)
     onChangePublisher(mapBook.publisher)
     onChangeNumberOfPages(mapBook.pageCount)
-    onChangePublishedDate(mapBook.publishedDate)
+
+    onChangePublishedDate(publishedDate(mapBook.publishedDate))
     onChangeCulturalName(mapBook.authors.join(', '))
 
     return mapBook

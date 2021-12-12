@@ -52,15 +52,15 @@ const InputsFormsLiterature = () => {
         value={sinopse}
         onChangeValue={onChangeSinopse}
         topic="Sinopse*"
-        height={150}
-        maxLength={1000}
+        height={300}
+        maxLength={1500}
         numberLines={12}
       />
       <InputTextArea
         value={sobreAObra}
         onChangeValue={onChangeSobreAObra}
         topic="Sobre a Obra"
-        height={300}
+        height={450}
         maxLength={5000}
         numberLines={12}
       />

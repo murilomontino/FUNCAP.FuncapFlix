@@ -16,10 +16,10 @@ import {
   useFormProductCategory,
   useFormProductCPFandCNPJ,
   useFormProductFinancialResources,
-  useFormProductFile,
   useFormProductData,
 } from '@/forms/Product/hooks'
 import {
+  useFormBookFile,
   useFormProductBook,
   useFormProductBookContent,
 } from '@/forms/Product/product-book/hooks'
@@ -31,7 +31,7 @@ const SendFormBookButton = () => {
   const { genero } = useFormProductGenero()
   const { sobreAObra, sinopse, subTitle, title, isbn } = useFormProductBook()
   const { image } = useFormImage()
-  const { file } = useFormProductFile()
+  const { file } = useFormBookFile()
   const { type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()

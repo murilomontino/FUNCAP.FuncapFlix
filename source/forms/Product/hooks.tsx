@@ -109,18 +109,6 @@ export const useFormProductFinancialResources = () => {
   }
 }
 
-export const useFormProductFile = () => {
-  const file = useContextSelector(FormProductContext, (value) => value.file)
-  const onChangeFile = useContextSelector(
-    FormProductContext,
-    (value) => value.onChangeFile
-  )
-  return {
-    file,
-    onChangeFile,
-  }
-}
-
 export const useFormProductData = () => {
   const culturalName = useContextSelector(
     FormProductContext,
