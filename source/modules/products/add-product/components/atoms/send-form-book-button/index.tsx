@@ -99,7 +99,7 @@ const SendFormBookButton = () => {
 
   const send = async (document: ProductBook) => {
     try {
-      const { data, status } = await api.post('add-product', document)
+      const { data, status } = await api.post('add-book', document)
       return { data, status }
     } catch (error: any) {
       return error.response

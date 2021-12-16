@@ -31,3 +31,18 @@ export const useFormMusicsFile = () => {
     onChangeFile,
   }
 }
+
+export const useFormMusicContent = () => {
+  const content = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.content
+  )
+  const onChangeContent = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeContent
+  )
+  return {
+    content,
+    onChangeContent,
+  }
+}

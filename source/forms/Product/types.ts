@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { Category, FinancialResources, TypesProducts } from '@/types/Products'
 
 export type Document = {
@@ -7,8 +8,34 @@ export type Document = {
   uri: string
   mimeType?: string | undefined
   lastModified?: number | undefined
-  file?: any
-  output?: any
+  file?: Document.File
+  output?: Document.Output
+}
+
+export type DocumentFile = {
+  type: 'success'
+  uri: string
+  name: string
+  size: number
+  mimeType: string
+}
+
+export declare namespace Document {
+  export type Type = 'success'
+  export type Name = string
+  export type Size = number | undefined
+  export type Uri = string
+  export type MimeType = string | undefined
+  export type LastModified = number | undefined
+  export type File = any
+  export type Output = {
+    lastModified: number
+    lastModifiedDate: Date
+    name: string
+    size: number
+    type: 'audio/mpeg'
+    webkitRelativePath: string
+  }[]
 }
 
 export type FormProduct = {
@@ -39,8 +66,10 @@ export type FormProduct = {
 export type FormProductMusic = {
   title: Array<string>
   file: Document[]
+  content: number
+  onChangeContent: (value: number) => void
   onChangeFile: () => void
-  onChangeTitle: (text: Array<string>) => void
+  onChangeTitle: (value: string, index: number) => void
   resetProductMusic: () => void
 }
 

@@ -26,7 +26,7 @@ export const GetFileButton = ({ category }: Props) => {
     )
   }
   if (category === Category.Music) {
-    const { file, onChangeFile } = useFormMusicsFile()
+    const { onChangeFile } = useFormMusicsFile()
 
     return (
       <Button
@@ -34,12 +34,12 @@ export const GetFileButton = ({ category }: Props) => {
         color="#fff"
         onPress={onChangeFile}
       >
-        {file?.name || `Escolher Músicas`}
+        Escolher Músicas
       </Button>
     )
   }
 
-  return <Button>Indefinido</Button>
+  return <Button>Indefindo</Button>
 }
 
 export default GetFileButton

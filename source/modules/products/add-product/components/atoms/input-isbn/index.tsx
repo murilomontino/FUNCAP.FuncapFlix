@@ -3,12 +3,15 @@ import { Platform, Text, View } from 'react-native'
 import { MaskedTextInput } from 'react-native-mask-text'
 
 import { useLoading } from '@/context/LoadingModal'
+import { useToast } from '@/context/ToastModal'
 
 import { useFormImage, useFormProductData } from '@/forms/Product/hooks'
 import {
   useFormProductBook,
   useFormProductBookContent,
 } from '@/forms/Product/product-book/hooks'
+
+import api from '@/services'
 
 import { styles } from '../styles'
 
@@ -27,9 +30,6 @@ interface MapBook {
 }
 
 const InputISBN = () => {
-  const apiGoogle = 'https://www.googleapis.com/books/v1/volumes?q=isbn='
-  const apiKey = '&maxResults=1&key=AIzaSyB6sfiUCwfRUDtlc_q1XsUDCvDzM4AsXNk'
-
   const {
     isbn,
     onChangeISBN,
@@ -37,6 +37,8 @@ const InputISBN = () => {
     onChangeSubTitle,
     onChangeTitle,
   } = useFormProductBook()
+
+  const { AlertToast } = useToast()
 
   const { onChangeNumberOfPages, onChangePublisher } =
     useFormProductBookContent()
@@ -59,38 +61,40 @@ const InputISBN = () => {
   }
 
   const searchBook = useCallback(async (isbn: string) => {
-    const response = await fetch(`${apiGoogle}${isbn}${apiKey}`)
-    const data = await response.json()
+    const response = await api.get(`api-google-book/${isbn}`)
 
-    if (data.totalItems === 0) {
-      return []
+    if (response.status === 200) {
+      const { data: volumeInfo } = response
+      const mapBook: MapBook = {
+        title: volumeInfo.title || '',
+        subtitle: volumeInfo.subtitle || '',
+        authors: volumeInfo.authors || [],
+        description: volumeInfo.description || '',
+        image: volumeInfo.imageLinks?.thumbnail || '',
+        categories: volumeInfo.categories || [],
+        publisher: volumeInfo.publisher || '',
+        publishedDate: volumeInfo.publishedDate || '',
+        pageCount: volumeInfo.pageCount || '',
+      }
+
+      onChangeSinopse(mapBook.description.slice(0, 1500))
+
+      onChangeSubTitle(mapBook.subtitle)
+      onChangeTitle(mapBook.title)
+      onChangeImageURL(mapBook.image, mapBook.title)
+      onChangePublisher(mapBook.publisher)
+      onChangeNumberOfPages(mapBook.pageCount)
+
+      onChangePublishedDate(publishedDate(mapBook.publishedDate))
+      onChangeCulturalName(mapBook.authors.join(', '))
+
+      return mapBook
+    } else {
+      console.log(response)
+
+      AlertToast('warning', 'Livro não encontrado!')
+      return null
     }
-    const { volumeInfo } = data.items[0]
-
-    const mapBook: MapBook = {
-      title: volumeInfo.title || '',
-      subtitle: volumeInfo.subtitle || '',
-      authors: volumeInfo.authors || [],
-      description: volumeInfo.description || '',
-      image: volumeInfo.imageLinks?.thumbnail || '',
-      categories: volumeInfo.categories || [],
-      publisher: volumeInfo.publisher || '',
-      publishedDate: volumeInfo.publishedDate || '',
-      pageCount: volumeInfo.pageCount || '',
-    }
-
-    onChangeSinopse(mapBook.description.slice(0, 1500))
-
-    onChangeSubTitle(mapBook.subtitle)
-    onChangeTitle(mapBook.title)
-    onChangeImageURL(mapBook.image, mapBook.title)
-    onChangePublisher(mapBook.publisher)
-    onChangeNumberOfPages(mapBook.pageCount)
-
-    onChangePublishedDate(publishedDate(mapBook.publishedDate))
-    onChangeCulturalName(mapBook.authors.join(', '))
-
-    return mapBook
   }, [])
 
   const onChangeSearch = (text: string, rawText: string) => {

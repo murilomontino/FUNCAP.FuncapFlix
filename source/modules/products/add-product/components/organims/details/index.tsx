@@ -14,6 +14,7 @@ import {
 import { InputTopic } from '../../atoms/input-topic'
 import { styles } from '../../atoms/styles'
 import InputsFormsLiterature from '../../molecules/inputs-forms-literature'
+import InputsFormsMusic from '../../molecules/inputs-forms-music'
 
 const Details = () => {
   const web = Platform.OS === 'web'
@@ -69,6 +70,7 @@ const Details = () => {
       />
 
       {category === Category.Literature && <InputsFormsLiterature />}
+      {category === Category.Music && <InputsFormsMusic />}
     </View>
   )
 }

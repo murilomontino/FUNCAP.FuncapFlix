@@ -7,7 +7,7 @@ import { DocumentResult } from 'expo-document-picker'
 import { Category } from '@/types/Products'
 import { createContext } from 'use-context-selector'
 
-import { Document, FormProductMusic } from '../types'
+import { Document, FormProductMusic, DocumentFile } from '../types'
 
 export const FormProductMusicContext = createContext({} as FormProductMusic)
 
@@ -16,12 +16,13 @@ type Props = {
 }
 
 const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
-  const [title, setTitle] = useState<Array<string>>([])
+  const [title, setTitle] = useState([] as string[])
   const [file, setFile] = useState([] as Document[])
+  const [content, setContent] = useState(0)
 
   const web = Platform.OS === 'web'
 
-  function fileReader(fileList: any) {
+  function fileReader(fileList: Document.Output) {
     return Promise.all(
       Object.keys(fileList).map(
         (_key, i) =>
@@ -38,29 +39,34 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
                 mimeType: file.type,
               })
             }
-            reader.readAsDataURL(file)
+            reader.readAsDataURL(file as unknown as Blob)
           })
       )
     )
   }
 
   const onChangeFile = useCallback(async () => {
-    const obj: DocumentResult = await DocumentPicker.getDocumentAsync({
+    const documents: DocumentResult = await DocumentPicker.getDocumentAsync({
       type: 'audio/mp3',
       multiple: true,
       copyToCacheDirectory: true,
     })
 
-    if (obj && obj.type === 'success') {
-      const files = web ? await fileReader(obj.output) : obj.file
-      setFile(files)
-      console.log(files)
+    if (documents && documents.type === 'success') {
+      const files: Array<DocumentFile> = web
+        ? await fileReader(documents.output)
+        : documents.file
+
+      setFile([...file, ...files])
+
+      const newTitle = [...title, ...files.map((file) => file.name)]
+      setTitle(newTitle)
 
       return true
     }
 
     return false
-  }, [file])
+  }, [file, title])
 
   useEffect(() => {
     return () => {
@@ -68,9 +74,18 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     }
   }, [category])
 
+  const onChangeContent = useCallback(
+    (value: number) => {
+      setContent(value)
+    },
+    [content]
+  )
+
   const onChangeTitle = useCallback(
-    (text: Array<string>) => {
-      setTitle(text)
+    (value: string, index: number) => {
+      const newTitle = [...title]
+      newTitle[index] = value
+      setTitle(newTitle)
     },
     [title]
   )
@@ -83,7 +98,9 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     <FormProductMusicContext.Provider
       value={{
         title,
+        content,
         file,
+        onChangeContent,
         onChangeFile,
         onChangeTitle,
         resetProductMusic,

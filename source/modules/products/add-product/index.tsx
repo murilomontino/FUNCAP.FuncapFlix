@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ImageBackground, Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
 import { Category } from '@/types/Products'
 
 import FormProductProvider from '@/forms/Product'
+
+import io from '@/services/config/socket'
 
 import HeaderLogo from './components/molecules/header-logo'
 import Details from './components/organims/details'
@@ -18,7 +20,14 @@ type Props = {
   category: Category
 }
 
-const AddBook = ({ category }: Props) => {
+const AddProduct = ({ category }: Props) => {
+  useEffect(() => {
+    io.connect()
+    return () => {
+      io.disconnect()
+    }
+  }, [])
+
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
   const size = web ? window : screen
@@ -64,4 +73,4 @@ const AddBook = ({ category }: Props) => {
   )
 }
 
-export default AddBook
+export default AddProduct

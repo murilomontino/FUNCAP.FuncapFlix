@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa, ProductMusic } from '@/types/Products'
+import { Category, ProductMusic, TypeImgCapa } from '@/types/Products'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -23,7 +23,7 @@ import {
   useFormMusicsFile,
 } from '@/forms/Product/product-music/hooks'
 
-import api from '@/services'
+import io from '@/services/config/socket'
 
 const SendFormBookButton = () => {
   const { tags } = useFormProductTags()
@@ -39,12 +39,15 @@ const SendFormBookButton = () => {
   const { AlertToast } = useToast()
 
   const submitBookIsValid = useMemo(() => {
+    const validateCPFOrCNPJ =
+      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
+
     if (
       financialResources &&
       titleMusic &&
       file !== null &&
-      file.type === 'success' &&
-      (cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid))
+      file.length > 0 &&
+      validateCPFOrCNPJ
     ) {
       return true
     }
@@ -54,49 +57,43 @@ const SendFormBookButton = () => {
   const handleSubmit = async () => {
     showLoading()
 
-    const { status, data } = await send({
-      recursos: financialResources,
-      nome_cultural: culturalName,
-      data_de_publicacao: publishedDate,
-      link: '',
-      cpfOrCnpj: cpfOrCnpj,
-      tipo: type,
-      nome_arquivo: file.name,
-      genero: genero,
-      tags: tags,
-      categoria: Category.Music,
-      arquivo: file.uri,
-      capa: image.uri ?? undefined,
-      tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
-      titulo: titleMusic[0],
+    file.forEach(async (document, index) => {
+      const music: ProductMusic = {
+        titulo: titleMusic[index],
+        arquivo: document.uri,
+        categoria: Category.Music,
+        tags,
+        genero,
+        data_de_publicacao: publishedDate,
+        capa: image.uri ?? '',
+        tipo_capa: (image.mimeType as TypeImgCapa) ?? '',
+        tipo: type,
+        cpfOrCnpj: cpfOrCnpj,
+        recursos: financialResources,
+        nome_cultural: culturalName,
+        nome_arquivo: document.name,
+      }
+
+      io.emit('add-music', music)
     })
 
-    switch (status) {
+    switch (200) {
       case 200:
         AlertToast('success', 'Livro Cadastrado Com Sucesso!')
         break
 
       default:
-        AlertToast('erro', `Erro ao cadastrar livro! Tente novamente. ${data}`)
+        AlertToast('erro', `Erro ao cadastrar livro! Tente novamente`)
         break
     }
 
     hideLoading()
   }
 
-  const send = async (document: ProductMusic) => {
-    try {
-      const { data, status } = await api.post('add-product', document)
-      return { data, status }
-    } catch (error: any) {
-      return error.response
-    }
-  }
-
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       <Button
-        disabled={!submitBookIsValid}
+        disabled={submitBookIsValid}
         onPress={handleSubmit}
         text="Enviar Música(s)"
       />

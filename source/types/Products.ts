@@ -88,3 +88,10 @@ export enum TypesProducts {
   URL,
   PDF,
 }
+
+export enum ContentMusic {
+  Single = 1,
+  Ep,
+  Interprete,
+  Album,
+}

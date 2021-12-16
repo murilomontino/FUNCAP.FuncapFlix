@@ -68,7 +68,9 @@ const Left = () => {
         label="Selecione o Tipo"
       />
 
-      <GetFileButton category={category} />
+      {category === Category.Literature && (
+        <GetFileButton category={category} />
+      )}
       <Dropdown
         items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}
