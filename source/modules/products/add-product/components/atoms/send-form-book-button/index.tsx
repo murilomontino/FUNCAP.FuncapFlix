@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa, ProductBook } from '@/types/Products'
+import { Category, TypeImgCapa, ProductBook } from '@/types'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -99,7 +99,7 @@ const SendFormBookButton = () => {
 
   const send = async (document: ProductBook) => {
     try {
-      const { data, status } = await api.post('add-book', document)
+      const { data, status } = await api.post('books', document)
       return { data, status }
     } catch (error: any) {
       return error.response

@@ -2,13 +2,14 @@ import React from 'react'
 import { View, Text, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from '@/types/Products'
+import { generos } from '@/types'
+import { ProductBook } from '@/types/generic/Products'
 
 import GenerosLiterarios from '../../atoms/generos-literarios'
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {
-  item: AttrsProducts
+  item: ProductBook
 }
 
 const BookBasicInformation = ({ item }: Props) => {
@@ -63,7 +64,7 @@ const BookBasicInformation = ({ item }: Props) => {
         >
           Genero:{' '}
         </Text>
-        <GenerosLiterarios generos={item.genero} />
+        <GenerosLiterarios generos={item.genero as unknown as generos[]} />
       </View>
     </View>
   )

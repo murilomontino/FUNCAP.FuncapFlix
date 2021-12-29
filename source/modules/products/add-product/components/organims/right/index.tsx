@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 
 import { useFormProductCategory } from '@/forms/Product/hooks'
 

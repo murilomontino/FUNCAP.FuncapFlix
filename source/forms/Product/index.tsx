@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import * as DocumentPicker from 'expo-document-picker'
 
-import { Category, FinancialResources, TypesProducts } from '@/types/Products'
+import { Category, FinancialResources, TypesProducts } from '@/types'
 import { createContext } from 'use-context-selector'
 
 import FormProductBookProvider from './product-book'

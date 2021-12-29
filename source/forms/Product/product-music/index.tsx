@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 import * as DocumentPicker from 'expo-document-picker'
 import { DocumentResult } from 'expo-document-picker'
 
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 import { createContext } from 'use-context-selector'
 
 import { Document, FormProductMusic, DocumentFile } from '../types'

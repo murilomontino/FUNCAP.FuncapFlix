@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-native-paper'
 
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 
 import { useFormBookFile } from '@/forms/Product/product-book/hooks'
 import { useFormMusicsFile } from '@/forms/Product/product-music/hooks'

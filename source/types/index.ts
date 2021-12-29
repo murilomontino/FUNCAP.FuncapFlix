@@ -1,0 +1,23 @@
+/* eslint-disable no-unused-vars */
+
+export { books } from './books'
+export { links } from './links'
+export { musicsAlbuns, tracks } from './musics'
+export { patrons } from './patrons'
+export { generos, products, tags } from './products'
+export { sheet } from './sheet'
+export { TypesProducts, documents, mapTypesProducts } from './documents'
+export { YTPlaylistsAttributes, YTVideosAttributes } from './youtube'
+export { FinancialResources, mapFinancialResources } from './financialResources'
+export { Category, mapCategory } from './categoriesProducts'
+export {
+  ContentMusic,
+  ExtImgCapa,
+  GenericProduct,
+  ProductBook,
+  ProductMusic,
+  ProductVideo,
+  TypeImgCapa,
+  TypeProduct,
+  ContentMusicCategory,
+} from './generic/Products'

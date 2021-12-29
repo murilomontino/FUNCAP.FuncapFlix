@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Platform, StyleSheet, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from '@/types/Products'
+import { ProductBook } from '@/types/generic/Products'
 
 import BooksProvider from '@/components/context/ContextBooks'
 import PdfViewer from '@/components/organism/PDF-viewer'
@@ -15,7 +15,7 @@ import PaginationsBooks from './components/organims/pagination-books'
 import constants from '@/global/constants'
 
 const BooksScreen = () => {
-  const [products, setProducts] = useState<AttrsProducts[]>([])
+  const [products, setProducts] = useState<ProductBook[]>([])
 
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
@@ -23,9 +23,8 @@ const BooksScreen = () => {
 
   useEffect(() => {
     ;(async () => {
-      const { data } = await api.get('get-all-books')
-
-      setProducts(data)
+      const { data } = await api.get('books')
+      setProducts(data ?? [])
     })()
   }, [])
 

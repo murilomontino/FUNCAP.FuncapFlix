@@ -1,24 +1,16 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
+import { tags } from '@/types'
+
 import colors from '@/global/colors'
 
 type Props = {
-  tags: string | string[] | undefined
+  tags: tags[]
 }
 
 const Tags = ({ tags }: Props) => {
-  const [itensTags] = useState(() => {
-    if (tags) {
-      if (typeof tags === 'string') {
-        return tags.split(',')
-      }
-
-      return tags
-    } else {
-      return []
-    }
-  })
+  const [itensTags] = useState(tags)
 
   return (
     <View
@@ -31,8 +23,8 @@ const Tags = ({ tags }: Props) => {
       }}
     >
       {itensTags.map((tag) => (
-        <Text style={tagsStyles.tags} key={tag}>
-          {tag}
+        <Text style={tagsStyles.tags} key={tag.id}>
+          {tag.tag}
         </Text>
       ))}
     </View>

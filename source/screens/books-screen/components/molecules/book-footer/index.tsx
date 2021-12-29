@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { AttrsProducts } from '@/types/Products'
+import { ProductBook, tags } from '@/types'
 
 import { useBooks } from '@/components/context/ContextBooks'
 import { useScroll } from '@/components/context/ContextScroll'
@@ -11,7 +11,7 @@ import Tags from '../../atoms/tags'
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {
-  item: AttrsProducts
+  item: ProductBook
 }
 
 const BookFooter = ({ item }: Props) => {
@@ -39,14 +39,14 @@ const BookFooter = ({ item }: Props) => {
       ]}
     >
       <View>
-        <Text style={textStyles.authorFooter}>Autor(a) Não Identificado</Text>
+        <Text style={textStyles.authorFooter}>{item.autor}</Text>
       </View>
       <View
         style={{
           flexDirection: 'row',
         }}
       >
-        <Tags tags={item.tags} />
+        <Tags tags={item.tags as unknown as tags[]} />
       </View>
 
       <View style={[viewStyles.viewButtons]}>

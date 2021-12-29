@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { ImageBackground, Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 
 import FormProductProvider from '@/forms/Product'
 

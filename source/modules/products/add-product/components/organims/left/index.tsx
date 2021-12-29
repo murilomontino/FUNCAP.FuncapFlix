@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { View, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { Category, FinancialResources, TypesProducts } from '@/types/Products'
+import { Category, FinancialResources, TypesProducts } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
 

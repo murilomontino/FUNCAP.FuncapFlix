@@ -2,7 +2,7 @@ import React from 'react'
 import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 
 import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
 

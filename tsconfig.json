@@ -1,22 +1,25 @@
 {
 	"compilerOptions": {
 		"jsx": "react-native",
-		"target": "ES2020",
-		"module": "CommonJS",
+		"target": "ES2015",
+		"module": "ES2020",
 		"types": [
-			"jest"
+			"jest",
+			"node"
 		],
-		"lib": [
-			"es2020"
-		],
+	
 		"allowJs": true,
-		"strict": true,
+		"strict": false,
 		"skipLibCheck": true,
-		"noEmit": true,
+		"noEmit": false,
+		"declaration": true,
+		"emitDeclarationOnly": true,
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"resolveJsonModule": true,
 		"forceConsistentCasingInFileNames": true,
 		"rootDir": ".",
 		"baseUrl": ".",

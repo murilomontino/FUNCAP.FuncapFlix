@@ -98,7 +98,7 @@ const BookContent = () => {
           Foi ilustrado?
         </Text>
       </View>
-      {illustrated && (
+      {/*  {illustrated && (
         <InputTopic
           value={illustrator}
           onChangeText={onChangeIllustrator}
@@ -112,7 +112,7 @@ const BookContent = () => {
           }}
           maxLength={50}
         />
-      )}
+      )} */}
     </View>
   )
 }

@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, ProductMusic, TypeImgCapa } from '@/types/Products'
+import { Category, ProductMusic, TypeImgCapa } from '@/types'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'

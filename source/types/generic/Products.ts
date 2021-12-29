@@ -1,17 +1,21 @@
 /* eslint-disable no-unused-vars */
+import { FinancialResources, TypesProducts, Category, documents } from '@/types'
 interface Product {
   cpfOrCnpj?: string
   recursos: FinancialResources
   arquivo: string
-  conteudo?: string
+  conteudo?: string | ContentMusic
   nome_arquivo: string
   data_de_publicacao: string
   nome_cultural: string
   tipo: TypesProducts
+  genero?: string[]
+  tags?: string[]
 }
 
 interface GenericAttrs {
   id?: string
+  exystBD?: boolean
   titulo?: string
   name_uuid?: string
   sub_titulo?: string
@@ -21,19 +25,16 @@ interface GenericAttrs {
   sinopse?: string
   sobre_a_obra?: string
   qr_code?: string
-  recursos_outros?: string
-  genero?: string[] | string
-  tags?: string[] | string
   cidade?: string
   estado?: string
   link?: string
   tipo_capa?: TypeImgCapa
-  isbn?: string
-  numero_de_paginas?: string
-  tamanho?: string
-  ilustracao?: boolean
-  editora?: string
-  ilustrador?: string
+  categoria?: Category
+  patrocinadores?: number
+  fichaTecnica?: number
+  youtube?: number
+  data_cadastro?: Date
+  documentos?: documents[]
 }
 
 export interface ProductVideo extends Product, GenericAttrs {
@@ -44,18 +45,22 @@ export interface ProductVideo extends Product, GenericAttrs {
 export interface ProductMusic extends Product, GenericAttrs {
   titulo: string
   categoria: Category.Music
+  conteudo: ContentMusic
+  faixa: number
 }
 
 export interface ProductBook extends Product, GenericAttrs {
+  livroId?: number
   categoria: Category.Literature
   titulo: string
   isbn: string
   sinopse: string
-  numero_de_paginas: string
+  numero_de_paginas: number
   tamanho: string
   ilustracao: boolean
   editora: string
   ilustrador: string
+  autor: string
 }
 
 export interface GenericProduct extends Product, GenericAttrs {
@@ -68,30 +73,10 @@ export type TypeImgCapa = 'image/png' | 'image/jpeg'
 
 export type ExtImgCapa = 'png' | 'jpg'
 
-export enum FinancialResources {
-  NaoInformado = 0,
-  LeiAldirBlanc = 1,
-  Funcart,
-  RecursoDoArtista,
-  Federal,
-  Municipal,
-  Outros = 99,
-}
+export type ContentMusic = 'album' | 'single' | 'interprete'
 
-export enum Category {
-  Music = 1,
-  Literature,
-  Video,
-}
-export enum TypesProducts {
-  MP3 = 1,
-  URL,
-  PDF,
-}
-
-export enum ContentMusic {
-  Single = 1,
-  Ep,
-  Interprete,
-  Album,
+export enum ContentMusicCategory {
+  'Album',
+  'Single',
+  'Interprete',
 }

@@ -1,30 +1,22 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text } from 'react-native'
 
+import { generos } from '@/types'
+
 import colors from '@/global/colors'
 
 type Props = {
-  generos: string | string[] | undefined
+  generos: generos[]
 }
 
 const GenerosLiterarios = ({ generos }: Props) => {
-  const [itensGeneros] = useState(() => {
-    if (generos) {
-      if (typeof generos === 'string') {
-        return generos.split(',')
-      }
-
-      return generos
-    } else {
-      return []
-    }
-  })
+  const [itensGeneros] = useState(generos)
 
   return (
     <>
-      {itensGeneros.map((tag) => (
-        <Text style={generosStyles.generos} key={tag}>
-          {tag}
+      {itensGeneros.map((genero) => (
+        <Text style={generosStyles.generos} key={genero.id}>
+          {genero.genero}
         </Text>
       ))}
     </>

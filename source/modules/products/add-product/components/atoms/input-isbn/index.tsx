@@ -2,6 +2,8 @@ import React, { useCallback, useMemo } from 'react'
 import { Platform, Text, View } from 'react-native'
 import { MaskedTextInput } from 'react-native-mask-text'
 
+import { AxiosResponse } from 'axios'
+
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
 
@@ -16,6 +18,8 @@ import api from '@/services'
 import { styles } from '../styles'
 
 import useDebounce from '@/hooks/use-debounce'
+
+import tryCatch from '@/utils/try-catch'
 
 interface MapBook {
   title: string
@@ -61,9 +65,16 @@ const InputISBN = () => {
   }
 
   const searchBook = useCallback(async (isbn: string) => {
-    const response = await api.get(`api-google-book/${isbn}`)
+    const response = await tryCatch.run<AxiosResponse>(
+      async () => await api.get(`api-google-book/${isbn}`)
+    )
 
-    if (response.status === 200) {
+    if (response instanceof Error) {
+      AlertToast('erro', response.message)
+      return
+    }
+
+    if (response && response.status === 200) {
       const { data: volumeInfo } = response
       const mapBook: MapBook = {
         title: volumeInfo.title || '',

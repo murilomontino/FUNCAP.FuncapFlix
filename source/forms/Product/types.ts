@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Category, FinancialResources, TypesProducts } from '@/types/Products'
+import { Category, FinancialResources, TypesProducts } from '@/types'
 
 export type Document = {
   type: 'success'

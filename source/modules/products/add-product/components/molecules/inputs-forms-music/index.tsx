@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { Category, ContentMusic } from '@/types/Products'
+import { Category, ContentMusicCategory } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
 
@@ -18,10 +18,10 @@ const InputsFormsMusic = () => {
   const { content, onChangeContent } = useFormMusicContent()
 
   const ContentMusicItems = [
-    { value: ContentMusic.Album, label: 'Álbum' },
-    { value: ContentMusic.Single, label: 'Single' },
-    { value: ContentMusic.Ep, label: 'EP' },
-    { value: ContentMusic.Interprete, label: 'Álbum Interprete' },
+    { value: ContentMusicCategory.Album, label: 'Álbum' },
+    { value: ContentMusicCategory.Single, label: 'Single' },
+    { value: ContentMusicCategory.Ep, label: 'EP' },
+    { value: ContentMusicCategory.Interprete, label: 'Álbum Interprete' },
   ]
 
   return (

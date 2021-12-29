@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, TouchableHighlight, View } from 'react-native'
 import { Button } from 'react-native-paper'
 
-import { TypesProducts } from '@/types/Products'
+import { TypesProducts } from '@/types'
 
 import { useFormImage, useFormProductCategory } from '@/forms/Product/hooks'
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import AddProduct from '@/modules/products/add-product'
-import { Category } from '@/types/Products'
+import { Category } from '@/types'
 
 import { TemplateFront } from '@/navigations/template/navigation-frontend-template'
 
