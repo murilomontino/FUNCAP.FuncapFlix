@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { Category, ContentMusicCategory } from '@/types'
+import { Category, TypeMusicAlbuns } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
 
@@ -14,14 +14,15 @@ import GetFileButton from '../../atoms/get-file-button'
 import InputTopic from '../../atoms/input-topic'
 
 const InputsFormsMusic = () => {
-  const { titleMusic, onChangeTitleMusic } = useFormMusic()
+  const { titleMusics, onChangeTitleMusics, titleAlbum, onChangeTitleAlbum } =
+    useFormMusic()
   const { content, onChangeContent } = useFormMusicContent()
 
   const ContentMusicItems = [
-    { value: ContentMusicCategory.Album, label: 'Álbum' },
-    { value: ContentMusicCategory.Single, label: 'Single' },
-    { value: ContentMusicCategory.Ep, label: 'EP' },
-    { value: ContentMusicCategory.Interprete, label: 'Álbum Interprete' },
+    { value: TypeMusicAlbuns.album, label: 'Álbum' },
+    { value: TypeMusicAlbuns.single, label: 'Single' },
+    { value: TypeMusicAlbuns.ep, label: 'EP' },
+    { value: TypeMusicAlbuns.album_interprete, label: 'Álbum Interprete' },
   ]
 
   return (
@@ -32,11 +33,19 @@ const InputsFormsMusic = () => {
         value={content}
       />
       {content && <GetFileButton category={Category.Music} />}
-      {titleMusic.map((item, index) => (
+      <InputTopic
+        topic="Título da Obra"
+        onChangeText={onChangeTitleAlbum}
+        value={titleAlbum}
+        styleViewContainer={{
+          width: '90%',
+        }}
+      />
+      {titleMusics.map((item, index) => (
         <InputTopic
           topic={`Faixa ${index + 1 > 9 ? '' : 0}${index + 1}`}
           key={index}
-          onChangeText={(text) => onChangeTitleMusic(text, index)}
+          onChangeText={(text) => onChangeTitleMusics(text, index)}
           value={item}
           styleViewContainer={{
             maxWidth: '90%',

@@ -14,3 +14,10 @@ export type tracks = {
   duracao: string
   compositor: string
 }
+
+export enum TypeMusicAlbuns {
+  'single' = 1,
+  'ep',
+  'album_interprete',
+  'album',
+}

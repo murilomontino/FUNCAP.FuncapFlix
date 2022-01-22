@@ -20,9 +20,27 @@ const CardBooks = ({ item }: Props) => {
   const { window, screen } = useDimensions()
   const size = web ? window : screen
 
+  // telas menores < 640
+
   return (
-    <View style={[viewStyles.viewCard]}>
-      <View style={viewStyles.viewContainerImage}>
+    <View
+      style={[
+        viewStyles.viewCard,
+        size.width < 640 && {
+          flexDirection: 'column',
+        },
+      ]}
+    >
+      <View
+        style={
+          (viewStyles.viewContainerImage,
+          size.width < 640 && {
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          })
+        }
+      >
         <View style={viewStyles.viewImage}>
           <CacheImage capa={item.capa} />
         </View>

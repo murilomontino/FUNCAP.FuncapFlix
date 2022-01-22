@@ -31,6 +31,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.grey20,
   },
+  posterContainer: {
+    width: '33%',
+    height: 180,
+    padding: 2,
+    borderRadius: 5,
+  },
 })
 
 export default styles

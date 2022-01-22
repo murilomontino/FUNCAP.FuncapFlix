@@ -3,17 +3,28 @@ import { useContextSelector } from 'use-context-selector'
 import { FormProductMusicContext } from './index'
 
 export const useFormMusic = () => {
-  const titleMusic = useContextSelector(
+  const titleAlbum = useContextSelector(
     FormProductMusicContext,
-    (value) => value.title
+    (state) => state.titleAlbum
   )
-  const onChangeTitleMusic = useContextSelector(
+  const onChangeTitleAlbum = useContextSelector(
     FormProductMusicContext,
-    (value) => value.onChangeTitle
+    (state) => state.onChangeTitleAlbum
+  )
+
+  const titleMusics = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.titleMusics
+  )
+  const onChangeTitleMusics = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeTitleMusics
   )
   return {
-    titleMusic,
-    onChangeTitleMusic,
+    titleAlbum,
+    titleMusics,
+    onChangeTitleMusics,
+    onChangeTitleAlbum,
   }
 }
 

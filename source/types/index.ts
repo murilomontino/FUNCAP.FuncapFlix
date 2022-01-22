@@ -2,7 +2,7 @@
 
 export { books } from './books'
 export { links } from './links'
-export { musicsAlbuns, tracks } from './musics'
+export { musicsAlbuns, tracks, TypeMusicAlbuns } from './musics'
 export { patrons } from './patrons'
 export { generos, products, tags } from './products'
 export { sheet } from './sheet'
@@ -17,7 +17,7 @@ export {
   ProductBook,
   ProductMusic,
   ProductVideo,
+  ProductAlbum,
   TypeImgCapa,
   TypeProduct,
-  ContentMusicCategory,
 } from './generic/Products'

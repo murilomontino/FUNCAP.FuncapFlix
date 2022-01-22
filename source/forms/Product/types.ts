@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Category, FinancialResources, TypesProducts } from '@/types'
+import {
+  Category,
+  FinancialResources,
+  TypeMusicAlbuns,
+  TypesProducts,
+} from '@/types'
 
 export type Document = {
   type: 'success'
@@ -64,12 +69,14 @@ export type FormProduct = {
 }
 
 export type FormProductMusic = {
-  title: Array<string>
+  titleAlbum: string
+  titleMusics: Array<string>
   file: Document[]
-  content: number
+  content: TypeMusicAlbuns
+  onChangeTitleAlbum: (value: string) => void
   onChangeContent: (value: number) => void
   onChangeFile: () => void
-  onChangeTitle: (value: string, index: number) => void
+  onChangeTitleMusics: (value: string, index: number) => void
   resetProductMusic: () => void
 }
 
@@ -103,4 +110,5 @@ export const mapTypeProduct: { [key in TypesProducts]: string } = {
   [TypesProducts.PDF]: 'Livro',
   [TypesProducts.MP3]: 'Música(s)',
   [TypesProducts.URL]: 'URL',
+  [TypesProducts.CAPA]: 'Capa',
 }

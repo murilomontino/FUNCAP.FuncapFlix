@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 const PaginationsBooks = () => {
   return (
     <View>
-      <Text style={{ color: '#fff' }}>Hello World!</Text>
+      <Text style={{ color: '#fff' }}></Text>
     </View>
   )
 }

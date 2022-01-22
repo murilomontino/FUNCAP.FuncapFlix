@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { Platform, ImageBackground, View } from 'react-native'
+import React from 'react'
+import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import home from './home_slide.json'
+import SlideContent from './components/molecules/slider-content'
+import CardCarousel from './components/organisms/card-carousel'
 
 const HomeScreen = () => {
   const web = Platform.OS === 'web'
@@ -11,28 +12,21 @@ const HomeScreen = () => {
   const size = web ? window : screen
   const { height, width } = size
 
-  const [items, setItems] = useState(home.items)
-
   return (
-    <ImageBackground
-      source={items[0].snippet.thumbnails.maxres?.url}
-      resizeMode="cover"
-      style={[
-        {
-          flex: 1,
-          justifyContent: 'center',
-          width: width,
-          height: height,
-        },
-      ]}
-    >
+    <View style={{ flex: 1 }}>
       <View
         style={{
-          width: width,
-          height: height,
+          flex: 1,
+          minHeight: height,
+          minWidth: width,
+          marginBottom: -100,
         }}
-      ></View>
-    </ImageBackground>
+      >
+        <CardCarousel />
+      </View>
+      <SlideContent />
+      <SlideContent />
+    </View>
   )
 }
 

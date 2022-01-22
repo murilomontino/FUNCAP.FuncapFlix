@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 import * as DocumentPicker from 'expo-document-picker'
 import { DocumentResult } from 'expo-document-picker'
 
-import { Category } from '@/types'
+import { Category, TypeMusicAlbuns } from '@/types'
 import { createContext } from 'use-context-selector'
 
 import { Document, FormProductMusic, DocumentFile } from '../types'
@@ -16,9 +16,10 @@ type Props = {
 }
 
 const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
-  const [title, setTitle] = useState([] as string[])
+  const [titleAlbum, setTitleAlbum] = useState('')
+  const [titleMusics, setTitleMusics] = useState([] as string[])
   const [file, setFile] = useState([] as Document[])
-  const [content, setContent] = useState(0)
+  const [content, setContent] = useState<TypeMusicAlbuns>(0)
 
   const web = Platform.OS === 'web'
 
@@ -59,14 +60,14 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
 
       setFile([...file, ...files])
 
-      const newTitle = [...title, ...files.map((file) => file.name)]
-      setTitle(newTitle)
+      const newTitle = [...titleMusics, ...files.map((file) => file.name)]
+      setTitleMusics(newTitle)
 
       return true
     }
 
     return false
-  }, [file, title])
+  }, [file, titleMusics])
 
   useEffect(() => {
     return () => {
@@ -81,28 +82,37 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     [content]
   )
 
-  const onChangeTitle = useCallback(
+  const onChangeTitleMusics = useCallback(
     (value: string, index: number) => {
-      const newTitle = [...title]
+      const newTitle = [...titleMusics]
       newTitle[index] = value
-      setTitle(newTitle)
+      setTitleMusics(newTitle)
     },
-    [title]
+    [titleMusics]
+  )
+
+  const onChangeTitleAlbum = useCallback(
+    (value: string) => {
+      setTitleAlbum(value)
+    },
+    [titleAlbum]
   )
 
   const resetProductMusic = useCallback(() => {
-    setTitle([])
+    setTitleMusics([])
   }, [])
 
   return (
     <FormProductMusicContext.Provider
       value={{
-        title,
+        titleAlbum,
+        titleMusics,
         content,
         file,
         onChangeContent,
         onChangeFile,
-        onChangeTitle,
+        onChangeTitleAlbum,
+        onChangeTitleMusics,
         resetProductMusic,
       }}
     >

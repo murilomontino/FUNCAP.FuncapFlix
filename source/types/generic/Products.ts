@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { FinancialResources, TypesProducts, Category, documents } from '@/types'
+import {
+  FinancialResources,
+  TypesProducts,
+  Category,
+  documents,
+  TypeMusicAlbuns,
+} from '@/types'
 interface Product {
   cpfOrCnpj?: string
   recursos: FinancialResources
@@ -14,7 +20,7 @@ interface Product {
 }
 
 interface GenericAttrs {
-  id?: string
+  productId?: string
   exystBD?: boolean
   titulo?: string
   name_uuid?: string
@@ -45,8 +51,13 @@ export interface ProductVideo extends Product, GenericAttrs {
 export interface ProductMusic extends Product, GenericAttrs {
   titulo: string
   categoria: Category.Music
-  conteudo: ContentMusic
-  faixa: number
+}
+
+export interface ProductAlbum extends Product, GenericAttrs {
+  albumId?: string
+  titulo: string
+  categoria: Category.Music
+  tipo_de_album: TypeMusicAlbuns
 }
 
 export interface ProductBook extends Product, GenericAttrs {
@@ -67,16 +78,14 @@ export interface GenericProduct extends Product, GenericAttrs {
   [key: string]: any
 }
 
-export type TypeProduct = ProductVideo | ProductMusic | ProductBook
+export type TypeProduct =
+  | ProductVideo
+  | ProductMusic
+  | ProductBook
+  | ProductAlbum
 
 export type TypeImgCapa = 'image/png' | 'image/jpeg'
 
 export type ExtImgCapa = 'png' | 'jpg'
 
 export type ContentMusic = 'album' | 'single' | 'interprete'
-
-export enum ContentMusicCategory {
-  'Album',
-  'Single',
-  'Interprete',
-}

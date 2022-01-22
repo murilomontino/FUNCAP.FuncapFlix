@@ -52,7 +52,7 @@ const BooksScreen = () => {
               return <CardBooks item={item} />
             }}
             ListFooterComponent={() => <PaginationsBooks />}
-            keyExtractor={(item) => item.nome_arquivo}
+            keyExtractor={(item) => item.arquivo}
           />
         </View>
       </View>
