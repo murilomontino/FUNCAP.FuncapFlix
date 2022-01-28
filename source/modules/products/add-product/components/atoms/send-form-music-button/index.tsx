@@ -67,8 +67,8 @@ const SendFormBookButton = () => {
       data_de_publicacao: publishedDate,
       tipo: type,
       categoria: Category.Music,
-      genero,
-      recursos: financialResources,
+      generos: genero,
+      recurso: financialResources,
       tipo_de_album: content,
       titulo: titleAlbum,
       capa: image.uri ?? '',
@@ -117,12 +117,14 @@ const SendFormBookButton = () => {
         arquivo: document.uri,
         categoria: Category.Music,
         tags,
-        genero,
+        generos: genero,
         data_de_publicacao: publishedDate,
         tipo: type,
-        recursos: financialResources,
+        recurso: financialResources,
         nome_cultural: culturalName,
         nome_arquivo: document.name,
+        duracao: '',
+        compositor: '',
       }
 
       const response = await api.post<ProductMusic>('/musicas/musica', music)

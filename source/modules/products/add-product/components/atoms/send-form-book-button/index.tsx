@@ -59,9 +59,10 @@ const SendFormBookButton = () => {
     showLoading()
 
     const { status, data } = await send({
-      recursos: financialResources,
+      autor: culturalName,
+      recurso: financialResources,
       isbn: isbn,
-      numero_de_paginas: numberOfPages,
+      numero_de_paginas: numberOfPages as unknown as number,
       tamanho: size,
       ilustrador: illustrator,
       ilustracao: illustrated,
@@ -72,7 +73,7 @@ const SendFormBookButton = () => {
       cpfOrCnpj: cpfOrCnpj,
       tipo: type,
       nome_arquivo: file.name,
-      genero: genero,
+      generos: genero,
       tags: tags,
       sobre_a_obra: sobreAObra,
       sinopse: sinopse,

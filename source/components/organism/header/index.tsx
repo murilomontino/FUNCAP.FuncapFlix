@@ -7,6 +7,7 @@ import ButtonOpenMenu from '@/components/atom/button-open-menu'
 import LogoMapaCultural from '@/components/atom/logo-mapa-cultural'
 import NavBar from '@/components/molecule/nav-bar'
 
+import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const Header = () => {
@@ -74,6 +75,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     height: constants.headerHight,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: colors.bluePerCent._20,
   },
 })

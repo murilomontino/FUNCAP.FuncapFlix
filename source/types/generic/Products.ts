@@ -8,19 +8,19 @@ import {
 } from '@/types'
 interface Product {
   cpfOrCnpj?: string
-  recursos: FinancialResources
+  recurso: FinancialResources
   arquivo: string
   conteudo?: string | ContentMusic
   nome_arquivo: string
   data_de_publicacao: string
   nome_cultural: string
   tipo: TypesProducts
-  genero?: string[]
+  generos?: string[]
   tags?: string[]
 }
 
 interface GenericAttrs {
-  productId?: string
+  productId?: number
   exystBD?: boolean
   titulo?: string
   name_uuid?: string
@@ -51,13 +51,18 @@ export interface ProductVideo extends Product, GenericAttrs {
 export interface ProductMusic extends Product, GenericAttrs {
   titulo: string
   categoria: Category.Music
+  duracao: string
+  compositor: string
+  albumId?: number
+  documentoId?: number
 }
 
 export interface ProductAlbum extends Product, GenericAttrs {
-  albumId?: string
+  albumId?: number
   titulo: string
   categoria: Category.Music
   tipo_de_album: TypeMusicAlbuns
+  nome_unico?: string
 }
 
 export interface ProductBook extends Product, GenericAttrs {

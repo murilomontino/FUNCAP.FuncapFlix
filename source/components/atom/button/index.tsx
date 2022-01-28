@@ -1,9 +1,12 @@
 import React from 'react'
 import {
   Text,
-  TouchableHighlight,
   TouchableOpacityProps,
   TextProps,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  TouchableOpacity,
 } from 'react-native'
 
 import colors from '@/global/colors'
@@ -11,34 +14,50 @@ import colors from '@/global/colors'
 interface Props extends TouchableOpacityProps {
   textProps?: TextProps
   text: string
+  style?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
 }
 
-const Button = ({ textProps, disabled, text, ...rest }: Props) => {
+const Button = ({
+  textProps,
+  disabled,
+  text,
+  style,
+  textStyle,
+  ...rest
+}: Props) => {
+  const color = disabled ? colors.grey20 : colors.button_secondary
+
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       {...rest}
       disabled={disabled}
-      style={{
-        backgroundColor: disabled ? colors.grey20 : colors.button_secondary,
-        padding: 16,
-        margin: 8,
-        borderRadius: 40,
-
-        width: 200,
-      }}
+      style={[
+        {
+          backgroundColor: color,
+          padding: 16,
+          margin: 8,
+          borderRadius: 40,
+          width: 200,
+        },
+        style,
+      ]}
     >
       <Text
         {...textProps}
-        style={{
-          fontWeight: 'bold',
-          color: '#fff',
-          fontSize: 14,
-          textAlign: 'center',
-        }}
+        style={[
+          {
+            fontWeight: 'bold',
+            color: '#fff',
+            fontSize: 14,
+            textAlign: 'center',
+          },
+          textStyle,
+        ]}
       >
         {text}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 }
 

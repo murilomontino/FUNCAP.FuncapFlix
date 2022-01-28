@@ -37,7 +37,7 @@ const Footer = () => {
         bottom: 0,
         height: constants.footerHight,
         width: '100%',
-        backgroundColor: colors.dark_secondary,
+        backgroundColor: colors.bluePerCent._10,
         marginTop: 200,
       }}
     >

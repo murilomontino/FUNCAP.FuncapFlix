@@ -4,9 +4,17 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import { enableScreens } from 'react-native-screens'
 import { Provider } from 'react-redux'
 
+import AppLoading from 'expo-app-loading'
 import * as ScreenOrientation from 'expo-screen-orientation'
 
 import { PersistGate } from 'redux-persist/integration/react'
+
+import { AlfaSlabOne_400Regular } from '@expo-google-fonts/alfa-slab-one'
+import {
+  useFonts,
+  Inter_900Black,
+  Inter_800ExtraBold,
+} from '@expo-google-fonts/inter'
 
 import { persistedStore, store } from '@/redux'
 
@@ -33,11 +41,21 @@ export default function App() {
     })()
   })
 
+  const [fontsLoaded] = useFonts({
+    Inter_900Black,
+    Inter_800ExtraBold,
+    AlfaSlabOne_400Regular,
+  })
+
+  if (!fontsLoaded) {
+    return <AppLoading />
+  }
+
   return (
     <PaperProvider>
       <Provider store={store}>
         <PersistGate persistor={persistedStore} loading={null}>
-          <RootContext style={{ flex: 1 }}>
+          <RootContext>
             <Navigation />
           </RootContext>
         </PersistGate>

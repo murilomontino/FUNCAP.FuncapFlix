@@ -114,7 +114,7 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
     })
 
     if (obj && obj.type === 'success') {
-      setFile(obj)
+      setFile(obj as unknown as Document)
       return true
     }
 
