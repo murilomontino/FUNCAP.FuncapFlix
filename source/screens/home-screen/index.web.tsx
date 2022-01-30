@@ -5,7 +5,6 @@ import { useDimensions } from 'react-native-web-hooks'
 import CardCarousel from './components/templates/card-carousel'
 import SlideContent from './components/templates/slider-content'
 
-import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const SLIDE_HEIGHT = 300
@@ -32,7 +31,6 @@ const HomeScreen = () => {
     <View
       style={{
         flex: 1,
-        backgroundColor: colors.bluePerCent._10,
       }}
     >
       <CardCarousel />

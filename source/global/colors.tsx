@@ -13,7 +13,8 @@ export default {
     _90: 'rgba(18, 65, 95, 0.9)',
     _100: 'rgba(18, 65, 95, 1)',
   },
-  card_background: '#103B57',
+  background: '#13181c',
+  card_background: '#1C2231',
   button_secondary: '#265c66',
   white: '#fffafa',
   white30: 'rgba(255, 255, 255, 0.3)',
@@ -28,7 +29,8 @@ export default {
   success: 'green',
   heading: '#e6e6e6',
   black: '#000',
-
+  bar_header: '#1b2f3d',
+  bar_footer: '#121c23',
   black20: 'rgba(0, 0, 0, 0.2)',
   black40: 'rgba(0, 0, 0, 0.4)',
   black50: 'rgba(0, 0, 0, 0.5)',
@@ -42,6 +44,7 @@ export default {
     _70: 'rgba(0, 0, 0, 0.7)',
     _80: 'rgba(0, 0, 0, 0.8)',
     _90: 'rgba(0, 0, 0, 0.9)',
+    _100: 'rgba(0, 0, 0, 1)',
   },
   whitePerCent: {
     _10: 'rgba(255, 255, 255, 0.1)',

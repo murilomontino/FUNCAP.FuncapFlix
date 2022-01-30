@@ -6,6 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import FormMoveButtons from '../atom/form-move-buttons'
 import ContentSlide from './content'
 
+import colors from '@/global/colors'
+
 import { ThumbnailsMax } from '@/utils/thumbnail-max'
 
 type Props = {
@@ -44,9 +46,14 @@ const CardContent = ({
       }}
     >
       <LinearGradient
-        start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}
-        colors={['rgba(0,0,0,0.5)', 'transparent']}
+        start={{ x: 0.0, y: 1.0 }}
+        end={{ x: 0.5, y: 1.0 }}
+        locations={[0, 0.1, 1]}
+        colors={[
+          colors.blackPerCent._100,
+          colors.blackPerCent._90,
+          'transparent',
+        ]}
         style={{
           flex: 1,
           width: item_width,

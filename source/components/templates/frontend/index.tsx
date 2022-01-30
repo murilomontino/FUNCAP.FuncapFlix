@@ -9,6 +9,7 @@ import ScrollProvider from '@/components/context/ContextScroll'
 import Footer from '@/components/organism/footer'
 import Header from '@/components/organism/header'
 
+import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const Front: React.FC = ({ children }) => {
@@ -26,6 +27,7 @@ const Front: React.FC = ({ children }) => {
             flex: 1,
             minHeight: minHeight,
             marginBottom: constants.footerHight,
+            backgroundColor: colors.background,
           }}
         >
           {children}

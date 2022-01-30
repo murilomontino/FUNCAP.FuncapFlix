@@ -26,22 +26,26 @@ const ThumbnailImage = ({
   width,
   borderRadius,
 }: Props) => {
+  const heightHover = (maxHeight ?? height) - 8
+  const widthHover = maxWidth - 8
+
   return (
     <ImageBackground
       source={{ uri: image }}
-      resizeMode="cover"
+      resizeMode="stretch"
       style={[
         {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          alignSelf: 'center',
         },
         hover
           ? {
-              height: maxHeight ?? height,
-              width: maxWidth,
-              justifyContent: 'center',
-              alignSelf: 'center',
+              height: heightHover,
+              width: widthHover,
+              borderTopLeftRadius: 8,
+              borderTopRightRadius: 8,
             }
           : {
               borderRadius: borderRadius ?? 0,

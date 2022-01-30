@@ -16,7 +16,7 @@ const TitleSlider = ({ title }: Props) => {
           color: colors.white,
           width: '100%',
           fontFamily: 'AlfaSlabOne_400Regular',
-          backgroundColor: colors.bluePerCent._30,
+          backgroundColor: colors.bluePerCent._10,
 
           textAlign: 'left',
           padding: 8,

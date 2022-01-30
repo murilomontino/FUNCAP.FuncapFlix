@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import { Animated, Easing, View } from 'react-native'
-import { useHover } from 'react-native-web-hooks'
+import React, { useState } from 'react'
+import { View } from 'react-native'
+
+import { MotiView } from 'moti'
+import { MotiPressable } from 'moti/interactions'
 
 import DescriptionMovie from '../atom/description-movie'
 import ButtonsCard from '../molecules/buttons-card'
@@ -22,95 +24,46 @@ type Props = {
 }
 
 const ThumbnailCard = ({ item, width, height, image, index }: Props) => {
-  const ref = useRef(null)
-  const hover = useHover(ref)
+  const [hover, setHover] = useState(false)
 
-  const BORDER_RADIUS = 8
+  const BORDER_RADIUS = 4
   const CARD_HEIGHT = height * 2
-  const CARD_WIDTH = 300
-  const TIME_ANIMATION = 100
-  const DELAY = 0
-  const SCALE = 0.95
-
-  useEffect(() => {
-    if (hover) {
-      setTimeout(() => {
-        widthAnimation()
-        animatedHeight()
-      }, DELAY)
-    } else {
-      animationWidth.setValue(width)
-      animationHeight.setValue(height)
-    }
-  }, [hover])
-
-  const animationWidth = useRef(new Animated.Value(width)).current
-  const animationHeight = useRef(new Animated.Value(height)).current
-  const animationScale = useRef(new Animated.Value(SCALE)).current
-
-  function animatedHeight() {
-    Animated.timing(animationHeight, {
-      toValue: CARD_HEIGHT,
-      easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      useNativeDriver: false,
-      duration: TIME_ANIMATION,
-      delay: DELAY,
-    }).start()
-  }
-
-  const widthAnimation = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(animationWidth, {
-      toValue: CARD_WIDTH,
-      useNativeDriver: false,
-      easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      duration: TIME_ANIMATION,
-      delay: DELAY,
-    }).start()
-  }
+  const CARD_WIDTH = 320
+  const TIME_ANIMATION = 150
+  const DELAY = 100
+  const SCALE = 0.93
+  const MARGIN_RIGHT = -16
+  const BORDER_WIDTH = 2
 
   return (
-    <Animated.View
-      ref={ref}
+    <MotiPressable
       key={index}
+      animate={({ hovered, pressed }) => {
+        setHover(hovered)
+        return {
+          scale: hovered ? 1 : SCALE,
+          width: hovered ? CARD_WIDTH : width,
+          height: hovered ? CARD_HEIGHT : height,
+          marginRight: hovered ? -8 : MARGIN_RIGHT,
+        }
+      }}
+      transition={{ type: 'timing', delay: DELAY, duration: TIME_ANIMATION }}
       style={[
         {
           elevation: 10,
           shadowColor: '#000',
           shadowOffset: {
             width: 1,
-            height: 2,
+            height: 1,
           },
           backgroundColor: colors.card_background,
           borderRadius: 8,
         },
-
-        hover
-          ? {
-              width: CARD_WIDTH,
-              height: animationHeight,
-              borderLeftWidth: 1,
-              borderRightWidth: 1,
-              borderBottomWidth: 1,
-              borderColor: colors.bluePerCent._70,
-              transform: [
-                {
-                  scale: animationScale.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [SCALE, 1],
-                  }),
-                },
-              ],
-            }
-          : {
-              width: width,
-              height: animationHeight,
-              transform: [
-                {
-                  scale: animationScale,
-                },
-              ],
-            },
+        hover && {
+          borderWidth: BORDER_WIDTH,
+          borderRadius: BORDER_RADIUS,
+          borderColor: colors.button,
+        },
       ]}
     >
       <View
@@ -130,12 +83,19 @@ const ThumbnailCard = ({ item, width, height, image, index }: Props) => {
             key={item.id}
           />
         </View>
-        <View style={{ flex: 1 }}>
-          {hover && <DescriptionMovie description={item.description} />}
-          {hover && <ButtonsCard />}
-        </View>
+        {hover && (
+          <MotiView
+            from={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ type: 'timing', duration: TIME_ANIMATION }}
+            style={{ flex: 1 }}
+          >
+            <DescriptionMovie description={item.description} />
+            <ButtonsCard />
+          </MotiView>
+        )}
       </View>
-    </Animated.View>
+    </MotiPressable>
   )
 }
 
