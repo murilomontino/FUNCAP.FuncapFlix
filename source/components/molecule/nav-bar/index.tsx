@@ -17,6 +17,7 @@ const NavBar: React.FC<Props> = ({ flexDirection = 'row' }) => {
     <View
       style={{
         flexDirection: flexDirection,
+        marginLeft: 16,
       }}
     >
       <ItemNavBar
@@ -33,7 +34,7 @@ const NavBar: React.FC<Props> = ({ flexDirection = 'row' }) => {
       />
 
       <ItemNavBar title="LITERATURA" select={true} />
-
+      <ItemNavBar title="MÚSICAS" select={true} />
       <ItemNavBar
         title="ARTES VISUAIS"
         link="https://funcap.mapacultural.se.gov.br/streaming/workshops"

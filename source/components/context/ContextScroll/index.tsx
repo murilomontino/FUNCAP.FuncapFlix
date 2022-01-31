@@ -23,6 +23,7 @@ const ScrollProvider: React.FC = ({ children }) => {
   return (
     <ScrollView
       ref={refScroll}
+      scrollEventThrottle={16}
       style={{
         backgroundColor: '#141414',
       }}

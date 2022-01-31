@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { View } from 'react-native'
 
 import { Category, ProductAlbum, ProductMusic, TypeImgCapa } from '@/types'
@@ -40,6 +40,12 @@ const SendFormBookButton = () => {
   const { titleMusics, titleAlbum } = useFormMusic()
   const { AlertToast } = useToast()
 
+  const [album, setAlbum] = useState({
+    produtoID: 13,
+    albumID: 2,
+    name_uuid: 'f39f34b6f24dee5db31240',
+  })
+
   const submitMusicIsValid = useMemo(() => {
     const validateCPFOrCNPJ =
       cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
@@ -76,28 +82,17 @@ const SendFormBookButton = () => {
       tags: tags,
     }
 
-    const response = await api.post<ProductAlbum>('/musicas/album', album)
+    const { data, status } = await api.post<ProductAlbum>(
+      '/musicas/album',
+      album
+    )
+    setAlbum({
+      produtoID: data.productId,
+      albumID: data.albumId,
+      name_uuid: data.nome_unico,
+    })
 
-    /*  file.forEach(async (document, index) => {
-      const music: ProductMusic = {
-        titulo: titleMusics[index],
-        arquivo: document.uri,
-        categoria: Category.Music,
-        tags,
-        genero,
-        data_de_publicacao: publishedDate,
-        capa: image.uri ?? '',
-        tipo: type,
-        cpfOrCnpj: cpfOrCnpj,
-        recursos: financialResources,
-        nome_cultural: culturalName,
-        nome_arquivo: document.name,
-      }
-
-      io.emit('add-music', music)
-    }) */
-
-    switch (response.status) {
+    switch (status) {
       case 200:
         AlertToast('success', 'Música(s) Cadastrada(s) Com Sucesso!')
         break
@@ -113,6 +108,9 @@ const SendFormBookButton = () => {
   const handleSubmitMusic = () => {
     file.forEach(async (document, index) => {
       const music: ProductMusic = {
+        productId: 13, //
+        nome_album: 'f39f34b6f24dee5db31240', //
+        albumId: 2, //
         titulo: titleMusics[index],
         arquivo: document.uri,
         categoria: Category.Music,

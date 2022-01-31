@@ -20,7 +20,7 @@ const ItemNavBar: React.FC<Props> = ({
   const ref = useRef(null)
   const hover = useHover(ref)
 
-  const fontSize = useScaledSize(0.7)
+  const fontSize = useScaledSize(0.5)
   const { navigate } = useNavigation()
 
   const navigateItem = () => {

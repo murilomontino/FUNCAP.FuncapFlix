@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
   },
   hoverText: {
     color: 'orange',
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   buttonNav: {
     padding: 4,
-    marginHorizontal: 4,
   },
   selectText: {},
 })

@@ -14,7 +14,6 @@ import Left from './components/organims/left'
 import Right from './components/organims/right'
 
 import colors from '@/global/colors'
-import constants from '@/global/constants'
 
 type Props = {
   category: Category
@@ -55,7 +54,6 @@ const AddProduct = ({ category }: Props) => {
               flexDirection: 'row',
               width: '100%',
               alignItems: 'center',
-              marginBottom: constants.footerHight,
             },
             size.width < 1127 && {
               flexDirection: 'column',

@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { Platform, StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
-import { useHover } from 'react-native-web-hooks'
 
 import { MotiPressable } from 'moti/interactions'
 
@@ -21,9 +20,6 @@ const Header = () => {
   const { window, screen } = useDimensions()
   const size = web ? window : screen
 
-  const refView = useRef()
-  const hover = useHover(refView)
-
   const [sizeNavBar, setSizeNavBar] = useState(web ? false : true)
 
   const { width } = size
@@ -40,10 +36,12 @@ const Header = () => {
 
   return (
     <View
-      ref={refView}
       style={[
-        styles.container,
         {
+          flex: 1,
+          position: 'absolute',
+          top: 0,
+          height: constants.headerHight - 8,
           width: !sizeNavBar ? '98.8%' : '100%',
           zIndex: 1,
         },
@@ -52,7 +50,15 @@ const Header = () => {
       <MotiPressable
         animate={({ hovered }) => {
           return {
-            opacity: hovered ? 1 : 0.1,
+            backgroundColor: hovered ? colors.bar_header : 'transparent',
+            elevation: hovered ? 5 : 0,
+            shadowColor: hovered ? '#fff' : 'transparent',
+            shadowOffset: {
+              width: 1,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 4,
           }
         }}
         transition={{ type: 'timing', delay: DELAY, duration: TIME_ANIMATION }}
@@ -63,13 +69,19 @@ const Header = () => {
           width: '100%',
           alignItems: 'center',
           height: constants.headerHight,
-          backgroundColor: colors.bar_header,
         }}
       >
         {!sizeNavBar ? (
           <>
-            <LogoMapaCultural />
-            <NavBar />
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <LogoMapaCultural />
+              <NavBar />
+            </View>
             <ButtonLogin />
           </>
         ) : (
@@ -85,20 +97,3 @@ const Header = () => {
 }
 
 export default Header
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    elevation: 5,
-    shadowColor: '#fff',
-    shadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    position: 'absolute',
-    top: 0,
-    height: constants.headerHight - 8,
-  },
-})

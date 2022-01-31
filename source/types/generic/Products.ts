@@ -54,6 +54,7 @@ export interface ProductMusic extends Product, GenericAttrs {
   duracao: string
   compositor: string
   albumId?: number
+  nome_album: string
   documentoId?: number
 }
 

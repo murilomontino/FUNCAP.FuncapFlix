@@ -40,6 +40,7 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
                 mimeType: file.type,
               })
             }
+
             reader.readAsDataURL(file as unknown as Blob)
           })
       )

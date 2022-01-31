@@ -21,13 +21,7 @@ const ButtonOpenMenu = () => {
         drawerToggle()
       }}
     >
-      <Icon
-        tvParallaxProperties
-        name="menu"
-        type="entypo"
-        size={iconSize}
-        color={colors.white}
-      />
+      <Icon name="menu" type="entypo" size={iconSize} color={colors.white} />
     </TouchableOpacity>
   )
 }
