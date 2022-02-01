@@ -24,7 +24,14 @@ const ItemNavBar: React.FC<Props> = ({
   const { navigate } = useNavigation()
 
   const navigateItem = () => {
-    navigate('Literatura')
+    switch (title.toUpperCase()) {
+      case 'LITERATURA':
+        navigate('Literatura')
+        break
+      case 'MÚSICAS':
+        navigate('Music')
+        break
+    }
   }
 
   return (

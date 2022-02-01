@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
+
+import api from '@/services'
 
 import constants from '@/global/constants'
 
 const MusicScreen = () => {
+  const onLoad = async () => {
+    const { data } = await api.get('/musicas/album')
+    console.log(data)
+  }
+
+  useEffect(() => {
+    ;(async () => {
+      await onLoad()
+    })()
+  }, [])
+
   return (
     <View style={styles.container}>
       <audio controls={true}>

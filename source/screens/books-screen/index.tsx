@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Platform, StyleSheet, View } from 'react-native'
+import { FlatList, Platform, StyleSheet, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
 import { ProductBook } from '@/types/generic/Products'
@@ -12,6 +12,7 @@ import api from '@/services'
 import CardBooks from './components/organims/card-book'
 import PaginationsBooks from './components/organims/pagination-books'
 
+import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const BooksScreen = () => {
@@ -38,23 +39,53 @@ const BooksScreen = () => {
         >
           <PdfViewer />
         </View>
-        <View
-          style={{
-            width: '100%',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
+
+        <FlatList
+          style={{ marginBottom: 40, minHeight: 300 * products.length ?? 1 }}
+          contentContainerStyle={{
+            width: size.width,
           }}
-        >
-          <FlatList
-            style={{ marginBottom: 40, minHeight: 300 * products.length ?? 1 }}
-            data={products}
-            renderItem={({ item }) => {
-              return <CardBooks item={item} />
-            }}
-            ListFooterComponent={() => <PaginationsBooks />}
-            keyExtractor={(item) => item.arquivo}
-          />
-        </View>
+          data={products}
+          ListEmptyComponent={() => (
+            <View
+              style={[
+                {
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  flexDirection: 'row',
+                  padding: 12,
+                  marginHorizontal: 20,
+                  marginVertical: 8,
+                  backgroundColor: colors.castGrey,
+                  elevation: 5,
+                  shadowColor: '#fff',
+                  shadowOffset: {
+                    width: 1,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.4,
+                  shadowRadius: 4,
+                },
+              ]}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: colors.whitePerCent._80,
+                }}
+              >
+                Não há livros cadastrados
+              </Text>
+            </View>
+          )}
+          renderItem={({ item }) => {
+            return <CardBooks item={item} />
+          }}
+          ListFooterComponent={() => <PaginationsBooks />}
+          keyExtractor={(item) => item.arquivo}
+        />
       </View>
     </BooksProvider>
   )

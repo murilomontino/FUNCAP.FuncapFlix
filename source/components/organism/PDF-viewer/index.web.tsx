@@ -53,7 +53,7 @@ const PdfViewer = () => {
   return (
     <View
       style={{
-        width: width,
+        maxWidth: width,
         minHeight: height / 2,
         backgroundColor: '#666666',
       }}
