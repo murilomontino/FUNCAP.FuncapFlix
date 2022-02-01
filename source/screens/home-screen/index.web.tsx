@@ -48,7 +48,7 @@ const HomeScreen = () => {
             zIndex: 999,
           }}
         >
-          <SlideContent title={'Em Alta'} />
+          <SlideContent title="Em Alta" />
         </View>
         {dataArray.map((item, idx) => {
           return (

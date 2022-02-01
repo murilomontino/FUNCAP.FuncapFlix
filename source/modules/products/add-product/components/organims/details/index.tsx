@@ -66,7 +66,7 @@ const Details = () => {
         styleViewContainer={{
           width: '90%',
         }}
-        mask="99/99/9999"
+        mask={'99/99/9999'}
       />
 
       {category === Category.Literature && <InputsFormsLiterature />}
