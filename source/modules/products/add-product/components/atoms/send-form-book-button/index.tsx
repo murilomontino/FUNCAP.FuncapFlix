@@ -17,6 +17,7 @@ import {
   useFormProductCPFandCNPJ,
   useFormProductFinancialResources,
   useFormProductData,
+  useResetProducts,
 } from '@/forms/Product/hooks'
 import {
   useFormBookFile,
@@ -27,6 +28,8 @@ import {
 import api from '@/services'
 
 const SendFormBookButton = () => {
+  // fields ---------------------------------------------------------------------
+  // -----------------------------------------------------------------------------
   const { tags } = useFormProductTags()
   const { genero } = useFormProductGenero()
   const { sobreAObra, sinopse, subTitle, title, isbn } = useFormProductBook()
@@ -35,11 +38,21 @@ const SendFormBookButton = () => {
   const { type } = useFormProductCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormProductCPFandCNPJ()
   const { financialResources } = useFormProductFinancialResources()
-  const { showLoading, hideLoading } = useLoading()
   const { culturalName, publishedDate } = useFormProductData()
   const { illustrated, publisher, size, illustrator, numberOfPages } =
     useFormProductBookContent()
+
+  // Função com o objetivo de resetar o formulário de produtos
+  const { reset } = useResetProducts()
+
+  // -----------------------------------------------------------------------------
+  // Efeito Visual ----------------------------------------------------------------
   const { AlertToast } = useToast()
+  const { showLoading, hideLoading } = useLoading()
+
+  // -----------------------------------------------------------------------------
+  // Funções que enviam os dados do formulário -----------------------------------
+  // -----------------------------------------------------------------------------
 
   const submitBookIsValid = useMemo(() => {
     if (
@@ -56,46 +69,55 @@ const SendFormBookButton = () => {
   }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
-    showLoading()
+    try {
+      showLoading()
 
-    const { status, data } = await send({
-      autor: culturalName,
-      recurso: financialResources,
-      isbn: isbn,
-      numero_de_paginas: numberOfPages as unknown as number,
-      tamanho: size,
-      ilustrador: illustrator,
-      ilustracao: illustrated,
-      editora: publisher,
-      nome_cultural: culturalName,
-      data_de_publicacao: publishedDate,
-      link: '',
-      cpfOrCnpj: cpfOrCnpj,
-      tipo: type,
-      nome_arquivo: file.name,
-      generos: genero,
-      tags: tags,
-      sobre_a_obra: sobreAObra,
-      sinopse: sinopse,
-      categoria: Category.Literature,
-      sub_titulo: subTitle,
-      titulo: title,
-      arquivo: file.uri,
-      capa: image.uri ?? undefined,
-      tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
-    })
+      const { status, data } = await send({
+        autor: culturalName,
+        recurso: financialResources,
+        isbn: isbn,
+        numero_de_paginas: numberOfPages as unknown as number,
+        tamanho: size,
+        ilustrador: illustrator,
+        ilustracao: illustrated,
+        editora: publisher,
+        nome_cultural: culturalName,
+        data_de_publicacao: publishedDate,
+        link: '',
+        cpfOrCnpj: cpfOrCnpj,
+        tipo: type,
+        nome_arquivo: file.name,
+        generos: genero,
+        tags: tags,
+        sobre_a_obra: sobreAObra,
+        sinopse: sinopse,
+        categoria: Category.Literature,
+        sub_titulo: subTitle,
+        titulo: title,
+        arquivo: file.uri,
+        capa: image.uri ?? undefined,
+        tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
+      })
 
-    switch (status) {
-      case 200:
-        AlertToast('success', 'Livro Cadastrado Com Sucesso!')
-        break
+      switch (status) {
+        case 200:
+          AlertToast('success', 'Livro Cadastrado Com Sucesso!')
+          break
 
-      default:
-        AlertToast('erro', `Erro ao cadastrar livro! Tente novamente. ${data}`)
-        break
+        default:
+          AlertToast(
+            'erro',
+            `Erro ao cadastrar livro! Tente novamente. ${data}`
+          )
+          break
+      }
+
+      hideLoading()
+    } catch (error) {
+      AlertToast('erro', `Erro ao cadastrar livro! Tente novamente. ${error}`)
+    } finally {
+      await reset()
     }
-
-    hideLoading()
   }
 
   const send = async (document: ProductBook) => {

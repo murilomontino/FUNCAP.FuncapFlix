@@ -49,7 +49,7 @@ export const InputTopic = (params: InputTopicType) => {
     return web ? styles.outlineWeb : styles.outline
   }, [])
 
-  if (params.mask !== undefined || params.type !== undefined) {
+  if (params.mask !== undefined) {
     return (
       <View style={[styles.textAreaContainer, params.styleViewContainer]}>
         <View style={styles.viewTitle}>
@@ -79,7 +79,7 @@ export const InputTopic = (params: InputTopicType) => {
         {...params}
         placeholder={params.placeholder || params.topic}
         value={params.value}
-        onChangeText={params.onChangeText}
+        onChangeText={(text) => params.onChangeText(text, text)}
         style={[styles.textArea, outlineWeb, params.styleViewInput]}
         maxLength={params.maxLength}
       />

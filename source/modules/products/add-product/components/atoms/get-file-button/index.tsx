@@ -12,6 +12,7 @@ type Props = {
   category: Category
 }
 export const GetFileButton = ({ category }: Props) => {
+  // Busca um arquivo no formato PDF
   if (category === Category.Literature) {
     const { file, onChangeFile } = useFormBookFile()
 
@@ -25,6 +26,8 @@ export const GetFileButton = ({ category }: Props) => {
       </Button>
     )
   }
+
+  // Busca um arquivo no formato MP3
   if (category === Category.Music) {
     const { onChangeFile } = useFormMusicsFile()
 

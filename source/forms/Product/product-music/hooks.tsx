@@ -57,3 +57,54 @@ export const useFormMusicContent = () => {
     onChangeContent,
   }
 }
+
+export const useFormMusicReset = () => {
+  const resetProductMusic = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.resetProductMusic
+  )
+  return {
+    resetProductMusic,
+  }
+}
+
+export const useFormMusicDurations = () => {
+  const durations = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.durations
+  )
+  const onChangeDurations = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeDurations
+  )
+  return {
+    durations,
+    onChangeDurations,
+  }
+}
+
+export const useFormMusicComposers = () => {
+  const composers = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.composers
+  )
+
+  const onChangeComposers = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeComposers
+  )
+  return {
+    composers,
+    onChangeComposers,
+  }
+}
+
+export const removeFormMusic = () => {
+  const onRemoveMusic = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onRemoveMusic
+  )
+  return {
+    onRemoveMusic,
+  }
+}

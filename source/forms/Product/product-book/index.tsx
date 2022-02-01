@@ -66,14 +66,6 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
     [illustrated]
   )
 
-  const resetProductBook = useCallback(() => {
-    setTitle('')
-    setSubTitle('')
-    setSinopse('')
-    setSobreAObra('')
-    setISBN('')
-  }, [])
-
   const onChangeISBN = useCallback(
     (value: string) => {
       setISBN(value)
@@ -120,6 +112,20 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
 
     return false
   }, [file])
+
+  const resetProductBook = useCallback(() => {
+    setTitle('')
+    setSubTitle('')
+    setSinopse('')
+    setSobreAObra('')
+    setISBN('')
+    setFile({} as Document)
+    setNumberOfPages('')
+    setPublisher('')
+    setSize('')
+    setIllustrated(false)
+    setIlustrador('')
+  }, [])
 
   return (
     <FormProductBookContext.Provider

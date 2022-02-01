@@ -71,13 +71,18 @@ export type FormProduct = {
 export type FormProductMusic = {
   titleAlbum: string
   titleMusics: Array<string>
+  durations: Array<string>
   file: Document[]
   content: TypeMusicAlbuns
+  composers: string[]
   onChangeTitleAlbum: (value: string) => void
   onChangeContent: (value: number) => void
   onChangeFile: () => void
   onChangeTitleMusics: (value: string, index: number) => void
+  onChangeDurations: (value: string, index: number) => void
   resetProductMusic: () => void
+  onRemoveMusic: (index: number) => void
+  onChangeComposers: (value: string, index: number) => void
 }
 
 export type FormProductBook = {

@@ -7,6 +7,8 @@ import { DocumentResult } from 'expo-document-picker'
 import { Category, TypeMusicAlbuns } from '@/types'
 import { createContext } from 'use-context-selector'
 
+import { useLoading } from '@/context/LoadingModal'
+
 import { Document, FormProductMusic, DocumentFile } from '../types'
 
 export const FormProductMusicContext = createContext({} as FormProductMusic)
@@ -16,10 +18,14 @@ type Props = {
 }
 
 const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
+  const { showLoading, hideLoading } = useLoading()
+
   const [titleAlbum, setTitleAlbum] = useState('')
   const [titleMusics, setTitleMusics] = useState([] as string[])
   const [file, setFile] = useState([] as Document[])
+  const [durations, setDurations] = useState([])
   const [content, setContent] = useState<TypeMusicAlbuns>(0)
+  const [composers, setComposers] = useState([] as string[])
 
   const web = Platform.OS === 'web'
 
@@ -48,26 +54,31 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
   }
 
   const onChangeFile = useCallback(async () => {
-    const documents: DocumentResult = await DocumentPicker.getDocumentAsync({
-      type: 'audio/mp3',
-      multiple: true,
-      copyToCacheDirectory: true,
-    })
+    try {
+      const documents: DocumentResult = await DocumentPicker.getDocumentAsync({
+        type: 'audio/mp3',
+        multiple: true,
+        copyToCacheDirectory: true,
+      }).finally(() => hideLoading())
+      showLoading()
 
-    if (documents && documents.type === 'success') {
-      const files: Array<DocumentFile> = web
-        ? await fileReader(documents.output)
-        : documents.file
+      if (documents && documents.type === 'success') {
+        const files: Array<DocumentFile> = web
+          ? await fileReader(documents.output)
+          : documents.file
 
-      setFile([...file, ...files])
+        setFile([...file, ...files])
 
-      const newTitle = [...titleMusics, ...files.map((file) => file.name)]
-      setTitleMusics(newTitle)
+        const newTitle = [...titleMusics, ...files.map((file) => file.name)]
+        setTitleMusics(newTitle)
 
-      return true
+        return true
+      }
+    } catch (error) {
+      return false
+    } finally {
+      hideLoading()
     }
-
-    return false
   }, [file, titleMusics])
 
   useEffect(() => {
@@ -92,6 +103,45 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     [titleMusics]
   )
 
+  const onRemoveMusic = useCallback(
+    (index: number) => {
+      const newTitle = [...titleMusics]
+      newTitle.splice(index, 1)
+      setTitleMusics(newTitle)
+
+      const newFile = [...file]
+      newFile.splice(index, 1)
+      setFile(newFile)
+
+      const newDurations = [...durations]
+      newDurations.splice(index, 1)
+      setDurations(newDurations)
+
+      const newComposers = [...composers]
+      newComposers.splice(index, 1)
+      setComposers(newComposers)
+    },
+    [titleMusics, file, durations]
+  )
+
+  const onChangeComposers = useCallback(
+    (value: string, index: number) => {
+      const newComposers = [...composers]
+      newComposers[index] = value
+      setComposers(newComposers)
+    },
+    [composers]
+  )
+
+  const onChangeDurations = useCallback(
+    (value: string, index: number) => {
+      const newDurations = [...durations]
+      newDurations[index] = value
+      setDurations(newDurations)
+    },
+    [durations]
+  )
+
   const onChangeTitleAlbum = useCallback(
     (value: string) => {
       setTitleAlbum(value)
@@ -101,6 +151,9 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
 
   const resetProductMusic = useCallback(() => {
     setTitleMusics([])
+    setTitleAlbum('')
+    setFile([])
+    setContent(0)
   }, [])
 
   return (
@@ -110,11 +163,16 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
         titleMusics,
         content,
         file,
+        durations,
+        composers,
         onChangeContent,
         onChangeFile,
         onChangeTitleAlbum,
         onChangeTitleMusics,
+        onChangeDurations,
         resetProductMusic,
+        onChangeComposers,
+        onRemoveMusic,
       }}
     >
       {children}

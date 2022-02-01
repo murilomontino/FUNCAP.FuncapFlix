@@ -19,6 +19,7 @@ const FormProductProvider: React.FC<Props> = ({
   children,
   initialCategory,
 }) => {
+  // State -----------------------------------------------------------------------
   const [financialResources, setFinancialResources] = useState(0)
   const [genero, setGenero] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
@@ -54,16 +55,6 @@ const FormProductProvider: React.FC<Props> = ({
     [culturalName]
   )
 
-  const resetProduct = useCallback(() => {
-    setFinancialResources(0)
-    setGenero([])
-    setTags([])
-    setCapa({} as Document)
-    setType(TypesProducts.URL)
-    SetCPForCNPJ('')
-    SetCPForCNPJIsValid(false)
-  }, [])
-
   const onChangeImageURL = useCallback((value: string, title: string) => {
     setCapa({
       type: 'success',
@@ -92,32 +83,6 @@ const FormProductProvider: React.FC<Props> = ({
     },
     [cpfOrCnpjIsValid]
   )
-
-  const onChangeCategory = useCallback(
-    (value: Category) => {
-      resetProduct()
-      setCategory(value)
-
-      switch (value) {
-        case Category.Literature:
-          setType(TypesProducts.PDF)
-
-          break
-        case Category.Music:
-          setType(TypesProducts.MP3)
-
-          break
-        case Category.Video:
-          setType(TypesProducts.URL)
-
-          break
-        default:
-          break
-      }
-    },
-    [category]
-  )
-
   const onChangeType = useCallback(
     (value: number) => {
       setType(value)
@@ -152,6 +117,41 @@ const FormProductProvider: React.FC<Props> = ({
     [tags]
   )
 
+  const resetProduct = () => {
+    setGenero([])
+    setTags([])
+    setCapa({} as Document)
+    setPublishedDate('')
+    setCulturalName('')
+    SetCPForCNPJ('')
+    SetCPForCNPJIsValid(false)
+  }
+
+  const onChangeCategory = useCallback(
+    (value: Category) => {
+      resetProduct()
+      setCategory(value)
+
+      switch (value) {
+        case Category.Literature:
+          setType(TypesProducts.PDF)
+
+          break
+        case Category.Music:
+          setType(TypesProducts.MP3)
+
+          break
+        case Category.Video:
+          setType(TypesProducts.URL)
+
+          break
+        default:
+          break
+      }
+    },
+    [category]
+  )
+
   return (
     <FormProductContext.Provider
       value={{
@@ -168,7 +168,6 @@ const FormProductProvider: React.FC<Props> = ({
         onChangePublishedDate,
         publishedDate,
         onChangeImageURL,
-
         onChangeFinancialResources,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,

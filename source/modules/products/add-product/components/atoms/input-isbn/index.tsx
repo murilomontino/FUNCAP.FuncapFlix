@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { Platform, Text, View } from 'react-native'
-import { MaskedTextInput } from 'react-native-mask-text'
+import { MaskedTextInput, mask } from 'react-native-mask-text'
 
 import { AxiosResponse } from 'axios'
 
@@ -34,6 +34,7 @@ interface MapBook {
 }
 
 const InputISBN = () => {
+  // Hooks e Fields ---------------------------------------------------------------
   const {
     isbn,
     onChangeISBN,
@@ -42,40 +43,59 @@ const InputISBN = () => {
     onChangeTitle,
   } = useFormProductBook()
 
-  const { AlertToast } = useToast()
-
   const { onChangeNumberOfPages, onChangePublisher } =
     useFormProductBookContent()
   const { onChangePublishedDate, onChangeCulturalName } = useFormProductData()
   const { onChangeImageURL } = useFormImage()
 
+  // Efeito Visual ----------------------------------------------------------------
+  const { AlertToast } = useToast()
+  const { showLoading, hideLoading } = useLoading()
+
+  // Efeito visual css para garantir uma borda alaranjada
   const web = Platform.OS === 'web'
   const outlineWeb = useMemo(() => {
     return web ? styles.outlineWeb : styles.outline
   }, [])
-  const { showLoading, hideLoading } = useLoading()
+
+  // Função de efeito atraso em funções -------------------------------------------
   const debounce = useDebounce()
 
-  const publishedDate = (publishedDate: string) => {
+  // Corrige a data para o formato local ------------------------------------------
+  const publishedDateLocale = (publishedDate: string) => {
     if (publishedDate) {
-      const date = new Date(publishedDate)
-      return date.toLocaleDateString()
+      const date = new Date(publishedDate).toLocaleDateString()
+      return mask(date, '99/99/9999')
     }
     return ''
   }
 
+  // Função que faz a busca do livro na api do google books ------------------------
   const searchBook = useCallback(async (isbn: string) => {
+    // Busca o livro no google books
     const response = await tryCatch.run<AxiosResponse>(
       async () => await api.get(`api-google-book/${isbn}`)
     )
 
+    // Caso ocorra algum erro na busca do livro
     if (response instanceof Error) {
       AlertToast('erro', response.message)
       return
     }
 
+    // Caso ocorra um sucesso na busca do livro
     if (response && response.status === 200) {
       const { data: volumeInfo } = response
+
+      // Caso o livro já tenha sido adicionado anteriormente ao banco de dados
+      if (volumeInfo.exystBD) {
+        AlertToast('warning', 'Este livro já está cadastrado')
+        return
+      }
+
+      // Caso o livro não tenha sido adicionado anteriormente ao banco de dados
+      // mapa os dados do livro para o formato do banco de dados
+      // ---------------------------------------------------------------
       const mapBook: MapBook = {
         title: volumeInfo.title || '',
         subtitle: volumeInfo.subtitle || '',
@@ -89,20 +109,19 @@ const InputISBN = () => {
       }
 
       onChangeSinopse(mapBook.description.slice(0, 1500))
-
       onChangeSubTitle(mapBook.subtitle)
       onChangeTitle(mapBook.title)
       onChangeImageURL(mapBook.image, mapBook.title)
       onChangePublisher(mapBook.publisher)
       onChangeNumberOfPages(mapBook.pageCount)
 
-      onChangePublishedDate(publishedDate(mapBook.publishedDate))
+      const locale = publishedDateLocale(mapBook.publishedDate)
+
+      onChangePublishedDate(locale)
       onChangeCulturalName(mapBook.authors.join(', '))
 
       return mapBook
     } else {
-      console.log(response)
-
       AlertToast('warning', 'Livro não encontrado!')
       return null
     }
