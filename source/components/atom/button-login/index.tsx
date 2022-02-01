@@ -1,7 +1,9 @@
-import React from 'react'
-import { Linking, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { Linking, Text } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useScaledSize } from 'react-native-web-hooks'
+
+import { MotiPressable } from 'moti/interactions'
 
 import colors from '@/global/colors'
 
@@ -10,6 +12,8 @@ type Props = {
 }
 
 const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
+  const [hover, setHover] = useState(false)
+
   const handleClickURL = async () => {
     await Linking.openURL('https://funcap.mapacultural.acesso.se.gov.br/')
   }
@@ -18,8 +22,10 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
   const iconSize = useScaledSize(1.2)
 
   return (
-    <TouchableOpacity
+    <MotiPressable
       onPress={handleClickURL}
+      onHoverIn={() => setHover(true)}
+      onHoverOut={() => setHover(false)}
       style={{
         padding: 12,
         marginRight: 4,
@@ -29,7 +35,7 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
     >
       <Icon
         size={iconSize}
-        color={colors.white}
+        color={hover ? 'orange' : colors.white}
         style={{ padding: 8 }}
         tvParallaxProperties
         name="login"
@@ -37,7 +43,7 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
       {textVisible && (
         <Text
           style={{
-            color: colors.white,
+            color: hover ? 'orange' : colors.white,
             padding: 8,
             fontSize: fontSize,
             fontWeight: 'bold',
@@ -46,10 +52,8 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
           Entrar
         </Text>
       )}
-    </TouchableOpacity>
+    </MotiPressable>
   )
 }
 
 export default ButtonLogin
-
-const styles = StyleSheet.create({})
