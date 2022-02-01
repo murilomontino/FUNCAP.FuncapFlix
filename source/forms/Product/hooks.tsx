@@ -1,6 +1,8 @@
 import { useContextSelector } from 'use-context-selector'
 
 import { FormProductContext } from './index'
+import { FormProductBookContext } from './product-book'
+import { FormProductMusicContext } from './product-music'
 
 export const useFormImage = () => {
   const getImage = useContextSelector(
@@ -133,5 +135,32 @@ export const useFormProductData = () => {
     onChangeCulturalName,
     publishedDate,
     onChangePublishedDate,
+  }
+}
+
+export const useResetProducts = () => {
+  const resetProduct = useContextSelector(
+    FormProductContext,
+    (value) => value.resetProduct
+  )
+
+  const resetBook = useContextSelector(
+    FormProductBookContext,
+    (value) => value.resetProductBook
+  )
+
+  const resetMusic = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.resetProductMusic
+  )
+
+  const reset = async () => {
+    resetBook()
+    resetMusic()
+    resetProduct()
+  }
+
+  return {
+    reset,
   }
 }
