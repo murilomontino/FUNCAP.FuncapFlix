@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import BooksPage from '@/screens/books-screen'
 import HomeScreen from '@/screens/home-screen'
-import MusicScreen from '@/screens/music-screen/index'
+import MusicScreen from '@/screens/music-screen'
 import QRCodeScreen from '@/screens/qr-code-screen'
 
 import { linking, RootStackParamList } from '../config'
