@@ -1,7 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-
-import { Platform } from 'expo-modules-core'
+import { StyleSheet, View, FlatList } from 'react-native'
 
 import { Category, TypeMusicAlbuns } from '@/types'
 
@@ -10,7 +8,6 @@ import Dropdown from '@/components/atom/dropdown'
 import {
   useFormMusic,
   useFormMusicContent,
-  useFormMusicDurations,
   useFormMusicsFile,
 } from '@/forms/Product/product-music/hooks'
 
@@ -19,9 +16,7 @@ import InputTopic from '../../atoms/input-topic'
 import CardMusicForm from '../card-music-form'
 
 const InputsFormsMusic = () => {
-  const { titleMusics, onChangeTitleMusics, titleAlbum, onChangeTitleAlbum } =
-    useFormMusic()
-  const { onChangeDurations } = useFormMusicDurations()
+  const { titleAlbum, onChangeTitleAlbum } = useFormMusic()
   const { content, onChangeContent } = useFormMusicContent()
   const { file } = useFormMusicsFile()
 
@@ -32,8 +27,6 @@ const InputsFormsMusic = () => {
     { value: TypeMusicAlbuns.album_interprete, label: 'Álbum Interprete' },
   ]
 
-  const web = Platform.OS === 'web'
-
   return (
     <View>
       <Dropdown
@@ -41,7 +34,7 @@ const InputsFormsMusic = () => {
         onChangeValue={onChangeContent}
         value={content}
       />
-      <GetFileButton category={Category.Music} />
+      {content ? <GetFileButton category={Category.Music} /> : <></>}
       <InputTopic
         topic="Título da Obra*"
         onChangeText={onChangeTitleAlbum}
@@ -50,14 +43,14 @@ const InputsFormsMusic = () => {
           width: '90%',
         }}
       />
-      {titleMusics.map((item, index) => (
-        <CardMusicForm
-          key={item}
-          index={index}
-          item={item}
-          uri={file[index].uri}
-        />
-      ))}
+
+      <FlatList
+        data={file}
+        renderItem={({ item, index }) => (
+          <CardMusicForm key={index} index={index} uri={item.uri} />
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   )
 }

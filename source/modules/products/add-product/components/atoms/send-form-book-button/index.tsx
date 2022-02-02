@@ -55,13 +55,15 @@ const SendFormBookButton = () => {
   // -----------------------------------------------------------------------------
 
   const submitBookIsValid = useMemo(() => {
+    const validateCPFOrCNPJ =
+      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
     if (
       financialResources &&
       title &&
       file !== null &&
       file.type === 'success' &&
       sinopse.length > 0 &&
-      (cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid))
+      validateCPFOrCNPJ
     ) {
       return true
     }

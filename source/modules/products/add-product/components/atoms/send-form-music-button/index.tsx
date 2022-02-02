@@ -69,13 +69,21 @@ const SendFormBookButton = () => {
       titleAlbum &&
       titleMusics &&
       file !== null &&
+      content &&
       file.length > 0 &&
       validateCPFOrCNPJ
     ) {
       return true
     }
     return false
-  }, [financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid, titleAlbum])
+  }, [
+    financialResources,
+    file,
+    cpfOrCnpj,
+    cpfOrCnpjIsValid,
+    titleAlbum,
+    content,
+  ])
 
   // Funções para enviar os dados do formulário de música
   // Caso o formulário seja válido, será enviado os dados para a API /musicas/musica

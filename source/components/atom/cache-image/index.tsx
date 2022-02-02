@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image } from 'react-native'
+import { Image, ImageStyle, StyleProp } from 'react-native'
 
 import api from '@/services'
 
@@ -11,9 +11,17 @@ type Props = {
   capa?: string
   height?: number
   width?: number
+  resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center'
+  imageStyle?: StyleProp<ImageStyle>
 }
 
-const CacheImage = ({ capa, height = 200, width = 150 }: Props) => {
+const CacheImage = ({
+  capa,
+  height = 200,
+  width = 150,
+  resizeMode = 'contain',
+  imageStyle,
+}: Props) => {
   const [img, setImg] = useState('')
 
   useEffect(() => {
@@ -48,11 +56,14 @@ const CacheImage = ({ capa, height = 200, width = 150 }: Props) => {
 
   return (
     <Image
-      style={{
-        width,
-        resizeMode: 'contain',
-        height,
-      }}
+      style={[
+        {
+          width,
+          resizeMode,
+          height,
+        },
+        imageStyle,
+      ]}
       defaultSource={NotCapa}
       source={{
         uri: img,

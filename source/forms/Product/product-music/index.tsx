@@ -154,6 +154,8 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     setTitleAlbum('')
     setFile([])
     setContent(0)
+    setComposers([])
+    setDurations([])
   }, [])
 
   return (

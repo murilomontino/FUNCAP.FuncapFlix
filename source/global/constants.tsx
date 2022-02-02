@@ -22,4 +22,5 @@ export default {
     xlarge: 8,
     xxlarge: 10,
   },
+  perPage: 10,
 }

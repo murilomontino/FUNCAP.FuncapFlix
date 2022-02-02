@@ -111,7 +111,11 @@ const InputISBN = () => {
       onChangeSinopse(mapBook.description.slice(0, 1500))
       onChangeSubTitle(mapBook.subtitle)
       onChangeTitle(mapBook.title)
-      onChangeImageURL(mapBook.image, mapBook.title)
+
+      if (mapBook.image) {
+        onChangeImageURL(mapBook.image, mapBook.title)
+      }
+
       onChangePublisher(mapBook.publisher)
       onChangeNumberOfPages(mapBook.pageCount)
 

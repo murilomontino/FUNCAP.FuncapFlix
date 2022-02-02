@@ -16,21 +16,19 @@ import InputTopic from '../../atoms/input-topic'
 
 type Props = {
   index: number
-  item: string
   uri: string
 }
 
-const CardMusicForm = ({ index, item, uri }: Props) => {
+const CardMusicForm = ({ index, uri }: Props) => {
   const web = Platform.OS === 'web'
 
-  const { onChangeTitleMusics } = useFormMusic()
+  const { onChangeTitleMusics, titleMusics } = useFormMusic()
   const { onChangeDurations } = useFormMusicDurations()
   const { onRemoveMusic } = removeFormMusic()
   const { onChangeComposers, composers } = useFormMusicComposers()
 
   return (
     <View
-      key={item}
       style={{
         borderWidth: 1,
         borderColor: '#fff',
@@ -43,7 +41,7 @@ const CardMusicForm = ({ index, item, uri }: Props) => {
           topic={`Faixa ${index + 1 > 9 ? '' : 0}${index + 1}`}
           key={index}
           onChangeText={(text) => onChangeTitleMusics(text, index)}
-          value={item}
+          value={titleMusics[index]}
           styleViewContainer={{
             maxWidth: '90%',
           }}
