@@ -13,14 +13,22 @@ export const styles = StyleSheet.create({
   topicForm: {
     fontWeight: 'bold',
     color: '#f1f1f1',
-    padding: 8,
+    paddingVertical: 4,
     textAlign: 'right',
+  },
+  topicRequered: {
+    fontWeight: 'bold',
+    color: colors.redSecondary,
+    fontSize: 18,
+    textAlign: 'right',
+    paddingLeft: 2,
   },
   viewTitle: {
     flex: 1,
+    flexDirection: 'row',
+    paddingRight: 8,
     maxWidth: 150,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   textArea: {
     color: colors.grey20,

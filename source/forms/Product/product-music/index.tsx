@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Platform } from 'react-native'
 
 import * as DocumentPicker from 'expo-document-picker'
@@ -33,12 +33,33 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   const [financialResources, setFinancialResources] = useState(0)
   const [genero, setGenero] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
-  const [capa, setCapa] = useState({} as Document)
+  const [capa, setCapa] = useState({} as DocumentPicker.DocumentResult)
   const [type, setType] = useState(TypesProducts.MP3)
   const [cpfOrCnpj, SetCPForCNPJ] = useState('')
   const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
   const [publishedDate, setPublishedDate] = useState('')
   const [culturalName, setCulturalName] = useState('')
+
+  // cleanup ---------------------------------------------------------------------
+  useEffect(() => {
+    return () => {
+      setTitleAlbum('')
+      setTitleMusics([])
+      setFile([])
+      setDurations([])
+      setContent(0)
+      setComposers([])
+      setFinancialResources(0)
+      setGenero([])
+      setTags([])
+      setCapa({} as DocumentPicker.DocumentResult)
+      setType(TypesProducts.MP3)
+      SetCPForCNPJ('')
+      SetCPForCNPJIsValid(false)
+      setPublishedDate('')
+      setCulturalName('')
+    }
+  }, [])
 
   const web = Platform.OS === 'web'
 
@@ -69,7 +90,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   const onChangeFile = useCallback(async () => {
     try {
       const documents: DocumentResult = await DocumentPicker.getDocumentAsync({
-        type: 'audio/mp3',
+        type: ['audio/mp3'],
         multiple: true,
         copyToCacheDirectory: true,
       }).finally(() => hideLoading())
@@ -205,19 +226,14 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
     [type]
   )
 
-  const getImage = useCallback(async () => {
-    const obj = await DocumentPicker.getDocumentAsync({
-      type: ['image/png', 'image/jpeg'],
-    })
-
-    if (obj.type === 'success') {
-      setCapa(obj)
-
-      return true
-    }
-
-    return false
-  }, [capa])
+  const onChangeImage = useCallback(
+    async (image: DocumentPicker.DocumentResult) => {
+      if (image.type === 'success') {
+        setCapa(image)
+      }
+    },
+    [capa]
+  )
 
   const onChangeGeneros = useCallback(
     (generos: string[]) => {
@@ -240,10 +256,9 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
     setComposers([])
     setDurations([])
     setFile([])
-    setFinancialResources(0)
     setGenero([])
     setTags([])
-    setCapa({} as Document)
+    setCapa({} as DocumentPicker.DocumentResult)
     SetCPForCNPJ('')
     SetCPForCNPJIsValid(false)
     setPublishedDate('')
@@ -261,7 +276,6 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
         culturalName,
         financialResources,
         genero,
-        getImage,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,
@@ -271,6 +285,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
         onChangePublishedDate,
         onChangeTags,
         onChangeType,
+        onChangeImage,
         publishedDate,
         tags,
         type,

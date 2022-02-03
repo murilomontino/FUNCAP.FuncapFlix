@@ -110,10 +110,6 @@ export const removeFormMusic = () => {
 }
 
 export const useFormMusicImage = () => {
-  const getImage = useContextSelector(
-    FormProductMusicContext,
-    (value) => value.getImage
-  )
   const image = useContextSelector(
     FormProductMusicContext,
     (value) => value.capa
@@ -124,9 +120,14 @@ export const useFormMusicImage = () => {
     (value) => value.onChangeImageURL
   )
 
+  const onChangeImage = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeImage
+  )
+
   return {
-    getImage,
     onChangeImageURL,
+    onChangeImage,
     image,
   }
 }

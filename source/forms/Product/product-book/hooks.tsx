@@ -264,10 +264,6 @@ export const useResetBook = () => {
 }
 
 export const useFormBookImage = () => {
-  const getImage = useContextSelector(
-    FormProductBookContext,
-    (value) => value.getImage
-  )
   const image = useContextSelector(
     FormProductBookContext,
     (value) => value.capa
@@ -278,9 +274,14 @@ export const useFormBookImage = () => {
     (value) => value.onChangeImageURL
   )
 
+  const onChangeImage = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeImage
+  )
+
   return {
-    getImage,
     onChangeImageURL,
+    onChangeImage,
     image,
   }
 }

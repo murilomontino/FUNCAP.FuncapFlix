@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -11,6 +12,7 @@ type Props = {
   value: number
   disabled?: boolean
   label?: string
+  requered?: boolean
 }
 
 const Dropdown = ({
@@ -18,6 +20,7 @@ const Dropdown = ({
   value,
   onChangeValue,
   disabled = false,
+  requered = false,
   label = 'Selecione',
 }: Props) => {
   useEffect(() => {
@@ -46,10 +49,31 @@ const Dropdown = ({
         disabled && { backgroundColor: colors.grey20 },
       ]}
       buttonTextStyle={{
-        color: '#fff',
+        color: colors.redSecondary,
         textTransform: 'uppercase',
         fontSize: 14,
       }}
+      renderCustomizedButtonChild={(selectedItem, index) => (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 14,
+              color: colors.white,
+              fontWeight: '500',
+            }}
+          >
+            {selectedItem?.label.toUpperCase() ?? labelState}
+          </Text>
+          {requered && <Text style={styleDefault.topicRequered}>*</Text>}
+        </View>
+      )}
       renderDropdownIcon={() => {
         return <FontAwesome name="chevron-down" color={'#fff'} size={14} />
       }}
@@ -75,3 +99,13 @@ const Dropdown = ({
 }
 
 export default Dropdown
+
+const styleDefault = StyleSheet.create({
+  topicRequered: {
+    fontWeight: 'bold',
+    color: colors.redSecondary,
+    fontSize: 18,
+    textAlign: 'right',
+    paddingLeft: 2,
+  },
+})

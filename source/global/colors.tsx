@@ -58,7 +58,8 @@ export default {
     _90: 'rgba(255, 255, 255, 0.9)',
   },
   // shared
-  brandPrimary: '#d22f27',
+  redPrimary: '#d22f27',
+  redSecondary: '#ff574d',
   bgGrey: '#191919',
   inactiveGrey: '#727272',
   headerBarBg: '#1b1b1b',

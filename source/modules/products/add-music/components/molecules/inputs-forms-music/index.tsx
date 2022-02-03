@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
 
-import { Category, TypeMusicAlbuns } from '@/types'
+import { TypeMusicAlbuns } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
 import InputTopic from '@/components/atom/input-topic'
@@ -33,11 +33,14 @@ const InputsFormsMusic = () => {
         items={ContentMusicItems}
         onChangeValue={onChangeContent}
         value={content}
+        requered
+        label={'Tipo de conteúdo'.toUpperCase()}
       />
-      {content ? <GetFileButton category={Category.Music} /> : <></>}
+      <GetFileButton message="Escolher Músicas" />
       <InputTopic
-        topic="Título da Obra*"
+        topic="Título da Obra"
         onChangeText={onChangeTitleAlbum}
+        requered
         value={titleAlbum}
         styleViewContainer={{
           width: '90%',

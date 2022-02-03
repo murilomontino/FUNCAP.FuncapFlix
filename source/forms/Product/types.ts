@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import { DocumentResult } from 'expo-document-picker'
+
 import {
   Category,
   FinancialResources,
@@ -59,7 +61,7 @@ export interface FormProduct {
   onChangeFinancialResources: (value: FinancialResources) => void
   onChangeCPForCNPJ: (text: string) => void
   onChangeCPForCNPJIsValid: (value: boolean) => void
-  getImage: () => Promise<boolean>
+  onChangeImage: (value: DocumentResult) => void
   onChangeCategory?: (value: Category) => void
   onChangeType: (value: TypesProducts) => void
   onChangeTags: (tags: string[]) => void

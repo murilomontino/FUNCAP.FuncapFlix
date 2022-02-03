@@ -5,16 +5,17 @@ import { useDimensions } from 'react-native-web-hooks'
 import { FinancialResources, TypesProducts } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
+import GetImageButton from '@/components/atom/get-image-button'
 import MultipleSelectedGenero from '@/components/atom/multiple-selected-genero'
 
 import {
   useFormBookCategory,
   useFormBookFinancialResources,
   useFormBookGenero,
+  useFormBookImage,
 } from '@/forms/Product/product-book/hooks'
 
 import GetFileButton from '../../atoms/get-file-button'
-import GetImageButton from '../../atoms/get-image-button'
 
 const ItemsTypesProducts = [
   { label: 'MP3', value: TypesProducts.MP3 },
@@ -41,6 +42,8 @@ const Left = () => {
   const { onChangeFinancialResources, financialResources } =
     useFormBookFinancialResources()
 
+  const { image, onChangeImage } = useFormBookImage()
+
   const { genero, onChangeGeneros } = useFormBookGenero()
 
   return (
@@ -55,7 +58,7 @@ const Left = () => {
         borderColor: 'rgba(0,0,0, 0.4)',
       }}
     >
-      <GetImageButton />
+      <GetImageButton image={image} onChangeImage={onChangeImage} />
       <Dropdown
         items={ItemsTypesProducts}
         onChangeValue={onChangeType}
@@ -67,10 +70,11 @@ const Left = () => {
       <GetFileButton />
 
       <Dropdown
+        requered
         items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}
         value={financialResources}
-        label="Recursos"
+        label={'Recursos'.toUpperCase()}
       />
       <MultipleSelectedGenero value={genero} onChangeValue={onChangeGeneros} />
     </View>

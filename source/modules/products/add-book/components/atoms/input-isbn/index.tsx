@@ -34,7 +34,11 @@ interface MapBook {
   pageCount: string
 }
 
-const InputISBN = () => {
+interface Props {
+  requered?: boolean
+}
+
+const InputISBN = ({ requered = true }: Props) => {
   // Hooks e Fields ---------------------------------------------------------------
   const {
     isbn,
@@ -145,7 +149,8 @@ const InputISBN = () => {
   return (
     <View style={[styles.textAreaContainer]}>
       <View style={styles.viewTitle}>
-        <Text style={styles.topicForm}>ISBN:</Text>
+        <Text style={styles.topicForm}>ISBN</Text>
+        {requered && <Text style={styles.topicRequered}>*</Text>}
       </View>
       <MaskedTextInput
         value={isbn}

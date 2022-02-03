@@ -17,6 +17,7 @@ import colors from '@/global/colors'
 interface Props {
   topic: string
   value: string
+  requered?: boolean
   maxLength?: number
   styleViewContainer?: ViewStyle
   styleViewInput?: TextStyle | ViewStyle | ImageStyle
@@ -43,46 +44,58 @@ interface MaskedTopicProps extends MaskedTextInputProps, Props {
 
 type InputTopicType = InputTopicProps | MaskedTopicProps
 
-export const InputTopic = (params: InputTopicType) => {
+export const InputTopic = ({
+  mask,
+  styleViewContainer,
+  topic,
+  value,
+  requered = false,
+  maxLength,
+  styleViewInput,
+  onChangeText,
+  placeholder,
+  ...rest
+}: InputTopicType) => {
   const web = Platform.OS === 'web'
 
   const outlineWeb = useMemo(() => {
     return web ? styles.outlineWeb : styles.outline
   }, [])
 
-  if (params.mask !== undefined) {
+  if (mask !== undefined) {
     return (
-      <View style={[styles.textAreaContainer, params.styleViewContainer]}>
+      <View style={[styles.textAreaContainer, styleViewContainer]}>
         <View style={styles.viewTitle}>
-          <Text style={styles.topicForm}>{params.topic}:</Text>
+          <Text style={styles.topicForm}>{topic}:</Text>
         </View>
         <MaskedTextInput
-          {...params}
-          mask={params.mask}
-          value={params.value}
-          onChangeText={params.onChangeText}
-          placeholder={params.placeholder || params.topic}
-          style={[styles.textArea, outlineWeb, params.styleViewInput]}
-          maxLength={params.maxLength}
+          {...rest}
+          mask={mask}
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder || topic}
+          style={[styles.textArea, outlineWeb, styleViewInput]}
+          maxLength={maxLength}
         />
       </View>
     )
   }
 
   return (
-    <View style={[styles.textAreaContainer, params.styleViewContainer]}>
-      {params.topic && (
+    <View style={[styles.textAreaContainer, styleViewContainer]}>
+      {topic && (
         <View style={styles.viewTitle}>
-          <Text style={styles.topicForm}>{params.topic}:</Text>
+          <Text style={styles.topicForm}>{topic}</Text>
+          {requered && <Text style={styles.topicRequered}>*</Text>}
         </View>
       )}
       <TextInput
-        {...params}
-        placeholder={params.placeholder || params.topic}
-        value={params.value}
-        onChangeText={(text) => params.onChangeText(text, text)}
-        style={[styles.textArea, outlineWeb, params.styleViewInput]}
-        maxLength={params.maxLength}
+        {...rest}
+        placeholder={placeholder || topic}
+        value={value}
+        onChangeText={(text) => onChangeText(text, text)}
+        style={[styles.textArea, outlineWeb, styleViewInput]}
+        maxLength={maxLength}
       />
     </View>
   )
@@ -101,14 +114,22 @@ export const styles = StyleSheet.create({
   topicForm: {
     fontWeight: 'bold',
     color: '#f1f1f1',
-    padding: 8,
+    paddingVertical: 4,
     textAlign: 'right',
+  },
+  topicRequered: {
+    fontWeight: 'bold',
+    color: colors.redSecondary,
+    fontSize: 18,
+    textAlign: 'right',
+    paddingLeft: 2,
   },
   viewTitle: {
     flex: 1,
+    flexDirection: 'row',
+    paddingRight: 8,
     maxWidth: 150,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   textArea: {
     color: colors.grey20,

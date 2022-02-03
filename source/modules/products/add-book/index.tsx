@@ -2,9 +2,10 @@ import React from 'react'
 import { ImageBackground, Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
+import HeaderLogo from '@/components/atom/header-logo'
+
 import FormBookProvider from '@/forms/Product/product-book'
 
-import HeaderLogo from './components/molecules/header-logo'
 import Details from './components/organims/details'
 import Left from './components/organims/left'
 import Right from './components/organims/right'

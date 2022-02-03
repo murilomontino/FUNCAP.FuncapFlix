@@ -43,7 +43,12 @@ const InputsFormsLiterature = () => {
         Detalhes
       </Text>
       <InputISBN />
-      <InputTopic value={title} onChangeText={onChangeTitle} topic="Título*" />
+      <InputTopic
+        value={title}
+        onChangeText={onChangeTitle}
+        topic="Título"
+        requered
+      />
       <InputTopic
         value={subTitle}
         onChangeText={onChangeSubTitle}
@@ -51,8 +56,9 @@ const InputsFormsLiterature = () => {
       />
       <InputTextArea
         value={sinopse}
+        requered
         onChangeValue={onChangeSinopse}
-        topic="Sinopse*"
+        topic="Sinopse"
         height={300}
         maxLength={1500}
         numberLines={12}

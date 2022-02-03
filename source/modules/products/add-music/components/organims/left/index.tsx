@@ -2,10 +2,12 @@ import React from 'react'
 import { View, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import GetImageButton from '@/modules/products/add-music/components/atoms/get-image-button'
+import { DocumentResult } from 'expo-document-picker'
+
 import { FinancialResources, TypesProducts } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
+import GetImageButton from '@/components/atom/get-image-button'
 
 import {
   useFormMusicFinancialResources,
@@ -37,7 +39,7 @@ const Left = () => {
   const { onChangeType, type } = useFormMusicCategory()
   const { onChangeFinancialResources, financialResources } =
     useFormMusicFinancialResources()
-  const { getImage, image } = useFormMusicImage()
+  const { onChangeImage, image } = useFormMusicImage()
 
   return (
     <View
@@ -51,7 +53,11 @@ const Left = () => {
         borderColor: 'rgba(0,0,0, 0.4)',
       }}
     >
-      <GetImageButton onChangeImage={getImage} image={image} />
+      <GetImageButton
+        onChangeImage={onChangeImage}
+        image={image as unknown as DocumentResult}
+        width={200}
+      />
       <Dropdown
         items={ItemsTypesProducts}
         onChangeValue={onChangeType}
@@ -64,7 +70,8 @@ const Left = () => {
         items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}
         value={financialResources}
-        label="Recursos"
+        label={'Recursos'.toUpperCase()}
+        requered
       />
     </View>
   )

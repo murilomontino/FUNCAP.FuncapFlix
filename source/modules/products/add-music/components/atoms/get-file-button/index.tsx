@@ -1,27 +1,44 @@
 import React from 'react'
-import { Button } from 'react-native-paper'
-
-import { Category } from '@/types'
+import { Text, TouchableOpacity, View } from 'react-native'
 
 import { useFormMusicsFile } from '@/forms/Product/product-music/hooks'
 
 import { styles } from '../styles'
 
 type Props = {
-  category: Category
+  requered?: boolean
+  message?: string
 }
-export const GetFileButton = ({ category }: Props) => {
-  // Busca um arquivo no formato MP3
+
+export const GetFileButton = ({
+  requered = true,
+  message = 'Selecione um arquivo',
+}: Props) => {
+  // Busca um arquivo no formato PDF
   const { onChangeFile } = useFormMusicsFile()
 
   return (
-    <Button
-      style={[styles.buttonContainer]}
-      color="#fff"
-      onPress={onChangeFile}
-    >
-      Escolher Músicas
-    </Button>
+    <TouchableOpacity style={[styles.buttonContainer]} onPress={onChangeFile}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight: '500',
+            textAlign: 'center',
+          }}
+        >
+          {message.toUpperCase()}
+        </Text>
+        {requered && <Text style={styles.topicRequered}>*</Text>}
+      </View>
+    </TouchableOpacity>
   )
 }
 

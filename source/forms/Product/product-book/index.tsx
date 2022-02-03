@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import * as DocumentPicker from 'expo-document-picker'
 
@@ -34,6 +34,32 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
   const [publishedDate, setPublishedDate] = useState('')
   const [culturalName, setCulturalName] = useState('')
+
+  // cleanup ---------------------------------------------------------------------
+  useEffect(() => {
+    return () => {
+      setTitle('')
+      setSubTitle('')
+      setSinopse('')
+      setSobreAObra('')
+      setISBN('')
+      setNumberOfPages('')
+      setPublisher('')
+      setSize('')
+      setIllustrated(false)
+      setIlustrador('')
+      setFile({} as Document)
+      setFinancialResources(0)
+      setGenero([])
+      setTags([])
+      setCapa({} as Document)
+      setType(TypesProducts.MP3)
+      SetCPForCNPJ('')
+      SetCPForCNPJIsValid(false)
+      setPublishedDate('')
+      setCulturalName('')
+    }
+  }, [])
 
   const onChangeIllustrator = useCallback(
     (text: string) => {
@@ -164,20 +190,14 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     },
     [type]
   )
-
-  const getImage = useCallback(async () => {
-    const obj = await DocumentPicker.getDocumentAsync({
-      type: ['image/png', 'image/jpeg'],
-    })
-
-    if (obj.type === 'success') {
-      setCapa(obj)
-
-      return true
-    }
-
-    return false
-  }, [capa])
+  const onChangeImage = useCallback(
+    async (image: DocumentPicker.DocumentResult) => {
+      if (image.type === 'success') {
+        setCapa(image)
+      }
+    },
+    [capa]
+  )
 
   const onChangeGeneros = useCallback(
     (generos: string[]) => {
@@ -204,7 +224,6 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     setIllustrated(false)
     setIlustrador('')
     setFile({} as Document)
-    setFinancialResources(0)
     setGenero([])
     setTags([])
     setCapa({} as Document)
@@ -238,7 +257,7 @@ const FormProductBookProvider: React.FC = ({ children }) => {
         size,
         illustrator,
         file,
-        getImage,
+        onChangeImage,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
 import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
@@ -12,6 +12,8 @@ import {
 
 import { styles } from '../../atoms/styles'
 import InputsFormsLiterature from '../../molecules/inputs-forms-literature'
+
+import colors from '@/global/colors'
 
 const Details = () => {
   const web = Platform.OS === 'web'
@@ -47,6 +49,16 @@ const Details = () => {
         marginRight: 8,
       }}
     >
+      <Text
+        style={{
+          fontSize: 16,
+          textAlign: 'center',
+          marginBottom: 8,
+          color: colors.redSecondary,
+        }}
+      >
+        * Campos Obrigatórios
+      </Text>
       <FieldCPFandCNPJGeneric
         isValid={cpfOrCnpjIsValid}
         onChangeIsValid={onChangeCPForCNPJIsValid}
@@ -60,6 +72,7 @@ const Details = () => {
       />
       <InputTopic
         topic="Nome Cultural"
+        requered={true}
         onChangeText={onChangeCulturalName}
         value={culturalName}
         styleViewContainer={{

@@ -9,6 +9,7 @@ type Props = {
   maxLength: number
   height: number
   value: string
+  requered?: boolean
   onChangeValue: (text: string) => void
 }
 
@@ -18,6 +19,7 @@ const InputTextArea = ({
   maxLength = 5000,
   height,
   value,
+  requered = false,
   onChangeValue,
 }: Props) => {
   const web = Platform.OS === 'web'
@@ -29,7 +31,8 @@ const InputTextArea = ({
   return (
     <View style={styles.textAreaContainer}>
       <View style={styles.viewTitle}>
-        <Text style={styles.topicForm}>{topic}: </Text>
+        <Text style={styles.topicForm}>{topic}</Text>
+        {requered && <Text style={styles.topicRequered}>*</Text>}
       </View>
       <TextInput
         value={value}
@@ -77,14 +80,22 @@ export const styles = StyleSheet.create({
   topicForm: {
     fontWeight: 'bold',
     color: '#f1f1f1',
-    padding: 8,
+    paddingVertical: 4,
     textAlign: 'right',
+  },
+  topicRequered: {
+    fontWeight: 'bold',
+    color: colors.redSecondary,
+    fontSize: 18,
+    textAlign: 'right',
+    paddingLeft: 2,
   },
   viewTitle: {
     flex: 1,
+    flexDirection: 'row',
+    paddingRight: 8,
     maxWidth: 150,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   textArea: {
     color: colors.grey20,

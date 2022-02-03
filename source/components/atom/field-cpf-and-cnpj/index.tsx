@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Text, TextStyle, View, ViewStyle } from 'react-native'
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import { MaskedTextInput } from 'react-native-mask-text'
 import { HelperText } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -19,6 +19,7 @@ type Props = {
   viewInput: ViewStyle
   viewContainer: ViewStyle
   topicForm: TextStyle
+  requered?: boolean
 }
 
 const FieldCPFandCNPJGeneric = ({
@@ -29,6 +30,7 @@ const FieldCPFandCNPJGeneric = ({
   viewInput,
   value,
   onChangeValue,
+  requered = true,
   isValid,
   onChangeIsValid,
   ...rest
@@ -112,7 +114,8 @@ const FieldCPFandCNPJGeneric = ({
       </HelperText>
       <View style={[viewContainer, { maxWidth: '90%' }]}>
         <View style={[viewTitle]}>
-          <Text style={[topicForm]}>{topic}: </Text>
+          <Text style={[topicForm]}>{topic}</Text>
+          {requered && <Text style={stylesDefault.topicRequered}>*</Text>}
         </View>
         <MaskedTextInput
           placeholder={topic}
@@ -162,3 +165,13 @@ const FieldCPFandCNPJGeneric = ({
 }
 
 export default FieldCPFandCNPJGeneric
+
+export const stylesDefault = StyleSheet.create({
+  topicRequered: {
+    fontWeight: 'bold',
+    color: colors.redSecondary,
+    fontSize: 18,
+    textAlign: 'right',
+    paddingLeft: 2,
+  },
+})
