@@ -10,7 +10,7 @@ type Props = {
 }
 
 const GenerosLiterarios = ({ generos }: Props) => {
-  const [itensGeneros] = useState(generos)
+  const [itensGeneros] = useState(generos ?? [])
 
   return (
     <>

@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Tags = ({ tags }: Props) => {
-  const [itensTags] = useState(tags)
+  const [itensTags] = useState(tags ?? [])
 
   return (
     <View

@@ -2,7 +2,7 @@ import React from 'react'
 import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { ProductBook } from '@/types/generic/Products'
+import { BooksGet } from '@/types/generic/books'
 
 import CacheImage from '@/components/atom/cache-image'
 
@@ -12,7 +12,7 @@ import BookSinopse from '../../molecules/book-sinopse'
 import { viewStyles } from '../../styles'
 
 type Props = {
-  item: ProductBook
+  item: BooksGet
 }
 
 const CardBooks = ({ item }: Props) => {
@@ -42,7 +42,7 @@ const CardBooks = ({ item }: Props) => {
         }
       >
         <View style={viewStyles.viewImage}>
-          <CacheImage capa={item.capa} />
+          <CacheImage capa={item.image} />
         </View>
       </View>
       <View style={[viewStyles.viewDetails]}>

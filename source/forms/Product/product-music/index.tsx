@@ -1,10 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Platform } from 'react-native'
 
 import * as DocumentPicker from 'expo-document-picker'
 import { DocumentResult } from 'expo-document-picker'
 
-import { Category, TypeMusicAlbuns } from '@/types'
+import {
+  Category,
+  FinancialResources,
+  TypeMusicAlbuns,
+  TypesProducts,
+} from '@/types'
 import { createContext } from 'use-context-selector'
 
 import { useLoading } from '@/context/LoadingModal'
@@ -13,12 +18,9 @@ import { Document, FormProductMusic, DocumentFile } from '../types'
 
 export const FormProductMusicContext = createContext({} as FormProductMusic)
 
-type Props = {
-  category: Category
-}
-
-const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
+const FormProductMusicProvider: React.FC = ({ children }) => {
   const { showLoading, hideLoading } = useLoading()
+  const category = Category.Music
 
   const [titleAlbum, setTitleAlbum] = useState('')
   const [titleMusics, setTitleMusics] = useState([] as string[])
@@ -26,6 +28,17 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
   const [durations, setDurations] = useState([])
   const [content, setContent] = useState<TypeMusicAlbuns>(0)
   const [composers, setComposers] = useState([] as string[])
+
+  // State -----------------------------------------------------------------------
+  const [financialResources, setFinancialResources] = useState(0)
+  const [genero, setGenero] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>([])
+  const [capa, setCapa] = useState({} as Document)
+  const [type, setType] = useState(TypesProducts.MP3)
+  const [cpfOrCnpj, SetCPForCNPJ] = useState('')
+  const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
+  const [publishedDate, setPublishedDate] = useState('')
+  const [culturalName, setCulturalName] = useState('')
 
   const web = Platform.OS === 'web'
 
@@ -80,12 +93,6 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
       hideLoading()
     }
   }, [file, titleMusics])
-
-  useEffect(() => {
-    return () => {
-      resetProductMusic()
-    }
-  }, [category])
 
   const onChangeContent = useCallback(
     (value: number) => {
@@ -149,6 +156,82 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     [titleAlbum]
   )
 
+  const onChangePublishedDate = useCallback(
+    (date: string) => {
+      setPublishedDate(date)
+    },
+    [publishedDate]
+  )
+
+  const onChangeCulturalName = useCallback(
+    (value: string) => {
+      setCulturalName(value)
+    },
+    [culturalName]
+  )
+
+  const onChangeImageURL = useCallback((value: string, title: string) => {
+    setCapa({
+      type: 'success',
+      name: title,
+      uri: value,
+    } as Document)
+  }, [])
+
+  const onChangeFinancialResources = useCallback(
+    (value: FinancialResources) => {
+      setFinancialResources(value)
+    },
+    [financialResources]
+  )
+
+  const onChangeCPForCNPJ = useCallback(
+    (text: string) => {
+      SetCPForCNPJ(text)
+    },
+    [cpfOrCnpj]
+  )
+
+  const onChangeCPForCNPJIsValid = useCallback(
+    (value: boolean) => {
+      SetCPForCNPJIsValid(value)
+    },
+    [cpfOrCnpjIsValid]
+  )
+  const onChangeType = useCallback(
+    (value: number) => {
+      setType(value)
+    },
+    [type]
+  )
+
+  const getImage = useCallback(async () => {
+    const obj = await DocumentPicker.getDocumentAsync({
+      type: ['image/png', 'image/jpeg'],
+    })
+
+    if (obj.type === 'success') {
+      setCapa(obj)
+
+      return true
+    }
+
+    return false
+  }, [capa])
+
+  const onChangeGeneros = useCallback(
+    (generos: string[]) => {
+      setGenero(generos)
+    },
+    [genero]
+  )
+  const onChangeTags = useCallback(
+    (tags: string[]) => {
+      setTags(tags)
+    },
+    [tags]
+  )
+
   const resetProductMusic = useCallback(() => {
     setTitleMusics([])
     setTitleAlbum('')
@@ -156,12 +239,41 @@ const FormProductMusicProvider: React.FC<Props> = ({ children, category }) => {
     setContent(0)
     setComposers([])
     setDurations([])
+    setFile([])
+    setFinancialResources(0)
+    setGenero([])
+    setTags([])
+    setCapa({} as Document)
+    SetCPForCNPJ('')
+    SetCPForCNPJIsValid(false)
+    setPublishedDate('')
+    setCulturalName('')
   }, [])
 
   return (
     <FormProductMusicContext.Provider
       value={{
         titleAlbum,
+        capa,
+        category,
+        cpfOrCnpj,
+        cpfOrCnpjIsValid,
+        culturalName,
+        financialResources,
+        genero,
+        getImage,
+        onChangeCPForCNPJ,
+        onChangeCPForCNPJIsValid,
+        onChangeCulturalName,
+        onChangeFinancialResources,
+        onChangeGeneros,
+        onChangeImageURL,
+        onChangePublishedDate,
+        onChangeTags,
+        onChangeType,
+        publishedDate,
+        tags,
+        type,
         titleMusics,
         content,
         file,

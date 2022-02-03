@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Platform, StyleSheet, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { ProductBook } from '@/types/generic/Products'
+import { BooksGet } from '@/types/generic/books'
 
 import BooksProvider from '@/components/context/ContextBooks'
 import PdfViewer from '@/components/organism/PDF-viewer'
@@ -16,7 +16,7 @@ import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const BooksScreen = () => {
-  const [products, setProducts] = useState<ProductBook[]>([])
+  const [books, setBooks] = useState<BooksGet[]>([])
 
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
@@ -24,9 +24,14 @@ const BooksScreen = () => {
 
   useEffect(() => {
     ;(async () => {
-      const { data } = await api.get('books')
-      setProducts(data ?? [])
+      const { data } = await api.get<BooksGet[]>('books')
+      console.log(data)
+      setBooks(data ?? [])
     })()
+
+    return () => {
+      setBooks([])
+    }
   }, [])
 
   return (
@@ -41,11 +46,11 @@ const BooksScreen = () => {
         </View>
 
         <FlatList
-          style={{ marginBottom: 40, minHeight: 300 * products.length ?? 1 }}
+          style={{ marginBottom: 40, minHeight: 300 * books.length ?? 1 }}
           contentContainerStyle={{
             width: size.width,
           }}
-          data={products}
+          data={books}
           ListEmptyComponent={() => (
             <View
               style={[
@@ -83,8 +88,8 @@ const BooksScreen = () => {
           renderItem={({ item }) => {
             return <CardBooks item={item} />
           }}
+          keyExtractor={(item, index) => `${item.id}`}
           ListFooterComponent={() => <PaginationsBooks />}
-          keyExtractor={(item) => item.arquivo}
         />
       </View>
     </BooksProvider>

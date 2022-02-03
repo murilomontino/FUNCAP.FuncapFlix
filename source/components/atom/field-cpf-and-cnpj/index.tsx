@@ -6,12 +6,14 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { validateBr } from 'js-brasil'
 
-import { useFormProductCPFandCNPJ } from '@/forms/Product/hooks'
-
 import colors from '@/global/colors'
 import useDebounce from '@/hooks/use-debounce'
 
 type Props = {
+  value: string
+  onChangeValue: (value: string) => void
+  isValid: boolean
+  onChangeIsValid: (isValid: boolean) => void
   topic: string
   viewTitle: ViewStyle
   viewInput: ViewStyle
@@ -25,6 +27,10 @@ const FieldCPFandCNPJGeneric = ({
   topic,
   viewContainer,
   viewInput,
+  value,
+  onChangeValue,
+  isValid,
+  onChangeIsValid,
   ...rest
 }: Props) => {
   // EFEITOS VISUAIS
@@ -35,24 +41,17 @@ const FieldCPFandCNPJGeneric = ({
     setBorderFocus(!borderFocus)
   }
 
-  const {
-    cpfOrCnpj,
-    cpfOrCnpjIsValid,
-    onChangeCPForCNPJ,
-    onChangeCPForCNPJIsValid,
-  } = useFormProductCPFandCNPJ()
-
   // VERIFICAÇÃO DE CPF
   const debounce = useDebounce()
 
   const handleChangeCPFandCNPJ = (text: string) => {
-    onChangeCPForCNPJ(text)
+    onChangeValue(text)
 
     debounce(() => {
       if (validateBr.cpf(text) || validateBr.cnpj(text)) {
-        onChangeCPForCNPJIsValid(true)
+        onChangeIsValid(true)
       } else {
-        onChangeCPForCNPJIsValid(false)
+        onChangeIsValid(false)
       }
     }, 50)
   }
@@ -60,8 +59,8 @@ const FieldCPFandCNPJGeneric = ({
   const border = useMemo(() => {
     const borderWidth = borderFocus ? 2 : 1
 
-    if (cpfOrCnpj.length === 14 || cpfOrCnpj.length === 18) {
-      if (cpfOrCnpjIsValid) {
+    if (value.length === 14 || value.length === 18) {
+      if (isValid) {
         return {
           borderWidth,
           borderColor: 'green',
@@ -84,7 +83,7 @@ const FieldCPFandCNPJGeneric = ({
         borderColor: colors.grey20,
       }
     }
-  }, [cpfOrCnpjIsValid, borderFocus, cpfOrCnpj])
+  }, [isValid, borderFocus, value])
 
   return (
     <>
@@ -105,13 +104,11 @@ const FieldCPFandCNPJGeneric = ({
         ]}
         type="error"
         visible={
-          (!cpfOrCnpjIsValid && cpfOrCnpj.length === 14) ||
-          (!cpfOrCnpjIsValid && cpfOrCnpj.length === 18)
+          (!isValid && value.length === 14) || (!isValid && value.length === 18)
         }
       >
-        {cpfOrCnpj.length === 14 && 'CPF'}
-        {cpfOrCnpj.length === 18 && 'CNPJ'} Inválido, confira e digite
-        novamente!
+        {value.length === 14 && 'CPF'}
+        {value.length === 18 && 'CNPJ'} Inválido, confira e digite novamente!
       </HelperText>
       <View style={[viewContainer, { maxWidth: '90%' }]}>
         <View style={[viewTitle]}>
@@ -134,8 +131,8 @@ const FieldCPFandCNPJGeneric = ({
               borderBottomRightRadius: 0,
             },
           ]}
-          mask={cpfOrCnpj.length < 14 ? '999.999.999-99' : '99.999.999/9999-99'}
-          value={cpfOrCnpj}
+          mask={value.length < 14 ? '999.999.999-99' : '99.999.999/9999-99'}
+          value={value}
           onChangeText={handleChangeCPFandCNPJ}
           keyboardType={'numeric'}
         />

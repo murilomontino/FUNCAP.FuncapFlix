@@ -2,8 +2,8 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddProduct from '@/modules/products/add-product'
-import { Category } from '@/types'
+import ModuleAddBook from '@/modules/products/add-book'
+import ModuleAddMusic from '@/modules/products/add-music'
 
 import { TemplateFront } from '@/navigations/template/navigation-frontend-template'
 
@@ -16,7 +16,7 @@ export const AddProductStack = ({ ...rest }) => {
         name="AddBooks"
         component={() =>
           TemplateFront({
-            children: <AddProduct {...rest} category={Category.Literature} />,
+            children: <ModuleAddBook {...rest} />,
           })
         }
         options={{
@@ -29,7 +29,7 @@ export const AddProductStack = ({ ...rest }) => {
         name="AddMusic"
         component={() =>
           TemplateFront({
-            children: <AddProduct {...rest} category={Category.Music} />,
+            children: <ModuleAddMusic {...rest} />,
           })
         }
         options={{

@@ -43,7 +43,7 @@ export declare namespace Document {
   }[]
 }
 
-export type FormProduct = {
+export interface FormProduct {
   cpfOrCnpj: string
   culturalName: string
   publishedDate: string
@@ -60,15 +60,15 @@ export type FormProduct = {
   onChangeCPForCNPJ: (text: string) => void
   onChangeCPForCNPJIsValid: (value: boolean) => void
   getImage: () => Promise<boolean>
-  onChangeCategory: (value: Category) => void
+  onChangeCategory?: (value: Category) => void
   onChangeType: (value: TypesProducts) => void
   onChangeTags: (tags: string[]) => void
   onChangeGeneros: (generos: string[]) => void
   onChangeImageURL: (value: string, title: string) => void
-  resetProduct: () => void
+  resetProduct?: () => void
 }
 
-export type FormProductMusic = {
+export interface FormProductMusic extends FormProduct {
   titleAlbum: string
   titleMusics: Array<string>
   durations: Array<string>
@@ -85,7 +85,7 @@ export type FormProductMusic = {
   onChangeComposers: (value: string, index: number) => void
 }
 
-export type FormProductBook = {
+export interface FormProductBook extends FormProduct {
   title: string
   subTitle: string
   isbn: string

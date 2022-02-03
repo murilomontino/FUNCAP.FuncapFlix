@@ -108,3 +108,164 @@ export const removeFormMusic = () => {
     onRemoveMusic,
   }
 }
+
+export const useFormMusicImage = () => {
+  const getImage = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.getImage
+  )
+  const image = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.capa
+  )
+
+  const onChangeImageURL = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeImageURL
+  )
+
+  return {
+    getImage,
+    onChangeImageURL,
+    image,
+  }
+}
+
+export const useFormMusicTags = () => {
+  const tags = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.tags
+  )
+  const onChangeTags = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeTags
+  )
+  return {
+    onChangeTags,
+    tags,
+  }
+}
+
+export const useFormMusicGenero = () => {
+  const genero = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.genero
+  )
+  const onChangeGeneros = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeGeneros
+  )
+  return {
+    genero,
+    onChangeGeneros,
+  }
+}
+
+export const useFormMusicCategory = () => {
+  const category = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.category
+  )
+  const onChangeCategory = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeCategory
+  )
+
+  const type = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.type
+  )
+  const onChangeType = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeType
+  )
+
+  return {
+    category,
+    onChangeCategory,
+    type,
+    onChangeType,
+  }
+}
+
+export const useFormMusicCPFandCNPJ = () => {
+  const cpfOrCnpj = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.cpfOrCnpj
+  )
+  const onChangeCPForCNPJ = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeCPForCNPJ
+  )
+  const cpfOrCnpjIsValid = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.cpfOrCnpjIsValid
+  )
+  const onChangeCPForCNPJIsValid = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeCPForCNPJIsValid
+  )
+  return {
+    cpfOrCnpj,
+    onChangeCPForCNPJ,
+    cpfOrCnpjIsValid,
+    onChangeCPForCNPJIsValid,
+  }
+}
+
+export const useFormMusicFinancialResources = () => {
+  const financialResources = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.financialResources
+  )
+  const onChangeFinancialResources = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeFinancialResources
+  )
+  return {
+    financialResources,
+    onChangeFinancialResources,
+  }
+}
+
+export const useFormMusicData = () => {
+  const culturalName = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.culturalName
+  )
+  const onChangeCulturalName = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangeCulturalName
+  )
+
+  const publishedDate = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.publishedDate
+  )
+  const onChangePublishedDate = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.onChangePublishedDate
+  )
+
+  return {
+    culturalName,
+    onChangeCulturalName,
+    publishedDate,
+    onChangePublishedDate,
+  }
+}
+
+export const useResetMusic = () => {
+  const resetMusic = useContextSelector(
+    FormProductMusicContext,
+    (value) => value.resetProductMusic
+  )
+
+  const reset = async () => {
+    resetMusic()
+  }
+
+  return {
+    reset,
+  }
+}

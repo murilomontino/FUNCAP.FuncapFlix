@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { ProductBook, tags } from '@/types'
+import { BooksGet } from '@/types/generic/books'
 
 import { useBooks } from '@/components/context/ContextBooks'
 import { useScroll } from '@/components/context/ContextScroll'
@@ -11,7 +11,7 @@ import Tags from '../../atoms/tags'
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {
-  item: ProductBook
+  item: BooksGet
 }
 
 const BookFooter = ({ item }: Props) => {
@@ -24,7 +24,7 @@ const BookFooter = ({ item }: Props) => {
 
   const redirectBookID = () => {
     scrollTop()
-    changeBook(item.arquivo)
+    changeBook(item.pdf)
   }
 
   return (
@@ -46,7 +46,7 @@ const BookFooter = ({ item }: Props) => {
           flexDirection: 'row',
         }}
       >
-        <Tags tags={item.tags as unknown as tags[]} />
+        <Tags tags={item.tags} />
       </View>
 
       <View style={[viewStyles.viewButtons]}>

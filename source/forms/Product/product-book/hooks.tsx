@@ -2,7 +2,7 @@ import { useContextSelector } from 'use-context-selector'
 
 import { FormProductBookContext } from './index'
 
-export const useFormProductBook = () => {
+export const useFormBook = () => {
   const sobreAObra = useContextSelector(
     FormProductBookContext,
     (value) => value.sobreAObra
@@ -59,7 +59,7 @@ export const useFormProductBook = () => {
   }
 }
 
-export const useFormProductBookContent = () => {
+export const useFormBookContent = () => {
   const publisher = useContextSelector(
     FormProductBookContext,
     (value) => value.publisher
@@ -127,5 +127,160 @@ export const useFormBookFile = () => {
   return {
     file,
     onChangeFile,
+  }
+}
+
+export const useFormBookTags = () => {
+  const tags = useContextSelector(FormProductBookContext, (value) => value.tags)
+  const onChangeTags = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeTags
+  )
+  return {
+    onChangeTags,
+    tags,
+  }
+}
+
+export const useFormBookGenero = () => {
+  const genero = useContextSelector(
+    FormProductBookContext,
+    (value) => value.genero
+  )
+  const onChangeGeneros = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeGeneros
+  )
+  return {
+    genero,
+    onChangeGeneros,
+  }
+}
+
+export const useFormBookCategory = () => {
+  const category = useContextSelector(
+    FormProductBookContext,
+    (value) => value.category
+  )
+  const onChangeCategory = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeCategory
+  )
+
+  const type = useContextSelector(FormProductBookContext, (value) => value.type)
+  const onChangeType = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeType
+  )
+
+  return {
+    category,
+    onChangeCategory,
+    type,
+    onChangeType,
+  }
+}
+
+export const useFormBookCPFandCNPJ = () => {
+  const cpfOrCnpj = useContextSelector(
+    FormProductBookContext,
+    (value) => value.cpfOrCnpj
+  )
+  const onChangeCPForCNPJ = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeCPForCNPJ
+  )
+  const cpfOrCnpjIsValid = useContextSelector(
+    FormProductBookContext,
+    (value) => value.cpfOrCnpjIsValid
+  )
+  const onChangeCPForCNPJIsValid = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeCPForCNPJIsValid
+  )
+  return {
+    cpfOrCnpj,
+    onChangeCPForCNPJ,
+    cpfOrCnpjIsValid,
+    onChangeCPForCNPJIsValid,
+  }
+}
+
+export const useFormBookFinancialResources = () => {
+  const financialResources = useContextSelector(
+    FormProductBookContext,
+    (value) => value.financialResources
+  )
+  const onChangeFinancialResources = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeFinancialResources
+  )
+  return {
+    financialResources,
+    onChangeFinancialResources,
+  }
+}
+
+export const useFormBookData = () => {
+  const culturalName = useContextSelector(
+    FormProductBookContext,
+    (value) => value.culturalName
+  )
+  const onChangeCulturalName = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeCulturalName
+  )
+
+  const publishedDate = useContextSelector(
+    FormProductBookContext,
+    (value) => value.publishedDate
+  )
+  const onChangePublishedDate = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangePublishedDate
+  )
+
+  return {
+    culturalName,
+    onChangeCulturalName,
+    publishedDate,
+    onChangePublishedDate,
+  }
+}
+
+export const useResetBook = () => {
+  const resetBook = useContextSelector(
+    FormProductBookContext,
+    (value) => value.resetProductBook
+  )
+
+  const reset = async () => {
+    resetBook()
+  }
+
+  return {
+    reset,
+  }
+}
+
+export const useFormBookImage = () => {
+  const getImage = useContextSelector(
+    FormProductBookContext,
+    (value) => value.getImage
+  )
+  const image = useContextSelector(
+    FormProductBookContext,
+    (value) => value.capa
+  )
+
+  const onChangeImageURL = useContextSelector(
+    FormProductBookContext,
+    (value) => value.onChangeImageURL
+  )
+
+  return {
+    getImage,
+    onChangeImageURL,
+    image,
   }
 }

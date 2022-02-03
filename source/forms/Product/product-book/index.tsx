@@ -1,19 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import * as DocumentPicker from 'expo-document-picker'
 
-import { Category } from '@/types'
+import { Category, FinancialResources, TypesProducts } from '@/types'
 import { createContext } from 'use-context-selector'
 
 import { Document, FormProductBook } from '../types'
 
 export const FormProductBookContext = createContext({} as FormProductBook)
 
-type Props = {
-  category: Category
-}
+const FormProductBookProvider: React.FC = ({ children }) => {
+  const category = Category.Literature
 
-const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
   const [title, setTitle] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [sinopse, setSinopse] = useState('')
@@ -26,11 +24,16 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
   const [illustrator, setIlustrador] = useState('')
   const [file, setFile] = useState({} as Document)
 
-  useEffect(() => {
-    return () => {
-      resetProductBook()
-    }
-  }, [category])
+  // State -----------------------------------------------------------------------
+  const [financialResources, setFinancialResources] = useState(0)
+  const [genero, setGenero] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>([])
+  const [capa, setCapa] = useState({} as Document)
+  const [type, setType] = useState(TypesProducts.MP3)
+  const [cpfOrCnpj, SetCPForCNPJ] = useState('')
+  const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
+  const [publishedDate, setPublishedDate] = useState('')
+  const [culturalName, setCulturalName] = useState('')
 
   const onChangeIllustrator = useCallback(
     (text: string) => {
@@ -113,23 +116,117 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
     return false
   }, [file])
 
+  const onChangePublishedDate = useCallback(
+    (date: string) => {
+      setPublishedDate(date)
+    },
+    [publishedDate]
+  )
+
+  const onChangeCulturalName = useCallback(
+    (value: string) => {
+      setCulturalName(value)
+    },
+    [culturalName]
+  )
+
+  const onChangeImageURL = useCallback((value: string, title: string) => {
+    setCapa({
+      type: 'success',
+      name: title,
+      uri: value,
+    } as Document)
+  }, [])
+
+  const onChangeFinancialResources = useCallback(
+    (value: FinancialResources) => {
+      setFinancialResources(value)
+    },
+    [financialResources]
+  )
+
+  const onChangeCPForCNPJ = useCallback(
+    (text: string) => {
+      SetCPForCNPJ(text)
+    },
+    [cpfOrCnpj]
+  )
+
+  const onChangeCPForCNPJIsValid = useCallback(
+    (value: boolean) => {
+      SetCPForCNPJIsValid(value)
+    },
+    [cpfOrCnpjIsValid]
+  )
+  const onChangeType = useCallback(
+    (value: number) => {
+      setType(value)
+    },
+    [type]
+  )
+
+  const getImage = useCallback(async () => {
+    const obj = await DocumentPicker.getDocumentAsync({
+      type: ['image/png', 'image/jpeg'],
+    })
+
+    if (obj.type === 'success') {
+      setCapa(obj)
+
+      return true
+    }
+
+    return false
+  }, [capa])
+
+  const onChangeGeneros = useCallback(
+    (generos: string[]) => {
+      setGenero(generos)
+    },
+    [genero]
+  )
+  const onChangeTags = useCallback(
+    (tags: string[]) => {
+      setTags(tags)
+    },
+    [tags]
+  )
+
   const resetProductBook = useCallback(() => {
     setTitle('')
     setSubTitle('')
     setSinopse('')
     setSobreAObra('')
     setISBN('')
-    setFile({} as Document)
     setNumberOfPages('')
     setPublisher('')
     setSize('')
     setIllustrated(false)
     setIlustrador('')
+    setFile({} as Document)
+    setFinancialResources(0)
+    setGenero([])
+    setTags([])
+    setCapa({} as Document)
+    SetCPForCNPJ('')
+    SetCPForCNPJIsValid(false)
+    setPublishedDate('')
+    setCulturalName('')
   }, [])
 
   return (
     <FormProductBookContext.Provider
       value={{
+        category,
+        capa,
+        cpfOrCnpj,
+        cpfOrCnpjIsValid,
+        culturalName,
+        financialResources,
+        genero,
+        tags,
+        publishedDate,
+        type,
         title,
         subTitle,
         sinopse,
@@ -141,6 +238,16 @@ const FormProductBookProvider: React.FC<Props> = ({ children, category }) => {
         size,
         illustrator,
         file,
+        getImage,
+        onChangeCPForCNPJ,
+        onChangeCPForCNPJIsValid,
+        onChangeCulturalName,
+        onChangeFinancialResources,
+        onChangeGeneros,
+        onChangeImageURL,
+        onChangePublishedDate,
+        onChangeTags,
+        onChangeType,
         onChangeFile,
         onChangeIllustrator,
         onChangeNumberOfPages,
