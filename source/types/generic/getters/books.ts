@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { Category, FinancialResources } from '@/types'
+import { Category, FinancialResources, generos, tags } from '@/types'
 
-import { generos, tags } from '../products'
-
-export interface BooksGet {
+export interface GetterBooks {
   id: number
   produtoId: number
   titulo: string
@@ -11,7 +8,7 @@ export interface BooksGet {
   isbn_13: string
   autor: string
   editora: string
-  data_de_acao: string
+  data_de_publicacao: string
   numero_de_paginas: number
   dimensoes: string
   sinopse: string

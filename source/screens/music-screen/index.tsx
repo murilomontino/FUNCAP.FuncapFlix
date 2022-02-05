@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 
-import { Albuns } from '@/types/generic/albuns'
+import { GettersAlbuns } from '@/types/generic/getters/albuns'
 
 import api from '@/services'
 
@@ -14,7 +14,7 @@ const MusicScreen = () => {
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(1)
 
-  const [albums, setAlbums] = useState<Albuns[]>([])
+  const [albums, setAlbums] = useState<GettersAlbuns[]>([])
 
   const data = useMemo(() => {
     const pos = (page - 1) * perPage
@@ -22,9 +22,11 @@ const MusicScreen = () => {
   }, [page, albums])
 
   const onLoad = async () => {
-    const { data } = await api.get<Albuns[]>('/musicas/album')
+    const { data } = await api.get<GettersAlbuns[]>('/musicas/album')
 
-    setAlbums(data)
+    if (data) {
+      setAlbums(data)
+    }
   }
 
   useEffect(() => {

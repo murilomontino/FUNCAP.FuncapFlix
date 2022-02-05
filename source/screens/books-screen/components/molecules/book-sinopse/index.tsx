@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-import { BooksGet } from '@/types/generic/books'
+import { GetterBooks } from '@/types/generic/getters/books'
 
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {
-  item: BooksGet
+  item: GetterBooks
 }
 
 const BookSinopse = ({ item }: Props) => {

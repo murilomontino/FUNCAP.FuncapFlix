@@ -2,7 +2,8 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, ProductAlbum, ProductMusic, TypeImgCapa } from '@/types'
+import { Category, ProductAlbum, TypeImgCapa } from '@/types'
+import { SettersTracks, SettersAlbums } from '@/types/generic'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -89,8 +90,8 @@ const SendFormBookButton = () => {
   // de erro e o nome dos respectivos arquivos com erro
   // Caso o formulário seja válido, será exibido um toast com a mensagem de sucesso
   // e será feito um reload da página
-  const sendFiles = async (music: ProductMusic) => {
-    const { status } = await api.post<ProductMusic>('/musicas/musica', music)
+  const sendFiles = async (music: SettersTracks) => {
+    const { status } = await api.post<SettersTracks>('/musicas/musica', music)
 
     if (status === 200) {
       sucessFile.push(music.titulo)
@@ -103,7 +104,7 @@ const SendFormBookButton = () => {
     try {
       showLoading()
 
-      const album: ProductAlbum = {
+      const album: SettersAlbums = {
         cpfOrCnpj: cpfOrCnpj,
         arquivo: '',
         nome_arquivo: '',
@@ -114,7 +115,7 @@ const SendFormBookButton = () => {
         generos: genero,
         recurso: financialResources,
         tipo_de_album: content,
-        titulo: titleAlbum,
+        nome: titleAlbum,
         capa: image.uri ?? '',
         tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
         tags: tags,
@@ -128,19 +129,14 @@ const SendFormBookButton = () => {
       switch (status) {
         case 200:
           file.forEach(async (document, index) => {
-            const music: ProductMusic = {
+            const music: SettersTracks = {
+              artista: culturalName,
               productId: data.productId, //
               nome_album: data.nome_unico, //
               albumId: data.albumId, //
               titulo: titleMusics[index],
               arquivo: document.uri,
               categoria: Category.Music,
-              tags,
-              generos: genero,
-              data_de_publicacao: publishedDate,
-              tipo: type,
-              recurso: financialResources,
-              nome_cultural: culturalName,
               nome_arquivo: document.name,
               duracao: durations[index],
               compositor: '',

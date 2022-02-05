@@ -2,13 +2,13 @@ import React from 'react'
 import { View, Text, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { BooksGet } from '@/types/generic/books'
+import { GetterBooks } from '@/types/generic/getters/books'
 
 import GenerosLiterarios from '../../atoms/generos-literarios'
 import { textStyles, viewStyles } from '../../styles'
 
 type Props = {
-  item: BooksGet
+  item: GetterBooks
 }
 
 const BookBasicInformation = ({ item }: Props) => {

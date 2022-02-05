@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Platform, StyleSheet, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { BooksGet } from '@/types/generic/books'
+import { GetterBooks } from '@/types/generic/getters/books'
 
 import BooksProvider from '@/components/context/ContextBooks'
 import PdfViewer from '@/components/organism/PDF-viewer'
@@ -16,7 +16,7 @@ import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const BooksScreen = () => {
-  const [books, setBooks] = useState<BooksGet[]>([])
+  const [books, setBooks] = useState<GetterBooks[]>([])
 
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
@@ -24,9 +24,10 @@ const BooksScreen = () => {
 
   useEffect(() => {
     ;(async () => {
-      const { data } = await api.get<BooksGet[]>('books')
-      console.log(data)
-      setBooks(data ?? [])
+      const { data } = await api.get<GetterBooks[]>('books')
+      if (data) {
+        setBooks(data)
+      }
     })()
 
     return () => {

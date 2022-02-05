@@ -1,9 +1,15 @@
-import { Category } from '../categoriesProducts'
-import { TypesProducts } from '../documents'
-import { FinancialResources } from '../financialResources'
-import { TypeMusicAlbuns } from '../musics'
+import {
+  Category,
+  FinancialResources,
+  generos,
+  tags,
+  TypeMusicAlbuns,
+  TypesProducts,
+} from '@/types'
 
-export interface Albuns {
+import { tracks } from '../../musics'
+
+export interface GettersAlbuns {
   id: number
   nome: string
   produtoId: number
@@ -12,7 +18,7 @@ export interface Albuns {
   artista: string
   data_de_lancamento: string
   image: string
-  tracks: Tracks[]
+  tracks: GettersTracks[]
   cpf: string
   cnpj: string
   categoria: Category
@@ -22,12 +28,12 @@ export interface Albuns {
   youtube: number
   sobre_a_obra: string
   link: string
-  tags: string[]
-  generos: string[]
+  tags: tags[]
+  generos: generos[]
   data_cadastro: Date
 }
 
-export interface Tracks {
+export interface GettersTracks extends tracks {
   id: number
   produtoId: number
   albumMusicalId: number

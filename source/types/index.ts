@@ -10,14 +10,4 @@ export { TypesProducts, documents, mapTypesProducts } from './documents'
 export { YTPlaylistsAttributes, YTVideosAttributes } from './youtube'
 export { FinancialResources, mapFinancialResources } from './financialResources'
 export { Category, mapCategory } from './categoriesProducts'
-export {
-  ContentMusic,
-  ExtImgCapa,
-  GenericProduct,
-  ProductBook,
-  ProductMusic,
-  ProductVideo,
-  ProductAlbum,
-  TypeImgCapa,
-  TypeProduct,
-} from './generic/Products'
+export { ContentMusic, ExtImgCapa, TypeImgCapa } from './generic'

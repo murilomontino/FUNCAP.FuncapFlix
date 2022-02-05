@@ -2,7 +2,8 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa, ProductBook } from '@/types'
+import { Category, TypeImgCapa } from '@/types'
+import { SettersBooks } from '@/types/generic'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -83,7 +84,6 @@ const SendFormBookButton = () => {
         editora: publisher,
         nome_cultural: culturalName,
         data_de_publicacao: publishedDate,
-        link: '',
         cpfOrCnpj: cpfOrCnpj,
         tipo: type,
         nome_arquivo: file.name,
@@ -120,7 +120,7 @@ const SendFormBookButton = () => {
     }
   }
 
-  const send = async (document: ProductBook) => {
+  const send = async (document: SettersBooks) => {
     try {
       const { data, status } = await api.post('books', document)
       return { data, status }
