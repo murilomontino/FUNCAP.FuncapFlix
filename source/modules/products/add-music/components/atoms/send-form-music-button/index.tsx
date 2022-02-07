@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, ProductAlbum, TypeImgCapa } from '@/types'
-import { SettersTracks, SettersAlbums } from '@/types/generic'
+import { Category, TypeImgCapa } from '@/types'
+import { SettersTracks, SettersAlbums, GettersAlbuns } from '@/types/generic'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -23,6 +23,7 @@ import {
   useFormMusicContent,
   useFormMusicDurations,
   useFormMusicsFile,
+  useFormMusicComposers,
 } from '@/forms/Product/product-music/hooks'
 
 import api from '@/services'
@@ -40,6 +41,7 @@ const SendFormBookButton = () => {
   const { file } = useFormMusicsFile()
   const { durations } = useFormMusicDurations()
   const { titleMusics, titleAlbum } = useFormMusic()
+  const { composers } = useFormMusicComposers()
   const { reset } = useResetMusic()
   // -----------------------------------------------------------------------------
   // Efeito Visual ---------------------------------------------------------------
@@ -121,7 +123,7 @@ const SendFormBookButton = () => {
         tags: tags,
       }
 
-      const { data, status } = await api.post<ProductAlbum>(
+      const { data, status } = await api.post<GettersAlbuns>(
         '/musicas/album',
         album
       )
@@ -131,15 +133,15 @@ const SendFormBookButton = () => {
           file.forEach(async (document, index) => {
             const music: SettersTracks = {
               artista: culturalName,
-              productId: data.productId, //
+              productId: data.produtoId, //
               nome_album: data.nome_unico, //
-              albumId: data.albumId, //
+              albumId: data.id, //
               titulo: titleMusics[index],
               arquivo: document.uri,
               categoria: Category.Music,
               nome_arquivo: document.name,
               duracao: durations[index],
-              compositor: '',
+              compositor: composers[index],
             }
 
             await sendFiles(music)

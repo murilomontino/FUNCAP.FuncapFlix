@@ -29,7 +29,7 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [genero, setGenero] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
   const [capa, setCapa] = useState({} as Document)
-  const [type, setType] = useState(TypesProducts.MP3)
+  const [type, setType] = useState(TypesProducts.PDF)
   const [cpfOrCnpj, SetCPForCNPJ] = useState('')
   const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
   const [publishedDate, setPublishedDate] = useState('')
