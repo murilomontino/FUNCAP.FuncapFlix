@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
 import { Category, TypeImgCapa } from '@/types'
-import { SettersTracks, SettersAlbums, GettersAlbuns } from '@/types/generic'
+import { SettersTracks, SettersAlbums, GettersAlbums } from '@/types/products'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
@@ -123,7 +123,7 @@ const SendFormBookButton = () => {
         tags: tags,
       }
 
-      const { data, status } = await api.post<GettersAlbuns>(
+      const { data, status } = await api.post<GettersAlbums>(
         '/musicas/album',
         album
       )
@@ -133,7 +133,7 @@ const SendFormBookButton = () => {
           file.forEach(async (document, index) => {
             const music: SettersTracks = {
               artista: culturalName,
-              productId: data.produtoId, //
+              produtoId: data.produtoId, //
               nome_album: data.nome_unico, //
               albumId: data.id, //
               titulo: titleMusics[index],

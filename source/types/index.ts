@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
 
-export { books } from './books'
-export { links } from './links'
-export { musicsAlbuns, tracks, TypeMusicAlbuns } from './musics'
-export { patrons } from './patrons'
-export { generos, products, tags } from './products'
-export { sheet } from './sheet'
-export { TypesProducts, documents, mapTypesProducts } from './documents'
-export { YTPlaylistsAttributes, YTVideosAttributes } from './youtube'
-export { FinancialResources, mapFinancialResources } from './financialResources'
-export { Category, mapCategory } from './categoriesProducts'
-export { ContentMusic, ExtImgCapa, TypeImgCapa } from './generic'
+export { books } from './models/books'
+export { links } from './models/links'
+export { musicsAlbums, tracks, TypeMusicAlbums } from './models/musics'
+export { patrons } from './models/patrons'
+export { generos, products, tags } from './models/products'
+export { sheet } from './models/sheet'
+export { TypesProducts, documents, mapTypesProducts } from './models/documents'
+export { YTPlaylistsAttributes, YTVideosAttributes } from './models/youtube'
+export {
+  FinancialResources,
+  mapFinancialResources,
+} from './models/financialResources'
+export { Category, mapCategory } from './models/categoriesProducts'
+export { ContentMusic, ExtImgCapa, TypeImgCapa } from './products'

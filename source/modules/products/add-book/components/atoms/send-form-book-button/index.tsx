@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa } from '@/types'
-import { SettersBooks } from '@/types/generic'
+import { Category, TypeImgCapa } from '@/types/index'
+import { SettersBooks } from '@/types/products/'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'

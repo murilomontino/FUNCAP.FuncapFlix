@@ -6,7 +6,7 @@ export type ExtImgCapa = 'png' | 'jpg' | 'jpeg'
 
 export type ContentMusic = 'album' | 'single' | 'interprete'
 
-export * from './getters/albuns'
+export * from './getters/albums'
 export * from './getters/books'
 export * from './setters/album'
 export * from './setters/books'

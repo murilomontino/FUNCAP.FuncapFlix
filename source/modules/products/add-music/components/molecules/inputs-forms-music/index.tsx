@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
 
-import { TypeMusicAlbuns } from '@/types'
+import { TypeMusicAlbums } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
 import InputTopic from '@/components/atom/input-topic'
@@ -21,10 +21,10 @@ const InputsFormsMusic = () => {
   const { file } = useFormMusicsFile()
 
   const ContentMusicItems = [
-    { value: TypeMusicAlbuns.album, label: 'Álbum' },
-    { value: TypeMusicAlbuns.single, label: 'Single' },
-    { value: TypeMusicAlbuns.ep, label: 'EP' },
-    { value: TypeMusicAlbuns.album_interprete, label: 'Álbum Interprete' },
+    { value: TypeMusicAlbums.album, label: 'Álbum' },
+    { value: TypeMusicAlbums.single, label: 'Single' },
+    { value: TypeMusicAlbums.ep, label: 'EP' },
+    { value: TypeMusicAlbums.album_interprete, label: 'Álbum Interprete' },
   ]
 
   return (

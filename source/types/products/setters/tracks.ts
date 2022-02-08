@@ -1,7 +1,7 @@
 import { Category } from '@/types'
 
 export interface SettersTracks {
-  productId: number
+  produtoId: number
   name_uuid?: string
   artista: string
   arquivo: string
