@@ -1,39 +1,20 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
+import { useQuery } from 'react-query'
 
-import { GettersAlbuns } from '@/types/generic/getters/albuns'
+import { GettersAlbums } from '@/types/products'
 
 import api from '@/services'
 
-import CardAlbum from './organims/card-album'
+import CardAlbum from './organism/card-album'
 
 import constants from '@/global/constants'
 
 const MusicScreen = () => {
-  const perPage = useMemo(() => constants.perPage, [])
-  const [page, setPage] = useState(1)
-  const [totalPage, setTotalPage] = useState(1)
-
-  const [albums, setAlbums] = useState<GettersAlbuns[]>([])
-
-  const data = useMemo(() => {
-    const pos = (page - 1) * perPage
-    return albums.slice(pos, pos + perPage)
-  }, [page, albums])
-
-  const onLoad = async () => {
-    const { data } = await api.get<GettersAlbuns[]>('/musicas/album')
-
-    if (data) {
-      setAlbums(data)
-    }
-  }
-
-  useEffect(() => {
-    ;(async () => {
-      await onLoad()
-    })()
-  }, [])
+  const { data: albums } = useQuery<GettersAlbums[]>('albums', async () => {
+    const { data } = await api.get('/musicas/album')
+    return data
+  })
 
   return (
     <View style={styles.container}>
@@ -43,7 +24,7 @@ const MusicScreen = () => {
           width: '100%',
           flexWrap: 'wrap',
         }}
-        data={data}
+        data={albums}
         renderItem={({ item }) => <CardAlbum album={item} />}
         keyExtractor={(item) => item.id.toString()}
       />

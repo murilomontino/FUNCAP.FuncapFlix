@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const PaginationsBooks = () => {
+const PaginationBooks = () => {
   return (
     <View>
       <Text style={{ color: '#fff' }}></Text>
@@ -9,4 +9,4 @@ const PaginationsBooks = () => {
   )
 }
 
-export default PaginationsBooks
+export default PaginationBooks

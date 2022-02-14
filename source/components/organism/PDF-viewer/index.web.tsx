@@ -105,7 +105,7 @@ const PdfViewer = () => {
         />
       </Document>
 
-      {book && (
+      {!!book && (
         <View
           style={{
             height: 80,

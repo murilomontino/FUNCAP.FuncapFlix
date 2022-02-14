@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 
-import { GettersAlbuns } from '@/types/generic/getters/albuns'
+import { GettersAlbums } from '@/types/products'
 
 import CacheImage from '@/components/atom/cache-image'
 
@@ -10,7 +10,7 @@ import CardTrack from './card-track'
 import colors from '@/global/colors'
 
 interface Props {
-  album: GettersAlbuns
+  album: GettersAlbums
 }
 
 const CardAlbum = ({ album }: Props) => {

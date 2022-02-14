@@ -40,7 +40,7 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
         tvParallaxProperties
         name="login"
       />
-      {textVisible && (
+      {!!textVisible && (
         <Text
           style={{
             color: hover ? 'orange' : colors.white,

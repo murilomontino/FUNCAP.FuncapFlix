@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useDimensions } from 'react-native-web-hooks'
 
 import TitleSlider from '../atom/title-slider'
-import ThumbnailCard from '../organisms/thumbnail-card'
+import ThumbnailCard from '../organism/thumbnail-card'
 import home from './home_slide.json'
 
 import globalStyles from '@/global/globalStyles'

@@ -108,8 +108,6 @@ const SendFormBookButton = () => {
 
       const album: SettersAlbums = {
         cpfOrCnpj: cpfOrCnpj,
-        arquivo: '',
-        nome_arquivo: '',
         nome_cultural: culturalName,
         data_de_publicacao: publishedDate,
         tipo: type,

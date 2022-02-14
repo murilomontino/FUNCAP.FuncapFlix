@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Platform } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { enableScreens } from 'react-native-screens'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { Provider } from 'react-redux'
 
 import AppLoading from 'expo-app-loading'
@@ -25,6 +26,8 @@ import Navigation from '@/navigations/index'
 enableScreens()
 
 export default function App() {
+  const queryClient = new QueryClient()
+
   useEffect(() => {
     ;(async () => {
       if (Platform.OS !== 'web') {
@@ -52,14 +55,16 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
-      <Provider store={store}>
-        <PersistGate persistor={persistedStore} loading={null}>
-          <RootContext>
-            <Navigation />
-          </RootContext>
-        </PersistGate>
-      </Provider>
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persistedStore} loading={null}>
+            <RootContext>
+              <Navigation />
+            </RootContext>
+          </PersistGate>
+        </Provider>
+      </PaperProvider>
+    </QueryClientProvider>
   )
 }

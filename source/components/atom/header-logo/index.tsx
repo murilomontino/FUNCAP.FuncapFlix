@@ -29,7 +29,7 @@ const HeaderLogo = () => {
           borderBottomColor: '#ccc',
         }}
       >
-        Fundação de Cultura e Arte Aperipe
+        Fundação de Cultura e Arte Aperipê
       </Text>
     </View>
   )

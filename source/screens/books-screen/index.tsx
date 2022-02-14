@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { FlatList, Platform, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Platform, StyleSheet, View, Text, FlatList } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
+import { useQuery } from 'react-query'
 
-import { GetterBooks } from '@/types/generic/getters/books'
+import { GetterBooks } from '@/types/products'
 
 import BooksProvider from '@/components/context/ContextBooks'
 import PdfViewer from '@/components/organism/PDF-viewer'
 
 import api from '@/services'
 
-import CardBooks from './components/organims/card-book'
-import PaginationsBooks from './components/organims/pagination-books'
+import CardBooks from './components/organism/card-book'
+import PaginationBooks from './components/organism/pagination-books'
 
 import colors from '@/global/colors'
 import constants from '@/global/constants'
 
 const BooksScreen = () => {
-  const [books, setBooks] = useState<GetterBooks[]>([])
-
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
   const size = web ? window : screen
 
-  useEffect(() => {
-    ;(async () => {
-      const { data } = await api.get<GetterBooks[]>('books')
-      if (data) {
-        setBooks(data)
-      }
-    })()
+  const { data: books } = useQuery<GetterBooks[]>(
+    'books',
+    async () => {
+      const { data } = await api.get('books')
 
-    return () => {
-      setBooks([])
+      return data
+    },
+    {
+      staleTime: 1000 * 60 * 60 * 24,
     }
-  }, [])
+  )
 
   return (
     <BooksProvider>
@@ -47,7 +45,7 @@ const BooksScreen = () => {
         </View>
 
         <FlatList
-          style={{ marginBottom: 40, minHeight: 300 * books.length ?? 1 }}
+          style={{ marginBottom: 40, minHeight: 300 }}
           contentContainerStyle={{
             width: size.width,
           }}
@@ -90,7 +88,7 @@ const BooksScreen = () => {
             return <CardBooks item={item} />
           }}
           keyExtractor={(item, index) => `${item.id}`}
-          ListFooterComponent={() => <PaginationsBooks />}
+          ListFooterComponent={() => <PaginationBooks />}
         />
       </View>
     </BooksProvider>

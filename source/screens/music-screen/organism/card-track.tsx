@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { Audio } from 'expo-av'
 
-import { Tracks } from '@/types/generic/albuns'
+import { GettersTracks } from '@/types/products'
 import { MotiPressable } from 'moti/interactions'
 
 import { path } from '@/services/config/api'
@@ -13,7 +13,7 @@ import Controls from '../molecules/controls'
 import colors from '@/global/colors'
 
 interface Props {
-  track: Tracks
+  track: GettersTracks
   albumNomeUnico: string
 }
 
