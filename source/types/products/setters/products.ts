@@ -7,29 +7,29 @@ import {
 
 export interface SettersGenericProduct {
   produtoId?: number
-  exystBD?: boolean
-  cpfOrCnpj?: string
-  recurso: FinancialResources
   name_uuid?: string
-  cpf?: string | null
-  cnpj?: string | null
+  cpf?: string
+  cnpj?: string
   arquivo?: string
   nome_arquivo?: string
-  data_de_publicacao: string
-  nome_cultural: string
-  tipo?: TypesProducts
+  data_de_publicacao?: string
   generos?: string[]
+  cidade?: string
+  estado?: string
   tags?: string[]
   capa?: string
   sobre_a_obra?: string
   qr_code?: string
-  cidade?: string
-  estado?: string
   tipo_capa?: TypeImgCapa
-  categoria?: Category
   link?: string
   patrocinadores?: number
   fichaTecnica?: number
   youtube?: number
   data_cadastro?: Date
+  tipo?: TypesProducts
+
+  categoria?: Category
+  nome_cultural: string
+  cpfOrCnpj: string
+  recurso: FinancialResources
 }

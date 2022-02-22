@@ -4,6 +4,7 @@ export enum TypesProducts {
 	URL,
 	PDF,
 	CAPA,
+	PHOTOS,
 }
 
 export const mapTypesProducts = [
@@ -22,6 +23,10 @@ export const mapTypesProducts = [
 	{
 		id: TypesProducts.CAPA,
 		tipo: 'CAPA',
+	},
+	{
+		id: TypesProducts.PHOTOS,
+		tipo: 'PHOTOS',
 	},
 ]
 

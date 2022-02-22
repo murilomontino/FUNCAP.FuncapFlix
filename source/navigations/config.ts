@@ -20,6 +20,7 @@ declare global {
       QRCode: undefined
       AddBooks: undefined
       AddMusic: undefined
+      AddExhibitions: undefined
       Music: undefined
     }
   }
@@ -41,6 +42,7 @@ export const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           AddBooks: 'adicionar-livros',
           AddMusic: 'adicionar-musicas',
+          AddExhibition: 'adicionar-exposicoes',
         },
       },
       Music: 'musicas',

@@ -8,9 +8,11 @@ type Props = {
   numberLines: number
   maxLength: number
   height: number
+  placeholder?: string
   value: string
   requered?: boolean
   onChangeValue: (text: string) => void
+  widthContainer?: number | string
 }
 
 const InputTextArea = ({
@@ -18,8 +20,10 @@ const InputTextArea = ({
   numberLines,
   maxLength = 5000,
   height,
+  placeholder,
   value,
   requered = false,
+  widthContainer = '100%',
   onChangeValue,
 }: Props) => {
   const web = Platform.OS === 'web'
@@ -29,14 +33,23 @@ const InputTextArea = ({
   }, [])
 
   return (
-    <View style={styles.textAreaContainer}>
-      <View style={styles.viewTitle}>
-        <Text style={styles.topicForm}>{topic}</Text>
-        {requered && <Text style={styles.topicRequered}>*</Text>}
-      </View>
+    <View
+      style={[
+        styles.textAreaContainer,
+        {
+          width: widthContainer,
+        },
+      ]}
+    >
+      {!!topic && (
+        <View style={styles.viewTitle}>
+          <Text style={styles.topicForm}>{topic}</Text>
+          {requered && <Text style={styles.topicRequered}>*</Text>}
+        </View>
+      )}
       <TextInput
         value={value}
-        placeholder={topic}
+        placeholder={placeholder || topic}
         onChangeText={onChangeValue}
         style={[
           {
@@ -73,7 +86,6 @@ export const styles = StyleSheet.create({
   textAreaContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%',
     margin: 8,
     alignContent: 'center',
   },
@@ -96,6 +108,7 @@ export const styles = StyleSheet.create({
     paddingRight: 8,
     maxWidth: 150,
     justifyContent: 'flex-end',
+    alignSelf: 'center',
   },
   textArea: {
     color: colors.grey20,

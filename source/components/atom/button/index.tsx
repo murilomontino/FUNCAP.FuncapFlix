@@ -16,6 +16,8 @@ interface Props extends TouchableOpacityProps {
   text: string
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  selectable?: boolean
+  selected?: boolean
 }
 
 const Button = ({
@@ -24,6 +26,8 @@ const Button = ({
   text,
   style,
   textStyle,
+  selectable = false,
+  selected = false,
   ...rest
 }: Props) => {
   const color = disabled ? colors.grey20 : colors.button_secondary
@@ -41,6 +45,9 @@ const Button = ({
           width: 200,
         },
         style,
+        selectable && {
+          backgroundColor: selected ? color : colors.grey20,
+        },
       ]}
     >
       <Text

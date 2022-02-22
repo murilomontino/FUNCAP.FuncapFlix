@@ -9,14 +9,16 @@ import { getCache, setCache } from '@/utils/CacheStorageLocal'
 
 type Props = {
   capa?: string
-  height?: number
-  width?: number
+  height?: number | string
+  width?: number | string
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center'
   imageStyle?: StyleProp<ImageStyle>
+  uri?: string
 }
 
 const CacheImage = ({
   capa,
+  uri,
   height = 200,
   width = 150,
   resizeMode = 'contain',
@@ -25,6 +27,11 @@ const CacheImage = ({
   const [img, setImg] = useState('')
 
   useEffect(() => {
+    if (uri) {
+      setImg(uri)
+      return
+    }
+
     // Se a capa for uma url, seta a imagem como a capa
     if (capa && capa.includes('http')) {
       setImg(capa)

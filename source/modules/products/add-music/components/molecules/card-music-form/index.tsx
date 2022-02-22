@@ -29,10 +29,18 @@ const CardMusicForm = ({ index, uri }: Props) => {
   return (
     <View
       style={{
-        borderWidth: 1,
-        borderColor: '#fff',
-        borderRadius: 10,
-        margin: 10,
+        elevation: 4,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 1,
+          height: 2,
+        },
+
+        shadowRadius: 3.84,
+
+        backgroundColor: 'rgba(0,0,0, 0.2)',
+        borderRadius: 2,
+        margin: 8,
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

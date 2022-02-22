@@ -16,7 +16,6 @@ export type tracks = {
 	duracao: string
 	compositor: string
 	artista: string
-
 }
 
 export enum TypeMusicAlbums {

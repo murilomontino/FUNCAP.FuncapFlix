@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
   View,
   TextInput,
@@ -18,9 +18,13 @@ interface Props {
   topic: string
   value: string
   requered?: boolean
+  maxWidthTitle?: number | string
+  width?: number | string
   maxLength?: number
+  stylesViewTitle?: ViewStyle | ViewStyle[]
   styleViewContainer?: ViewStyle
   styleViewInput?: TextStyle | ViewStyle | ImageStyle
+  styleTopic?: TextStyle
   mask?: string
   type?: string
   onChangeText:
@@ -51,23 +55,53 @@ export const InputTopic = ({
   value,
   requered = false,
   maxLength,
+  stylesViewTitle,
   styleViewInput,
+  styleTopic,
   onChangeText,
   placeholder,
+  width = '100%',
+  maxWidthTitle = 150,
   ...rest
 }: InputTopicType) => {
   const web = Platform.OS === 'web'
-
   const outlineWeb = useMemo(() => {
     return web ? styles.outlineWeb : styles.outline
   }, [])
 
+  const [defaultValue] = useState(value)
+
   if (mask !== undefined) {
+    useEffect(() => {
+      if (defaultValue) {
+        onChangeText(defaultValue)
+      }
+    }, [])
+
     return (
-      <View style={[styles.textAreaContainer, styleViewContainer]}>
-        <View style={styles.viewTitle}>
-          <Text style={styles.topicForm}>{topic}:</Text>
-        </View>
+      <View
+        style={[
+          {
+            width: width,
+          },
+          styles.textAreaContainer,
+          styleViewContainer,
+        ]}
+      >
+        {!!topic && (
+          <View
+            style={[
+              styles.viewTitle,
+              stylesViewTitle,
+              {
+                maxWidth: maxWidthTitle,
+              },
+            ]}
+          >
+            <Text style={[styles.topicForm, styleTopic]}>{topic}</Text>
+            {requered && <Text style={styles.topicRequered}>*</Text>}
+          </View>
+        )}
         <MaskedTextInput
           {...rest}
           mask={mask}
@@ -82,10 +116,26 @@ export const InputTopic = ({
   }
 
   return (
-    <View style={[styles.textAreaContainer, styleViewContainer]}>
-      {topic && (
-        <View style={styles.viewTitle}>
-          <Text style={styles.topicForm}>{topic}</Text>
+    <View
+      style={[
+        {
+          width: width,
+        },
+        styles.textAreaContainer,
+        styleViewContainer,
+      ]}
+    >
+      {!!topic && (
+        <View
+          style={[
+            styles.viewTitle,
+            stylesViewTitle,
+            {
+              maxWidth: maxWidthTitle,
+            },
+          ]}
+        >
+          <Text style={[styles.topicForm, styleTopic]}>{topic}</Text>
           {requered && <Text style={styles.topicRequered}>*</Text>}
         </View>
       )}
@@ -107,7 +157,6 @@ export const styles = StyleSheet.create({
   textAreaContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%',
     margin: 8,
     alignContent: 'center',
   },
@@ -128,8 +177,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingRight: 8,
-    maxWidth: 150,
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   textArea: {
     color: colors.grey20,

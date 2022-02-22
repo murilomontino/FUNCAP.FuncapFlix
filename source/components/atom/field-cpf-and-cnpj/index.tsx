@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import { MaskedTextInput } from 'react-native-mask-text'
 import { HelperText } from 'react-native-paper'
@@ -17,7 +17,7 @@ type Props = {
   topic: string
   viewTitle: ViewStyle
   viewInput: ViewStyle
-  viewContainer: ViewStyle
+  viewContainer: ViewStyle | ViewStyle[]
   topicForm: TextStyle
   requered?: boolean
 }
@@ -38,8 +38,18 @@ const FieldCPFandCNPJGeneric = ({
   // EFEITOS VISUAIS
 
   const [borderFocus, setBorderFocus] = useState(false)
+  const [defaultValue] = useState(value)
 
-  const toogleBorderFocus = () => {
+  useEffect(() => {
+    if (defaultValue) {
+      handleChangeCPFandCNPJ(defaultValue)
+    }
+    return () => {
+      setBorderFocus(false)
+    }
+  }, [])
+
+  const toggleBorderFocus = () => {
     setBorderFocus(!borderFocus)
   }
 
@@ -113,14 +123,16 @@ const FieldCPFandCNPJGeneric = ({
         {value.length === 18 && 'CNPJ'} Inválido, confira e digite novamente!
       </HelperText>
       <View style={[viewContainer, { maxWidth: '90%' }]}>
-        <View style={[viewTitle]}>
+        <View style={[{ alignSelf: 'center' }, viewTitle]}>
           <Text style={[topicForm]}>{topic}</Text>
           {requered && <Text style={stylesDefault.topicRequered}>*</Text>}
         </View>
         <MaskedTextInput
+          value={value}
+          defaultValue={defaultValue}
           placeholder={topic}
-          onFocus={toogleBorderFocus}
-          onBlur={toogleBorderFocus}
+          onFocus={toggleBorderFocus}
+          onBlur={toggleBorderFocus}
           style={[
             viewInput,
             {
@@ -135,7 +147,6 @@ const FieldCPFandCNPJGeneric = ({
             },
           ]}
           mask={value.length < 14 ? '999.999.999-99' : '99.999.999/9999-99'}
-          value={value}
           onChangeText={handleChangeCPFandCNPJ}
           keyboardType={'numeric'}
         />

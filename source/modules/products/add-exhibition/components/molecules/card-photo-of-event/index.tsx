@@ -1,0 +1,178 @@
+import React from 'react'
+import { TouchableHighlight, View } from 'react-native'
+
+import { ExhibitionPhotosTypes } from '@/types'
+import { AntDesign } from '@expo/vector-icons'
+
+import CacheImage from '@/components/atom/cache-image'
+import Dropdown from '@/components/atom/dropdown'
+import InputTextArea from '@/components/atom/input-text-area'
+import InputTopic from '@/components/atom/input-topic'
+
+import { keys } from '@/forms/Product/product-exhibition/type'
+import { mapTypeExhibitionPhoto } from '@/forms/Product/types'
+
+import colors from '@/global/colors'
+
+type Props = {
+  uri: string
+  title: string
+  date: string
+  description: string
+  typeOfPhoto: string
+  index: number
+  onRemovePhoto?: (index: number) => void
+  onChangeAttrs: (text: string, index: number, key: keys) => void
+}
+
+const CardPhotoOfEvent = ({
+  onChangeAttrs,
+  onRemovePhoto,
+  title,
+  date,
+  description,
+  typeOfPhoto,
+  uri,
+  index,
+}: Props) => {
+  const onChangeTitle = (text: string) => {
+    onChangeAttrs(text, index, 'titulo')
+  }
+
+  const onChangeTypeOfPhoto = (type: ExhibitionPhotosTypes) => {
+    onChangeAttrs(`${type}`, index, 'tipo_de_foto')
+  }
+
+  const onChangeDate = (text: string) => {
+    onChangeAttrs(text, index, 'data')
+  }
+
+  const onChangeDescription = (text: string) => {
+    onChangeAttrs(text, index, 'descricao')
+  }
+
+  const onRemovePhotoEvent = () => {
+    if (onRemovePhoto) {
+      onRemovePhoto(index)
+    }
+  }
+
+  return (
+    <View
+      style={[
+        {
+          zIndex: 1,
+          width: 360,
+          height: 440,
+          margin: 10,
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          borderRadius: 2,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowRadius: 3.84,
+          elevation: 5,
+        },
+      ]}
+    >
+      <TouchableHighlight
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+        onPress={onRemovePhotoEvent}
+      >
+        <AntDesign name="close" size={24} color={colors.grey20} />
+      </TouchableHighlight>
+      <CacheImage
+        uri={uri}
+        resizeMode={'stretch'}
+        width={'100%'}
+        height={140}
+      />
+      <InputTopic
+        requered
+        stylesViewTitle={{
+          marginVertical: 8,
+          padding: 4,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        styleTopic={{
+          fontSize: 16,
+          color: '#fff',
+          fontWeight: 'bold',
+          textAlign: 'center',
+        }}
+        styleViewContainer={{
+          flexDirection: 'column',
+        }}
+        styleViewInput={{
+          flex: 1,
+          width: '95%',
+          paddingHorizontal: 8,
+        }}
+        onChangeText={onChangeTitle}
+        value={title}
+        placeholder={'Título da foto*'}
+        topic=""
+      />
+      <InputTopic
+        requered
+        stylesViewTitle={{
+          marginVertical: 8,
+          padding: 4,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        styleTopic={{
+          fontSize: 16,
+          color: '#fff',
+          fontWeight: 'bold',
+          textAlign: 'center',
+        }}
+        styleViewContainer={{
+          flexDirection: 'column',
+        }}
+        styleViewInput={{
+          flex: 1,
+          width: '95%',
+          paddingHorizontal: 8,
+        }}
+        onChangeText={onChangeDate}
+        value={date}
+        placeholder={'Data da foto*'}
+        mask={'99/99/9999'}
+        topic=""
+      />
+      <InputTextArea
+        topic=""
+        placeholder="Descrição da foto"
+        value={description}
+        onChangeValue={onChangeDescription}
+        height={80}
+        maxLength={1500}
+        numberLines={4}
+        widthContainer={'95%'}
+      />
+      <Dropdown
+        styleContainerButton={{
+          height: 40,
+          backgroundColor: colors.whitePerCent._80,
+        }}
+        color={'#000'}
+        value={typeOfPhoto as unknown as number}
+        onChangeValue={onChangeTypeOfPhoto}
+        items={mapTypeExhibitionPhoto}
+        label="Tipo de foto"
+        requered
+      />
+    </View>
+  )
+}
+
+export default CardPhotoOfEvent

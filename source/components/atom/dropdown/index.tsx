@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -12,16 +12,20 @@ type Props = {
   value: number
   disabled?: boolean
   label?: string
+  color?: string
   requered?: boolean
+  styleContainerButton?: ViewStyle | ViewStyle[]
 }
 
 const Dropdown = ({
   items,
   value,
   onChangeValue,
+  color = colors.white,
   disabled = false,
   requered = false,
   label = 'Selecione',
+  styleContainerButton,
 }: Props) => {
   useEffect(() => {
     select()
@@ -46,6 +50,7 @@ const Dropdown = ({
       defaultButtonText={labelState}
       buttonStyle={[
         styles.buttonContainer,
+        styleContainerButton,
         disabled && { backgroundColor: colors.grey20 },
       ]}
       buttonTextStyle={{
@@ -65,7 +70,7 @@ const Dropdown = ({
           <Text
             style={{
               fontSize: 14,
-              color: colors.white,
+              color: color,
               fontWeight: '500',
             }}
           >

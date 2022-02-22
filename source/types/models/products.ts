@@ -25,7 +25,7 @@ export type products = {
 	youtube: number
 	sobre_a_obra: string
 	link: string
-	tags?: tags[] | string[]
-	generos?: generos[] | string[]
+	tags?: tags[]
+	generos?: generos[]
 	data_cadastro?: Date
 }

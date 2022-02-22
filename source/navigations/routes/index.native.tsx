@@ -5,7 +5,7 @@ import { Text } from 'react-native'
 import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import AddBook from '@/modules/products/add-product'
+import AddBook from '@/modules/products/add-book'
 
 import Front from '@/components/templates/frontend'
 

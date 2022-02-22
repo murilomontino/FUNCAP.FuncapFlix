@@ -3,8 +3,9 @@ import { DocumentResult } from 'expo-document-picker'
 
 import {
   Category,
+  ExhibitionPhotosTypes,
   FinancialResources,
-  TypeMusicAlbuns,
+  TypeMusicAlbums,
   TypesProducts,
 } from '@/types'
 
@@ -48,7 +49,7 @@ export declare namespace Document {
 export interface FormProduct {
   cpfOrCnpj: string
   culturalName: string
-  publishedDate: string
+  publishedDate?: string
   financialResources: FinancialResources
   capa: Document
   category: Category
@@ -56,7 +57,7 @@ export interface FormProduct {
   type: TypesProducts
   tags: string[]
   cpfOrCnpjIsValid: boolean
-  onChangePublishedDate: (date: string) => void
+  onChangePublishedDate?: (date: string) => void
   onChangeCulturalName: (value: string) => void
   onChangeFinancialResources: (value: FinancialResources) => void
   onChangeCPForCNPJ: (text: string) => void
@@ -75,7 +76,7 @@ export interface FormProductMusic extends FormProduct {
   titleMusics: Array<string>
   durations: Array<string>
   file: Document[]
-  content: TypeMusicAlbuns
+  content: TypeMusicAlbums
   composers: string[]
   onChangeTitleAlbum: (value: string) => void
   onChangeContent: (value: number) => void
@@ -118,4 +119,44 @@ export const mapTypeProduct: { [key in TypesProducts]: string } = {
   [TypesProducts.MP3]: 'Música(s)',
   [TypesProducts.URL]: 'URL',
   [TypesProducts.CAPA]: 'Capa',
+  [TypesProducts.PHOTOS]: 'Foto',
 }
+
+export const mapTypeMusic: { [key in TypeMusicAlbums]: string } = {
+  [TypeMusicAlbums.album]: 'Álbum',
+  [TypeMusicAlbums.album_interprete]: 'Álbum Interprete',
+  [TypeMusicAlbums.single]: 'Single',
+  [TypeMusicAlbums.ep]: 'EP',
+}
+
+type mapPhotos = {
+  label: string
+  value: ExhibitionPhotosTypes
+}
+
+export const mapTypeExhibitionPhoto: mapPhotos[] = [
+  {
+    label: 'Foto de Abertura',
+    value: ExhibitionPhotosTypes.foto_de_abertura,
+  },
+  {
+    value: ExhibitionPhotosTypes.foto_de_artista,
+    label: 'Foto de Artista',
+  },
+  {
+    value: ExhibitionPhotosTypes.foto_de_evento,
+    label: 'Foto de Evento',
+  },
+  {
+    value: ExhibitionPhotosTypes.foto_de_local,
+    label: 'Foto de Local',
+  },
+  {
+    value: ExhibitionPhotosTypes.foto_de_montagem,
+    label: 'Foto de Montagem',
+  },
+  {
+    value: ExhibitionPhotosTypes.outros,
+    label: 'Outros',
+  },
+]

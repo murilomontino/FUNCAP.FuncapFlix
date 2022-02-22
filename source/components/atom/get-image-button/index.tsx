@@ -11,13 +11,16 @@ import { Button } from 'react-native-paper'
 
 import * as DocumentPicker from 'expo-document-picker'
 
+import { Document } from '@/forms/Product/types'
+
 import colors from '@/global/colors'
 
 type Props = {
-  image: DocumentPicker.DocumentResult
-  onChangeImage: (value: DocumentPicker.DocumentResult) => void
+  image: Document
+  onChangeImage: (value: Document) => void
   width?: number
   height?: number
+  placeholder?: string
 }
 
 const GetImageButton = ({
@@ -25,6 +28,7 @@ const GetImageButton = ({
   onChangeImage,
   width = 150,
   height = 200,
+  placeholder = 'Escolher uma Capa',
 }: Props) => {
   const onPress = async () => {
     const obj = await DocumentPicker.getDocumentAsync({
@@ -32,7 +36,7 @@ const GetImageButton = ({
     })
 
     if (obj.type === 'success') {
-      onChangeImage(obj)
+      onChangeImage(obj as unknown as Document)
     }
   }
 
@@ -52,7 +56,7 @@ const GetImageButton = ({
         />
       </TouchableHighlight>
       <Button style={[styles.buttonContainer]} color="#fff" onPress={onPress}>
-        {image.type === 'success' ? image.name : 'Escolher uma Capa'}
+        {image.type === 'success' ? image.name : placeholder}
       </Button>
     </View>
   )

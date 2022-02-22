@@ -4,6 +4,7 @@ export enum Category {
 	Literature,
 	Video,
 	Event,
+	Exhibition,
 }
 
 export const mapCategory = [

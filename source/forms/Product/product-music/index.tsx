@@ -7,7 +7,7 @@ import { DocumentResult } from 'expo-document-picker'
 import {
   Category,
   FinancialResources,
-  TypeMusicAlbuns,
+  TypeMusicAlbums,
   TypesProducts,
 } from '@/types'
 import { createContext } from 'use-context-selector'
@@ -26,7 +26,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   const [titleMusics, setTitleMusics] = useState([] as string[])
   const [file, setFile] = useState([] as Document[])
   const [durations, setDurations] = useState([])
-  const [content, setContent] = useState<TypeMusicAlbuns>(0)
+  const [content, setContent] = useState<TypeMusicAlbums>(0)
   const [composers, setComposers] = useState([] as string[])
 
   // State -----------------------------------------------------------------------

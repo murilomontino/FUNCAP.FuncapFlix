@@ -3,6 +3,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import ModuleAddBook from '@/modules/products/add-book'
+import ModuleAddExhibition from '@/modules/products/add-exhibition'
 import ModuleAddMusic from '@/modules/products/add-music'
 
 import { TemplateFront } from '@/navigations/template/navigation-frontend-template'
@@ -35,6 +36,18 @@ export const AddProductStack = ({ ...rest }) => {
         options={{
           headerShown: false,
           title: 'Adicionar Música',
+        }}
+      />
+      <Stack.Screen
+        name="AddExhibition"
+        component={() =>
+          TemplateFront({
+            children: <ModuleAddExhibition {...rest} />,
+          })
+        }
+        options={{
+          headerShown: false,
+          title: 'Adicionar Exposições',
         }}
       />
     </Stack.Navigator>
