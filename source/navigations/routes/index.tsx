@@ -45,34 +45,29 @@ const Navigation: React.FC = () => {
           headerShown: false,
         }}
       >
-        <Stack.Screen
-          component={({ ...rest }) =>
+        <Stack.Screen name="Home">
+          {({ ...rest }) =>
             TemplateFront({ children: <HomeScreen {...rest} /> })
           }
-          name="Home"
-        />
-        <Stack.Screen
-          component={({ ...rest }) =>
+        </Stack.Screen>
+        <Stack.Screen name="Literatura">
+          {({ ...rest }) =>
             TemplateFront({ children: <BooksPage {...rest} /> })
           }
-          name="Literatura"
-        />
-        <Stack.Screen
-          component={({ ...rest }) =>
+        </Stack.Screen>
+        <Stack.Screen name="QRCode">
+          {({ ...rest }) =>
             TemplateFront({ children: <QRCodeScreen {...rest} /> })
           }
-          name="QRCode"
-        />
-        <Stack.Screen
-          name="AddProducts"
-          component={({ ...rest }) => <AddProductStack {...rest} />}
-        />
-        <Stack.Screen
-          component={({ ...rest }) =>
+        </Stack.Screen>
+        <Stack.Screen name="AddProducts">
+          {({ ...rest }) => <AddProductStack {...rest} />}
+        </Stack.Screen>
+        <Stack.Screen name="Music">
+          {({ ...rest }) =>
             TemplateFront({ children: <MusicScreen {...rest} /> })
           }
-          name="Music"
-        />
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

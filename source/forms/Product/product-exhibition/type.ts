@@ -17,6 +17,10 @@ export type keys =
   | 'descricao'
   | 'data'
   | 'titulo'
+  | 'id'
+  | 'error'
+
+export type Generics = string | number | boolean | null
 
 export type Argument =
   | string

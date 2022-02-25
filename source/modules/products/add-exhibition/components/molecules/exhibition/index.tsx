@@ -2,9 +2,8 @@ import React, { memo, useEffect, useMemo, useState } from 'react'
 import { View, Text } from 'react-native'
 
 import DatePicker from '@/components/atom/date-picker'
-import InputTextArea from '@/components/atom/input-text-area'
-import InputTopic from '@/components/atom/input-topic'
-import InputTopicRef from '@/components/atom/input-topic-ref'
+import InputTextArea from '@/components/molecule/input-text-area'
+import InputTopic from '@/components/molecule/input-topic'
 
 import {
   useFormExhibitionDescription,
@@ -92,7 +91,7 @@ const Exhibition = () => {
         }}
       />
 
-      <InputTopicRef
+      <InputTopic
         topic="Local"
         onChangeText={onChangeLocation}
         requered

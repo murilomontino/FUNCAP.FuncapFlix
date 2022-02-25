@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Platform } from 'react-native'
-import { Provider as PaperProvider } from 'react-native-paper'
 import { enableScreens } from 'react-native-screens'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Provider } from 'react-redux'
@@ -15,6 +14,7 @@ import {
   useFonts,
   Inter_900Black,
   Inter_800ExtraBold,
+  Inter_500Medium,
 } from '@expo-google-fonts/inter'
 
 import { persistedStore, store } from '@/redux'
@@ -47,6 +47,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_900Black,
     Inter_800ExtraBold,
+    Inter_500Medium,
     AlfaSlabOne_400Regular,
   })
 
@@ -56,15 +57,13 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PaperProvider>
-        <Provider store={store}>
-          <PersistGate persistor={persistedStore} loading={null}>
-            <RootContext>
-              <Navigation />
-            </RootContext>
-          </PersistGate>
-        </Provider>
-      </PaperProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistedStore} loading={null}>
+          <RootContext>
+            <Navigation />
+          </RootContext>
+        </PersistGate>
+      </Provider>
     </QueryClientProvider>
   )
 }

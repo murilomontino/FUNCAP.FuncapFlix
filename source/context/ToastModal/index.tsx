@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { createContext, useContext, useState } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import { Icon } from 'react-native-elements'
 
 import { useAssets } from 'expo-asset'
+
+import { AntDesign } from '@expo/vector-icons'
 
 import ErrorImg from '@/assets/Alerts/Error.png'
 import SuccessImg from '@/assets/Alerts/Success.png'
@@ -84,18 +85,7 @@ const ToastContextProvider: React.FC = ({ children }) => {
           <Text style={styles.subtitle}>{text}</Text>
         </View>
         <TouchableOpacity>
-          <Icon
-            name="close"
-            type="evil-icons"
-            color={'#000'}
-            style={{
-              fontSize: 12,
-              color: 'white',
-              padding: 8,
-              marginRight: 12,
-              justifyContent: 'flex-start',
-            }}
-          />
+          <AntDesign name="close" size={24} color={colors.grey20} />
         </TouchableOpacity>
       </View>
     )

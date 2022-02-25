@@ -4,7 +4,7 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import { TypeMusicAlbums } from '@/types'
 
 import Dropdown from '@/components/atom/dropdown'
-import InputTopic from '@/components/atom/input-topic'
+import InputTopic from '@/components/molecule/input-topic'
 
 import {
   useFormMusic,

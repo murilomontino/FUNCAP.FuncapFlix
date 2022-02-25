@@ -1,12 +1,11 @@
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
 
 import * as DocumentPicker from 'expo-document-picker'
 import { DocumentResult } from 'expo-document-picker'
 
 import { Document } from '@/forms/Product/types'
 
-import { styles } from '../styles'
+import { Container, TextRequered, ContainerCentered, Text } from './styles'
 
 type mimeType =
   | 'application/pdf'
@@ -79,28 +78,12 @@ export const GetFileButton = ({
   }
 
   return (
-    <TouchableOpacity style={[styles.buttonContainer]} onPress={onChangeFile}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: 14,
-            fontWeight: '500',
-            textAlign: 'center',
-            textTransform: 'uppercase',
-          }}
-        >
-          {!multiple ? files[0]?.name || message : message}
-        </Text>
-        {requered && <Text style={styles.topicRequered}>*</Text>}
-      </View>
-    </TouchableOpacity>
+    <Container onPress={onChangeFile}>
+      <ContainerCentered>
+        <Text>{!multiple ? files[0]?.name || message : message}</Text>
+        {requered && <TextRequered>*</TextRequered>}
+      </ContainerCentered>
+    </Container>
   )
 }
 

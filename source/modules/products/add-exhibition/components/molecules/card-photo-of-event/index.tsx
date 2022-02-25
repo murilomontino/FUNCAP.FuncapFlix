@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableHighlight, View } from 'react-native'
 
 import { ExhibitionPhotosTypes } from '@/types'
@@ -7,8 +7,8 @@ import { AntDesign } from '@expo/vector-icons'
 import CacheImage from '@/components/atom/cache-image'
 import DatePicker from '@/components/atom/date-picker'
 import Dropdown from '@/components/atom/dropdown'
-import InputTextArea from '@/components/atom/input-text-area'
-import InputTopic from '@/components/atom/input-topic'
+import InputTextArea from '@/components/molecule/input-text-area'
+import InputTopic from '@/components/molecule/input-topic'
 
 import { keys } from '@/forms/Product/product-exhibition/type'
 import { mapTypeExhibitionPhoto } from '@/forms/Product/types'
@@ -21,6 +21,7 @@ type Props = {
   date: string
   description: string
   typeOfPhoto: string
+  error: string
   index: number
   onRemovePhoto?: (index: number) => void
   onChangeAttrs: (text: string, index: number, key: keys) => void
@@ -30,12 +31,28 @@ const CardPhotoOfEvent = ({
   onChangeAttrs,
   onRemovePhoto,
   title,
-  date,
   description,
   typeOfPhoto,
   uri,
   index,
+  error,
 }: Props) => {
+  const [err, setErr] = useState(() => {
+    if (error === 'true') {
+      return true
+    }
+    return false
+  })
+
+  useEffect(() => {
+    setErr(() => {
+      if (error === 'true') {
+        return true
+      }
+      return false
+    })
+  }, [error])
+
   const onChangeTitle = (text: string) => {
     onChangeAttrs(text, index, 'titulo')
   }
@@ -75,6 +92,10 @@ const CardPhotoOfEvent = ({
           },
           shadowRadius: 3.84,
           elevation: 5,
+        },
+        err && {
+          borderWidth: 1,
+          borderColor: colors.redPrimary,
         },
       ]}
     >

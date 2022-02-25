@@ -11,7 +11,7 @@ import CardAlbum from './organism/card-album'
 
 import constants from '@/global/constants'
 
-const MusicScreen = () => {
+const MusicScreen = (props: any) => {
   const { data: albums } = useQuery<GettersAlbums[]>('albums', async () => {
     const { data } = await api.get<Getter<GettersAlbums[]>>('/musicas/album')
 

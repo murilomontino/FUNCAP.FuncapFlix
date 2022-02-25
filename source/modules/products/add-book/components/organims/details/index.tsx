@@ -2,15 +2,15 @@ import React from 'react'
 import { Platform, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
-import { InputTopic } from '@/components/atom/input-topic'
+import FieldCPFandCNPJGeneric from '@/components/molecule/field-cpf-and-cnpj'
+import { InputTopic } from '@/components/molecule/input-topic'
+import InputTopicMasked from '@/components/molecule/input-topic-masked'
 
 import {
   useFormBookData,
   useFormBookCPFandCNPJ,
 } from '@/forms/Product/product-book/hooks'
 
-import { styles } from '../../atoms/styles'
 import InputsFormsLiterature from '../../molecules/inputs-forms-literature'
 
 import colors from '@/global/colors'
@@ -64,11 +64,7 @@ const Details = () => {
         onChangeIsValid={onChangeCPForCNPJIsValid}
         onChangeValue={onChangeCPForCNPJ}
         value={cpfOrCnpj}
-        viewContainer={styles.textAreaContainer}
-        viewInput={styles.textArea}
         topic="CPF/CNPJ"
-        topicForm={styles.topicForm}
-        viewTitle={styles.viewTitle}
       />
       <InputTopic
         topic="Nome Cultural"
@@ -79,7 +75,7 @@ const Details = () => {
           width: '90%',
         }}
       />
-      <InputTopic
+      <InputTopicMasked
         topic="Data de Publicação"
         onChangeText={onChangePublishedDate}
         value={publishedDate}

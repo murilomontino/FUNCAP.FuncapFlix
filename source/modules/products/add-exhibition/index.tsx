@@ -1,6 +1,5 @@
 import React from 'react'
-import { ImageBackground, Platform, View } from 'react-native'
-import { useDimensions } from 'react-native-web-hooks'
+import { ImageBackground } from 'react-native'
 
 import ResetContextProvider from '@/context/ResetModal'
 
@@ -8,15 +7,13 @@ import HeaderLogo from '@/components/atom/header-logo'
 
 import FormExhibitionProvider from '@/forms/Product/product-exhibition'
 
-import Details from './components/organism/details'
-import Left from './components/organism/left'
+import Main from './components/template/main'
 
 import colors from '@/global/colors'
+import { useSize } from '@/hooks/use-size'
 
 const ModuleAddBook = () => {
-  const web = Platform.OS === 'web'
-  const { window, screen } = useDimensions()
-  const size = web ? window : screen
+  const { size, web } = useSize()
 
   return (
     <ResetContextProvider>
@@ -26,33 +23,14 @@ const ModuleAddBook = () => {
           resizeMode="cover"
           style={{
             backgroundColor: colors.button,
-            width: window.width,
-            minHeight: window.height,
+            width: size.width,
+            minHeight: size.height,
             paddingTop: 80,
             padding: web ? 0 : 20,
           }}
         >
           <HeaderLogo />
-          <View
-            style={[
-              {
-                flex: 1,
-                marginTop: 40,
-                padding: 40,
-                flexDirection: 'row',
-                width: '100%',
-                alignItems: 'center',
-              },
-              size.width < 1127 && {
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              },
-            ]}
-          >
-            <Left />
-            <Details />
-          </View>
+          <Main />
         </ImageBackground>
       </FormExhibitionProvider>
     </ResetContextProvider>

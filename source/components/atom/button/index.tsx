@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-  Text,
   TouchableOpacityProps,
   TextProps,
   StyleProp,
   ViewStyle,
   TextStyle,
-  TouchableOpacity,
 } from 'react-native'
+
+import { Container, Text } from './styles'
 
 import colors from '@/global/colors'
 
@@ -33,38 +33,23 @@ const Button = ({
   const color = disabled ? colors.grey20 : colors.button_secondary
 
   return (
-    <TouchableOpacity
+    <Container
       {...rest}
       disabled={disabled}
       style={[
+        style,
         {
           backgroundColor: color,
-          padding: 16,
-          margin: 8,
-          borderRadius: 40,
-          width: 200,
         },
-        style,
         selectable && {
           backgroundColor: selected ? color : colors.grey20,
         },
       ]}
     >
-      <Text
-        {...textProps}
-        style={[
-          {
-            fontWeight: 'bold',
-            color: '#fff',
-            fontSize: 14,
-            textAlign: 'center',
-          },
-          textStyle,
-        ]}
-      >
+      <Text {...textProps} style={[textStyle]}>
         {text}
       </Text>
-    </TouchableOpacity>
+    </Container>
   )
 }
 

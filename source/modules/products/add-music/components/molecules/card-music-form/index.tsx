@@ -3,7 +3,7 @@ import { View, Platform, TouchableHighlight } from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 
-import InputTopic from '@/components/atom/input-topic'
+import InputTopic from '@/components/molecule/input-topic'
 import AudioPlayer from '@/components/organism/audio-player'
 
 import {

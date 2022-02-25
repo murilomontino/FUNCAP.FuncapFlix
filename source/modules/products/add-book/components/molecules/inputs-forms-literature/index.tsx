@@ -2,8 +2,8 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import InputTextArea from '@/components/atom/input-text-area'
-import InputTopic from '@/components/atom/input-topic'
+import InputTextArea from '@/components/molecule/input-text-area'
+import InputTopic from '@/components/molecule/input-topic'
 
 import { useFormBook } from '@/forms/Product/product-book/hooks'
 

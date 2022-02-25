@@ -13,7 +13,7 @@ module.exports = function (api) {
             '@/assets': './source/assets',
             '@/components': './source/components',
             '@/context': './source/context',
-
+            '@/theme': './source/theme',
 						'@/data': './source/data',
             '@/forms': './source/forms',
             '@/global': './source/global',

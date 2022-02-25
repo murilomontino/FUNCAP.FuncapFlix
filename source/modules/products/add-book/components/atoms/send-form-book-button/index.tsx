@@ -88,6 +88,7 @@ const SendFormBookButton = () => {
         cpfOrCnpj: cpfOrCnpj,
         tipo: type,
         nome_arquivo: file.name,
+        arquivo: file.uri,
         generos: genres,
         tags: tags,
         sobre_a_obra: sobreAObra,
@@ -95,9 +96,8 @@ const SendFormBookButton = () => {
         categoria: Category.Literature,
         sub_titulo: subTitle,
         titulo: title,
-        arquivo: file.uri,
-        capa: thumbnail.uri ?? undefined,
-        tipo_capa: (thumbnail.mimeType as TypeImgCapa) ?? undefined,
+        capa: thumbnail?.uri ?? undefined,
+        tipo_capa: (thumbnail?.mimeType as TypeImgCapa) ?? undefined,
       })
 
       switch (status) {
@@ -112,12 +112,11 @@ const SendFormBookButton = () => {
           )
           break
       }
-
-      hideLoading()
     } catch (error) {
       AlertToast('erro', `Erro ao cadastrar livro! Tente novamente. ${error}`)
     } finally {
       await reset()
+      hideLoading()
     }
   }
 

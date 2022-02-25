@@ -15,7 +15,7 @@ import api from '@/services'
 import colors from '@/global/colors'
 import constants from '@/global/constants'
 
-const QRCodeScreen = () => {
+const QRCodeScreen = (props: any) => {
   const [inputText, setInputText] = useState('')
   const [qrValue, setQrValue] = useState('')
   const { height } = Dimensions.get('window')

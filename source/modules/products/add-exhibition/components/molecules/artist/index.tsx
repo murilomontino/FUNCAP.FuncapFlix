@@ -1,10 +1,9 @@
 import React, { memo } from 'react'
-import { View, Text } from 'react-native'
 
-import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
 import GetImageButton from '@/components/atom/get-image-button-ref'
-import InputTextArea from '@/components/atom/input-text-area-ref'
-import InputTopic from '@/components/atom/input-topic'
+import FieldCPFandCNPJGeneric from '@/components/molecule/field-cpf-and-cnpj'
+import InputTextArea from '@/components/molecule/input-text-area'
+import InputTopic from '@/components/molecule/input-topic'
 
 import {
   useFormExhibitionBiography,
@@ -13,7 +12,7 @@ import {
   useFormExhibitionPhotoOfArtist,
 } from '@/forms/Product/product-exhibition/hooks'
 
-import { styles } from '../../atoms/styles'
+import { Container, Title } from './styles'
 
 const Artist = () => {
   const { biography, onChangeBiography } = useFormExhibitionBiography()
@@ -29,29 +28,8 @@ const Artist = () => {
   } = useFormExhibitionCPFandCNPJ()
 
   return (
-    <View
-      style={{
-        flex: 1,
-        height: '100%',
-        maxWidth: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 20,
-          width: '70%',
-          fontWeight: 'bold',
-          marginVertical: 12,
-          textTransform: 'uppercase',
-          color: '#fff',
-          textAlign: 'left',
-          fontFamily: 'Inter_900Black',
-        }}
-      >
-        Dados do Artista:
-      </Text>
+    <Container>
+      <Title>Dados do Artista:</Title>
       <GetImageButton
         image={photoOfArtist}
         onChangeImage={onChangePhotoOfArtist}
@@ -60,15 +38,14 @@ const Artist = () => {
         placeholder={'Fotografia do Artista'}
       />
       <FieldCPFandCNPJGeneric
+        viewContainer={{
+          width: '70%',
+        }}
         isValid={cpfOrCnpjIsValid}
         onChangeIsValid={onChangeCPForCNPJIsValid}
         onChangeValue={onChangeCPForCNPJ}
         value={cpfOrCnpj}
-        viewContainer={[styles.textAreaContainer, { width: '70%' }]}
-        viewInput={styles.textArea}
         topic="CPF/CNPJ"
-        topicForm={styles.topicForm}
-        viewTitle={styles.viewTitle}
       />
       <InputTopic
         topic="Nome Cultural"
@@ -89,7 +66,7 @@ const Artist = () => {
         value={biography}
         widthContainer={'70%'}
       />
-    </View>
+    </Container>
   )
 }
 

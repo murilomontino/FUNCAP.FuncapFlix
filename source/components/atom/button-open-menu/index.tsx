@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { Icon } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native'
 import { useScaledSize } from 'react-native-web-hooks'
+
+import { Entypo } from '@expo/vector-icons'
 
 import { useDrawer } from '@/context/DrawerMenu'
 
@@ -21,11 +22,9 @@ const ButtonOpenMenu = () => {
         drawerToggle()
       }}
     >
-      <Icon name="menu" type="entypo" size={iconSize} color={colors.white} />
+      <Entypo name="menu" size={iconSize} color={colors.grey20} />
     </TouchableOpacity>
   )
 }
 
 export default ButtonOpenMenu
-
-const styles = StyleSheet.create({})

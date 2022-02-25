@@ -17,7 +17,7 @@ import PaginationBooks from './components/organism/pagination-books'
 import colors from '@/global/colors'
 import constants from '@/global/constants'
 
-const BooksScreen = () => {
+const BooksScreen = (params: any) => {
   const web = Platform.OS === 'web'
   const { window, screen } = useDimensions()
   const size = web ? window : screen

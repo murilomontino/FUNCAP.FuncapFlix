@@ -59,6 +59,7 @@ const PhotosOfEvent = () => {
                 onChangeAttrs={onChangeAttrsPhotos}
                 onRemovePhoto={() => removePhoto(index)}
                 index={index}
+                error={item.get('error')}
               />
             </View>
           )

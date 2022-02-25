@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
-import { MaskedTextInput } from 'react-native-mask-text'
-import { HelperText } from 'react-native-paper'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { validateBr } from 'js-brasil'
+
+import HelperText from '@/components/atom/helper-text'
+import Topic from '@/components/atom/topic'
+
+import { MaskedInput, ContainerIcon, Container } from './styles'
 
 import colors from '@/global/colors'
 import useDebounce from '@/hooks/use-debounce'
@@ -15,16 +18,14 @@ type Props = {
   isValid: boolean
   onChangeIsValid: (isValid: boolean) => void
   topic: string
-  viewTitle: ViewStyle
-  viewInput: ViewStyle
-  viewContainer: ViewStyle | ViewStyle[]
-  topicForm: TextStyle
+  viewTitle?: ViewStyle
+  viewInput?: ViewStyle
+  viewContainer?: ViewStyle | ViewStyle[]
+  topicForm?: TextStyle
   requered?: boolean
 }
 
 const FieldCPFandCNPJGeneric = ({
-  viewTitle,
-  topicForm,
   topic,
   viewContainer,
   viewInput,
@@ -68,6 +69,22 @@ const FieldCPFandCNPJGeneric = ({
     }, 50)
   }
 
+  const isValidMemo = useMemo(() => {
+    return (
+      (!isValid && value.length === 14) || (!isValid && value.length === 18)
+    )
+  }, [isValid, value])
+
+  const msgError = useMemo(() => {
+    if (value.length === 14 && 'CPF') {
+      return 'CPF inválido, verifique se digitou corretamente'
+    } else if (value.length === 18 && 'CNPJ') {
+      return 'CNPJ inválido, verifique se digitou corretamente'
+    } else {
+      return ''
+    }
+  }, [value])
+
   const border = useMemo(() => {
     const borderWidth = borderFocus ? 2 : 1
 
@@ -99,12 +116,9 @@ const FieldCPFandCNPJGeneric = ({
 
   return (
     <>
-      <View style={[viewContainer, { maxWidth: '90%' }]}>
-        <View style={[{ alignSelf: 'center' }, viewTitle]}>
-          <Text style={[topicForm]}>{topic}</Text>
-          {requered && <Text style={stylesDefault.topicRequered}>*</Text>}
-        </View>
-        <MaskedTextInput
+      <Container style={[viewContainer, { maxWidth: '90%' }]}>
+        <Topic requered={requered} topic={topic} />
+        <MaskedInput
           value={value}
           defaultValue={defaultValue}
           placeholder={topic}
@@ -113,10 +127,6 @@ const FieldCPFandCNPJGeneric = ({
           style={[
             viewInput,
             {
-              outlineStyle: 'none',
-            },
-            {
-              width: '100%',
               ...border,
               borderRightWidth: 0,
               borderTopRightRadius: 0,
@@ -127,18 +137,12 @@ const FieldCPFandCNPJGeneric = ({
           onChangeText={handleChangeCPFandCNPJ}
           keyboardType={'numeric'}
         />
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#d9d9d9',
-            borderLeftWidth: 0,
-            borderTopLeftRadius: 0,
-            borderBottomLeftRadius: 0,
-            borderRadius: 2,
-
-            ...border,
-          }}
+        <ContainerIcon
+          style={[
+            {
+              ...border,
+            },
+          ]}
         >
           <Icon
             style={{ marginRight: 5 }}
@@ -146,34 +150,10 @@ const FieldCPFandCNPJGeneric = ({
             size={14}
             color={border.borderColor}
           />
-        </View>
-      </View>
-      <HelperText
-        onPressIn={() => {
-          return
-        }}
-        onPressOut={() => {
-          return
-        }}
-        style={[
-          {
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            marginTop: -10,
-            color: colors.redSecondary,
-            fontSize: 14,
-            fontWeight: '600',
-          },
-        ]}
-        type="error"
-        visible={
-          (!isValid && value.length === 14) || (!isValid && value.length === 18)
-        }
-      >
-        {value.length === 14 && 'CPF'}
-        {value.length === 18 && 'CNPJ'} Inválido, confira e digite novamente!
-      </HelperText>
+        </ContainerIcon>
+      </Container>
+
+      <HelperText text={msgError} visible={isValidMemo} />
     </>
   )
 }

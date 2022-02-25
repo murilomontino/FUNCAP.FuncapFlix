@@ -3,6 +3,9 @@ import { View, Dimensions } from 'react-native'
 
 import { Platform } from 'expo-modules-core'
 
+import THEME from '@/theme'
+import { ThemeProvider } from 'styled-components'
+
 import DrawerProvider from '@/context/DrawerMenu'
 
 import ScrollProvider from '@/components/context/ContextScroll'
@@ -30,7 +33,7 @@ const Front: React.FC = ({ children }) => {
             backgroundColor: colors.background,
           }}
         >
-          {children}
+          <ThemeProvider theme={THEME}>{children}</ThemeProvider>
         </View>
         <Footer />
       </ScrollProvider>

@@ -15,41 +15,44 @@ export const AddProductStack = ({ ...rest }) => {
     <Stack.Navigator>
       <Stack.Screen
         name="AddBooks"
-        component={() =>
-          TemplateFront({
-            children: <ModuleAddBook {...rest} />,
-          })
-        }
         options={{
           headerShown: false,
           title: 'Adicionar Livro',
         }}
-      />
+      >
+        {() =>
+          TemplateFront({
+            children: <ModuleAddBook {...rest} />,
+          })
+        }
+      </Stack.Screen>
 
       <Stack.Screen
         name="AddMusic"
-        component={() =>
-          TemplateFront({
-            children: <ModuleAddMusic {...rest} />,
-          })
-        }
         options={{
           headerShown: false,
           title: 'Adicionar Música',
         }}
-      />
-      <Stack.Screen
-        name="AddExhibition"
-        component={() =>
+      >
+        {() =>
           TemplateFront({
-            children: <ModuleAddExhibition {...rest} />,
+            children: <ModuleAddMusic {...rest} />,
           })
         }
+      </Stack.Screen>
+      <Stack.Screen
+        name="AddExhibition"
         options={{
           headerShown: false,
           title: 'Adicionar Exposições',
         }}
-      />
+      >
+        {() =>
+          TemplateFront({
+            children: <ModuleAddExhibition {...rest} />,
+          })
+        }
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

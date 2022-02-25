@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Linking, Text } from 'react-native'
-import { Icon } from 'react-native-elements'
 import { useScaledSize } from 'react-native-web-hooks'
 
+import { AntDesign } from '@expo/vector-icons'
 import { MotiPressable } from 'moti/interactions'
 
 import colors from '@/global/colors'
@@ -33,13 +33,13 @@ const ButtonLogin: React.FC<Props> = ({ textVisible = true }) => {
         alignItems: 'center',
       }}
     >
-      <Icon
+      <AntDesign
+        style={{ padding: 8 }}
+        name="login"
         size={iconSize}
         color={hover ? 'orange' : colors.white}
-        style={{ padding: 8 }}
-        tvParallaxProperties
-        name="login"
       />
+
       {!!textVisible && (
         <Text
           style={{

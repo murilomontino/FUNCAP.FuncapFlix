@@ -2,15 +2,15 @@ import React from 'react'
 import { Platform, Text, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
-import InputTopic from '@/components/atom/input-topic'
+import FieldCPFandCNPJGeneric from '@/components/molecule/field-cpf-and-cnpj'
+import InputTopic from '@/components/molecule/input-topic'
+import InputTopicMasked from '@/components/molecule/input-topic-masked'
 
 import {
   useFormMusicData,
   useFormMusicCPFandCNPJ,
 } from '@/forms/Product/product-music/hooks'
 
-import { styles } from '../../atoms/styles'
 import InputsFormsMusic from '../../molecules/inputs-forms-music'
 
 import colors from '@/global/colors'
@@ -64,11 +64,7 @@ const Details = () => {
         onChangeIsValid={onChangeCPForCNPJIsValid}
         onChangeValue={onChangeCPForCNPJ}
         value={cpfOrCnpj}
-        viewContainer={styles.textAreaContainer}
-        viewInput={styles.textArea}
         topic="CPF/CNPJ"
-        topicForm={styles.topicForm}
-        viewTitle={styles.viewTitle}
       />
       <InputTopic
         topic="Nome Cultural"
@@ -79,14 +75,14 @@ const Details = () => {
           width: '90%',
         }}
       />
-      <InputTopic
+      <InputTopicMasked
         topic="Data de Publicação"
         onChangeText={onChangePublishedDate}
         value={publishedDate}
         styleViewContainer={{
           width: '90%',
         }}
-        mask={'99/99/9999'}
+        mask="99/99/9999"
       />
 
       <InputsFormsMusic />

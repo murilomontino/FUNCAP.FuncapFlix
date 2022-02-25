@@ -1,6 +1,6 @@
 export default {
   button: '#12415f',
-  button_terciary: '#1A5E8A',
+  button_tertiary: '#1A5E8A',
   bluePerCent: {
     _10: 'rgba(18, 65, 95, 0.1)',
     _20: 'rgba(18, 65, 95, 0.2)',

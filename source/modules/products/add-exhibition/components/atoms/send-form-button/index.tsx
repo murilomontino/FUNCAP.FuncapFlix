@@ -32,6 +32,7 @@ function SendFormExhibitionButton<T>({ onSubmit, reset, validated }: Props<T>) {
     switch (response.statusCode) {
       case 200:
         AlertToast('success', 'Cadastrado Com Sucesso!')
+        reset()
         break
 
       default:
@@ -43,7 +44,6 @@ function SendFormExhibitionButton<T>({ onSubmit, reset, validated }: Props<T>) {
     }
 
     hideLoading()
-    reset()
   }
 
   return (

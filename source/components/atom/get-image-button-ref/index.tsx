@@ -1,19 +1,12 @@
 import React, { MutableRefObject, useState } from 'react'
-import {
-  Image,
-  ImageStyle,
-  StyleProp,
-  StyleSheet,
-  TouchableHighlight,
-  View,
-} from 'react-native'
-import { Button } from 'react-native-paper'
+import { Image, ImageStyle, StyleProp } from 'react-native'
 
 import * as DocumentPicker from 'expo-document-picker'
 
 import { Document } from '@/forms/Product/types'
 
-import colors from '@/global/colors'
+import Button from '../button'
+import { Container, ImageButton } from '../get-image-button/styles'
 
 type Props = {
   image: MutableRefObject<Document>
@@ -71,8 +64,21 @@ const GetImageButton = ({
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableHighlight style={styles.imageButton} onPress={onPress}>
+    <Container>
+      <ImageButton
+        style={{
+          marginBottom: 8,
+          elevation: 5,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 1,
+            height: 2,
+          },
+          shadowOpacity: 1,
+          shadowRadius: 4,
+        }}
+        onPress={onPress}
+      >
         <Image
           style={imageStyle}
           defaultSource={require('@/assets/not-image.png')}
@@ -80,42 +86,13 @@ const GetImageButton = ({
             uri: imageState?.type === 'success' ? `${imageState?.uri}` : '',
           }}
         />
-      </TouchableHighlight>
-      <Button style={[styles.buttonContainer]} color="#fff" onPress={onPress}>
-        {imageState?.type === 'success' ? imageState?.name : placeholder}
-      </Button>
-    </View>
+      </ImageButton>
+      <Button
+        text={imageState?.type === 'success' ? imageState?.name : placeholder}
+        onPress={onPress}
+      />
+    </Container>
   )
 }
 
 export default GetImageButton
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    backgroundColor: colors.button_secondary,
-    borderRadius: 4,
-    width: 250,
-    height: 50,
-    margin: 8,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignContent: 'center',
-    borderWidth: 1,
-    borderColor: colors.grey20,
-  },
-  imageButton: {
-    marginBottom: 8,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 4,
-  },
-})

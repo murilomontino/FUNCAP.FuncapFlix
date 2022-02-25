@@ -6,12 +6,12 @@
 		"types": [
 			"jest",
 			"node",
-      "cypress"
 		],
 	
 		"allowJs": true,
 		"strict": false,
 		"skipLibCheck": true,
+      "noImplicitAny": false,
 		"noEmit": false,
 		"declaration": true,
 		"emitDeclarationOnly": true,
@@ -32,7 +32,6 @@
 	},
 	"include": [
 		"source/**/*",
-    "cypress/integration/**/*"
 	],
 	"exclude": [
 		"node_modules",

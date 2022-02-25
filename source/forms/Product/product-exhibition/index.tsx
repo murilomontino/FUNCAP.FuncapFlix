@@ -50,8 +50,14 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
     onChangeFinancialResources,
   } = useAttrsProduct()
 
-  const { file, mapFiles, onChangeAttrPhotos, onChangeFile, onRemovePhoto } =
-    useAttrsExhibitionFiles()
+  const {
+    file,
+    mapFiles,
+    onChangeAttrPhotos,
+    onChangeFile,
+    onRemovePhoto,
+    onChangeMapFiles,
+  } = useAttrsExhibitionFiles()
 
   const { submit } = useSubmitExhibition()
   const { submit: submitPhoto } = useSubmitPhoto()
@@ -70,7 +76,15 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
     file.splice(0, file.length)
   }, [])
 
-  const onSubmit = async () => {
+  const onSubmitPhoto = async ({
+    exibicaoId,
+    nome_exibicao,
+    produtoId,
+  }: {
+    nome_exibicao: string
+    exibicaoId: number
+    produtoId: number
+  }) => {
     return submitPhoto({
       artista: culturalName,
       arquivo: photoOfArtist.current?.uri,
@@ -79,10 +93,10 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
       tipo_de_imagem: photoOfArtist.current?.mimeType,
       tipo_de_foto: ExhibitionPhotosTypes.foto_de_artista,
       titulo: culturalName,
-      data: null,
-      nome_exibicao: '0025cc4d6223212f134a90',
-      exibicaoId: 1,
-      produtoId: 112,
+      data: new Date().toISOString(),
+      nome_exibicao: nome_exibicao,
+      exibicaoId: exibicaoId,
+      produtoId: produtoId,
     })
   }
 
@@ -102,6 +116,37 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
       capa: thumbnail.uri ?? undefined,
       tipo_capa: (thumbnail.mimeType as TypeImgCapa) ?? undefined,
     })
+  }
+
+  const onSubmit = async () => {
+    const filesErr = await Promise.all(
+      mapFiles.filter(async (file) => {
+        const response = await submitPhoto({
+          artista: culturalName,
+          arquivo: file.get('uri'),
+          descricao: file.get('descricao'),
+          nome_arquivo: file.get('name'),
+          tipo_de_imagem: file.get('mimeType'),
+          tipo_de_foto: file.get(
+            'tipo_de_foto'
+          ) as unknown as ExhibitionPhotosTypes,
+          titulo: file.get('titulo'),
+          data: file.get('data'),
+          nome_exibicao: '0025cc4d6223212f134a90',
+          exibicaoId: 1,
+          produtoId: 112,
+        })
+
+        if (response.statusCode !== 200) {
+          file.set('error', 'true')
+          return file
+        }
+      })
+    )
+
+    await onChangeMapFiles(filesErr)
+
+    return { statusCode: 400 }
   }
 
   const validated = useMemo(() => {
@@ -144,6 +189,7 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
         biography,
         photoOfArtist,
         titleExhibition,
+        onChangeMapFiles,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,

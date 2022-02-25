@@ -9,3 +9,5 @@ declare module '*.(png|jpg|jpeg|gif|webp|svg)$' {
   const content: string
   export default content
 }
+
+declare module '*.png'

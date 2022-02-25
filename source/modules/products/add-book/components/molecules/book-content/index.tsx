@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { RadioButton } from 'react-native-paper'
 
-import InputTopic from '@/components/atom/input-topic'
+import InputTopic from '@/components/molecule/input-topic'
+import InputTopicMasked from '@/components/molecule/input-topic-masked'
 
 import { useFormBookContent } from '@/forms/Product/product-book/hooks'
 
@@ -38,7 +38,7 @@ const BookContent = () => {
         }}
         maxLength={50}
       />
-      <InputTopic
+      <InputTopicMasked
         value={numberOfPages}
         onChangeText={onChangeNumberOfPages}
         topic="Num de páginas"
@@ -53,7 +53,7 @@ const BookContent = () => {
         }}
         maxLength={4}
       />
-      <InputTopic
+      <InputTopicMasked
         value={size}
         onChangeText={onChangeSize}
         topic="Dimensões"
@@ -81,11 +81,11 @@ const BookContent = () => {
           alignItems: 'center',
         }}
       >
-        <RadioButton
+        {/* <RadioButton
           value="Ilustrado"
           status={illustrated ? 'checked' : 'unchecked'}
           onPress={() => onChangeIllustrated(!illustrated)}
-        />
+        /> */}
         <Text
           style={{
             marginLeft: 10,

@@ -7,7 +7,7 @@ import SlideContent from './components/templates/slider-content'
 
 const SLIDE_HEIGHT = 300
 
-const HomeScreen = () => {
+const HomeScreen = (params: any) => {
   const web = Platform.OS === 'web'
 
   const { window, screen } = useDimensions()
