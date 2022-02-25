@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa } from '@/types'
+import { Category, GettersTracks, TypeImgCapa } from '@/types'
 import { SettersTracks, SettersAlbums, GettersAlbums } from '@/types/products'
 
 import { useLoading } from '@/context/LoadingModal'
@@ -27,6 +27,7 @@ import {
 } from '@/forms/Product/product-music/hooks'
 
 import api from '@/services'
+import { Getter } from '@/services/config/types'
 
 const SendFormBookButton = () => {
   // Contexts and Hooks ------------------------------------------------------------
@@ -54,7 +55,7 @@ const SendFormBookButton = () => {
   // -----------------------------------------------------------------------------
   // Variáveis que indicam se o formulário obteve sucesso ou falha
   // caso o formulário tenha ocorrido erro em alguma música, errFile terá o nome da música
-  const sucessFile: string[] = []
+  const successFile: string[] = []
   const errFile: string[] = []
 
   // Condicional para verificar se o usuário selecionou algum arquivo, e tenha informado:
@@ -93,10 +94,13 @@ const SendFormBookButton = () => {
   // Caso o formulário seja válido, será exibido um toast com a mensagem de sucesso
   // e será feito um reload da página
   const sendFiles = async (music: SettersTracks) => {
-    const { status } = await api.post<SettersTracks>('/musicas/musica', music)
+    const { data: track } = await api.post<Getter<GettersTracks>>(
+      '/musicas/musica',
+      music
+    )
 
-    if (status === 200) {
-      sucessFile.push(music.titulo)
+    if (track.statusCode === 200) {
+      successFile.push(music.titulo)
     } else {
       errFile.push(music.titulo)
     }
@@ -106,7 +110,7 @@ const SendFormBookButton = () => {
     try {
       showLoading()
 
-      const album: SettersAlbums = {
+      const albumDoc: SettersAlbums = {
         cpfOrCnpj: cpfOrCnpj,
         nome_cultural: culturalName,
         data_de_publicacao: publishedDate,
@@ -121,19 +125,19 @@ const SendFormBookButton = () => {
         tags: tags,
       }
 
-      const { data, status } = await api.post<GettersAlbums>(
+      const { data: album } = await api.post<Getter<GettersAlbums>>(
         '/musicas/album',
-        album
+        albumDoc
       )
 
-      switch (status) {
+      switch (album.statusCode) {
         case 200:
           file.forEach(async (document, index) => {
             const music: SettersTracks = {
               artista: culturalName,
-              produtoId: data.produtoId, //
-              nome_album: data.nome_unico, //
-              albumId: data.id, //
+              produtoId: album.data.produtoId, //
+              nome_album: album.data.nome_unico, //
+              albumId: album.data.id, //
               titulo: titleMusics[index],
               arquivo: document.uri,
               categoria: Category.Music,

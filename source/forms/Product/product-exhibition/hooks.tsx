@@ -73,48 +73,18 @@ export const useFormExhibitionTags = () => {
   }
 }
 
-export const useFormExhibitionGeneros = () => {
-  const genero = useContextSelector(
+export const useFormExhibitionThumbnail = () => {
+  const thumbnail = useContextSelector(
     FormProductExhibitionContext,
-    (value) => value.genero
+    (value) => value.thumbnail
   )
-  const onChangeGeneros = useContextSelector(
+  const onChangeThumbnail = useContextSelector(
     FormProductExhibitionContext,
-    (value) => value.onChangeGeneros
-  )
-  return {
-    genero,
-    onChangeGeneros,
-  }
-}
-
-export const useFormExhibitionType = () => {
-  const type = useContextSelector(
-    FormProductExhibitionContext,
-    (value) => value.type
-  )
-  const onChangeType = useContextSelector(
-    FormProductExhibitionContext,
-    (value) => value.onChangeType
+    (value) => value.onChangeThumbnail
   )
   return {
-    type,
-    onChangeType,
-  }
-}
-
-export const useFormExhibitionImage = () => {
-  const image = useContextSelector(
-    FormProductExhibitionContext,
-    (value) => value.capa
-  )
-  const onChangeImage = useContextSelector(
-    FormProductExhibitionContext,
-    (value) => value.onChangeImage
-  )
-  return {
-    image,
-    onChangeImage,
+    thumbnail,
+    onChangeThumbnail,
   }
 }
 
@@ -188,7 +158,7 @@ export const useFormExhibitionFiles = () => {
 export const useFormExhibitionReset = () => {
   const reset = useContextSelector(
     FormProductExhibitionContext,
-    (value) => value.resetProductExhibition
+    (value) => value.reset
   )
   return {
     reset,
@@ -272,5 +242,28 @@ export const useFormExhibitionRemovePhoto = () => {
   )
   return {
     removePhoto,
+  }
+}
+
+export const useSubmitFormExhibition = () => {
+  const onSubmit = useContextSelector(
+    FormProductExhibitionContext,
+    (value) => value.onSubmit
+  )
+
+  const reset = useContextSelector(
+    FormProductExhibitionContext,
+    (value) => value.reset
+  )
+
+  const validated = useContextSelector(
+    FormProductExhibitionContext,
+    (value) => value.validated
+  )
+
+  return {
+    onSubmit,
+    reset,
+    validated,
   }
 }

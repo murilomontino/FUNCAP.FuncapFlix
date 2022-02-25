@@ -11,8 +11,8 @@ import MultipleSelectedGenero from '@/components/atom/multiple-selected-genero'
 import {
   useFormBookCategory,
   useFormBookFinancialResources,
-  useFormBookGenero,
-  useFormBookImage,
+  useFormBookGenres,
+  useFormBookThumbnail,
 } from '@/forms/Product/product-book/hooks'
 
 import GetFileButton from '../../atoms/get-file-button'
@@ -42,9 +42,9 @@ const Left = () => {
   const { onChangeFinancialResources, financialResources } =
     useFormBookFinancialResources()
 
-  const { image, onChangeImage } = useFormBookImage()
+  const { thumbnail, onChangeThumbnail } = useFormBookThumbnail()
 
-  const { genero, onChangeGeneros } = useFormBookGenero()
+  const { genres, onChangeGenres } = useFormBookGenres()
 
   return (
     <View
@@ -58,7 +58,7 @@ const Left = () => {
         borderColor: 'rgba(0,0,0, 0.4)',
       }}
     >
-      <GetImageButton image={image} onChangeImage={onChangeImage} />
+      <GetImageButton image={thumbnail} onChangeImage={onChangeThumbnail} />
       <Dropdown
         items={ItemsTypesProducts}
         onChangeValue={onChangeType}
@@ -76,7 +76,7 @@ const Left = () => {
         value={financialResources}
         label={'Recursos'.toUpperCase()}
       />
-      <MultipleSelectedGenero value={genero} onChangeValue={onChangeGeneros} />
+      <MultipleSelectedGenero value={genres} onChangeValue={onChangeGenres} />
     </View>
   )
 }

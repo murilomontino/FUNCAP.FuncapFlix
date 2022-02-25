@@ -2,50 +2,20 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa } from '@/types/index'
-import { SettersExhibitions } from '@/types/products/'
-
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
 
 import Button from '@/components/atom/button'
 
-import {
-  useFormExhibitionGeneros,
-  useFormExhibitionTags,
-  useFormExhibitionImage,
-  useFormExhibitionCPFandCNPJ,
-  useFormExhibitionFinancialResources,
-  useFormExhibitionData,
-  useFormExhibitionFiles,
-  useFormExhibitionEndDate,
-  useFormExhibitionLocation,
-  useFormExhibitionStartDate,
-  useFormExhibitionTitle,
-  useFormExhibitionDescription,
-  useFormExhibitionReset,
-} from '@/forms/Product/product-exhibition/hooks'
+import { Getter } from '@/services/config/types'
 
-import api from '@/services'
+type Props<T> = {
+  onSubmit: () => Promise<Getter<T>>
+  reset: () => void
+  validated: boolean
+}
 
-const SendFormExhibitionButton = () => {
-  // fields ---------------------------------------------------------------------
-  // -----------------------------------------------------------------------------
-  const { tags } = useFormExhibitionTags()
-  const { genero } = useFormExhibitionGeneros()
-  const { endDate } = useFormExhibitionEndDate()
-  const { startDate } = useFormExhibitionStartDate()
-  const { title } = useFormExhibitionTitle()
-  const { location } = useFormExhibitionLocation()
-  const { description } = useFormExhibitionDescription()
-  const { image } = useFormExhibitionImage()
-  const { mapFiles } = useFormExhibitionFiles()
-  const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormExhibitionCPFandCNPJ()
-  const { financialResources } = useFormExhibitionFinancialResources()
-  const { culturalName } = useFormExhibitionData()
-
-  // Função com o objetivo de resetar o formulário de produtos
-  const { reset } = useFormExhibitionReset()
+function SendFormExhibitionButton<T>({ onSubmit, reset, validated }: Props<T>) {
   // -----------------------------------------------------------------------------
   // Efeito Visual ----------------------------------------------------------------
   const { AlertToast } = useToast()
@@ -56,63 +26,33 @@ const SendFormExhibitionButton = () => {
   // -----------------------------------------------------------------------------
 
   const handleSubmit = async () => {
-    try {
-      showLoading()
+    showLoading()
+    const response = await onSubmit()
 
-      const { status, data } = await send({
-        artista: culturalName,
-        categoria: Category.Exhibition,
-        cpfOrCnpj,
-        tags,
-        generos: genero,
-        sobre_a_obra: description,
-        data_de_fim: endDate,
-        data_de_inicio: startDate,
-        titulo: title,
-        local: location,
-        recurso: financialResources,
-        capa: image.uri ?? undefined,
-        tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
-      })
+    switch (response.statusCode) {
+      case 200:
+        AlertToast('success', 'Cadastrado Com Sucesso!')
+        break
 
-      switch (status) {
-        case 200:
-          AlertToast('success', 'Livro Cadastrado Com Sucesso!')
-          break
-
-        default:
-          AlertToast(
-            'erro',
-            `Erro ao cadastrar Exposição! Tente novamente. ${data}`
-          )
-          break
-      }
-
-      hideLoading()
-    } catch (error) {
-      AlertToast(
-        'erro',
-        `Erro ao cadastrar Exposição! Tente novamente. ${error.message}`
-      )
-    } finally {
-      // await reset()
+      default:
+        AlertToast(
+          'erro',
+          `Erro ao cadastrar! Tente novamente. ${response.error}`
+        )
+        break
     }
-  }
 
-  const send = async (document: SettersExhibitions) => {
-    console.log(document)
-
-    try {
-      const { data, status } = await api.post('exhibitions', document)
-      return { data, status }
-    } catch (error: any) {
-      return error.response
-    }
+    hideLoading()
+    reset()
   }
 
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <Button disabled={false} onPress={handleSubmit} text="Enviar Exposição" />
+      <Button
+        disabled={!validated}
+        onPress={handleSubmit}
+        text="Enviar Exposição"
+      />
     </View>
   )
 }

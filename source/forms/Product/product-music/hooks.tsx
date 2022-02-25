@@ -112,7 +112,7 @@ export const removeFormMusic = () => {
 export const useFormMusicImage = () => {
   const image = useContextSelector(
     FormProductMusicContext,
-    (value) => value.capa
+    (value) => value.thumbnail
   )
 
   const onChangeImageURL = useContextSelector(
@@ -122,7 +122,7 @@ export const useFormMusicImage = () => {
 
   const onChangeImage = useContextSelector(
     FormProductMusicContext,
-    (value) => value.onChangeImage
+    (value) => value.onChangeThumbnail
   )
 
   return {
@@ -150,11 +150,11 @@ export const useFormMusicTags = () => {
 export const useFormMusicGenero = () => {
   const genero = useContextSelector(
     FormProductMusicContext,
-    (value) => value.genero
+    (value) => value.genres
   )
   const onChangeGeneros = useContextSelector(
     FormProductMusicContext,
-    (value) => value.onChangeGeneros
+    (value) => value.onChangeGenres
   )
   return {
     genero,

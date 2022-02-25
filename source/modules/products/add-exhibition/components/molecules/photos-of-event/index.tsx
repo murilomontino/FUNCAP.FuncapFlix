@@ -34,6 +34,7 @@ const PhotosOfEvent = () => {
       />
       <View
         style={{
+          zIndex: 1,
           flex: 1,
           flexDirection: 'row',
           flexWrap: 'wrap',
@@ -43,17 +44,23 @@ const PhotosOfEvent = () => {
       >
         {mapFiles.map((item, index) => {
           return (
-            <CardPhotoOfEvent
+            <View
               key={index}
-              uri={item.get('uri')}
-              title={item.get('titulo')}
-              description={item.get('descricao')}
-              date={item.get('data')}
-              typeOfPhoto={item.get('tipo_de_foto')}
-              onChangeAttrs={onChangeAttrsPhotos}
-              onRemovePhoto={removePhoto}
-              index={index}
-            />
+              style={{
+                zIndex: 999 - index,
+              }}
+            >
+              <CardPhotoOfEvent
+                uri={item.get('uri')}
+                title={item.get('titulo')}
+                description={item.get('descricao')}
+                date={item.get('data')}
+                typeOfPhoto={item.get('tipo_de_foto')}
+                onChangeAttrs={onChangeAttrsPhotos}
+                onRemovePhoto={() => removePhoto(index)}
+                index={index}
+              />
+            </View>
           )
         })}
       </View>

@@ -1,8 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useMemo, useState } from 'react'
 import { View, Text } from 'react-native'
 
+import DatePicker from '@/components/atom/date-picker'
 import InputTextArea from '@/components/atom/input-text-area'
 import InputTopic from '@/components/atom/input-topic'
+import InputTopicRef from '@/components/atom/input-topic-ref'
 
 import {
   useFormExhibitionDescription,
@@ -13,15 +15,51 @@ import {
 } from '@/forms/Product/product-exhibition/hooks'
 
 const Exhibition = () => {
+  const [disabled, setDisabled] = useState(true)
+
   const { location, onChangeLocation } = useFormExhibitionLocation()
   const { title, onChangeTitle } = useFormExhibitionTitle()
   const { endDate, onChangeEndDate } = useFormExhibitionEndDate()
   const { startDate, onChangeStartDate } = useFormExhibitionStartDate()
   const { description, onChangeDescription } = useFormExhibitionDescription()
 
+  const [startDateState, setStartDate] = useState<Date>(() => {
+    if (startDate) {
+      return new Date(startDate)
+    }
+    return null
+  })
+  const [endDateState, setEndDate] = useState<Date>(() => {
+    if (endDate.current) {
+      return new Date(endDate.current)
+    }
+    return null
+  })
+
+  const onChangeStartDateState = (date: Date) => {
+    setStartDate(date)
+    onChangeStartDate(date?.toISOString())
+  }
+
+  const onChangeEndDateState = (date: Date) => {
+    setEndDate(date)
+    onChangeEndDate(date?.toISOString())
+  }
+
+  const memoDateMinimum = useMemo(
+    () => new Date(startDateState),
+    [startDateState]
+  )
+
+  useEffect(() => {
+    if (!startDateState) setDisabled(true)
+    else setDisabled(false)
+  }, [startDateState])
+
   return (
     <View
       style={{
+        zIndex: 1,
         flex: 1,
         width: '100%',
         height: '100%',
@@ -53,26 +91,8 @@ const Exhibition = () => {
           width: '70%',
         }}
       />
-      <InputTopic
-        topic="Date de Inicio"
-        onChangeText={onChangeStartDate}
-        requered
-        value={startDate}
-        styleViewContainer={{
-          width: '70%',
-        }}
-        mask={'99/99/9999'}
-      />
-      <InputTopic
-        topic="Data de Fim"
-        onChangeText={onChangeEndDate}
-        value={endDate}
-        styleViewContainer={{
-          width: '70%',
-        }}
-        mask={'99/99/9999'}
-      />
-      <InputTopic
+
+      <InputTopicRef
         topic="Local"
         onChangeText={onChangeLocation}
         requered
@@ -81,6 +101,7 @@ const Exhibition = () => {
           width: '70%',
         }}
       />
+
       <InputTextArea
         height={360}
         maxLength={2400}
@@ -91,6 +112,28 @@ const Exhibition = () => {
         value={description}
         widthContainer={'70%'}
       />
+      <View
+        style={{
+          zIndex: 10,
+          flexDirection: 'row',
+        }}
+      >
+        <DatePicker
+          topic="Data de Início"
+          requered
+          onChangeValue={onChangeStartDateState}
+          value={startDateState}
+          colorIcon={'#000'}
+        />
+        <DatePicker
+          disabled={disabled}
+          topic="Data de Fim"
+          onChangeValue={onChangeEndDateState}
+          minimumDate={memoDateMinimum}
+          value={endDateState}
+          colorIcon={'#000'}
+        />
+      </View>
     </View>
   )
 }

@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import * as DocumentPicker from 'expo-document-picker'
 
-import { Category, FinancialResources, TypesProducts } from '@/types'
+import { Category, TypesProducts } from '@/types'
 import { createContext } from 'use-context-selector'
 
 import { Document, FormProductBook } from '../types'
+
+import { useAttrsProduct } from '@/hooks/use-attrs-product'
 
 export const FormProductBookContext = createContext({} as FormProductBook)
 
@@ -25,15 +27,28 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [file, setFile] = useState({} as Document)
 
   // State -----------------------------------------------------------------------
-  const [financialResources, setFinancialResources] = useState(0)
-  const [genero, setGenero] = useState<string[]>([])
-  const [tags, setTags] = useState<string[]>([])
-  const [capa, setCapa] = useState({} as Document)
+
+  const {
+    cpfOrCnpj,
+    cpfOrCnpjIsValid,
+    culturalName,
+    financialResources,
+    genres,
+    tags,
+    thumbnail,
+    // onChange States
+    onChangeCPForCNPJ,
+    onChangeCPForCNPJIsValid,
+    onChangeCulturalName,
+    onChangeFinancialResources,
+    onChangeGenres,
+    onChangeTags,
+    onChangeThumbnail,
+  } = useAttrsProduct()
+
   const [type, setType] = useState(TypesProducts.PDF)
-  const [cpfOrCnpj, SetCPForCNPJ] = useState('')
-  const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
+
   const [publishedDate, setPublishedDate] = useState('')
-  const [culturalName, setCulturalName] = useState('')
 
   // cleanup ---------------------------------------------------------------------
   useEffect(() => {
@@ -49,15 +64,15 @@ const FormProductBookProvider: React.FC = ({ children }) => {
       setIllustrated(false)
       setIlustrador('')
       setFile({} as Document)
-      setFinancialResources(0)
-      setGenero([])
-      setTags([])
-      setCapa({} as Document)
+      onChangeFinancialResources(0)
+      onChangeGenres([])
+      onChangeTags([])
+      onChangeThumbnail({} as Document)
       setType(TypesProducts.MP3)
-      SetCPForCNPJ('')
-      SetCPForCNPJIsValid(false)
+      onChangeCPForCNPJ('')
+      onChangeCPForCNPJIsValid(false)
       setPublishedDate('')
-      setCulturalName('')
+      onChangeCulturalName('')
     }
   }, [])
 
@@ -149,67 +164,19 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     [publishedDate]
   )
 
-  const onChangeCulturalName = useCallback(
-    (value: string) => {
-      setCulturalName(value)
-    },
-    [culturalName]
-  )
-
   const onChangeImageURL = useCallback((value: string, title: string) => {
-    setCapa({
+    onChangeThumbnail({
       type: 'success',
       name: title,
       uri: value,
     } as Document)
   }, [])
 
-  const onChangeFinancialResources = useCallback(
-    (value: FinancialResources) => {
-      setFinancialResources(value)
-    },
-    [financialResources]
-  )
-
-  const onChangeCPForCNPJ = useCallback(
-    (text: string) => {
-      SetCPForCNPJ(text)
-    },
-    [cpfOrCnpj]
-  )
-
-  const onChangeCPForCNPJIsValid = useCallback(
-    (value: boolean) => {
-      SetCPForCNPJIsValid(value)
-    },
-    [cpfOrCnpjIsValid]
-  )
   const onChangeType = useCallback(
     (value: number) => {
       setType(value)
     },
     [type]
-  )
-  const onChangeImage = useCallback(
-    async (image: DocumentPicker.DocumentResult) => {
-      if (image.type === 'success') {
-        setCapa(image)
-      }
-    },
-    [capa]
-  )
-
-  const onChangeGeneros = useCallback(
-    (generos: string[]) => {
-      setGenero(generos)
-    },
-    [genero]
-  )
-  const onChangeTags = useCallback(
-    (tags: string[]) => {
-      setTags(tags)
-    },
-    [tags]
   )
 
   const resetProductBook = useCallback(() => {
@@ -224,25 +191,25 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     setIllustrated(false)
     setIlustrador('')
     setFile({} as Document)
-    setGenero([])
-    setTags([])
-    setCapa({} as Document)
-    SetCPForCNPJ('')
-    SetCPForCNPJIsValid(false)
+    onChangeGenres([])
+    onChangeTags([])
+    onChangeThumbnail({} as Document)
+    onChangeCPForCNPJ('')
+    onChangeCPForCNPJIsValid(false)
     setPublishedDate('')
-    setCulturalName('')
+    onChangeCulturalName('')
   }, [])
 
   return (
     <FormProductBookContext.Provider
       value={{
         category,
-        capa,
+        thumbnail,
         cpfOrCnpj,
         cpfOrCnpjIsValid,
         culturalName,
         financialResources,
-        genero,
+        genres,
         tags,
         publishedDate,
         type,
@@ -257,12 +224,12 @@ const FormProductBookProvider: React.FC = ({ children }) => {
         size,
         illustrator,
         file,
-        onChangeImage,
+        onChangeGenres,
+        onChangeThumbnail,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,
         onChangeFinancialResources,
-        onChangeGeneros,
         onChangeImageURL,
         onChangePublishedDate,
         onChangeTags,

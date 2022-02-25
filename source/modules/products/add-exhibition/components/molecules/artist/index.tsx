@@ -2,8 +2,8 @@ import React, { memo } from 'react'
 import { View, Text } from 'react-native'
 
 import FieldCPFandCNPJGeneric from '@/components/atom/field-cpf-and-cnpj'
-import GetImageButton from '@/components/atom/get-image-button'
-import InputTextArea from '@/components/atom/input-text-area'
+import GetImageButton from '@/components/atom/get-image-button-ref'
+import InputTextArea from '@/components/atom/input-text-area-ref'
 import InputTopic from '@/components/atom/input-topic'
 
 import {

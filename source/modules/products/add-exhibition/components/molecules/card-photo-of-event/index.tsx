@@ -5,6 +5,7 @@ import { ExhibitionPhotosTypes } from '@/types'
 import { AntDesign } from '@expo/vector-icons'
 
 import CacheImage from '@/components/atom/cache-image'
+import DatePicker from '@/components/atom/date-picker'
 import Dropdown from '@/components/atom/dropdown'
 import InputTextArea from '@/components/atom/input-text-area'
 import InputTopic from '@/components/atom/input-topic'
@@ -43,8 +44,8 @@ const CardPhotoOfEvent = ({
     onChangeAttrs(`${type}`, index, 'tipo_de_foto')
   }
 
-  const onChangeDate = (text: string) => {
-    onChangeAttrs(text, index, 'data')
+  const onChangeDate = (text: Date) => {
+    onChangeAttrs(text?.toISOString(), index, 'data')
   }
 
   const onChangeDescription = (text: string) => {
@@ -62,8 +63,8 @@ const CardPhotoOfEvent = ({
       style={[
         {
           zIndex: 1,
-          width: 360,
-          height: 440,
+          width: 340,
+          height: 420,
           margin: 10,
           backgroundColor: 'rgba(0,0,0,0.3)',
           borderRadius: 2,
@@ -121,34 +122,7 @@ const CardPhotoOfEvent = ({
         placeholder={'Título da foto*'}
         topic=""
       />
-      <InputTopic
-        requered
-        stylesViewTitle={{
-          marginVertical: 8,
-          padding: 4,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        styleTopic={{
-          fontSize: 16,
-          color: '#fff',
-          fontWeight: 'bold',
-          textAlign: 'center',
-        }}
-        styleViewContainer={{
-          flexDirection: 'column',
-        }}
-        styleViewInput={{
-          flex: 1,
-          width: '95%',
-          paddingHorizontal: 8,
-        }}
-        onChangeText={onChangeDate}
-        value={date}
-        placeholder={'Data da foto*'}
-        mask={'99/99/9999'}
-        topic=""
-      />
+
       <InputTextArea
         topic=""
         placeholder="Descrição da foto"
@@ -159,6 +133,21 @@ const CardPhotoOfEvent = ({
         numberLines={4}
         widthContainer={'95%'}
       />
+      <View
+        style={{
+          zIndex: 10,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <DatePicker
+          topic=""
+          onChangeValue={onChangeDate}
+          value={new Date()}
+          colorIcon={colors.black}
+        />
+      </View>
       <Dropdown
         styleContainerButton={{
           height: 40,

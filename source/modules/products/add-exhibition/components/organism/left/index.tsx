@@ -10,8 +10,9 @@ import InputTags from '@/components/atom/tags'
 
 import {
   useFormExhibitionFinancialResources,
-  useFormExhibitionImage,
+  useFormExhibitionThumbnail,
   useFormExhibitionTags,
+  useSubmitFormExhibition,
 } from '@/forms/Product/product-exhibition/hooks'
 
 import SendFormBookButton from '../../atoms/send-form-button'
@@ -34,9 +35,10 @@ const Left = () => {
   const { onChangeFinancialResources, financialResources } =
     useFormExhibitionFinancialResources()
 
-  const { image, onChangeImage } = useFormExhibitionImage()
+  const { thumbnail, onChangeThumbnail } = useFormExhibitionThumbnail()
 
   const { tags, onChangeTags } = useFormExhibitionTags()
+  const { onSubmit, reset, validated } = useSubmitFormExhibition()
 
   return (
     <View
@@ -51,8 +53,8 @@ const Left = () => {
       }}
     >
       <GetImageButton
-        image={image}
-        onChangeImage={onChangeImage}
+        image={thumbnail}
+        onChangeImage={onChangeThumbnail}
         height={200}
         width={200}
       />
@@ -65,7 +67,7 @@ const Left = () => {
         label={'Recursos'.toUpperCase()}
       />
       <InputTags onChangeTags={onChangeTags} tags={tags} />
-      <SendFormBookButton />
+      <SendFormBookButton onSubmit={onSubmit} reset={reset} validated={true} />
     </View>
   )
 }

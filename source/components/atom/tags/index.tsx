@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { MutableRefObject, useState } from 'react'
 import { TouchableOpacity, Text, View } from 'react-native'
 import Tags from 'react-native-tags'
 
 import colors from '@/global/colors'
 
 type Props = {
-  tags: string[]
+  tags: string[] | MutableRefObject<string[]>
   onChangeTags: (text: string[]) => void
 }
 
 const InputTags = ({ onChangeTags, tags }: Props) => {
+  const [selectedTags, setSelectedTags] = useState(() => {
+    if (Array.isArray(tags)) {
+      return tags
+    }
+    return tags.current
+  })
+
+  const onChangeSelectedTags = (text: string[]) => {
+    setSelectedTags(text)
+    onChangeTags(text)
+  }
+
   return (
     <View style={{ padding: 12 }}>
       <Text
@@ -41,8 +53,8 @@ const InputTags = ({ onChangeTags, tags }: Props) => {
         textInputProps={{
           placeholder: 'Tags',
         }}
-        initialTags={[]}
-        onChangeTags={onChangeTags}
+        initialTags={selectedTags}
+        onChangeTags={onChangeSelectedTags}
         containerStyle={{
           justifyContent: 'center',
           borderColor: colors.grey20,

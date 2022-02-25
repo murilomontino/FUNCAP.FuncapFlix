@@ -15,7 +15,9 @@ export interface SettersExhibitions
 
 export interface SettersExhibitionsPhotos
   extends Omit<exhibitionPhotos, 'documentoId' | 'id'> {
+  produtoId?: number
   arquivo: string
+  tipo_de_imagem: string
   nome_arquivo: string
   nome_exibicao: string
   name_uuid: string
@@ -23,7 +25,9 @@ export interface SettersExhibitionsPhotos
 
 export interface SettersExhibitionsWorks
   extends Omit<exhibitionWorks, 'documentoId' | 'id'> {
+  produtoId?: number
   arquivo: string
+  tipo_de_imagem: string
   nome_arquivo: string
   nome_exibicao: string
   name_uuid: string

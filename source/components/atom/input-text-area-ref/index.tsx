@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { MutableRefObject, useCallback, useMemo, useState } from 'react'
 import { View, TextInput, Platform, Text, StyleSheet } from 'react-native'
 
 import colors from '@/global/colors'
@@ -9,7 +9,7 @@ type Props = {
   maxLength: number
   height: number
   placeholder?: string
-  value: string
+  value: MutableRefObject<string>
   requered?: boolean
   onChangeValue: (text: string) => void
   widthContainer?: number | string
@@ -27,6 +27,13 @@ const InputTextArea = ({
   onChangeValue,
 }: Props) => {
   const web = Platform.OS === 'web'
+
+  const [valueText, setValueText] = useState(value.current)
+
+  const onChangeValueText = useCallback((text: string) => {
+    setValueText(text)
+    onChangeValue(text)
+  }, [])
 
   const outlineWeb = useMemo(() => {
     return web ? styles.outlineWeb : styles.outline
@@ -48,9 +55,9 @@ const InputTextArea = ({
         </View>
       )}
       <TextInput
-        value={value}
+        value={valueText}
         placeholder={placeholder || topic}
-        onChangeText={onChangeValue}
+        onChangeText={onChangeValueText}
         style={[
           {
             flexWrap: 'wrap',
@@ -74,7 +81,7 @@ const InputTextArea = ({
           right: 0,
         }}
       >
-        {value.length}/{maxLength}
+        {valueText.length}/{maxLength}
       </Text>
     </View>
   )

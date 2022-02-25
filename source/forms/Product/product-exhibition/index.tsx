@@ -1,244 +1,172 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
-import * as DocumentPicker from 'expo-document-picker'
-
-import { Category, FinancialResources, TypesProducts } from '@/types'
+import { Category, ExhibitionPhotosTypes, TypeImgCapa } from '@/types'
 import { createContext } from 'use-context-selector'
 
-import { Document } from '../types'
-import { FormProductExhibition, keys } from './type'
+import { FormProductExhibition } from './type'
+
+import { useAttrsExhibition } from '@/hooks/use-attrs-exhibition'
+import { useAttrsExhibitionFiles } from '@/hooks/use-attrs-exhibition-files'
+import { useAttrsProduct } from '@/hooks/use-attrs-product'
+import { useSubmitExhibition } from '@/hooks/use-submit-exhibition'
+import { useSubmitPhoto } from '@/hooks/use-submit-photos'
 
 export const FormProductExhibitionContext = createContext(
   {} as FormProductExhibition
 )
 
 const FormProductExhibitionProvider: React.FC = ({ children }) => {
-  const category = Category.Exhibition
+  // Fields Exhibitions
+  const {
+    biography,
+    descriptionExhibition,
+    endDate,
+    location,
+    photoOfArtist,
+    startDate,
+    titleExhibition,
+    onChangeBiography,
+    onChangeDescriptionExhibition,
+    onChangeEndDate,
+    onChangeLocation,
+    onChangePhotoOfArtist,
+    onChangeStartDate,
+    onChangeTitleExhibition,
+  } = useAttrsExhibition()
 
-  const [titleExhibition, setTitleExhibition] = useState('')
-  const [descriptionExhibition, setDescriptionExhibition] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-  const [location, setLocation] = useState('')
-  const [photoOfArtist, setPhotoOfArtist] = useState({} as Document)
-  const [biography, setBiography] = useState('')
+  // Fields Products
+  const {
+    tags,
+    thumbnail,
+    cpfOrCnpj,
+    cpfOrCnpjIsValid,
+    culturalName,
+    financialResources,
+    onChangeTags,
+    onChangeThumbnail,
+    onChangeCPForCNPJ,
+    onChangeCPForCNPJIsValid,
+    onChangeCulturalName,
+    onChangeFinancialResources,
+  } = useAttrsProduct()
 
-  const [mapFiles, setMapFiles] = useState<Map<keys, string>[]>([])
-  const file: Document[] = []
+  const { file, mapFiles, onChangeAttrPhotos, onChangeFile, onRemovePhoto } =
+    useAttrsExhibitionFiles()
 
-  // State -----------------------------------------------------------------------
-  const [financialResources, setFinancialResources] = useState(0)
-  const [genero, setGenero] = useState<string[]>([])
-  const [tags, setTags] = useState<string[]>([])
-  const [capa, setCapa] = useState({} as Document)
-  const [type, setType] = useState(TypesProducts.PHOTOS)
-  const [cpfOrCnpj, SetCPForCNPJ] = useState('')
-  const [cpfOrCnpjIsValid, SetCPForCNPJIsValid] = useState(false)
-  const [culturalName, setCulturalName] = useState('')
+  const { submit } = useSubmitExhibition()
+  const { submit: submitPhoto } = useSubmitPhoto()
 
-  const onChangeLocation = useCallback(
-    (value: string) => {
-      setLocation(value)
-    },
-    [location]
-  )
-
-  const onChangePhotoOfArtist = useCallback(
-    async (value: Document) => {
-      setPhotoOfArtist(value)
-    },
-    [photoOfArtist]
-  )
-
-  const onChangeBiography = useCallback(
-    (value: string) => {
-      setBiography(value)
-    },
-    [biography]
-  )
-
-  const onChangeDescriptionExhibition = useCallback(
-    (value: string) => {
-      setDescriptionExhibition(value)
-    },
-    [descriptionExhibition]
-  )
-
-  const onChangeStartDate = useCallback(
-    (value: string) => {
-      setStartDate(value)
-    },
-    [startDate]
-  )
-
-  const onChangeEndDate = useCallback(
-    (value: string) => {
-      setEndDate(value)
-    },
-    [endDate]
-  )
-
-  const onChangeFile = useCallback(
-    async (files) => {
-      file.push(...files)
-      const arrayMap = file.map((item) => {
-        const map = new Map<keys, string>()
-        Object.entries(item).forEach(([key, value]) => {
-          map.set(key as keys, value)
-        })
-        map.set('descricao', '')
-        map.set('data', '')
-        map.set('tipo_de_foto', '')
-        return map
-      })
-
-      setMapFiles([...mapFiles, ...arrayMap])
-    },
-    [file]
-  )
-
-  const onChangeAttrPhotos = useCallback(
-    (value: string, index: number, key: keys) => {
-      mapFiles[index].set(key, value)
-      setMapFiles([...mapFiles])
-    },
-    [mapFiles]
-  )
-
-  const onRemovePhoto = useCallback(
-    (index: number) => {
-      mapFiles.splice(index, 1)
-      file.splice(index, 1)
-      setMapFiles([...mapFiles])
-    },
-    [mapFiles, file]
-  )
-
-  const onChangeTitleExhibition = useCallback(
-    (value: string) => {
-      setTitleExhibition(value)
-    },
-    [titleExhibition]
-  )
-
-  const onChangeCulturalName = useCallback(
-    (value: string) => {
-      setCulturalName(value)
-    },
-    [culturalName]
-  )
-
-  const onChangeImageURL = useCallback((value: string, title: string) => {
-    setCapa({
-      type: 'success',
-      name: title,
-      uri: value,
-    } as Document)
+  const reset = useCallback(() => {
+    onChangeDescriptionExhibition('')
+    onChangeBiography('')
+    onChangeEndDate('')
+    onChangeLocation('')
+    onChangePhotoOfArtist(null)
+    onChangeStartDate('')
+    onChangeTitleExhibition('')
+    onChangeTags([])
+    onChangeThumbnail(null)
+    onChangeFile([])
+    file.splice(0, file.length)
   }, [])
 
-  const onChangeFinancialResources = useCallback(
-    (value: FinancialResources) => {
-      setFinancialResources(value)
-    },
-    [financialResources]
-  )
+  const onSubmit = async () => {
+    return submitPhoto({
+      artista: culturalName,
+      arquivo: photoOfArtist.current?.uri,
+      descricao: biography.current,
+      nome_arquivo: photoOfArtist.current?.name,
+      tipo_de_imagem: photoOfArtist.current?.mimeType,
+      tipo_de_foto: ExhibitionPhotosTypes.foto_de_artista,
+      titulo: culturalName,
+      data: null,
+      nome_exibicao: '0025cc4d6223212f134a90',
+      exibicaoId: 1,
+      produtoId: 112,
+    })
+  }
 
-  const onChangeCPForCNPJ = useCallback(
-    (text: string) => {
-      SetCPForCNPJ(text)
-    },
-    [cpfOrCnpj]
-  )
+  const onSubmit2 = async () => {
+    return await submit({
+      artista: culturalName,
+      categoria: Category.Exhibition,
+      cpfOrCnpj: cpfOrCnpj,
+      tags: tags,
+      generos: [],
+      sobre_a_obra: descriptionExhibition,
+      data_de_fim: endDate.current,
+      data_de_inicio: startDate,
+      titulo: titleExhibition,
+      local: location.current,
+      recurso: financialResources,
+      capa: thumbnail.uri ?? undefined,
+      tipo_capa: (thumbnail.mimeType as TypeImgCapa) ?? undefined,
+    })
+  }
 
-  const onChangeCPForCNPJIsValid = useCallback(
-    (value: boolean) => {
-      SetCPForCNPJIsValid(value)
-    },
-    [cpfOrCnpjIsValid]
-  )
-  const onChangeType = useCallback(
-    (value: number) => {
-      setType(value)
-    },
-    [type]
-  )
+  const validated = useMemo(() => {
+    const validateCPFOrCNPJ =
+      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
 
-  const onChangeImage = useCallback(
-    async (image: DocumentPicker.DocumentResult) => {
-      if (image.type === 'success') {
-        setCapa(image)
-      }
-    },
-    [capa]
-  )
-
-  const onChangeGeneros = useCallback(
-    (generos: string[]) => {
-      setGenero(generos)
-    },
-    [genero]
-  )
-  const onChangeTags = useCallback(
-    (tags: string[]) => {
-      setTags(tags)
-    },
-    [tags]
-  )
-
-  const resetProductExhibition = useCallback(() => {
-    setTitleExhibition('')
-    setMapFiles([])
-    file.length = 0
-    setFinancialResources(0)
-    setGenero([])
-    setTags([])
-    setCapa({} as Document)
-    SetCPForCNPJ('')
-    SetCPForCNPJIsValid(false)
-    setCulturalName('')
-  }, [])
+    if (
+      financialResources &&
+      titleExhibition.trim() &&
+      culturalName.trim() &&
+      descriptionExhibition.trim() &&
+      startDate &&
+      startDate.trim() &&
+      validateCPFOrCNPJ
+    ) {
+      return true
+    }
+    return false
+  }, [
+    financialResources,
+    cpfOrCnpj,
+    cpfOrCnpjIsValid,
+    titleExhibition,
+    culturalName,
+    descriptionExhibition,
+    startDate,
+  ])
 
   return (
     <FormProductExhibitionContext.Provider
       value={{
-        capa,
-        category,
+        tags,
+        thumbnail,
         cpfOrCnpj,
         cpfOrCnpjIsValid,
         culturalName,
         financialResources,
-        genero,
         mapFiles,
         location,
-        onChangeLocation,
-        onChangeTitleExhibition,
         biography,
-        onChangeBiography,
-        onChangePhotoOfArtist,
         photoOfArtist,
-        onRemovePhoto,
         titleExhibition,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,
         onChangeFinancialResources,
-        onChangeGeneros,
-        onChangeImageURL,
-        onChangeTags,
-        onChangeType,
-        onChangeImage,
+        onChangeDescriptionExhibition,
+        onChangeStartDate,
+        onChangeTitleExhibition,
         descriptionExhibition,
         endDate,
-        onChangeDescriptionExhibition,
-        onChangeEndDate,
-        onChangeStartDate,
         startDate,
-        tags,
-        type,
+        onChangeThumbnail,
         file,
+        onRemovePhoto,
         onChangeAttrPhotos,
         onChangeFile,
-        resetProductExhibition,
+        reset,
+        onSubmit,
+        validated,
+        onChangeTags,
+        onChangeBiography,
+        onChangeEndDate,
+        onChangeLocation,
+        onChangePhotoOfArtist,
       }}
     >
       {children}

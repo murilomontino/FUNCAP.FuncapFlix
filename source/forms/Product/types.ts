@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { DocumentResult } from 'expo-document-picker'
 
 import {
   Category,
   ExhibitionPhotosTypes,
-  FinancialResources,
   TypeMusicAlbums,
   TypesProducts,
 } from '@/types'
+
+import { AttrsProduct } from '@/hooks/use-attrs-product'
 
 export type Document = {
   type: 'success'
@@ -46,27 +46,13 @@ export declare namespace Document {
   }[]
 }
 
-export interface FormProduct {
-  cpfOrCnpj: string
-  culturalName: string
+export interface FormProduct extends AttrsProduct {
   publishedDate?: string
-  financialResources: FinancialResources
-  capa: Document
   category: Category
-  genero: string[]
   type: TypesProducts
-  tags: string[]
-  cpfOrCnpjIsValid: boolean
   onChangePublishedDate?: (date: string) => void
-  onChangeCulturalName: (value: string) => void
-  onChangeFinancialResources: (value: FinancialResources) => void
-  onChangeCPForCNPJ: (text: string) => void
-  onChangeCPForCNPJIsValid: (value: boolean) => void
-  onChangeImage: (value: DocumentResult) => void
   onChangeCategory?: (value: Category) => void
   onChangeType: (value: TypesProducts) => void
-  onChangeTags: (tags: string[]) => void
-  onChangeGeneros: (generos: string[]) => void
   onChangeImageURL: (value: string, title: string) => void
   resetProduct?: () => void
 }

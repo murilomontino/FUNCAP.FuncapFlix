@@ -99,29 +99,6 @@ const FieldCPFandCNPJGeneric = ({
 
   return (
     <>
-      <HelperText
-        onPressIn={() => {
-          return
-        }}
-        onPressOut={() => {
-          return
-        }}
-        style={[
-          {
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            marginTop: -10,
-          },
-        ]}
-        type="error"
-        visible={
-          (!isValid && value.length === 14) || (!isValid && value.length === 18)
-        }
-      >
-        {value.length === 14 && 'CPF'}
-        {value.length === 18 && 'CNPJ'} Inválido, confira e digite novamente!
-      </HelperText>
       <View style={[viewContainer, { maxWidth: '90%' }]}>
         <View style={[{ alignSelf: 'center' }, viewTitle]}>
           <Text style={[topicForm]}>{topic}</Text>
@@ -158,7 +135,7 @@ const FieldCPFandCNPJGeneric = ({
             borderLeftWidth: 0,
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
-            borderRadius: 8,
+            borderRadius: 2,
 
             ...border,
           }}
@@ -171,6 +148,32 @@ const FieldCPFandCNPJGeneric = ({
           />
         </View>
       </View>
+      <HelperText
+        onPressIn={() => {
+          return
+        }}
+        onPressOut={() => {
+          return
+        }}
+        style={[
+          {
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            marginTop: -10,
+            color: colors.redSecondary,
+            fontSize: 14,
+            fontWeight: '600',
+          },
+        ]}
+        type="error"
+        visible={
+          (!isValid && value.length === 14) || (!isValid && value.length === 18)
+        }
+      >
+        {value.length === 14 && 'CPF'}
+        {value.length === 18 && 'CNPJ'} Inválido, confira e digite novamente!
+      </HelperText>
     </>
   )
 }

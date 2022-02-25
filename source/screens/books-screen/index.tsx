@@ -9,6 +9,7 @@ import BooksProvider from '@/components/context/ContextBooks'
 import PdfViewer from '@/components/organism/PDF-viewer'
 
 import api from '@/services'
+import { Getter } from '@/services/config/types'
 
 import CardBooks from './components/organism/card-book'
 import PaginationBooks from './components/organism/pagination-books'
@@ -24,9 +25,11 @@ const BooksScreen = () => {
   const { data: books } = useQuery<GetterBooks[]>(
     'books',
     async () => {
-      const { data } = await api.get('books')
-
-      return data
+      const { data } = await api.get<Getter<GetterBooks[]>>('books')
+      if (data.statusCode === 200) {
+        return data.data
+      }
+      return []
     },
     {
       staleTime: 1000 * 60 * 60 * 24,

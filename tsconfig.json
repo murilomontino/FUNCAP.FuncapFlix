@@ -5,7 +5,8 @@
 		"module": "ES2020",
 		"types": [
 			"jest",
-			"node"
+			"node",
+      "cypress"
 		],
 	
 		"allowJs": true,
@@ -30,7 +31,8 @@
 		}
 	},
 	"include": [
-		"source/**/*"
+		"source/**/*",
+    "cypress/integration/**/*"
 	],
 	"exclude": [
 		"node_modules",

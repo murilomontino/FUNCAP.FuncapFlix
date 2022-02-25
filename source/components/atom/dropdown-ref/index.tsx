@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { MutableRefObject, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -9,7 +9,7 @@ import styles from '@/global/styles'
 type Props = {
   onChangeValue: (value: number) => void
   items: Array<{ label: string; value: number }>
-  value: number
+  value: MutableRefObject<number>
   disabled?: boolean
   label?: string
   color?: string
@@ -32,21 +32,25 @@ const Dropdown = ({
   }, [value])
 
   const [labelState, setLabel] = useState(label)
+  const [valueState, setValue] = useState(value.current)
 
   const select = () => {
-    const selectedItem = items.find((item) => item.value === value)
+    const selectedItem = items.find((item) => item.value === valueState)
     if (selectedItem) {
       setLabel(selectedItem.label)
     }
   }
 
+  const onChangeSelect = (selectedItem, index) => {
+    setLabel(selectedItem.label)
+    setValue(selectedItem.value)
+    onChangeValue(selectedItem.value)
+  }
+
   return (
     <SelectDropdown
       data={items}
-      onSelect={(selectedItem, index) => {
-        setLabel(selectedItem.label)
-        onChangeValue(selectedItem.value)
-      }}
+      onSelect={onChangeSelect}
       test-id="dropdown"
       defaultButtonText={labelState}
       buttonStyle={[

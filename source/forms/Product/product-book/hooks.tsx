@@ -142,18 +142,18 @@ export const useFormBookTags = () => {
   }
 }
 
-export const useFormBookGenero = () => {
-  const genero = useContextSelector(
+export const useFormBookGenres = () => {
+  const genres = useContextSelector(
     FormProductBookContext,
-    (value) => value.genero
+    (value) => value.genres
   )
-  const onChangeGeneros = useContextSelector(
+  const onChangeGenres = useContextSelector(
     FormProductBookContext,
-    (value) => value.onChangeGeneros
+    (value) => value.onChangeGenres
   )
   return {
-    genero,
-    onChangeGeneros,
+    genres,
+    onChangeGenres,
   }
 }
 
@@ -263,10 +263,10 @@ export const useResetBook = () => {
   }
 }
 
-export const useFormBookImage = () => {
-  const image = useContextSelector(
+export const useFormBookThumbnail = () => {
+  const thumbnail = useContextSelector(
     FormProductBookContext,
-    (value) => value.capa
+    (value) => value.thumbnail
   )
 
   const onChangeImageURL = useContextSelector(
@@ -274,14 +274,14 @@ export const useFormBookImage = () => {
     (value) => value.onChangeImageURL
   )
 
-  const onChangeImage = useContextSelector(
+  const onChangeThumbnail = useContextSelector(
     FormProductBookContext,
-    (value) => value.onChangeImage
+    (value) => value.onChangeThumbnail
   )
 
   return {
     onChangeImageURL,
-    onChangeImage,
-    image,
+    onChangeThumbnail,
+    thumbnail,
   }
 }

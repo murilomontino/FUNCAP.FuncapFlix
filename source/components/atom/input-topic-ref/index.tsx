@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import {
   View,
   TextInput,
@@ -16,7 +22,7 @@ import colors from '@/global/colors'
 
 interface Props {
   topic: string
-  value: string
+  value: MutableRefObject<string>
   requered?: boolean
   maxWidthTitle?: number | string
   width?: number | string
@@ -32,16 +38,14 @@ interface Props {
     | ((text: string) => void)
 }
 
-interface InputTopicProps extends TextInputProps, Props {
+interface InputTopicProps extends Omit<TextInputProps, 'value'>, Props {
   mask?: undefined
-  value: string
   type?: undefined
   onChangeText: (text: string) => void
 }
 
-interface MaskedTopicProps extends MaskedTextInputProps, Props {
+interface MaskedTopicProps extends Omit<MaskedTextInputProps, 'value'>, Props {
   mask: string
-  value: string
   onChangeText: (text: string, rawText: string) => void
   type?: 'custom' | 'currency'
 }
@@ -69,12 +73,17 @@ export const InputTopic = ({
     return web ? styles.outlineWeb : styles.outline
   }, [])
 
-  const [defaultValue] = useState(value)
+  const [valueInput, setValueInput] = useState<string>(value.current)
+
+  const onChangeValueInput = useCallback((text: string) => {
+    setValueInput(text)
+    onChangeText(text, text)
+  }, [])
 
   if (mask !== undefined) {
     useEffect(() => {
-      if (defaultValue) {
-        onChangeText(defaultValue, defaultValue)
+      if (valueInput) {
+        onChangeText(valueInput, '')
       }
     }, [])
 
@@ -105,8 +114,8 @@ export const InputTopic = ({
         <MaskedTextInput
           {...rest}
           mask={mask}
-          value={value}
-          onChangeText={onChangeText}
+          value={valueInput}
+          onChangeText={onChangeValueInput}
           placeholder={placeholder || topic}
           style={[styles.textArea, outlineWeb, styleViewInput]}
           maxLength={maxLength}
@@ -142,8 +151,8 @@ export const InputTopic = ({
       <TextInput
         {...rest}
         placeholder={placeholder || topic}
-        value={value}
-        onChangeText={(text) => onChangeText(text, text)}
+        value={valueInput}
+        onChangeText={onChangeValueInput}
         style={[styles.textArea, outlineWeb, styleViewInput]}
         maxLength={maxLength}
       />

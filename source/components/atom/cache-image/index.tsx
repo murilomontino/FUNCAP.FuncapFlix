@@ -41,7 +41,7 @@ const CacheImage = ({
     if (capa) {
       getImgStorage(capa)
     }
-  }, [])
+  }, [uri, capa])
 
   const getImgStorage = async (capa: string) => {
     const arrayCapa = capa.split('.')

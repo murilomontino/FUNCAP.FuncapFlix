@@ -8,13 +8,14 @@ import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
 
 import {
-  useFormBookImage,
+  useFormBookThumbnail,
   useFormBookData,
   useFormBook,
   useFormBookContent,
 } from '@/forms/Product/product-book/hooks'
 
 import api from '@/services'
+import { Getter } from '@/services/config/types'
 
 import { styles } from '../styles'
 
@@ -50,7 +51,7 @@ const InputISBN = ({ requered = true }: Props) => {
 
   const { onChangeNumberOfPages, onChangePublisher } = useFormBookContent()
   const { onChangePublishedDate, onChangeCulturalName } = useFormBookData()
-  const { onChangeImageURL } = useFormBookImage()
+  const { onChangeImageURL } = useFormBookThumbnail()
 
   // Efeito Visual ----------------------------------------------------------------
   const { AlertToast } = useToast()
@@ -77,7 +78,7 @@ const InputISBN = ({ requered = true }: Props) => {
   // Função que faz a busca do livro na api do google books ------------------------
   const searchBook = useCallback(async (isbn: string) => {
     // Busca o livro no google books
-    const response = await tryCatch.run<AxiosResponse>(
+    const response = await tryCatch.run<AxiosResponse<Getter<any>>>(
       async () => await api.get(`api-google-book/${isbn}`)
     )
 
@@ -87,12 +88,14 @@ const InputISBN = ({ requered = true }: Props) => {
       return
     }
 
+    const { data } = response
+
     // Caso ocorra um sucesso na busca do livro
-    if (response && response.status === 200) {
-      const { data: volumeInfo } = response
+    if (data.statusCode === 200) {
+      const { data: volumeInfo } = data
 
       // Caso o livro já tenha sido adicionado anteriormente ao banco de dados
-      if (volumeInfo.exystBD) {
+      if (volumeInfo.existBD) {
         AlertToast('warning', 'Este livro já está cadastrado')
         return
       }

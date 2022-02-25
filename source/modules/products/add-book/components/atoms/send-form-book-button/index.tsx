@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
 
-import { Category, TypeImgCapa } from '@/types/index'
+import { Category, GetterBooks, TypeImgCapa } from '@/types/index'
 import { SettersBooks } from '@/types/products/'
 
 import { useLoading } from '@/context/LoadingModal'
@@ -11,9 +11,9 @@ import { useToast } from '@/context/ToastModal'
 import Button from '@/components/atom/button'
 
 import {
-  useFormBookGenero,
+  useFormBookGenres,
   useFormBookTags,
-  useFormBookImage,
+  useFormBookThumbnail,
   useFormBookCategory,
   useFormBookCPFandCNPJ,
   useFormBookFinancialResources,
@@ -25,14 +25,15 @@ import {
 } from '@/forms/Product/product-book/hooks'
 
 import api from '@/services'
+import { Getter } from '@/services/config/types'
 
 const SendFormBookButton = () => {
   // fields ---------------------------------------------------------------------
   // -----------------------------------------------------------------------------
   const { tags } = useFormBookTags()
-  const { genero } = useFormBookGenero()
+  const { genres } = useFormBookGenres()
   const { sobreAObra, sinopse, subTitle, title, isbn } = useFormBook()
-  const { image } = useFormBookImage()
+  const { thumbnail } = useFormBookThumbnail()
   const { file } = useFormBookFile()
   const { type } = useFormBookCategory()
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormBookCPFandCNPJ()
@@ -87,7 +88,7 @@ const SendFormBookButton = () => {
         cpfOrCnpj: cpfOrCnpj,
         tipo: type,
         nome_arquivo: file.name,
-        generos: genero,
+        generos: genres,
         tags: tags,
         sobre_a_obra: sobreAObra,
         sinopse: sinopse,
@@ -95,8 +96,8 @@ const SendFormBookButton = () => {
         sub_titulo: subTitle,
         titulo: title,
         arquivo: file.uri,
-        capa: image.uri ?? undefined,
-        tipo_capa: (image.mimeType as TypeImgCapa) ?? undefined,
+        capa: thumbnail.uri ?? undefined,
+        tipo_capa: (thumbnail.mimeType as TypeImgCapa) ?? undefined,
       })
 
       switch (status) {
@@ -121,12 +122,13 @@ const SendFormBookButton = () => {
   }
 
   const send = async (document: SettersBooks) => {
-    try {
-      const { data, status } = await api.post('books', document)
-      return { data, status }
-    } catch (error: any) {
-      return error.response
+    const { data } = await api.post<Getter<GetterBooks>>('books', document)
+
+    if (data.statusCode === 200) {
+      return { data: data.data, status: data.statusCode }
     }
+
+    return { data: data.error, status: data.statusCode }
   }
 
   return (

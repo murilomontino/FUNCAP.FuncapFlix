@@ -65,7 +65,6 @@ const Left = () => {
         disabled={true}
         label="Selecione o Tipo"
       />
-
       <Dropdown
         items={ItemsFinancialResources}
         onChangeValue={onChangeFinancialResources}

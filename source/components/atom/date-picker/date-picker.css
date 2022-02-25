@@ -1,0 +1,44 @@
+.date-picker-container{
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 100%;
+  padding: 4px;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.date-picker-container div {
+  z-index: 999;
+  width: 240px;
+
+}
+
+.date-picker input {
+  color: black;
+  font-size: 1em;
+  font-family: sans-serif;
+  font-weight: 500;
+  border: 0;
+  min-width: 150 !important; 
+  z-index: -1;
+}
+
+.date-picker-disabled input {
+  color: gray !important; 
+  font-size: 1em;
+  font-family: sans-serif;
+  font-weight: 500;
+  border: 0;
+  min-width: 150 !important;
+  z-index: -1;
+}
+
+

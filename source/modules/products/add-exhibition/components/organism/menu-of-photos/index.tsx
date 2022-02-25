@@ -51,28 +51,6 @@ const MenuOfPhotos = () => {
     },
   ]
 
-  const HeaderButtons = () => (
-    <View
-      style={{
-        height: 50,
-        width: width,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-      }}
-    >
-      {BottomsMap.map((item, index) => (
-        <Button
-          key={index}
-          text={item.label}
-          onPress={() => item.onPress(index)}
-          selectable
-          selected={selected === index}
-        />
-      ))}
-    </View>
-  )
-
   const data = [
     {
       id: v4(),
@@ -94,11 +72,33 @@ const MenuOfPhotos = () => {
         setWidth(e.nativeEvent.layout.width)
       }}
     >
-      <HeaderButtons />
+      <View
+        style={{
+          zIndex: -10,
+          height: 50,
+          width: width,
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+        }}
+      >
+        {BottomsMap.map((item, index) => (
+          <Button
+            key={index}
+            text={item.label}
+            onPress={() => item.onPress(index)}
+            selectable
+            selected={selected === index}
+          />
+        ))}
+      </View>
       <FlatList
         ref={ref}
         initialScrollIndex={selected}
         data={data}
+        style={{
+          zIndex: 99,
+        }}
         keyExtractor={(item) => item.id}
         horizontal
         scrollEnabled={false}
@@ -107,6 +107,7 @@ const MenuOfPhotos = () => {
         renderItem={({ item }) => (
           <View
             style={{
+              zIndex: 99,
               padding: 12,
               width: width,
               minHeight: 400,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { MutableRefObject, useState } from 'react'
 import {
   Image,
   ImageStyle,
@@ -16,7 +16,7 @@ import { Document } from '@/forms/Product/types'
 import colors from '@/global/colors'
 
 type Props = {
-  image: Document
+  image: MutableRefObject<Document>
   onChangeImage: (value: Document) => void
   width?: number
   height?: number
@@ -32,11 +32,11 @@ const GetImageButton = ({
 }: Props) => {
   const [imageState, setImageState] = useState<DocumentPicker.DocumentResult>(
     () => {
-      if (image) {
+      if (image && image.current) {
         return {
-          name: image.name,
-          type: image.type,
-          uri: image.uri,
+          name: image.current.name,
+          type: image.current.type,
+          uri: image.current.uri,
         }
       }
       return null
@@ -48,14 +48,16 @@ const GetImageButton = ({
       type: ['image/png', 'image/jpeg', 'image/jpg'],
     })
 
-    if (img.type && img.type === 'success') {
+    if (img.type === 'success') {
       setImageState({
         name: img.name,
         type: img.type,
+        mimeType: img.mimeType,
         uri: img.uri,
       })
       onChangeImage({
         name: img.name,
+        mimeType: img.mimeType,
         type: img.type,
         uri: img.uri,
       })

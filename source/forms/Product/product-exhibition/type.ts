@@ -1,4 +1,11 @@
+import { GettersExhibitions } from '@/types'
+
+import { Getter } from '@/services/config/types'
+
 import { Document, FormProduct } from '../types'
+
+import { AttrsExhibition } from '@/hooks/use-attrs-exhibition'
+import { AttrsExhibitionFiles } from '@/hooks/use-attrs-exhibition-files'
 
 export type keys =
   | 'type'
@@ -11,26 +18,35 @@ export type keys =
   | 'data'
   | 'titulo'
 
+export type Argument =
+  | string
+  | number
+  | boolean
+  | string[]
+  | number[]
+  | boolean[]
+  | null
+  | undefined
+  | Document
 export interface FormProductExhibition
-  extends Omit<FormProduct, 'publishedDate | onChangePublishedDate'> {
-  titleExhibition: string
-  descriptionExhibition: string
-  location: string
-  biography: string
-  photoOfArtist: Document
-  startDate: string
-  endDate: string
-  file: Document[]
-  mapFiles: Map<keys, string>[]
-  onChangeBiography: (value: string) => void
-  onChangePhotoOfArtist: (value: Document) => void
-  onChangeTitleExhibition: (value: string) => void
-  onChangeDescriptionExhibition: (value: string) => void
-  onChangeLocation: (value: string) => void
-  onChangeStartDate: (value: string) => void
-  onChangeEndDate: (value: string) => void
-  onChangeFile: (files: Document[]) => Promise<void>
-  onChangeAttrPhotos: (value: string, index: number, key: keys) => void
-  resetProductExhibition: () => void
-  onRemovePhoto: (index: number) => void
+  extends AttrsExhibition,
+    AttrsExhibitionFiles,
+    Omit<
+      FormProduct,
+      | 'publishedDate'
+      | 'onChangePublishedDate'
+      | 'type'
+      | 'onChangeType'
+      | 'genres'
+      | 'onChangeGenres'
+      | 'capa'
+      | 'onChangeImage'
+      | 'onChangeImageURL'
+      | 'onChangeCategory'
+      | 'resetProduct'
+      | 'category'
+    > {
+  onSubmit: () => Promise<Getter<GettersExhibitions>>
+  reset: () => void
+  validated: boolean
 }
