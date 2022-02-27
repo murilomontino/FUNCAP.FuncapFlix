@@ -9,21 +9,22 @@ import { useSize } from '@/hooks/use-size'
 const HeaderLogo = () => {
   const { size } = useSize()
 
+  const TEXT_SIZE = useScaledSize(2)
+
   return (
     <View
       style={{
         flex: 1,
-        maxHeight: size.height * 0.2,
         padding: 20,
         justifyContent: size.width < 1127 ? 'center' : 'flex-start',
         flexDirection: 'row',
       }}
     >
-      <LogoFuncap size={3} />
+      <LogoFuncap size={4} />
       <Text
         style={{
           color: '#f1f1f1',
-          fontSize: useScaledSize(1),
+          fontSize: TEXT_SIZE,
           fontWeight: 'bold',
           fontVariant: ['small-caps'],
           marginLeft: 20,

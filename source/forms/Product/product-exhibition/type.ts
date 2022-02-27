@@ -52,5 +52,8 @@ export interface FormProductExhibition
     > {
   onSubmit: () => Promise<Getter<GettersExhibitions>>
   reset: () => void
-  validated: boolean
+  validated: {
+    err: string[]
+    isValid: boolean
+  }
 }

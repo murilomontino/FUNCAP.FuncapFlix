@@ -67,7 +67,6 @@ const InputTopicMasked = ({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder || topic}
-        style={[styleViewInput]}
         maxLength={maxLength}
       />
     </Container>

@@ -24,7 +24,9 @@ const InputTags = ({ onChangeTags, tags, width }: Props) => {
   }
 
   return (
-    <View style={{ padding: 12, width, flex: 1 }}>
+    <View
+      style={{ padding: 12, width, minHeight: 150, flex: 1, maxHeight: 200 }}
+    >
       <Text
         style={{
           fontWeight: 'bold',

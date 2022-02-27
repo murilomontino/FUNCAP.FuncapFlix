@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from 'react'
-import { View } from 'react-native'
 
 import { Category, GetterBooks, TypeImgCapa } from '@/types/index'
 import { SettersBooks } from '@/types/products/'
@@ -39,8 +38,7 @@ const SendFormBookButton = () => {
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormBookCPFandCNPJ()
   const { financialResources } = useFormBookFinancialResources()
   const { culturalName, publishedDate } = useFormBookData()
-  const { illustrated, publisher, size, illustrator, numberOfPages } =
-    useFormBookContent()
+  const { publisher, size, illustrator, numberOfPages } = useFormBookContent()
 
   // Função com o objetivo de resetar o formulário de produtos
   const { reset } = useResetBook()
@@ -56,12 +54,16 @@ const SendFormBookButton = () => {
 
   const submitBookIsValid = useMemo(() => {
     const validateCPFOrCNPJ = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
+
+    const validateTitle = title.trim().length > 0
+    const validateSinopse = sinopse.trim().length > 0
+
     if (
       financialResources &&
-      title &&
+      validateTitle &&
       file !== null &&
       file.type === 'success' &&
-      sinopse.length > 0 &&
+      validateSinopse &&
       validateCPFOrCNPJ
     ) {
       return true
@@ -74,27 +76,27 @@ const SendFormBookButton = () => {
       showLoading()
 
       const { status, data } = await send({
-        autor: culturalName,
+        autor: culturalName.trim(),
         recurso: financialResources,
         isbn: isbn,
         numero_de_paginas: numberOfPages as unknown as number,
         tamanho: size,
-        ilustrador: illustrator,
-        ilustracao: illustrated,
-        editora: publisher,
-        nome_cultural: culturalName,
-        data_de_publicacao: publishedDate,
+        ilustrador: illustrator?.trim(),
+        ilustracao: illustrator?.trim().length > 0,
+        editora: publisher?.trim(),
+        nome_cultural: culturalName?.trim(),
+        data_de_publicacao: publishedDate?.trim(),
         cpfOrCnpj: cpfOrCnpj,
         tipo: type,
         nome_arquivo: file.name,
         arquivo: file.uri,
         generos: genres,
         tags: tags,
-        sobre_a_obra: sobreAObra,
-        sinopse: sinopse,
+        sobre_a_obra: sobreAObra?.trim(),
+        sinopse: sinopse?.trim(),
         categoria: Category.Literature,
-        sub_titulo: subTitle,
-        titulo: title,
+        sub_titulo: subTitle?.trim(),
+        titulo: title?.trim(),
         capa: thumbnail?.uri ?? undefined,
         tipo_capa: (thumbnail?.mimeType as TypeImgCapa) ?? undefined,
       })
@@ -130,13 +132,11 @@ const SendFormBookButton = () => {
   }
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <Button
-        disabled={!submitBookIsValid}
-        onPress={handleSubmit}
-        text="Enviar Livro"
-      />
-    </View>
+    <Button
+      disabled={!submitBookIsValid}
+      onPress={handleSubmit}
+      text="Enviar Livro"
+    />
   )
 }
 

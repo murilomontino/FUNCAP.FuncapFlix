@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextProps, TouchableHighlightProps } from 'react-native'
+import { TextProps, TextStyle, TouchableHighlightProps } from 'react-native'
 
 import theme from '@/theme'
 
@@ -9,6 +9,7 @@ type Props = {
   visible: boolean
   color?: string
   text: string
+  textStyle?: TextStyle
   textProps?: TextProps
 } & TouchableHighlightProps
 
@@ -17,6 +18,7 @@ const HelperText = ({
   color = theme.COLORS.ERROR,
   text,
   textProps,
+  textStyle,
   ...rest
 }: Props) => {
   if (!visible) {
@@ -24,10 +26,11 @@ const HelperText = ({
   }
 
   return (
-    <Container>
+    <Container {...rest}>
       <Text
         {...textProps}
         style={[
+          textStyle,
           {
             color: color,
           },

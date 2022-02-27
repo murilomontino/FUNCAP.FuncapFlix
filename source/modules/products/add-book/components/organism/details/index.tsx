@@ -1,6 +1,5 @@
 import React from 'react'
-import { Platform, Text, View } from 'react-native'
-import { useDimensions } from 'react-native-web-hooks'
+import { Text, View } from 'react-native'
 
 import FieldCPFandCNPJGeneric from '@/components/molecule/field-cpf-and-cnpj'
 import { InputTopic } from '@/components/molecule/input-topic'
@@ -14,11 +13,10 @@ import {
 import InputsFormsLiterature from '../../molecules/inputs-forms-literature'
 
 import colors from '@/global/colors'
+import { useSize } from '@/hooks/use-size'
 
 const Details = () => {
-  const web = Platform.OS === 'web'
-  const { window, screen } = useDimensions()
-  const size = web ? window : screen
+  const { size, web, SCREEN_SMALLER_THAN_LARGE_SIZE } = useSize()
 
   const {
     culturalName,
@@ -38,13 +36,12 @@ const Details = () => {
     <View
       style={{
         height: '100%',
-        width: '70%',
-        flex: 2.5,
-        minHeight: size.height,
-        marginBottom: 120,
-        borderRightWidth: size.width < 1127 ? 0 : 1,
+        width: '80%',
+        flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 7 : 2.5,
+        marginBottom: 0,
+        borderRightWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? 0 : 1,
         borderRightColor: '#01010',
-        borderLeftWidth: size.width < 1127 ? 0 : 1,
+        borderLeftWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? 0 : 1,
         borderLeftColor: '#01010',
         marginRight: 8,
       }}

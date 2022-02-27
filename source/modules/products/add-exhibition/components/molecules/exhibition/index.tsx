@@ -128,17 +128,6 @@ const Exhibition = () => {
           width: '70%',
         }}
       />
-
-      <InputTextArea
-        height={360}
-        maxLength={2400}
-        numberLines={10}
-        topic="Sobre a Obra"
-        requered
-        onChangeValue={onChangeDescription}
-        value={description}
-        widthContainer={'70%'}
-      />
       <View
         style={{
           zIndex: 10,
@@ -161,6 +150,16 @@ const Exhibition = () => {
           colorIcon={'#000'}
         />
       </View>
+      <InputTextArea
+        height={360}
+        maxLength={2400}
+        numberLines={10}
+        topic="Sobre a Obra"
+        requered
+        onChangeValue={onChangeDescription}
+        value={description}
+        widthContainer={'70%'}
+      />
     </Container>
   )
 }

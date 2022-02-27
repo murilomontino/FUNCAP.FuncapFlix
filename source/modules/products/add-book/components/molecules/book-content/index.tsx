@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import InputTopic from '@/components/molecule/input-topic'
 import InputTopicMasked from '@/components/molecule/input-topic-masked'
@@ -8,13 +8,11 @@ import { useFormBookContent } from '@/forms/Product/product-book/hooks'
 
 const BookContent = () => {
   const {
-    onChangeIllustrated,
     onChangeIllustrator,
     onChangeSize,
     onChangePublisher,
     onChangeNumberOfPages,
     size,
-    illustrated,
     illustrator,
     numberOfPages,
     publisher,
@@ -23,7 +21,9 @@ const BookContent = () => {
     <View
       style={{
         marginLeft: 40,
-        backgroundColor: '#red',
+        width: '80%',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
       }}
     >
       <InputTopic
@@ -74,45 +74,19 @@ const BookContent = () => {
           textAlignVertical: 'center',
         }}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* <RadioButton
-          value="Ilustrado"
-          status={illustrated ? 'checked' : 'unchecked'}
-          onPress={() => onChangeIllustrated(!illustrated)}
-        /> */}
-        <Text
-          style={{
-            marginLeft: 10,
-            fontSize: 14,
-            textDecorationStyle: 'dotted',
-            fontWeight: 'bold',
-            color: '#fff',
-          }}
-        >
-          Foi ilustrado?
-        </Text>
-      </View>
-      {/*  {illustrated && (
-        <InputTopic
-          value={illustrator}
-          onChangeText={onChangeIllustrator}
-          topic=""
-          placeholder="Ilustrador"
-          styleViewInput={{
-            flex: 1,
 
-            textAlign: 'center',
-            textAlignVertical: 'center',
-          }}
-          maxLength={50}
-        />
-      )} */}
+      <InputTopic
+        value={illustrator}
+        onChangeText={onChangeIllustrator}
+        topic="Ilustrador"
+        placeholder="Ilustrador"
+        styleViewInput={{
+          flex: 1,
+          textAlign: 'center',
+          textAlignVertical: 'center',
+        }}
+        maxLength={50}
+      />
     </View>
   )
 }

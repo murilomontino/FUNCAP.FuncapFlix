@@ -36,7 +36,7 @@ const ItemsFinancialResources = [
 ]
 
 const Left = () => {
-  const { size, web } = useSize()
+  const { size, web, SCREEN_SMALLER_THAN_LARGE_SIZE } = useSize()
   const { onChangeType, type } = useFormBookCategory()
   const { onChangeFinancialResources, financialResources } =
     useFormBookFinancialResources()
@@ -48,10 +48,9 @@ const Left = () => {
   return (
     <View
       style={{
-        flex: 1,
+        flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 3.5 : 1,
         height: '100%',
-        maxWidth: 300,
-        minHeight: size.height,
+        maxWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? '80%' : 300,
         justifyContent: 'flex-start',
         marginLeft: web ? 0 : 40,
         borderColor: 'rgba(0,0,0, 0.4)',

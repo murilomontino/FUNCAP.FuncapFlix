@@ -1,7 +1,10 @@
 import React from 'react'
 import { ImageBackground } from 'react-native'
 
-import ResetContextProvider from '@/context/ResetModal'
+import theme from '@/theme'
+import { View } from 'moti'
+
+import HeaderLogo from '@/components/atom/header-logo'
 
 import FormExhibitionProvider from '@/forms/Product/product-exhibition'
 
@@ -14,22 +17,23 @@ const ModuleAddBook = () => {
   const { size, web } = useSize()
 
   return (
-    <ResetContextProvider>
-      <FormExhibitionProvider>
-        <ImageBackground
-          source={require('@/assets/background-image.png')}
-          resizeMode="cover"
-          style={{
-            flex: 1,
-            backgroundColor: colors.button,
-            width: size.width,
-            minHeight: size.height,
-          }}
-        >
-          <Main />
-        </ImageBackground>
-      </FormExhibitionProvider>
-    </ResetContextProvider>
+    <FormExhibitionProvider>
+      <ImageBackground
+        source={require('@/assets/background-image.png')}
+        resizeMode="cover"
+        style={{
+          flex: 1,
+          backgroundColor: colors.button,
+          width: size.width,
+          minHeight: size.height,
+        }}
+      >
+        <View style={{ marginTop: theme.CONSTANTS.HEADER_HIGHT }}>
+          <HeaderLogo />
+        </View>
+        <Main />
+      </ImageBackground>
+    </FormExhibitionProvider>
   )
 }
 

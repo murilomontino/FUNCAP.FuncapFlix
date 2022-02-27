@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Platform } from 'react-native'
-import { useDimensions } from 'react-native-web-hooks'
+import { View } from 'react-native'
 
 import InputTags from '@/components/atom/tags'
 
@@ -9,10 +8,10 @@ import { useFormBookTags } from '@/forms/Product/product-book/hooks'
 import SendFormBookButton from '../../atoms/send-form-book-button'
 import BookContent from '../../molecules/book-content'
 
+import { useSize } from '@/hooks/use-size'
+
 const Right = () => {
-  const web = Platform.OS === 'web'
-  const { window, screen } = useDimensions()
-  const size = web ? window : screen
+  const { web, size, SCREEN_SMALLER_THAN_LARGE_SIZE } = useSize()
 
   const { onChangeTags, tags } = useFormBookTags()
 
@@ -21,11 +20,11 @@ const Right = () => {
       style={{
         flex: 1,
         height: '100%',
-        minHeight: size.width < 1127 ? 250 : size.height,
+        justifyContent: 'flex-start',
+        minHeight: SCREEN_SMALLER_THAN_LARGE_SIZE ? 500 : size.height,
         marginRight: web ? 0 : 40,
         padding: 20,
-        maxWidth: 300,
-        justifyContent: 'flex-start',
+        width: SCREEN_SMALLER_THAN_LARGE_SIZE ? size.width : 300,
       }}
     >
       <BookContent />

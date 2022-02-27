@@ -81,7 +81,6 @@ export const InputTopic = ({
         placeholder={placeholder || topic}
         value={valueText}
         onChangeText={onChangeValueText}
-        style={[styleViewInput]}
         maxLength={maxLength}
       />
     </Container>

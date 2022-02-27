@@ -12,13 +12,14 @@ export const Container = styled.View`
 `
 export const Input = styled.TextInput`
   color: ${theme.COLORS.BORDER_BUTTON};
-  background-color: ${theme.COLORS.BACKGROUND_BUTTON};
+  background-color: ${theme.COLORS.BACKGROUND_INPUT};
   font-weight: 500;
   padding: 8px;
   border-radius: 2px;
   border-width: 0.2px;
   border-color: ${theme.COLORS.BORDER_BUTTON};
-  flex: 3;
+  flex: 4;
   outline-color: orange;
   outline-width: 1px;
+  text-align: center;
 `

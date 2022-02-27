@@ -3,6 +3,9 @@ import styled from 'styled-components/native'
 
 export const TopicContainer = styled.View`
   flex: 1;
+  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
   flex-direction: row;
   padding-right: 8px;
   justify-content: flex-end;

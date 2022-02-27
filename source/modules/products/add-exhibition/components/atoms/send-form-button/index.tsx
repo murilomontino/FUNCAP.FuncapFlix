@@ -47,7 +47,14 @@ function SendFormExhibitionButton<T>({ onSubmit, reset, validated }: Props<T>) {
   }
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        maxHeight: 100,
+      }}
+    >
       <Button
         disabled={!validated}
         onPress={handleSubmit}

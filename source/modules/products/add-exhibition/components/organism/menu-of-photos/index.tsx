@@ -8,6 +8,7 @@ import Button from '@/components/atom/button'
 import Artist from '../../molecules/artist'
 import Exhibition from '../../molecules/exhibition'
 import PhotosOfEvent from '../../molecules/photos-of-event'
+import SendExhibition from '../../molecules/send-exhibition'
 import { Container, ContainerButton, Important } from './styles'
 
 import { useSize } from '@/hooks/use-size'
@@ -53,6 +54,12 @@ const MenuOfPhotos = () => {
         scrollToIndex(index)
       },
     },
+    {
+      label: 'Enviar Exposição',
+      onPress: (index: number) => {
+        scrollToIndex(index)
+      },
+    },
   ]
 
   const data = [
@@ -68,24 +75,28 @@ const MenuOfPhotos = () => {
       id: v4(),
       component: <PhotosOfEvent />,
     },
+    {
+      id: v4(),
+      component: <SendExhibition />,
+    },
   ]
 
   return (
     <Container
-      style={{
-        minHeight: size.height,
-      }}
+      style={[
+        {
+          flex: 1,
+          minHeight: size.height * 1.5,
+        },
+        size.width < 1188 && {
+          minHeight: size.height * 2.5,
+        },
+      ]}
       onLayout={(e) => {
         setWidth(e.nativeEvent.layout.width)
       }}
     >
-      <ContainerButton
-        style={{
-          flex: 1,
-          width: width,
-          minHeight: 50,
-        }}
-      >
+      <ContainerButton>
         {BottomsMap.map((item, index) => (
           <Button
             key={index}
@@ -98,36 +109,43 @@ const MenuOfPhotos = () => {
       </ContainerButton>
 
       <Important>* Campos Obrigatórios</Important>
-      <FlatList
-        ref={ref}
-        initialScrollIndex={selected}
-        data={data}
+      <View
         style={{
-          flex: 3,
-          minHeight: size.height,
+          flex: 5,
+          width: size.width,
         }}
-        contentContainerStyle={{
-          zIndex: 99,
-        }}
-        keyExtractor={(item) => item.id}
-        horizontal
-        scrollEnabled={false}
-        disableScrollViewPanResponder
-        showsHorizontalScrollIndicator={false}
-        decelerationRate="normal"
-        renderItem={({ item }) => (
-          <View
-            style={{
-              zIndex: 99,
-              padding: 12,
-              width: width,
-              minHeight: 400,
-            }}
-          >
-            {item.component}
-          </View>
-        )}
-      />
+      >
+        <FlatList
+          ref={ref}
+          initialScrollIndex={selected}
+          data={data}
+          style={{
+            flex: 3,
+            minHeight: size.height,
+          }}
+          contentContainerStyle={{
+            zIndex: 99,
+          }}
+          keyExtractor={(item) => item.id}
+          horizontal
+          scrollEnabled={false}
+          disableScrollViewPanResponder
+          showsHorizontalScrollIndicator={false}
+          decelerationRate="normal"
+          renderItem={({ item }) => (
+            <View
+              style={{
+                zIndex: 99,
+                padding: 12,
+                width: width,
+                minHeight: 400,
+              }}
+            >
+              {item.component}
+            </View>
+          )}
+        />
+      </View>
     </Container>
   )
 }

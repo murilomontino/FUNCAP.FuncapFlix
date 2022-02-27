@@ -149,28 +149,39 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
     return { statusCode: 400 }
   }
 
+  // Objeto tendo todos os validated que deram false, e o segundo é o boolean que representa se todos os fields foram validados
   const validated = useMemo(() => {
-    const validateCPFOrCNPJ = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
+    const validateCpfOrCnpj = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
 
-    if (
-      financialResources &&
-      titleExhibition.trim() &&
-      culturalName.trim() &&
-      descriptionExhibition.trim() &&
-      startDate &&
-      startDate.trim() &&
-      validateCPFOrCNPJ
-    ) {
-      return true
-    }
-    return false
+    const validateCulturalName = !!culturalName?.trim()
+
+    const validateDescriptionExhibition = !!descriptionExhibition?.trim()
+
+    const validateTitleExhibition = !!titleExhibition?.trim()
+
+    const financialResourcesIsValid = !!financialResources
+
+    const validateStartDate = !!startDate?.trim()
+
+    const filterValid = [
+      !validateCpfOrCnpj && 'CPF/CNPJ Inválido',
+      !validateCulturalName && 'Nome artístico Não Preenchido',
+      !validateDescriptionExhibition && 'Descrição Não Preenchida',
+      !validateTitleExhibition && 'Título Não Preenchido',
+      !validateStartDate && 'Data de início Não Pode ser vazia',
+      !financialResourcesIsValid && 'Recursos financeiros Não Escolhido',
+    ].filter((item) => item)
+
+    const isValid = filterValid.length === 0
+
+    return { err: filterValid, isValid }
   }, [
-    financialResources,
     cpfOrCnpj,
     cpfOrCnpjIsValid,
-    titleExhibition,
     culturalName,
+    financialResources,
     descriptionExhibition,
+    titleExhibition,
     startDate,
   ])
 

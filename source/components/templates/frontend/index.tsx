@@ -1,7 +1,5 @@
 import React from 'react'
-import { View, Dimensions } from 'react-native'
-
-import { Platform } from 'expo-modules-core'
+import { View } from 'react-native'
 
 import THEME from '@/theme'
 import { ThemeProvider } from 'styled-components'
@@ -14,11 +12,12 @@ import Header from '@/components/organism/header'
 
 import colors from '@/global/colors'
 import constants from '@/global/constants'
+import { useSize } from '@/hooks/use-size'
 
 const Front: React.FC = ({ children }) => {
-  const web = Platform.OS === 'web'
-  const { height } = Dimensions.get(web ? 'window' : 'screen')
-  const minHeight = height - constants.footerHight
+  const {
+    size: { height },
+  } = useSize()
 
   return (
     <DrawerProvider>
@@ -28,7 +27,7 @@ const Front: React.FC = ({ children }) => {
         <View
           style={{
             flex: 1,
-            minHeight: minHeight,
+            minHeight: height,
             marginBottom: constants.footerHight,
             backgroundColor: colors.background,
           }}
