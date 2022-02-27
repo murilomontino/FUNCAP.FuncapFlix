@@ -1,26 +1,29 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { useDimensions, useScaledSize } from 'react-native-web-hooks'
+import { useScaledSize } from 'react-native-web-hooks'
 
 import LogoFuncap from '@/components/atom/logo-funcap'
 
+import { useSize } from '@/hooks/use-size'
+
 const HeaderLogo = () => {
-  const { window } = useDimensions()
+  const { size } = useSize()
 
   return (
     <View
       style={{
-        marginHorizontal: 40,
+        flex: 1,
+        maxHeight: size.height * 0.2,
         padding: 20,
-        justifyContent: window.width < 1127 ? 'center' : 'flex-start',
+        justifyContent: size.width < 1127 ? 'center' : 'flex-start',
         flexDirection: 'row',
       }}
     >
-      <LogoFuncap size={5} />
+      <LogoFuncap size={3} />
       <Text
         style={{
           color: '#f1f1f1',
-          fontSize: useScaledSize(1.5),
+          fontSize: useScaledSize(1),
           fontWeight: 'bold',
           fontVariant: ['small-caps'],
           marginLeft: 20,

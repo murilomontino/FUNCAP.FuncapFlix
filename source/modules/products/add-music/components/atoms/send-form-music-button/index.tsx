@@ -21,15 +21,13 @@ import {
   useResetMusic,
   useFormMusic,
   useFormMusicContent,
-  useFormMusicDurations,
   useFormMusicsFile,
-  useFormMusicComposers,
 } from '@/forms/Product/product-music/hooks'
 
 import api from '@/services'
 import { Getter } from '@/services/config/types'
 
-const SendFormBookButton = () => {
+const SendFormMusicButton = () => {
   // Contexts and Hooks ------------------------------------------------------------
   const { tags } = useFormMusicTags()
   const { genero } = useFormMusicGenero()
@@ -39,10 +37,8 @@ const SendFormBookButton = () => {
   const { cpfOrCnpj, cpfOrCnpjIsValid } = useFormMusicCPFandCNPJ()
   const { financialResources } = useFormMusicFinancialResources()
   const { culturalName, publishedDate } = useFormMusicData()
-  const { file } = useFormMusicsFile()
-  const { durations } = useFormMusicDurations()
-  const { titleMusics, titleAlbum } = useFormMusic()
-  const { composers } = useFormMusicComposers()
+  const { mapFiles } = useFormMusicsFile()
+  const { titleAlbum } = useFormMusic()
   const { reset } = useResetMusic()
   // -----------------------------------------------------------------------------
   // Efeito Visual ---------------------------------------------------------------
@@ -63,16 +59,27 @@ const SendFormBookButton = () => {
   // Caso não tenha sido informado, o botão não será habilitado
   // o cpf/cnpj ta sendo validado no useFormMusicCPFandCNPJ
   const submitMusicIsValid = useMemo(() => {
-    const validateCPFOrCNPJ =
-      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
+    const validateCPFOrCNPJ = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
+
+    const validateTitleAlbum = mapFiles
+      ?.map((item) => {
+        const titulo = item.get('titulo')
+
+        if (titulo?.length > 0 && titulo?.trim()) {
+          return true
+        }
+
+        return false
+      })
+      .reduce((acc, curr) => acc && curr, true)
 
     if (
       financialResources &&
       titleAlbum &&
-      titleMusics &&
-      file !== null &&
+      validateTitleAlbum &&
+      mapFiles !== null &&
       content &&
-      file.length > 0 &&
+      mapFiles.length > 0 &&
       validateCPFOrCNPJ
     ) {
       return true
@@ -80,8 +87,9 @@ const SendFormBookButton = () => {
     return false
   }, [
     financialResources,
-    file,
+    mapFiles,
     cpfOrCnpj,
+    content,
     cpfOrCnpjIsValid,
     titleAlbum,
     content,
@@ -132,18 +140,18 @@ const SendFormBookButton = () => {
 
       switch (album.statusCode) {
         case 200:
-          file.forEach(async (document, index) => {
+          mapFiles.forEach(async (document) => {
             const music: SettersTracks = {
               artista: culturalName,
               produtoId: album.data.produtoId, //
               nome_album: album.data.nome_unico, //
               albumId: album.data.id, //
-              titulo: titleMusics[index],
-              arquivo: document.uri,
+              titulo: document.get('titulo'), //
+              arquivo: document.get('uri'), //
               categoria: Category.Music,
-              nome_arquivo: document.name,
-              duracao: durations[index],
-              compositor: composers[index],
+              nome_arquivo: document.get('name'), //
+              duracao: document.get('duracao'), //
+              compositor: document.get('compositor'), //
             }
 
             await sendFiles(music)
@@ -181,4 +189,4 @@ const SendFormBookButton = () => {
   )
 }
 
-export default SendFormBookButton
+export default SendFormMusicButton

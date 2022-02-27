@@ -2,7 +2,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-import { NavigationContainer, Theme } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import BooksPage from '@/screens/books-screen'
@@ -16,22 +16,9 @@ import { AddProductStack } from './stacks/add-products-stack'
 
 const Stack = createStackNavigator<RootStackParamList>()
 
-const themeDefault: Theme = {
-  dark: true,
-  colors: {
-    background: 'transparent',
-    notification: '#fff',
-    border: '#000',
-    text: '#000',
-    card: '#fff',
-    primary: '#666666',
-  },
-}
-
 const Navigation: React.FC = () => {
   return (
     <NavigationContainer
-      theme={themeDefault}
       linking={linking}
       documentTitle={{
         formatter: (options, route) =>

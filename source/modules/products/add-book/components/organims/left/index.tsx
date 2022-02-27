@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Platform } from 'react-native'
-import { useDimensions } from 'react-native-web-hooks'
+import { View } from 'react-native'
 
 import { FinancialResources, TypesProducts } from '@/types'
 
@@ -16,6 +15,8 @@ import {
 } from '@/forms/Product/product-book/hooks'
 
 import GetFileButton from '../../atoms/get-file-button'
+
+import { useSize } from '@/hooks/use-size'
 
 const ItemsTypesProducts = [
   { label: 'MP3', value: TypesProducts.MP3 },
@@ -35,9 +36,7 @@ const ItemsFinancialResources = [
 ]
 
 const Left = () => {
-  const web = Platform.OS === 'web'
-  const { window, screen } = useDimensions()
-  const size = web ? window : screen
+  const { size, web } = useSize()
   const { onChangeType, type } = useFormBookCategory()
   const { onChangeFinancialResources, financialResources } =
     useFormBookFinancialResources()

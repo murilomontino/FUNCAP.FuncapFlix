@@ -1,11 +1,12 @@
-import React, { useCallback, useMemo } from 'react'
-import { Platform, Text, View } from 'react-native'
-import { MaskedTextInput, mask } from 'react-native-mask-text'
+import React, { useCallback } from 'react'
+import { mask } from 'react-native-mask-text'
 
-import { AxiosResponse } from 'axios'
+import { GetterBooks } from '@/types'
 
 import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
+
+import Topic from '@/components/atom/topic'
 
 import {
   useFormBookThumbnail,
@@ -17,23 +18,9 @@ import {
 import api from '@/services'
 import { Getter } from '@/services/config/types'
 
-import { styles } from '../styles'
+import { Container, MaskedInput } from './styles'
 
 import useDebounce from '@/hooks/use-debounce'
-
-import tryCatch from '@/utils/try-catch'
-
-interface MapBook {
-  title: string
-  subtitle: string
-  authors: Array<string>
-  description: string
-  image: string
-  categories: Array<string>
-  publisher: string
-  publishedDate: string
-  pageCount: string
-}
 
 interface Props {
   requered?: boolean
@@ -57,12 +44,6 @@ const InputISBN = ({ requered = true }: Props) => {
   const { AlertToast } = useToast()
   const { showLoading, hideLoading } = useLoading()
 
-  // Efeito visual css para garantir uma borda alaranjada
-  const web = Platform.OS === 'web'
-  const outlineWeb = useMemo(() => {
-    return web ? styles.outlineWeb : styles.outline
-  }, [])
-
   // Função de efeito atraso em funções -------------------------------------------
   const debounce = useDebounce()
 
@@ -78,15 +59,9 @@ const InputISBN = ({ requered = true }: Props) => {
   // Função que faz a busca do livro na api do google books ------------------------
   const searchBook = useCallback(async (isbn: string) => {
     // Busca o livro no google books
-    const response = await tryCatch.run<AxiosResponse<Getter<any>>>(
-      async () => await api.get(`api-google-book/${isbn}`)
+    const response = await api.get<Getter<GetterBooks>>(
+      `api-google-book/${isbn}`
     )
-
-    // Caso ocorra algum erro na busca do livro
-    if (response instanceof Error) {
-      AlertToast('erro', response.message)
-      return
-    }
 
     const { data } = response
 
@@ -95,7 +70,7 @@ const InputISBN = ({ requered = true }: Props) => {
       const { data: volumeInfo } = data
 
       // Caso o livro já tenha sido adicionado anteriormente ao banco de dados
-      if (volumeInfo.existBD) {
+      if (volumeInfo.existDB) {
         AlertToast('warning', 'Este livro já está cadastrado')
         return
       }
@@ -103,35 +78,24 @@ const InputISBN = ({ requered = true }: Props) => {
       // Caso o livro não tenha sido adicionado anteriormente ao banco de dados
       // mapa os dados do livro para o formato do banco de dados
       // ---------------------------------------------------------------
-      const mapBook: MapBook = {
-        title: volumeInfo.title || '',
-        subtitle: volumeInfo.subtitle || '',
-        authors: volumeInfo.authors || [],
-        description: volumeInfo.description || '',
-        image: volumeInfo.imageLinks?.thumbnail || '',
-        categories: volumeInfo.categories || [],
-        publisher: volumeInfo.publisher || '',
-        publishedDate: volumeInfo.publishedDate || '',
-        pageCount: volumeInfo.pageCount || '',
+
+      onChangeSinopse(volumeInfo.sinopse.slice(0, 1500))
+      onChangeSubTitle(volumeInfo.subTitulo)
+      onChangeTitle(volumeInfo.titulo)
+
+      if (volumeInfo.image) {
+        onChangeImageURL(volumeInfo.image, volumeInfo.titulo)
       }
 
-      onChangeSinopse(mapBook.description.slice(0, 1500))
-      onChangeSubTitle(mapBook.subtitle)
-      onChangeTitle(mapBook.title)
+      onChangePublisher(volumeInfo.editora)
+      onChangeNumberOfPages(volumeInfo.numero_de_paginas.toString())
 
-      if (mapBook.image) {
-        onChangeImageURL(mapBook.image, mapBook.title)
-      }
-
-      onChangePublisher(mapBook.publisher)
-      onChangeNumberOfPages(mapBook.pageCount)
-
-      const locale = publishedDateLocale(mapBook.publishedDate)
+      const locale = publishedDateLocale(volumeInfo.data_de_publicacao)
 
       onChangePublishedDate(locale)
-      onChangeCulturalName(mapBook.authors.join(', '))
+      onChangeCulturalName(volumeInfo.autor)
 
-      return mapBook
+      return volumeInfo
     } else {
       AlertToast('warning', 'Livro não encontrado!')
       return null
@@ -150,20 +114,16 @@ const InputISBN = ({ requered = true }: Props) => {
   }
 
   return (
-    <View style={[styles.textAreaContainer]}>
-      <View style={styles.viewTitle}>
-        <Text style={styles.topicForm}>ISBN</Text>
-        {requered && <Text style={styles.topicRequered}>*</Text>}
-      </View>
-      <MaskedTextInput
+    <Container style={{ width: '100%' }}>
+      <Topic topic="ISBN" requered />
+      <MaskedInput
         value={isbn}
         onChangeText={(text, rawText) => onChangeSearch(text, rawText)}
         placeholder={'ISBN-13'}
-        style={[styles.textArea, outlineWeb]}
         keyboardType={'numeric'}
         mask={'999-9999999999'}
       />
-    </View>
+    </Container>
   )
 }
 

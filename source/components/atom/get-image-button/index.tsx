@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, ImageStyle, StyleProp } from 'react-native'
 
 import * as DocumentPicker from 'expo-document-picker'
@@ -23,18 +23,22 @@ const GetImageButton = ({
   height = 200,
   placeholder = 'Escolher uma Capa',
 }: Props) => {
-  const [imageState, setImageState] = useState<DocumentPicker.DocumentResult>(
-    () => {
-      if (image) {
-        return {
-          name: image.name,
-          type: image.type,
-          uri: image.uri,
-        }
+  const [imageState, setImageState] = useState<Document>(() => {
+    if (image) {
+      return {
+        name: image.name,
+        type: image.type,
+        uri: image.uri,
       }
-      return null
     }
-  )
+    return null
+  })
+
+  useEffect(() => {
+    if (image) {
+      setImageState(image)
+    }
+  }, [image])
 
   const onPress = async () => {
     const img = await DocumentPicker.getDocumentAsync({

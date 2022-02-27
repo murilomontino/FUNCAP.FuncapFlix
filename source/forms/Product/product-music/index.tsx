@@ -9,9 +9,11 @@ import { createContext } from 'use-context-selector'
 
 import { useLoading } from '@/context/LoadingModal'
 
-import { Document, FormProductMusic, DocumentFile } from '../types'
+import { Document, DocumentFile } from '../types'
+import { FormProductMusic } from './types'
 
 import { useAttrsProduct } from '@/hooks/use-attrs-product'
+import { useAttrsTracksFiles } from '@/hooks/use-attrs-tracks-files'
 
 export const FormProductMusicContext = createContext({} as FormProductMusic)
 
@@ -20,15 +22,20 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   const category = Category.Music
 
   const [titleAlbum, setTitleAlbum] = useState('')
-  const [titleMusics, setTitleMusics] = useState([] as string[])
-  const [file, setFile] = useState([] as Document[])
-  const [durations, setDurations] = useState([])
   const [content, setContent] = useState<TypeMusicAlbums>(0)
-  const [composers, setComposers] = useState([] as string[])
 
   // State -----------------------------------------------------------------------
   const [type, setType] = useState(TypesProducts.MP3)
   const [publishedDate, setPublishedDate] = useState('')
+
+  const {
+    file,
+    mapFiles,
+    onChangeAttrTrack,
+    onChangeFile: onChangeInitMapFiles,
+    onChangeMapFiles,
+    onRemoveTrack,
+  } = useAttrsTracksFiles()
 
   const {
     cpfOrCnpj,
@@ -50,11 +57,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   useEffect(() => {
     return () => {
       setTitleAlbum('')
-      setTitleMusics([])
-      setFile([])
-      setDurations([])
       setContent(0)
-      setComposers([])
       onChangeFinancialResources(0)
       onChangeGenres([])
       onChangeTags([])
@@ -107,10 +110,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
           ? await fileReader(documents.output)
           : documents.file
 
-        setFile([...file, ...files])
-
-        const newTitle = [...titleMusics, ...files.map((file) => file.name)]
-        setTitleMusics(newTitle)
+        onChangeInitMapFiles([...file, ...files])
 
         return true
       }
@@ -119,7 +119,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
     } finally {
       hideLoading()
     }
-  }, [file, titleMusics])
+  }, [file])
 
   const onChangeContent = useCallback(
     (value: number) => {
@@ -130,50 +130,30 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
 
   const onChangeTitleMusics = useCallback(
     (value: string, index: number) => {
-      const newTitle = [...titleMusics]
-      newTitle[index] = value
-      setTitleMusics(newTitle)
+      onChangeAttrTrack(value, index, 'titulo')
     },
-    [titleMusics]
+    [mapFiles]
   )
 
   const onRemoveMusic = useCallback(
     (index: number) => {
-      const newTitle = [...titleMusics]
-      newTitle.splice(index, 1)
-      setTitleMusics(newTitle)
-
-      const newFile = [...file]
-      newFile.splice(index, 1)
-      setFile(newFile)
-
-      const newDurations = [...durations]
-      newDurations.splice(index, 1)
-      setDurations(newDurations)
-
-      const newComposers = [...composers]
-      newComposers.splice(index, 1)
-      setComposers(newComposers)
+      onRemoveTrack(index)
     },
-    [titleMusics, file, durations]
+    [mapFiles]
   )
 
   const onChangeComposers = useCallback(
     (value: string, index: number) => {
-      const newComposers = [...composers]
-      newComposers[index] = value
-      setComposers(newComposers)
+      onChangeAttrTrack(value, index, 'compositor')
     },
-    [composers]
+    [mapFiles]
   )
 
   const onChangeDurations = useCallback(
     (value: string, index: number) => {
-      const newDurations = [...durations]
-      newDurations[index] = value
-      setDurations(newDurations)
+      onChangeAttrTrack(value, index, 'duracao')
     },
-    [durations]
+    [mapFiles]
   )
 
   const onChangeTitleAlbum = useCallback(
@@ -206,13 +186,8 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   )
 
   const resetProductMusic = useCallback(() => {
-    setTitleMusics([])
     setTitleAlbum('')
-    setFile([])
     setContent(0)
-    setComposers([])
-    setDurations([])
-    setFile([])
     onChangeGenres([])
     onChangeTags([])
     onChangeThumbnail({} as Document)
@@ -220,6 +195,8 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
     onChangeCPForCNPJIsValid(false)
     setPublishedDate('')
     onChangeCulturalName('')
+    onChangeInitMapFiles([])
+    onChangeMapFiles([])
   }, [])
 
   return (
@@ -233,6 +210,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
         culturalName,
         financialResources,
         genres,
+        onChangeMapFiles,
         onChangeCPForCNPJ,
         onChangeCPForCNPJIsValid,
         onChangeCulturalName,
@@ -246,11 +224,8 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
         publishedDate,
         tags,
         type,
-        titleMusics,
         content,
         file,
-        durations,
-        composers,
         onChangeContent,
         onChangeFile,
         onChangeTitleAlbum,
@@ -259,6 +234,9 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
         resetProductMusic,
         onChangeComposers,
         onRemoveMusic,
+        onChangeAttrTrack,
+        mapFiles,
+        onRemoveTrack,
       }}
     >
       {children}

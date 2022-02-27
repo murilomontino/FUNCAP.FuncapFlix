@@ -150,8 +150,7 @@ const FormProductExhibitionProvider: React.FC = ({ children }) => {
   }
 
   const validated = useMemo(() => {
-    const validateCPFOrCNPJ =
-      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
+    const validateCPFOrCNPJ = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
 
     if (
       financialResources &&

@@ -80,7 +80,7 @@ const CardPhotoOfEvent = ({
       style={[
         {
           zIndex: 1,
-          width: 340,
+          width: 320,
           height: 420,
           margin: 10,
           backgroundColor: 'rgba(0,0,0,0.3)',

@@ -10,6 +10,8 @@ export default {
     BORDER_BUTTON: '#333333',
     IMPORTANT: '#ff574d',
     BACKGROUND_BUTTON: '#d9d9d9',
+    BUTTON_TEXT_LEGEND: '#666666',
+    BACKGROUND: '#666666',
   },
   FONTS: {
     SIZE: {
@@ -21,5 +23,9 @@ export default {
     TITLE_900: 'Inter_900Black',
     TITLE_800: 'Inter_800ExtraBold',
     MEDIUM: 'Inter_500Medium',
+  },
+  CONSTANTS: {
+    HEADER_HIGHT: 75,
+    FOOTER_HIGHT: 200,
   },
 }

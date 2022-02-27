@@ -18,7 +18,7 @@ import CardMusicForm from '../card-music-form'
 const InputsFormsMusic = () => {
   const { titleAlbum, onChangeTitleAlbum } = useFormMusic()
   const { content, onChangeContent } = useFormMusicContent()
-  const { file } = useFormMusicsFile()
+  const { mapFiles } = useFormMusicsFile()
 
   const ContentMusicItems = [
     { value: TypeMusicAlbums.album, label: 'Álbum' },
@@ -48,9 +48,16 @@ const InputsFormsMusic = () => {
       />
 
       <FlatList
-        data={file}
+        data={mapFiles}
         renderItem={({ item, index }) => (
-          <CardMusicForm key={index} index={index} uri={item.uri} />
+          <CardMusicForm
+            key={index}
+            index={index}
+            uri={item.get('uri')}
+            composer={item.get('compositor')}
+            duration={item.get('duracao')}
+            title={item.get('titulo')}
+          />
         )}
         keyExtractor={(item, index) => index.toString()}
       />

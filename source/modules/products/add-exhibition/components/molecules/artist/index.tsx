@@ -37,6 +37,15 @@ const Artist = () => {
         width={200}
         placeholder={'Fotografia do Artista'}
       />
+      <InputTopic
+        topic="Nome Cultural"
+        requered={true}
+        onChangeText={onChangeCulturalName}
+        value={culturalName}
+        styleViewContainer={{
+          width: '70%',
+        }}
+      />
       <FieldCPFandCNPJGeneric
         viewContainer={{
           width: '70%',
@@ -46,15 +55,6 @@ const Artist = () => {
         onChangeValue={onChangeCPForCNPJ}
         value={cpfOrCnpj}
         topic="CPF/CNPJ"
-      />
-      <InputTopic
-        topic="Nome Cultural"
-        requered={true}
-        onChangeText={onChangeCulturalName}
-        value={culturalName}
-        styleViewContainer={{
-          width: '70%',
-        }}
       />
       <InputTextArea
         height={360}

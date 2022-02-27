@@ -164,13 +164,16 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     [publishedDate]
   )
 
-  const onChangeImageURL = useCallback((value: string, title: string) => {
-    onChangeThumbnail({
-      type: 'success',
-      name: title,
-      uri: value,
-    } as Document)
-  }, [])
+  const onChangeImageURL = useCallback(
+    (value: string, title: string) => {
+      onChangeThumbnail({
+        type: 'success',
+        name: title,
+        uri: value,
+      } as Document)
+    },
+    [thumbnail]
+  )
 
   const onChangeType = useCallback(
     (value: number) => {

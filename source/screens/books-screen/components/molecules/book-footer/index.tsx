@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { GetterBooks } from '@/types/generic/getters/books'
+import { GetterBooks } from '@/types'
 
-import { useBooks } from '@/components/context/ContextBooks'
-import { useScroll } from '@/components/context/ContextScroll'
+import { useBooks } from '@/context/ContextBooks'
+import { useScroll } from '@/context/ContextScroll'
 
 import Tags from '../../atoms/tags'
 import { textStyles, viewStyles } from '../../styles'

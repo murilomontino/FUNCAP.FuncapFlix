@@ -5,7 +5,8 @@ import { useQuery } from 'react-query'
 
 import { GetterBooks } from '@/types/products'
 
-import BooksProvider from '@/components/context/ContextBooks'
+import BooksProvider from '@/context/ContextBooks'
+
 import PdfViewer from '@/components/organism/PDF-viewer'
 
 import api from '@/services'

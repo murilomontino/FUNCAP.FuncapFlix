@@ -1,4 +1,9 @@
-import React, { MutableRefObject, useCallback, useState } from 'react'
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 
 import Topic from '@/components/atom/topic'
 
@@ -34,6 +39,14 @@ const InputTextArea = ({
 
     return value?.current
   })
+
+  useEffect(() => {
+    if (typeof value === 'string') {
+      setValueText(value)
+    } else {
+      setValueText(value?.current)
+    }
+  }, [value])
 
   const onChangeValueText = useCallback((text: string) => {
     setValueText(text)

@@ -8,8 +8,12 @@ import Button from '@/components/atom/button'
 import Artist from '../../molecules/artist'
 import Exhibition from '../../molecules/exhibition'
 import PhotosOfEvent from '../../molecules/photos-of-event'
+import { Container, ContainerButton, Important } from './styles'
+
+import { useSize } from '@/hooks/use-size'
 
 const MenuOfPhotos = () => {
+  const { size } = useSize()
   const [width, setWidth] = useState(0)
 
   const [selected, setSelected] = useState(0)
@@ -67,19 +71,19 @@ const MenuOfPhotos = () => {
   ]
 
   return (
-    <View
+    <Container
+      style={{
+        minHeight: size.height,
+      }}
       onLayout={(e) => {
         setWidth(e.nativeEvent.layout.width)
       }}
     >
-      <View
+      <ContainerButton
         style={{
-          zIndex: -10,
-          height: 50,
+          flex: 1,
           width: width,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
+          minHeight: 50,
         }}
       >
         {BottomsMap.map((item, index) => (
@@ -91,17 +95,24 @@ const MenuOfPhotos = () => {
             selected={selected === index}
           />
         ))}
-      </View>
+      </ContainerButton>
+
+      <Important>* Campos Obrigatórios</Important>
       <FlatList
         ref={ref}
         initialScrollIndex={selected}
         data={data}
         style={{
+          flex: 3,
+          minHeight: size.height,
+        }}
+        contentContainerStyle={{
           zIndex: 99,
         }}
         keyExtractor={(item) => item.id}
         horizontal
         scrollEnabled={false}
+        disableScrollViewPanResponder
         showsHorizontalScrollIndicator={false}
         decelerationRate="normal"
         renderItem={({ item }) => (
@@ -117,7 +128,7 @@ const MenuOfPhotos = () => {
           </View>
         )}
       />
-    </View>
+    </Container>
   )
 }
 

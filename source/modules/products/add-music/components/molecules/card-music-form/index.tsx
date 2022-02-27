@@ -16,15 +16,18 @@ import {
 type Props = {
   index: number
   uri: string
+  composer: string
+  duration: string
+  title: string
 }
 
-const CardMusicForm = ({ index, uri }: Props) => {
+const CardMusicForm = ({ index, uri, composer, duration, title }: Props) => {
   const web = Platform.OS === 'web'
 
-  const { onChangeTitleMusics, titleMusics } = useFormMusic()
+  const { onChangeTitleMusics } = useFormMusic()
   const { onChangeDurations } = useFormMusicDurations()
   const { onRemoveMusic } = removeFormMusic()
-  const { onChangeComposers, composers } = useFormMusicComposers()
+  const { onChangeComposers } = useFormMusicComposers()
 
   return (
     <View
@@ -48,7 +51,7 @@ const CardMusicForm = ({ index, uri }: Props) => {
           topic={`Faixa ${index + 1 > 9 ? '' : 0}${index + 1}`}
           key={index}
           onChangeText={(text) => onChangeTitleMusics(text, index)}
-          value={titleMusics[index]}
+          value={title}
           styleViewContainer={{
             maxWidth: '90%',
           }}
@@ -61,7 +64,7 @@ const CardMusicForm = ({ index, uri }: Props) => {
         topic={`Compositores`}
         key={index}
         onChangeText={(text) => onChangeComposers(text, index)}
-        value={composers[index]}
+        value={composer}
         styleViewContainer={{
           maxWidth: '90%',
         }}

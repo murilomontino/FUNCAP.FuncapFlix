@@ -1,14 +1,22 @@
 import React, { useMemo, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { useDimensions } from 'react-native-web-hooks'
-import { Document, Page, pdfjs } from 'react-pdf'
+import { Text, View } from 'react-native'
+import { Page, pdfjs } from 'react-pdf'
 
-import { useBooks } from '@/components/context/ContextBooks'
-import { useScroll } from '@/components/context/ContextScroll'
+import { useBooks } from '@/context/ContextBooks'
+import { useScroll } from '@/context/ContextScroll'
 
 import { path } from '@/services/config/api'
 
-import './PdfViewer.css'
+import {
+  PDFContainer,
+  ContainerControls,
+  ContainerButton,
+  TextButton,
+  Container,
+  ContainerButtonControls,
+} from './styles'
+
+import { useSize } from '@/hooks/use-size'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -16,7 +24,9 @@ const PdfViewer = () => {
   const [numPages, setNumPages] = useState<number>(0)
   const [pageNumber, setPageNumber] = useState(1)
 
-  const { width, height } = useDimensions().window
+  const {
+    size: { width, height },
+  } = useSize()
 
   const { book } = useBooks()
   const { scrollTop } = useScroll()
@@ -51,14 +61,13 @@ const PdfViewer = () => {
   }, [book])
 
   return (
-    <View
+    <Container
       style={{
         maxWidth: width,
         minHeight: height / 2,
-        backgroundColor: '#666666',
       }}
     >
-      <Document
+      <PDFContainer
         file={PDF}
         noData={() => {
           return (
@@ -87,7 +96,6 @@ const PdfViewer = () => {
         }}
         onLoadSuccess={(pdf) => onDocumentLoadSuccess(pdf.numPages)}
         onContextMenu={(e) => e.preventDefault()}
-        className="pdf-container"
       >
         <Page
           height={height / 2}
@@ -103,33 +111,15 @@ const PdfViewer = () => {
           )}
           pageNumber={pageNumber}
         />
-      </Document>
+      </PDFContainer>
 
       {!!book && (
-        <View
-          style={{
-            height: 80,
-            elevation: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            flex: 1,
-          }}
-        >
-          <Text style={styles.txtButton}>{`${pageNumber}/${numPages}`}</Text>
-
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              onPress={prevPage}
-              disabled={pageNumber === 1}
-            >
-              <Text
+        <ContainerControls>
+          <TextButton>{`${pageNumber}/${numPages}`}</TextButton>
+          <ContainerButtonControls>
+            <ContainerButton onPress={prevPage} disabled={pageNumber === 1}>
+              <TextButton
                 style={[
-                  styles.txtButton,
                   pageNumber === 1 && {
                     fontWeight: 'normal',
                     color: 'transparent',
@@ -137,16 +127,14 @@ const PdfViewer = () => {
                 ]}
               >
                 Anterior
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.buttonContainer]}
+              </TextButton>
+            </ContainerButton>
+            <ContainerButton
               onPress={nextPage}
               disabled={pageNumber === numPages}
             >
-              <Text
+              <TextButton
                 style={[
-                  styles.txtButton,
                   pageNumber === numPages && {
                     fontWeight: 'normal',
                     color: 'transparent',
@@ -154,27 +142,13 @@ const PdfViewer = () => {
                 ]}
               >
                 Próximo
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+              </TextButton>
+            </ContainerButton>
+          </ContainerButtonControls>
+        </ContainerControls>
       )}
-    </View>
+    </Container>
   )
 }
 
 export default PdfViewer
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    padding: 12,
-    height: 48,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  txtButton: {
-    fontVariant: ['small-caps'],
-    color: '#666666',
-    fontWeight: '500',
-  },
-})

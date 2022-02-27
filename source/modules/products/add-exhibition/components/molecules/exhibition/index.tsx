@@ -1,17 +1,36 @@
 import React, { memo, useEffect, useMemo, useState } from 'react'
 import { View, Text } from 'react-native'
 
+import { FinancialResources } from '@/types'
+
 import DatePicker from '@/components/atom/date-picker'
+import Dropdown from '@/components/atom/dropdown'
+import GetImageButton from '@/components/atom/get-image-button'
 import InputTextArea from '@/components/molecule/input-text-area'
 import InputTopic from '@/components/molecule/input-topic'
 
 import {
   useFormExhibitionDescription,
   useFormExhibitionEndDate,
+  useFormExhibitionFinancialResources,
   useFormExhibitionLocation,
   useFormExhibitionStartDate,
+  useFormExhibitionThumbnail,
   useFormExhibitionTitle,
 } from '@/forms/Product/product-exhibition/hooks'
+
+import { Title, Container } from '../artist/styles'
+
+const ItemsFinancialResources = [
+  { label: 'Lei Aldir Blanc ', value: FinancialResources.LeiAldirBlanc },
+  {
+    label: 'Recursos do Artista',
+    value: FinancialResources.RecursoDoArtista,
+  },
+  { label: 'Funcart', value: FinancialResources.Funcart },
+  { label: 'Municipal', value: FinancialResources.Municipal },
+  { label: 'Federal', value: FinancialResources.Federal },
+]
 
 const Exhibition = () => {
   const [disabled, setDisabled] = useState(true)
@@ -21,7 +40,10 @@ const Exhibition = () => {
   const { endDate, onChangeEndDate } = useFormExhibitionEndDate()
   const { startDate, onChangeStartDate } = useFormExhibitionStartDate()
   const { description, onChangeDescription } = useFormExhibitionDescription()
+  const { onChangeFinancialResources, financialResources } =
+    useFormExhibitionFinancialResources()
 
+  const { thumbnail, onChangeThumbnail } = useFormExhibitionThumbnail()
   const [startDateState, setStartDate] = useState<Date>(() => {
     if (startDate) {
       return new Date(startDate)
@@ -56,17 +78,23 @@ const Exhibition = () => {
   }, [startDateState])
 
   return (
-    <View
-      style={{
-        zIndex: 1,
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-      }}
-    >
+    <Container>
+      <Title>Dados do Exposição:</Title>
+
+      <GetImageButton
+        image={thumbnail}
+        onChangeImage={onChangeThumbnail}
+        height={200}
+        width={200}
+      />
+
+      <Dropdown
+        requered
+        items={ItemsFinancialResources}
+        onChangeValue={onChangeFinancialResources}
+        value={financialResources}
+        label={'Recursos'.toUpperCase()}
+      />
       <Text
         style={{
           fontSize: 20,
@@ -133,7 +161,7 @@ const Exhibition = () => {
           colorIcon={'#000'}
         />
       </View>
-    </View>
+    </Container>
   )
 }
 

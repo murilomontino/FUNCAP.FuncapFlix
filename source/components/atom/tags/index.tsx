@@ -6,10 +6,11 @@ import colors from '@/global/colors'
 
 type Props = {
   tags: string[] | MutableRefObject<string[]>
+  width?: number | string
   onChangeTags: (text: string[]) => void
 }
 
-const InputTags = ({ onChangeTags, tags }: Props) => {
+const InputTags = ({ onChangeTags, tags, width }: Props) => {
   const [selectedTags, setSelectedTags] = useState(() => {
     if (Array.isArray(tags)) {
       return tags
@@ -23,7 +24,7 @@ const InputTags = ({ onChangeTags, tags }: Props) => {
   }
 
   return (
-    <View style={{ padding: 12 }}>
+    <View style={{ padding: 12, width, flex: 1 }}>
       <Text
         style={{
           fontWeight: 'bold',

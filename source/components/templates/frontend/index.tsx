@@ -6,9 +6,9 @@ import { Platform } from 'expo-modules-core'
 import THEME from '@/theme'
 import { ThemeProvider } from 'styled-components'
 
+import ScrollProvider from '@/context/ContextScroll'
 import DrawerProvider from '@/context/DrawerMenu'
 
-import ScrollProvider from '@/components/context/ContextScroll'
 import Footer from '@/components/organism/footer'
 import Header from '@/components/organism/header'
 

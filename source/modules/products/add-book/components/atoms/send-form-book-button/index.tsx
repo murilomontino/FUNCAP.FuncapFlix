@@ -55,8 +55,7 @@ const SendFormBookButton = () => {
   // -----------------------------------------------------------------------------
 
   const submitBookIsValid = useMemo(() => {
-    const validateCPFOrCNPJ =
-      cpfOrCnpj.length === 0 || (cpfOrCnpj.length > 0 && cpfOrCnpjIsValid)
+    const validateCPFOrCNPJ = cpfOrCnpj.length > 0 && cpfOrCnpjIsValid
     if (
       financialResources &&
       title &&

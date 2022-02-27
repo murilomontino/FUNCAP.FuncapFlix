@@ -57,23 +57,6 @@ export interface FormProduct extends AttrsProduct {
   resetProduct?: () => void
 }
 
-export interface FormProductMusic extends FormProduct {
-  titleAlbum: string
-  titleMusics: Array<string>
-  durations: Array<string>
-  file: Document[]
-  content: TypeMusicAlbums
-  composers: string[]
-  onChangeTitleAlbum: (value: string) => void
-  onChangeContent: (value: number) => void
-  onChangeFile: () => void
-  onChangeTitleMusics: (value: string, index: number) => void
-  onChangeDurations: (value: string, index: number) => void
-  resetProductMusic: () => void
-  onRemoveMusic: (index: number) => void
-  onChangeComposers: (value: string, index: number) => void
-}
-
 export interface FormProductBook extends FormProduct {
   title: string
   subTitle: string
