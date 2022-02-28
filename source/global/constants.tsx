@@ -1,5 +1,5 @@
 export default {
-  headerHight: 75,
+  headerHight: 120,
   footerHight: 200,
   fontSize: {
     small: 12,

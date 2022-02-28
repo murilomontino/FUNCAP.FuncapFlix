@@ -1,8 +1,4 @@
 import React from 'react'
-import { View } from 'react-native'
-
-import THEME from '@/theme'
-import { ThemeProvider } from 'styled-components'
 
 import ScrollProvider from '@/context/ContextScroll'
 import DrawerProvider from '@/context/DrawerMenu'
@@ -10,8 +6,8 @@ import DrawerProvider from '@/context/DrawerMenu'
 import Footer from '@/components/organism/footer'
 import Header from '@/components/organism/header'
 
-import colors from '@/global/colors'
-import constants from '@/global/constants'
+import { Container } from './styles'
+
 import { useSize } from '@/hooks/use-size'
 
 const Front: React.FC = ({ children }) => {
@@ -24,16 +20,13 @@ const Front: React.FC = ({ children }) => {
       <Header />
 
       <ScrollProvider>
-        <View
+        <Container
           style={{
-            flex: 1,
             minHeight: height,
-            marginBottom: constants.footerHight,
-            backgroundColor: colors.background,
           }}
         >
-          <ThemeProvider theme={THEME}>{children}</ThemeProvider>
-        </View>
+          {children}
+        </Container>
         <Footer />
       </ScrollProvider>
     </DrawerProvider>

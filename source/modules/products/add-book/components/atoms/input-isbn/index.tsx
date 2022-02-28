@@ -24,9 +24,10 @@ import useDebounce from '@/hooks/use-debounce'
 
 interface Props {
   requered?: boolean
+  textAlign?: 'left' | 'center' | 'right'
 }
 
-const InputISBN = ({ requered = true }: Props) => {
+const InputISBN = ({ requered = true, textAlign = 'left' }: Props) => {
   // Hooks e Fields ---------------------------------------------------------------
   const {
     isbn,
@@ -122,6 +123,7 @@ const InputISBN = ({ requered = true }: Props) => {
         placeholder={'ISBN-13'}
         keyboardType={'numeric'}
         mask={'999-9999999999'}
+        style={{ textAlign }}
       />
     </Container>
   )

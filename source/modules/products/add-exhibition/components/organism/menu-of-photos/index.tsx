@@ -85,7 +85,6 @@ const MenuOfPhotos = () => {
     <Container
       style={[
         {
-          flex: 1,
           minHeight: size.height * 1.5,
         },
         size.width < 1188 && {
@@ -111,7 +110,7 @@ const MenuOfPhotos = () => {
       <Important>* Campos Obrigatórios</Important>
       <View
         style={{
-          flex: 5,
+          minHeight: size.height,
           width: size.width,
         }}
       >
@@ -119,13 +118,6 @@ const MenuOfPhotos = () => {
           ref={ref}
           initialScrollIndex={selected}
           data={data}
-          style={{
-            flex: 3,
-            minHeight: size.height,
-          }}
-          contentContainerStyle={{
-            zIndex: 99,
-          }}
           keyExtractor={(item) => item.id}
           horizontal
           scrollEnabled={false}
@@ -135,10 +127,10 @@ const MenuOfPhotos = () => {
           renderItem={({ item }) => (
             <View
               style={{
+                flex: 1,
                 zIndex: 99,
                 padding: 12,
                 width: width,
-                minHeight: 400,
               }}
             >
               {item.component}

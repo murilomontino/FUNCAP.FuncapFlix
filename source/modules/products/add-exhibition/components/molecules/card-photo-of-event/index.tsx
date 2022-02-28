@@ -79,9 +79,7 @@ const CardPhotoOfEvent = ({
     <View
       style={[
         {
-          zIndex: 1,
-          width: 320,
-          height: 420,
+          flex: 1,
           margin: 10,
           backgroundColor: 'rgba(0,0,0,0.3)',
           borderRadius: 2,

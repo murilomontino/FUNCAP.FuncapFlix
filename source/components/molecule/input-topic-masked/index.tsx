@@ -17,6 +17,7 @@ type Props = {
   styleViewInput?: TextStyle | ViewStyle | ImageStyle
   styleTopic?: TextStyle
   mask: string
+  textAlign?: 'left' | 'center' | 'right'
   type?: string
   onChangeText: (text: string, rawText: string) => void
 } & MaskedTextInputProps
@@ -32,6 +33,7 @@ const InputTopicMasked = ({
   styleTopic,
   onChangeText,
   placeholder,
+  textAlign = 'left',
   width = '100%',
   maxWidthTitle = 150,
   ...rest
@@ -68,6 +70,12 @@ const InputTopicMasked = ({
         onChangeText={onChangeText}
         placeholder={placeholder || topic}
         maxLength={maxLength}
+        style={[
+          styleViewInput,
+          {
+            textAlign,
+          },
+        ]}
       />
     </Container>
   )

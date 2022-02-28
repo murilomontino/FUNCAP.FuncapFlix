@@ -12,7 +12,9 @@ export default {
     BACKGROUND_BUTTON: '#d9d9d9',
     BUTTON_TEXT_LEGEND: '#666666',
     BACKGROUND: '#666666',
+    BACKGROUND_FRONTEND: '#13181c',
     BACKGROUND_INPUT: '#d9d9d9',
+    BACKGROUND_FOOTER: 'rgba(18, 65, 95, 1)',
   },
   FONTS: {
     SIZE: {
@@ -26,7 +28,7 @@ export default {
     MEDIUM: 'Inter_500Medium',
   },
   CONSTANTS: {
-    HEADER_HIGHT: 75,
+    HEADER_HIGHT: 120,
     FOOTER_HIGHT: 200,
     SCREEN: {
       TINY: 576,

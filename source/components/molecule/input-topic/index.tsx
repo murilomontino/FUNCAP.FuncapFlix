@@ -21,6 +21,7 @@ type Props = {
   styleViewContainer?: ViewStyle
   styleViewInput?: TextStyle | ViewStyle | ImageStyle
   styleTopic?: TextStyle
+  textAlign?: 'left' | 'center' | 'right'
   onChangeText: (text: string) => void
 } & Omit<TextInputProps, 'value'>
 
@@ -34,6 +35,7 @@ export const InputTopic = ({
   styleTopic,
   onChangeText,
   placeholder,
+  textAlign = 'left',
   width = '100%',
   maxWidthTitle = 150,
   ...rest
@@ -82,6 +84,12 @@ export const InputTopic = ({
         value={valueText}
         onChangeText={onChangeValueText}
         maxLength={maxLength}
+        style={[
+          styleViewInput,
+          {
+            textAlign,
+          },
+        ]}
       />
     </Container>
   )

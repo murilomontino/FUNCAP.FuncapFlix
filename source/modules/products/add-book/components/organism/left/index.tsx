@@ -48,8 +48,8 @@ const Left = () => {
   return (
     <View
       style={{
-        flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 3.5 : 1,
-        height: '100%',
+        flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 4 : 1,
+        minHeight: SCREEN_SMALLER_THAN_LARGE_SIZE ? 700 : '100%',
         maxWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? '80%' : 300,
         justifyContent: 'flex-start',
         marginLeft: web ? 0 : 40,

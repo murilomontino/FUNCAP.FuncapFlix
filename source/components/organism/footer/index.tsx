@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Platform, StyleSheet, View } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import { useLayout } from 'react-native-web-hooks'
 
 import Logo from '@/components/atom/logo-funcap'
@@ -7,8 +7,12 @@ import LogoFuncapVertical from '@/components/atom/logo-funcap-vertical'
 import LogoGoverno from '@/components/atom/logo-governo'
 import AboutFooter from '@/components/molecule/about-footer'
 
-import colors from '@/global/colors'
-import constants from '@/global/constants'
+import {
+  ContainerFooter,
+  ContainerAbout,
+  ContainerSocial,
+  ContainerLogo,
+} from './styles'
 
 const Footer = () => {
   const web = Platform.OS === 'web'
@@ -28,49 +32,17 @@ const Footer = () => {
   // 720
 
   return (
-    <View
-      onLayout={onLayout}
-      style={{
-        position: 'absolute',
-        flexDirection: 'row',
-        flex: 1,
-        bottom: 0,
-        height: constants.footerHight,
-        width: '100%',
-        backgroundColor: colors.bluePerCent._10,
-        marginTop: 200,
-      }}
-    >
-      <View
-        style={{
-          flex: 2,
-          flexDirection: 'column',
-          paddingVertical: 42,
-          paddingLeft: 34,
-        }}
-      >
+    <ContainerFooter onLayout={onLayout}>
+      <ContainerAbout>
         <AboutFooter />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-        }}
-      ></View>
+      </ContainerAbout>
+      <ContainerSocial />
 
-      <View
-        style={{
-          flex: 2,
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          flexDirection: 'row',
-        }}
-      >
+      <ContainerLogo>
         {!sizeNavBar ? <LogoFuncapVertical size={8} /> : <Logo size={4} />}
         <LogoGoverno size={!sizeNavBar ? 8 : 4} textVisible={!sizeNavBar} />
-      </View>
-    </View>
+      </ContainerLogo>
+    </ContainerFooter>
   )
 }
 

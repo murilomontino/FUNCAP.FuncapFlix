@@ -20,7 +20,6 @@ const BookContent = () => {
   return (
     <View
       style={{
-        marginLeft: 40,
         width: '80%',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -30,6 +29,7 @@ const BookContent = () => {
         value={publisher}
         onChangeText={onChangePublisher}
         topic="Editora"
+        textAlign="center"
         styleViewInput={{
           flex: 1,
           fontSize: 14,
@@ -40,6 +40,7 @@ const BookContent = () => {
       />
       <InputTopicMasked
         value={numberOfPages}
+        textAlign="center"
         onChangeText={onChangeNumberOfPages}
         topic="Num de páginas"
         mask="9999"
@@ -56,6 +57,7 @@ const BookContent = () => {
       <InputTopicMasked
         value={size}
         onChangeText={onChangeSize}
+        textAlign="center"
         topic="Dimensões"
         type="custom"
         options={{
@@ -77,6 +79,7 @@ const BookContent = () => {
 
       <InputTopic
         value={illustrator}
+        textAlign="center"
         onChangeText={onChangeIllustrator}
         topic="Ilustrador"
         placeholder="Ilustrador"

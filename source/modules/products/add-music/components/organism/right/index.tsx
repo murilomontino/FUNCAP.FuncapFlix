@@ -20,7 +20,7 @@ const Right = () => {
       style={{
         flex: 1,
         height: '100%',
-        minHeight: size.width < 1127 ? 250 : size.height,
+        minHeight: size.width < 1127 ? 400 : size.height,
         marginRight: web ? 0 : 40,
         padding: 20,
         maxWidth: 300,

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from 'react'
-import { View } from 'react-native'
 
 import { Category, GettersTracks, TypeImgCapa } from '@/types'
 import { SettersTracks, SettersAlbums, GettersAlbums } from '@/types/products'
@@ -179,13 +178,11 @@ const SendFormMusicButton = () => {
   }
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <Button
-        disabled={!submitMusicIsValid}
-        onPress={handleSubmit}
-        text="Enviar Música(s)"
-      />
-    </View>
+    <Button
+      disabled={!submitMusicIsValid}
+      onPress={handleSubmit}
+      text="Enviar Música(s)"
+    />
   )
 }
 

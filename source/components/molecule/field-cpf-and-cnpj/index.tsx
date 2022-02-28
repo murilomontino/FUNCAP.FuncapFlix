@@ -23,6 +23,7 @@ type Props = {
   viewContainer?: ViewStyle | ViewStyle[]
   topicForm?: TextStyle
   requered?: boolean
+  textAlign?: 'left' | 'center' | 'right'
 }
 
 const FieldCPFandCNPJGeneric = ({
@@ -33,6 +34,7 @@ const FieldCPFandCNPJGeneric = ({
   onChangeValue,
   requered = true,
   isValid,
+  textAlign = 'left',
   onChangeIsValid,
   ...rest
 }: Props) => {
@@ -131,6 +133,7 @@ const FieldCPFandCNPJGeneric = ({
               borderRightWidth: 0,
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
+              textAlign,
             },
           ]}
           mask={value.length < 14 ? '999.999.999-99' : '99.999.999/9999-99'}

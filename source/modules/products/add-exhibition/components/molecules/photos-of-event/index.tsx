@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
-import { View } from 'react-native'
+import { FlatList, View } from 'react-native'
+
+import theme from '@/theme'
 
 import {
   useFormExhibitionFiles,
@@ -9,6 +11,8 @@ import {
 
 import { GetFileButton } from '../../atoms/get-file-button'
 import CardPhotoOfEvent from '../card-photo-of-event'
+
+import globalStyles from '@/global/globalStyles'
 
 const PhotosOfEvent = () => {
   const { files, mapFiles, onChangeFiles } = useFormExhibitionFiles()
@@ -20,8 +24,6 @@ const PhotosOfEvent = () => {
   return (
     <View
       style={{
-        flex: 1,
-        height: '100%',
         width: '100%',
       }}
     >
@@ -32,39 +34,46 @@ const PhotosOfEvent = () => {
         multiple
         message="Selecione as fotos"
       />
-      <View
+
+      <FlatList
+        contentContainerStyle={[
+          globalStyles.pHHalf,
+          {
+            zIndex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 420 * 2,
+          },
+        ]}
+        data={mapFiles}
         style={{
-          zIndex: 1,
-          flex: 1,
+          width: '100%',
           flexDirection: 'row',
           flexWrap: 'wrap',
-          height: '100%',
-          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: theme.CONSTANTS.FOOTER_HIGHT,
         }}
-      >
-        {mapFiles.map((item, index) => {
+        pagingEnabled={true}
+        horizontal
+        keyExtractor={(item) => item.get('id')}
+        renderItem={({ item, index }) => {
           return (
-            <View
-              key={index}
-              style={{
-                zIndex: 999 - index,
-              }}
-            >
-              <CardPhotoOfEvent
-                uri={item.get('uri')}
-                title={item.get('titulo')}
-                description={item.get('descricao')}
-                date={item.get('data')}
-                typeOfPhoto={item.get('tipo_de_foto')}
-                onChangeAttrs={onChangeAttrsPhotos}
-                onRemovePhoto={() => removePhoto(index)}
-                index={index}
-                error={item.get('error')}
-              />
-            </View>
+            <CardPhotoOfEvent
+              uri={item.get('uri')}
+              title={item.get('titulo')}
+              description={item.get('descricao')}
+              date={item.get('data')}
+              typeOfPhoto={item.get('tipo_de_foto')}
+              onChangeAttrs={onChangeAttrsPhotos}
+              onRemovePhoto={() => removePhoto(index)}
+              index={index}
+              error={item.get('error')}
+            />
           )
-        })}
-      </View>
+        }}
+        showsHorizontalScrollIndicator={false}
+      />
     </View>
   )
 }
