@@ -15,6 +15,5 @@ export const ContainerLogo = styled.View`
   max-height: 150px;
 `
 export const Container = styled.View`
-  flex: 1;
   padding: 20px;
 `

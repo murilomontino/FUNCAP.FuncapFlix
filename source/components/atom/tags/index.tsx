@@ -84,7 +84,7 @@ const InputTags = ({ onChangeTags, tags, width }: Props) => {
               borderColor: '#848787',
             }}
             key={`${tag}-${index}`}
-            onPress={onPress}
+            onPress={deleteTagOnPress}
           >
             <Text>{tag}</Text>
           </TouchableOpacity>

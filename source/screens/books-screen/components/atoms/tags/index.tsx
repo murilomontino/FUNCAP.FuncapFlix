@@ -9,7 +9,7 @@ type Props = {
   tags: tags[]
 }
 
-const Tags = ({ tags }: Props) => {
+const CardTag = ({ tags }: Props) => {
   const [itensTags] = useState(tags ?? [])
 
   return (
@@ -31,7 +31,7 @@ const Tags = ({ tags }: Props) => {
   )
 }
 
-export default Tags
+export default CardTag
 
 const tagsStyles = StyleSheet.create({
   tags: {

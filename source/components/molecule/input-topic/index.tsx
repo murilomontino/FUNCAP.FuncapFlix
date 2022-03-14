@@ -11,7 +11,7 @@ import Topic from '@/components/atom/topic'
 import { Container, Input } from './styles'
 
 type Props = {
-  topic: string
+  topic?: string
   value: string | MutableRefObject<string>
   requered?: boolean
   maxWidthTitle?: number | string

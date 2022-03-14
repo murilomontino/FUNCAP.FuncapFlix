@@ -2,7 +2,7 @@ import React from 'react'
 import { Platform, View } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { GetterBooks } from '@/types/generic/getters/books'
+import { GetterBooks } from '@/types'
 
 import CacheImage from '@/components/atom/cache-image'
 

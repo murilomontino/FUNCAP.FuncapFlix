@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import InputTags from '@/components/atom/tags'
+import InputTags from '@/components/molecule/input-tags'
 
 import { useFormBookTags } from '@/forms/Product/product-book/hooks'
 
@@ -19,7 +19,7 @@ const Right = () => {
     <View
       style={{
         flex: 1,
-        height: '100%',
+        alignSelf: 'flex-start',
         justifyContent: 'flex-start',
         minHeight: SCREEN_SMALLER_THAN_LARGE_SIZE ? 500 : size.height,
         marginRight: web ? 0 : 40,

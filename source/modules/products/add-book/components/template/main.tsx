@@ -1,6 +1,10 @@
 import React from 'react'
 
+import AppLoading from 'expo-app-loading'
+
 import theme from '@/theme'
+
+import { useLoading } from '@/context/LoadingModal'
 
 import Details from '../organism/details'
 import Left from '../organism/left'
@@ -12,6 +16,16 @@ import { useSize } from '@/hooks/use-size'
 const Main = () => {
   const { size } = useSize()
 
+  const { loading } = useLoading()
+
+  if (loading) {
+    return (
+      <Container>
+        <AppLoading />
+      </Container>
+    )
+  }
+
   return (
     <Container
       style={[
@@ -20,6 +34,7 @@ const Main = () => {
           flexDirection: 'row',
           width: '100%',
           minHeight: size.height,
+          height: '100%',
           marginBottom: theme.CONSTANTS.FOOTER_HIGHT,
           alignItems: 'center',
         },

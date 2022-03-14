@@ -38,8 +38,7 @@ const Details = () => {
         width: '80%',
         flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 10 : 2.5,
         minHeight: SCREEN_SMALLER_THAN_LARGE_SIZE ? size.height * 2.5 : '100%',
-        borderRightWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? 0 : 1,
-        borderRightColor: '#01010',
+
         borderLeftWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? 0 : 1,
         borderLeftColor: '#01010',
         marginRight: 8,
