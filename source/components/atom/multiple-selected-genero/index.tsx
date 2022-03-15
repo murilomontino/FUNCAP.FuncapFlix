@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
+import SectionedMultiSelect from '../react-native-sectioned-multi-select'
 import items from './items'
 
 import colors from '@/global/colors'
