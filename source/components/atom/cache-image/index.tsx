@@ -50,7 +50,11 @@ const CacheImage = ({
     const cache = await getCache(arrayCapa[0])
 
     if (!cache) {
-      const { data } = await api.get(`image/${capa}`)
+      const { data } = await api.get(`image`, {
+        params: {
+          image: capa,
+        },
+      })
 
       setCache(arrayCapa[0], {
         data: data,
