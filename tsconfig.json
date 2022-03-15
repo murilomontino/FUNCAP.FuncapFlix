@@ -37,7 +37,8 @@
 		"node_modules",
 		"babel.config.ts",
 		"metro.config.ts",
-		"jest.config.js"
+		"jest.config.js",
+    "./source/components/atom/react-native-sectioned-multi-select/**/*",
 	],
 	"extends": "expo/tsconfig.base",
 	"rules": [

@@ -9,14 +9,14 @@ export { sheet } from './models/sheet'
 export { TypesProducts, documents, mapTypesProducts } from './models/documents'
 export { YTPlaylistsAttributes, YTVideosAttributes } from './models/youtube'
 export {
-	exhibition,
-	exhibitionPhotos,
-	ExhibitionPhotosTypes,
-	exhibitionWorks,
+  exhibition,
+  exhibitionPhotos,
+  ExhibitionPhotosTypes,
+  exhibitionWorks,
 } from './models/exhibition'
 export {
-	FinancialResources,
-	mapFinancialResources,
+  FinancialResources,
+  mapFinancialResources,
 } from './models/financialResources'
 export { Category, mapCategory } from './models/categoriesProducts'
 export { ContentMusic, ExtImgCapa, TypeImgCapa } from './products'
