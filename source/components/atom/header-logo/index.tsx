@@ -7,12 +7,23 @@ import { ContainerLogo, ContainerTitle, TitleLogo, Container } from './styles'
 
 import { useSize } from '@/hooks/use-size'
 
-const HeaderLogo = () => {
+type Props = {
+  widthLogo?: number
+  textSize?: number
+  widthContainer?: number
+  subTitle?: string
+}
+
+const HeaderLogo = ({
+  textSize = 1,
+  widthLogo = 3,
+  widthContainer = 100,
+  subTitle,
+}: Props) => {
   const { size } = useSize()
 
-  const TEXT_SIZE = useScaledSize(1)
-
-  const WIDTH_LOGO = useScaledSize(3)
+  const TEXT_SIZE = useScaledSize(textSize)
+  const SUB_TITLE_SIZE = useScaledSize(textSize - 1)
 
   return (
     <Container
@@ -22,10 +33,11 @@ const HeaderLogo = () => {
     >
       <ContainerLogo
         style={{
-          maxWidth: WIDTH_LOGO,
+          width: widthContainer,
+          maxWidth: widthContainer,
         }}
       >
-        <LogoFuncap size={3} />
+        <LogoFuncap size={widthLogo} />
       </ContainerLogo>
       <ContainerTitle>
         <TitleLogo
@@ -35,6 +47,17 @@ const HeaderLogo = () => {
         >
           Fundação de Cultura e Arte Aperipê
         </TitleLogo>
+        {!!subTitle && (
+          <TitleLogo
+            style={{
+              fontSize: SUB_TITLE_SIZE,
+              textAlign: 'center',
+              width: '100%',
+            }}
+          >
+            {subTitle}
+          </TitleLogo>
+        )}
       </ContainerTitle>
     </Container>
   )
