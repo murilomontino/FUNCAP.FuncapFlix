@@ -17,13 +17,13 @@ const FormProductBookProvider: React.FC = ({ children }) => {
   const [title, setTitle] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [sinopse, setSinopse] = useState('')
-  const [sobreAObra, setSobreAObra] = useState('')
   const [isbn, setISBN] = useState('')
   const [numberOfPages, setNumberOfPages] = useState('')
   const [publisher, setPublisher] = useState('')
   const [size, setSize] = useState('')
   const [illustrated, setIllustrated] = useState(false)
   const [illustrator, setIlustrador] = useState('')
+  const [biography, setBiography] = useState('')
   const [file, setFile] = useState({} as Document)
 
   // State -----------------------------------------------------------------------
@@ -56,9 +56,9 @@ const FormProductBookProvider: React.FC = ({ children }) => {
       setTitle('')
       setSubTitle('')
       setSinopse('')
-      setSobreAObra('')
       setISBN('')
       setNumberOfPages('')
+      setBiography('')
       setPublisher('')
       setSize('')
       setIllustrated(false)
@@ -129,11 +129,12 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     },
     [subTitle]
   )
-  const onChangeSobreAObra = useCallback(
+
+  const onChangeBiography = useCallback(
     (text: string) => {
-      setSobreAObra(text)
+      setBiography(text)
     },
-    [sobreAObra]
+    [biography]
   )
 
   const onChangeSinopse = useCallback(
@@ -186,13 +187,13 @@ const FormProductBookProvider: React.FC = ({ children }) => {
     setTitle('')
     setSubTitle('')
     setSinopse('')
-    setSobreAObra('')
     setISBN('')
     setNumberOfPages('')
     setPublisher('')
     setSize('')
     setIllustrated(false)
     setIlustrador('')
+    setBiography('')
     setFile({} as Document)
     onChangeGenres([])
     onChangeTags([])
@@ -219,7 +220,6 @@ const FormProductBookProvider: React.FC = ({ children }) => {
         title,
         subTitle,
         sinopse,
-        sobreAObra,
         isbn,
         illustrated,
         numberOfPages,
@@ -245,10 +245,11 @@ const FormProductBookProvider: React.FC = ({ children }) => {
         onChangeIllustrated,
         onChangeISBN,
         onChangeTitle,
-        onChangeSobreAObra,
         onChangeSinopse,
         onChangeSubTitle,
         resetProductBook,
+        biography,
+        onChangeBiography,
       }}
     >
       {children}

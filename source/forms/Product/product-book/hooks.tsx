@@ -3,9 +3,9 @@ import { useContextSelector } from 'use-context-selector'
 import { FormProductBookContext } from './index'
 
 export const useFormBook = () => {
-  const sobreAObra = useContextSelector(
+  const biography = useContextSelector(
     FormProductBookContext,
-    (value) => value.sobreAObra
+    (value) => value.biography
   )
   const title = useContextSelector(
     FormProductBookContext,
@@ -28,9 +28,9 @@ export const useFormBook = () => {
     (value) => value.onChangeISBN
   )
 
-  const onChangeSobreAObra = useContextSelector(
+  const onChangeBiography = useContextSelector(
     FormProductBookContext,
-    (value) => value.onChangeSobreAObra
+    (value) => value.onChangeBiography
   )
   const onChangeTitle = useContextSelector(
     FormProductBookContext,
@@ -46,13 +46,13 @@ export const useFormBook = () => {
   )
 
   return {
-    sobreAObra,
+    biography,
     title,
     subTitle,
     sinopse,
     isbn,
     onChangeISBN,
-    onChangeSobreAObra,
+    onChangeBiography,
     onChangeSubTitle,
     onChangeTitle,
     onChangeSinopse,

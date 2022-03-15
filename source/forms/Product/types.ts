@@ -62,7 +62,7 @@ export interface FormProductBook extends FormProduct {
   subTitle: string
   isbn: string
   sinopse: string
-  sobreAObra: string
+  biography: string
   numberOfPages: string
   publisher: string
   size: string
@@ -79,7 +79,7 @@ export interface FormProductBook extends FormProduct {
   onChangeTitle: (text: string) => void
   onChangeSubTitle: (text: string) => void
   onChangeSinopse: (text: string) => void
-  onChangeSobreAObra: (text: string) => void
+  onChangeBiography: (text: string) => void
   resetProductBook: () => void
 }
 
