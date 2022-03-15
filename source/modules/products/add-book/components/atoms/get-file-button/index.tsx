@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const GetFileButton = ({
-  requered = true,
+  requered = false,
   message = 'Selecione um arquivo',
 }: Props) => {
   // Busca um arquivo no formato PDF

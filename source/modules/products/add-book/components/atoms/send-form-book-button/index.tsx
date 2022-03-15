@@ -31,7 +31,7 @@ const SendFormBookButton = () => {
   // -----------------------------------------------------------------------------
   const { tags } = useFormBookTags()
   const { genres } = useFormBookGenres()
-  const { sobreAObra, sinopse, subTitle, title, isbn } = useFormBook()
+  const { biography, sinopse, subTitle, title, isbn } = useFormBook()
   const { thumbnail } = useFormBookThumbnail()
   const { file } = useFormBookFile()
   const { type } = useFormBookCategory()
@@ -61,15 +61,13 @@ const SendFormBookButton = () => {
     if (
       financialResources &&
       validateTitle &&
-      file !== null &&
-      file.type === 'success' &&
       validateSinopse &&
       validateCPFOrCNPJ
     ) {
       return true
     }
     return false
-  }, [sinopse, title, financialResources, file, cpfOrCnpj, cpfOrCnpjIsValid])
+  }, [sinopse, title, financialResources, cpfOrCnpj, cpfOrCnpjIsValid])
 
   const handleSubmit = async () => {
     try {
@@ -88,11 +86,11 @@ const SendFormBookButton = () => {
         data_de_publicacao: publishedDate?.trim(),
         cpfOrCnpj: cpfOrCnpj,
         tipo: type,
-        nome_arquivo: file.name,
-        arquivo: file.uri,
+        nome_arquivo: file?.name,
+        arquivo: file?.uri,
         generos: genres,
         tags: tags,
-        sobre_a_obra: sobreAObra?.trim(),
+        biografia: biography?.trim(),
         sinopse: sinopse?.trim(),
         categoria: Category.Literature,
         sub_titulo: subTitle?.trim(),

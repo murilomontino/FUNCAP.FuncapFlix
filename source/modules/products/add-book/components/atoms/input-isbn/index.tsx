@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+import { ActivityIndicator, Modal, View } from 'react-native'
 import { mask } from 'react-native-mask-text'
 
 import { GetterBooks } from '@/types'
 
-import { useLoading } from '@/context/LoadingModal'
 import { useToast } from '@/context/ToastModal'
 
 import Topic from '@/components/atom/topic'
@@ -28,6 +28,8 @@ interface Props {
 }
 
 const InputISBN = ({ requered = true, textAlign = 'left' }: Props) => {
+  const [loading, setLoading] = useState(false)
+
   // Hooks e Fields ---------------------------------------------------------------
   const {
     isbn,
@@ -37,13 +39,13 @@ const InputISBN = ({ requered = true, textAlign = 'left' }: Props) => {
     onChangeTitle,
   } = useFormBook()
 
+  const [isbnValue, setIsbnValue] = useState(isbn)
   const { onChangeNumberOfPages, onChangePublisher } = useFormBookContent()
   const { onChangePublishedDate, onChangeCulturalName } = useFormBookData()
   const { onChangeImageURL } = useFormBookThumbnail()
 
   // Efeito Visual ----------------------------------------------------------------
   const { AlertToast } = useToast()
-  const { showLoading, hideLoading } = useLoading()
 
   // Função de efeito atraso em funções -------------------------------------------
   const debounce = useDebounce()
@@ -105,20 +107,35 @@ const InputISBN = ({ requered = true, textAlign = 'left' }: Props) => {
 
   const onChangeSearch = (text: string, rawText: string) => {
     onChangeISBN(text)
+    setIsbnValue(text)
     debounce(async () => {
       if (rawText.length === 13) {
-        showLoading()
+        setLoading(true)
         await searchBook(rawText)
-        hideLoading()
+        setLoading(false)
       }
     }, 500)
   }
 
   return (
     <Container style={{ width: '100%' }}>
+      <Modal visible={loading} transparent>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <ActivityIndicator size={'large'} color="#fff" />
+        </View>
+      </Modal>
       <Topic topic="ISBN" requered />
       <MaskedInput
-        value={isbn}
+        value={isbnValue}
         onChangeText={(text, rawText) => onChangeSearch(text, rawText)}
         placeholder={'ISBN-13'}
         keyboardType={'numeric'}

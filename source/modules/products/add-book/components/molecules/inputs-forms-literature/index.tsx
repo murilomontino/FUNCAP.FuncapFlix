@@ -11,14 +11,14 @@ import InputISBN from '../../atoms/input-isbn'
 
 const InputsFormsLiterature = () => {
   const {
-    onChangeSobreAObra,
+    onChangeBiography,
     onChangeSinopse,
     onChangeSubTitle,
-    sobreAObra,
     sinopse,
     subTitle,
     onChangeTitle,
     title,
+    biography,
   } = useFormBook()
 
   const { window } = useDimensions()
@@ -64,9 +64,9 @@ const InputsFormsLiterature = () => {
         numberLines={12}
       />
       <InputTextArea
-        value={sobreAObra}
-        onChangeValue={onChangeSobreAObra}
-        topic="Sobre a Obra"
+        value={biography}
+        onChangeValue={onChangeBiography}
+        topic="Biografia"
         height={450}
         maxLength={5000}
         numberLines={12}

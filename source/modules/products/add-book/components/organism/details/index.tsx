@@ -38,7 +38,6 @@ const Details = () => {
         width: '80%',
         flex: SCREEN_SMALLER_THAN_LARGE_SIZE ? 10 : 2.5,
         minHeight: SCREEN_SMALLER_THAN_LARGE_SIZE ? size.height * 2.5 : '100%',
-
         borderLeftWidth: SCREEN_SMALLER_THAN_LARGE_SIZE ? 0 : 1,
         borderLeftColor: '#01010',
         marginRight: 8,
@@ -77,7 +76,7 @@ const Details = () => {
         styleViewContainer={{
           width: '90%',
         }}
-        mask={'99/99/9999'}
+        mask={publishedDate.length < 4 ? '9999' : '99/99/9999'}
       />
 
       <InputsFormsLiterature />

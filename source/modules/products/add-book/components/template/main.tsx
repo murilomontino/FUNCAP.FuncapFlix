@@ -18,14 +18,6 @@ const Main = () => {
 
   const { loading } = useLoading()
 
-  if (loading) {
-    return (
-      <Container>
-        <AppLoading />
-      </Container>
-    )
-  }
-
   return (
     <Container
       style={[
@@ -46,9 +38,15 @@ const Main = () => {
         },
       ]}
     >
-      <Left />
-      <Details />
-      <Right />
+      {loading ? (
+        <AppLoading />
+      ) : (
+        <>
+          <Left />
+          <Details />
+          <Right />
+        </>
+      )}
     </Container>
   )
 }
