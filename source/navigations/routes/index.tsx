@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import BooksPage from '@/screens/books-screen'
-import HomeScreen from '@/screens/home-screen'
+import HomeScreen from '@/screens/coming-soon-screen'
 import MusicScreen from '@/screens/music-screen'
 import QRCodeScreen from '@/screens/qr-code-screen'
 
@@ -33,8 +33,9 @@ const Navigation: React.FC = () => {
         }}
       >
         <Stack.Screen name="Home">
-          {({ ...rest }) =>
-            TemplateFront({ children: <HomeScreen {...rest} /> })
+          {
+            ({ ...rest }) => <HomeScreen {...rest} />
+            /*  TemplateFront({ children: <HomeScreen {...rest} /> }) */
           }
         </Stack.Screen>
         <Stack.Screen name="Literatura">
