@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Platform } from 'react-native'
 import { useDimensions } from 'react-native-web-hooks'
 
-import { GetterBooks } from '@/types/generic/getters/books'
+import { GetterBooks } from '@/types'
 
 import GenerosLiterarios from '../../atoms/generos-literarios'
 import { textStyles, viewStyles } from '../../styles'

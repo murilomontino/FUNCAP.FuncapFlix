@@ -27,7 +27,10 @@ const BooksScreen = (params: any) => {
     'books',
     async () => {
       const { data } = await api.get<Getter<GetterBooks[]>>('books')
+
       if (data.statusCode === 200) {
+        console.log(data.data)
+
         return data.data
       }
       return []

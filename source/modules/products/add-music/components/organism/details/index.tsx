@@ -82,7 +82,7 @@ const Details = () => {
         styleViewContainer={{
           width: '90%',
         }}
-        mask="99/99/9999"
+        mask={publishedDate.length < 4 ? '9999' : '99-99-9999'}
       />
 
       <InputsFormsMusic />

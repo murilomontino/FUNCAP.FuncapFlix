@@ -99,7 +99,7 @@ const FormProductMusicProvider: React.FC = ({ children }) => {
   const onChangeFile = useCallback(async () => {
     try {
       const documents: DocumentResult = await DocumentPicker.getDocumentAsync({
-        type: ['audio/mp3'],
+        type: ['audio/mp3', 'audio/wav'],
         multiple: true,
         copyToCacheDirectory: true,
       }).finally(() => hideLoading())

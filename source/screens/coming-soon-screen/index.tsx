@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
+import ButtonLogin from '@/components/atom/button-login'
 import HeaderLogo from '@/components/atom/header-logo'
 
 import { ContainerBackground } from './styles'
@@ -25,6 +26,9 @@ const ComingSoonScreen = (params: any) => {
           textSize={TEXT_NUMBER}
           subTitle="EM BREVE"
         />
+      </View>
+      <View style={{ position: 'absolute', right: 0, top: 0 }}>
+        <ButtonLogin />
       </View>
     </ContainerBackground>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 import { generos } from '@/types'
@@ -10,13 +10,15 @@ type Props = {
 }
 
 const GenerosLiterarios = ({ generos }: Props) => {
-  const [itensGeneros] = useState(generos ?? [])
+  const [itensGeneros, setItensGeneros] = useState(generos ?? [])
+
+  const memoGeneros = useMemo(() => itensGeneros.slice(0, 5), [itensGeneros])
 
   return (
     <>
-      {itensGeneros.map((genero) => (
+      {memoGeneros.map((genero) => (
         <Text style={generosStyles.generos} key={genero.id}>
-          {genero.genero}
+          {genero}
         </Text>
       ))}
     </>
@@ -31,6 +33,7 @@ const generosStyles = StyleSheet.create({
     borderRadius: 40,
     padding: 8,
     fontSize: 10,
+
     backgroundColor: '#f5f5f5',
     borderColor: colors.grey20,
     borderWidth: 1,

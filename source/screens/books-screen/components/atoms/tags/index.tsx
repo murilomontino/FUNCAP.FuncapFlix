@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { tags } from '@/types'
@@ -12,6 +12,8 @@ type Props = {
 const CardTag = ({ tags }: Props) => {
   const [itensTags] = useState(tags ?? [])
 
+  const memoTags = useMemo(() => itensTags.slice(0, 7), [itensTags])
+
   return (
     <View
       style={{
@@ -22,9 +24,9 @@ const CardTag = ({ tags }: Props) => {
         alignItems: 'center',
       }}
     >
-      {itensTags.map((tag) => (
-        <Text style={tagsStyles.tags} key={tag.id}>
-          {tag.tag}
+      {memoTags.map((tag, index) => (
+        <Text style={tagsStyles.tags} key={index}>
+          {tag}
         </Text>
       ))}
     </View>
