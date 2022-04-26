@@ -4,10 +4,8 @@
 		"target": "ES2015",
 		"module": "ES2020",
 		"types": [
-			"jest",
 			"node",
 		],
-	
 		"allowJs": true,
 		"strict": false,
 		"skipLibCheck": true,
